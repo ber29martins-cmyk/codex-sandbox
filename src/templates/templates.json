@@ -18,7 +18,7 @@
           { "key": "esf", "label": "Alteração esfincteriana" },
           { "key": "sela", "label": "Anestesia em sela" }
         ],
-        "rxGroups": ["analgesia", "relaxante"],
+        "rxGroups": ["analgesia", "relaxante", "analgesicos", "aines", "corticoides"],
         "rxDefaults": ["dipirona20", "ibuprofeno400"]
       }
     },
@@ -40,7 +40,7 @@
           { "key": "prostr", "label": "Prostração importante" },
           { "key": "dessat", "label": "Dessaturação" }
         ],
-        "rxGroups": ["ivassintomatico"],
+        "rxGroups": ["ivassintomatico", "antibioticos", "antihistaminicos", "corticoides", "mucoliticos", "antitussigenos", "descongestionantes_nasal", "lavagem_nasal"],
         "rxDefaults": ["paracetamol750", "loratadina10", "soroNasal"]
       }
     }
