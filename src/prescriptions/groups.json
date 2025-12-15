@@ -29,6 +29,41 @@
       "id": "antivirais",
       "label": "Antivirais",
       "itemIds": ["oseltamivir_75mg_tamiflu"]
+    },
+    {
+      "id": "antibioticos",
+      "label": "Antibióticos",
+      "itemIds": ["azitromicina_500mg_zitromax", "amoxicilina_500mg_amoxil", "amox_clav_500_125_clavulin", "cefaclor_500mg_ceclor_bd", "cipro_500mg_ciflox", "levofloxacino_500mg_tavanic", "moxifloxacino_400mg_avalox"]
+    },
+    {
+      "id": "antihistaminicos",
+      "label": "Anti-histamínicos",
+      "itemIds": ["dexclorfeniramina_2mg_polaramine", "loratadina_10mg_claritin", "loratadina_10mg_pseudo_240mg_loranil", "desloratadina_5mg_desalex", "cetirizina_10mg_zyrtec", "fexofenadina_60mg_allegra", "fexofenadina_60mg_pseudo_120mg_allegra"]
+    },
+    {
+      "id": "corticoides",
+      "label": "Corticoides",
+      "itemIds": ["prednisona_20mg_meticorten", "prednisolona_5mg_prelone", "betametasona_2mg_celestone", "dexclorfeniramina_betametasona_koide_d", "dexametasona_4mg_decadron"]
+    },
+    {
+      "id": "mucoliticos",
+      "label": "Mucolíticos",
+      "itemIds": ["acetilcisteina_200mg_fluimucil", "ambroxol_15mg_5ml_mucosolvan"]
+    },
+    {
+      "id": "antitussigenos",
+      "label": "Antitussígenos",
+      "itemIds": ["dextrometorfano_2mg_ml_bisoltussin", "clobutinol_doxilamina_hytos_plus", "dropropizina_3mg_ml_vibral"]
+    },
+    {
+      "id": "descongestionantes_nasal",
+      "label": "Descongestionantes nasais",
+      "itemIds": ["nafazolina_0_5mg_ml_neosoro", "nafazolina_1mg_mepiramina_0_2mg_naridrin", "oximetazolina_0_5mg_ml_afrin"]
+    },
+    {
+      "id": "lavagem_nasal",
+      "label": "Lavagem nasal",
+      "itemIds": ["soro_0_9_sorimax"]
     }
   ]
 }

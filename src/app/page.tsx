@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 type BlockKey = "anamnese" | "exame" | "hipotese" | "conduta";
 type AlarmStatus = "unknown" | "nega" | "presente";
@@ -83,15 +84,19 @@ function buildTemplateDefaults(template: Template): TemplateState {
 import templatesData from "../templates/templates.json";
 import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
+import { INVITE_CODES, isInviteValid } from "../lib/invite";
 const TEMPLATES = (templatesData as { templates: Template[] }).templates;
 const RX_CATALOG = (rxCatalogData as { items: RxItem[] }).items;
 const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
 const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
 const RX_GROUP_MAP: Record<string, RxGroup> = Object.fromEntries(RX_GROUPS.map((group) => [group.id, group]));
+const FEEDBACK_URL = process.env.NEXT_PUBLIC_FEEDBACK_URL;
 
 
 export default function Page() {
     const [templateId, setTemplateId] = useState<string>(TEMPLATES[0]?.id ?? "lombalgia");
+  const router = useRouter();
+  const pathname = usePathname();
 const currentTemplate = useMemo(
   () => TEMPLATES.find((t) => t.id === templateId) ?? TEMPLATES[0],
   [templateId]
@@ -109,6 +114,8 @@ const currentTemplate = useMemo(
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, TemplateState>>({});
   const rxKitsRef = useRef<Record<string, string[]>>({});
+  const inviteChecked = useRef(false);
+  const feedbackUrl = FEEDBACK_URL;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -130,6 +137,19 @@ const currentTemplate = useMemo(
       didHydrate.current = true;
     }
   }, []);
+
+  useEffect(() => {
+    if (inviteChecked.current) return;
+    if (typeof window === "undefined") return;
+    const code = localStorage.getItem("invite_code");
+    if (!isInviteValid(code)) {
+      if (pathname !== "/beta") {
+        router.replace("/beta");
+      }
+      return;
+    }
+    inviteChecked.current = true;
+  }, [router, pathname]);
 
   useEffect(() => {
     if (!currentTemplate || !didHydrate.current) return;
@@ -426,6 +446,13 @@ const currentTemplate = useMemo(
   return (
     <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
       <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12 }}>MVP Prontuário (blocos)</h1>
+      {feedbackUrl && (
+        <div className="no-print" style={{ marginBottom: 12 }}>
+          <a href={feedbackUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 8, border: "1px solid #d1d5db", textDecoration: "none", color: "#111827", background: "#fff" }}>
+            Feedback
+          </a>
+        </div>
+      )}
 
       <div className="no-print" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
         <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>

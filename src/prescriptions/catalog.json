@@ -199,6 +199,319 @@
       "directions": [
         "Tomar 1 comprimido, de 12/12 horas, por 5 dias."
       ]
+    },
+    {
+      "id": "azitromicina_500mg_zitromax",
+      "label": "Azitromicina 500mg",
+      "route": "ORAL",
+      "title": "Azitromicina 500mg",
+      "brand": "ZITROMAX®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido por dia, por 5 dias."
+      ]
+    },
+    {
+      "id": "amoxicilina_500mg_amoxil",
+      "label": "Amoxicilina 500mg",
+      "route": "ORAL",
+      "title": "Amoxicilina 500mg",
+      "brand": "AMOXIL®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 8/8 horas, por 10 dias.",
+        "Sugestão de horários: 7h, 15h e 23h."
+      ]
+    },
+    {
+      "id": "amox_clav_500_125_clavulin",
+      "label": "Amoxicilina 500mg + clavulanato 125mg",
+      "route": "ORAL",
+      "title": "Amoxicilina 500mg + clavulanato 125mg",
+      "brand": "CLAVULIN®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 8/8 horas, por 10 dias.",
+        "Sugestão de horários: 7h, 15h e 23h."
+      ]
+    },
+    {
+      "id": "cefaclor_500mg_ceclor_bd",
+      "label": "Cefaclor 500mg",
+      "route": "ORAL",
+      "title": "Cefaclor 500mg",
+      "brand": "CECLOR BD®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 12/12 horas, por 10 dias."
+      ]
+    },
+    {
+      "id": "cipro_500mg_ciflox",
+      "label": "Ciprofloxacino 500mg",
+      "route": "ORAL",
+      "title": "Ciprofloxacino 500mg",
+      "brand": "CIFLOX®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 12/12 horas, por 7 dias."
+      ]
+    },
+    {
+      "id": "levofloxacino_500mg_tavanic",
+      "label": "Levofloxacino 500mg",
+      "route": "ORAL",
+      "title": "Levofloxacino 500mg",
+      "brand": "TAVANIC®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 único comprimido por dia, por 10 dias."
+      ]
+    },
+    {
+      "id": "moxifloxacino_400mg_avalox",
+      "label": "Moxifloxacino 400mg",
+      "route": "ORAL",
+      "title": "Moxifloxacino 400mg",
+      "brand": "AVALOX®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 único comprimido por dia, por 7 dias."
+      ]
+    },
+    {
+      "id": "dexclorfeniramina_2mg_polaramine",
+      "label": "Dexclorfeniramina 2mg",
+      "route": "ORAL",
+      "title": "Dexclorfeniramina 2mg",
+      "brand": "POLARAMINE®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 8/8 horas, se coceira, dermatite ou outros sintomas alérgicos.",
+        "Atenção: esta medicação pode causar sonolência e hipotensão."
+      ]
+    },
+    {
+      "id": "loratadina_10mg_claritin",
+      "label": "Loratadina 10mg",
+      "route": "ORAL",
+      "title": "Loratadina 10mg",
+      "brand": "CLARITIN®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido por dia, se coriza, espirros, coceira ou alergias da pele."
+      ]
+    },
+    {
+      "id": "loratadina_10mg_pseudo_240mg_loranil",
+      "label": "Loratadina 10mg + pseudoefedrina 240mg",
+      "route": "ORAL",
+      "title": "Loratadina 10mg + pseudoefedrina 240mg",
+      "brand": "LORANIL®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, se espirros, coceira nasal e coceira nos olhos."
+      ]
+    },
+    {
+      "id": "desloratadina_5mg_desalex",
+      "label": "Desloratadina 5mg",
+      "route": "ORAL",
+      "title": "Desloratadina 5mg",
+      "brand": "DESALEX®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido por dia, se coriza, espirros, coceira nasal ou alergias da pele."
+      ]
+    },
+    {
+      "id": "cetirizina_10mg_zyrtec",
+      "label": "Cetirizina 10mg",
+      "route": "ORAL",
+      "title": "Cetirizina 10mg",
+      "brand": "ZYRTEC®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido por dia, se coriza, espirros, coceira nasal ou alergias da pele."
+      ]
+    },
+    {
+      "id": "fexofenadina_60mg_allegra",
+      "label": "Fexofenadina 60mg",
+      "route": "ORAL",
+      "title": "Fexofenadina 60mg",
+      "brand": "ALLEGRA®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 12/12 horas, se coriza, espirros, coceira nasal ou alergias da pele."
+      ]
+    },
+    {
+      "id": "fexofenadina_60mg_pseudo_120mg_allegra",
+      "label": "Fexofenadina 60mg + pseudoefedrina 120mg",
+      "route": "ORAL",
+      "title": "Fexofenadina 60mg + pseudoefedrina 120mg",
+      "brand": "ALLEGRA®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, se obstrução nasal."
+      ]
+    },
+    {
+      "id": "prednisona_20mg_meticorten",
+      "label": "Prednisona 20mg",
+      "route": "ORAL",
+      "title": "Prednisona 20mg",
+      "brand": "METICORTEN®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 2 comprimidos, 1 vez por dia, pela manhã, por 5 dias."
+      ]
+    },
+    {
+      "id": "prednisolona_5mg_prelone",
+      "label": "Prednisolona 5mg",
+      "route": "ORAL",
+      "title": "Prednisolona 5mg",
+      "brand": "PRELONE®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 2 comprimidos, 1 vez por dia, pela manhã, por 5 dias."
+      ]
+    },
+    {
+      "id": "betametasona_2mg_celestone",
+      "label": "Betametasona 2mg",
+      "route": "ORAL",
+      "title": "Betametasona 2mg",
+      "brand": "CELESTONE®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, 1 vez por dia, pela manhã, por 5 dias."
+      ]
+    },
+    {
+      "id": "dexclorfeniramina_betametasona_koide_d",
+      "label": "Dexclorfeniramina 2mg/5mL + betametasona 0,25mg/5mL",
+      "route": "ORAL",
+      "title": "Dexclorfeniramina 2mg/5mL + betametasona 0,25mg/5mL",
+      "brand": "KÓIDE-D®",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar 5mL, de 8/8 horas, por até 5 dias.",
+        "Atenção: esta medicação pode causar sonolência e hipotensão."
+      ]
+    },
+    {
+      "id": "dexametasona_4mg_decadron",
+      "label": "Dexametasona 4mg",
+      "route": "ORAL",
+      "title": "Dexametasona 4mg",
+      "brand": "DECADRON®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, 1 vez por dia, pela manhã, por 5 dias."
+      ]
+    },
+    {
+      "id": "acetilcisteina_200mg_fluimucil",
+      "label": "Acetilcisteína 200mg",
+      "route": "ORAL",
+      "title": "Acetilcisteína 200mg",
+      "brand": "FLUIMUCIL®",
+      "qty": "12 envelopes",
+      "directions": [
+        "Diluir 1 envelope em 1 copo de água. Tomar até 3 vezes por dia."
+      ]
+    },
+    {
+      "id": "ambroxol_15mg_5ml_mucosolvan",
+      "label": "Ambroxol 15mg/5mL",
+      "route": "ORAL",
+      "title": "Ambroxol 15mg/5mL",
+      "brand": "MUCOSOLVAN®",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar 5mL, até de 8/8 horas, se tosse."
+      ]
+    },
+    {
+      "id": "dextrometorfano_2mg_ml_bisoltussin",
+      "label": "Dextrometorfano 2mg/mL",
+      "route": "ORAL",
+      "title": "Dextrometorfano 2mg/mL",
+      "brand": "BISOLTUSSIN®",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar 10mL, até de 6/6 horas, se tosse."
+      ]
+    },
+    {
+      "id": "clobutinol_doxilamina_hytos_plus",
+      "label": "Clobutinol 4mg/mL + doxilamina 0,75mg/mL",
+      "route": "ORAL",
+      "title": "Clobutinol 4mg/mL + doxilamina 0,75mg/mL",
+      "brand": "HYTÓS PLUS®",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar 10mL, até de 8/8 horas, se tosse."
+      ]
+    },
+    {
+      "id": "dropropizina_3mg_ml_vibral",
+      "label": "Dropropizina 3mg/mL",
+      "route": "ORAL",
+      "title": "Dropropizina 3mg/mL",
+      "brand": "VIBRAL®",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar 15mL, até de 12/12 horas, se tosse."
+      ]
+    },
+    {
+      "id": "nafazolina_0_5mg_ml_neosoro",
+      "label": "Cloridrato de nafazolina 0,5mg/mL",
+      "route": "NASAL",
+      "title": "Cloridrato de nafazolina 0,5mg/mL",
+      "brand": "NEOSORO®",
+      "qty": "1 frasco",
+      "directions": [
+        "Gotejar 2 gotas em cada narina, 4 vezes ao dia, por até 7 dias."
+      ]
+    },
+    {
+      "id": "nafazolina_1mg_mepiramina_0_2mg_naridrin",
+      "label": "Nafazolina 1,0mg/mL + mepiramina 0,2mg/mL",
+      "route": "NASAL",
+      "title": "Nafazolina 1,0mg/mL + mepiramina 0,2mg/mL",
+      "brand": "NARIDRIN®",
+      "qty": "1 frasco",
+      "directions": [
+        "Gotejar 2 gotas em cada narina, 1 vez ao dia, por até 7 dias."
+      ]
+    },
+    {
+      "id": "oximetazolina_0_5mg_ml_afrin",
+      "label": "Cloridrato de oximetazolina 0,5mg/mL",
+      "route": "NASAL",
+      "title": "Cloridrato de oximetazolina 0,5mg/mL",
+      "brand": "AFRIN®",
+      "qty": "1 frasco",
+      "directions": [
+        "Gotejar 2 gotas em cada narina, 2 vezes ao dia, por até 7 dias."
+      ]
+    },
+    {
+      "id": "soro_0_9_sorimax",
+      "label": "Soro fisiológico 0,9%",
+      "route": "INALATORIO",
+      "title": "Soro fisiológico 0,9%",
+      "brand": "SORIMAX®",
+      "qty": "1 frasco",
+      "directions": [
+        "Posicionar o bico da seringa em uma das narinas e iniciar uma pressão suave.",
+        "Realizar a manobra utilizando de 100mL, com frequência diária mínima de 4 vezes."
+      ]
     }
   ]
 }
