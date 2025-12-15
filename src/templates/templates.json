@@ -20,6 +20,17 @@
         "exame": [
           "BEG, corado, hidratado",
           "MV presente, eventuais roncos dispersos, sem sinais de dificuldade respiratória"
+        ],
+        "alarmItems": [
+          { "key": "dispneia", "label": "Dispneia / esforço respiratório" },
+          { "key": "satBaixa", "label": "Saturação baixa" },
+          { "key": "dorToracica", "label": "Dor torácica importante" },
+          { "key": "hemoptise", "label": "Hemoptise" },
+          { "key": "febreAlta", "label": "Febre alta persistente" },
+          { "key": "piora", "label": "Piora progressiva" },
+          { "key": "desidratacao", "label": "Desidratação importante / incapaz VO" },
+          { "key": "idosoComorb", "label": "Idoso frágil / comorbidade cardiopulmonar" },
+          { "key": "imuno", "label": "Imunossupressão" }
         ]
       }
     },
@@ -43,6 +54,16 @@
         "exame": [
           "BEG, afebril",
           "Palpação suprapúbica discretamente dolorosa, sem dor à punho percussão lombar"
+        ],
+        "alarmItems": [
+          { "key": "febre", "label": "Febre / calafrios" },
+          { "key": "dorLombar", "label": "Dor lombar / dor em flanco" },
+          { "key": "vomitos", "label": "Náuseas/vômitos importantes" },
+          { "key": "gestacao", "label": "Gestação" },
+          { "key": "sexoMasculino", "label": "Sexo masculino" },
+          { "key": "imuno", "label": "Imunossupressão" },
+          { "key": "sepse", "label": "Sinais de sepse (hipotensão/confusão)" },
+          { "key": "piora", "label": "Piora progressiva ou falha terapêutica" }
         ]
       }
     },
@@ -66,6 +87,16 @@
         "exame": [
           "BEG, abdome plano, ruídos hidroaéreos presentes",
           "Dor leve à palpação epigástrica sem sinais de irritação peritoneal"
+        ],
+        "alarmItems": [
+          { "key": "hematemese", "label": "Hematêmese" },
+          { "key": "melena", "label": "Melena / sangramento digestivo" },
+          { "key": "perdaPeso", "label": "Perda ponderal / anorexia importante" },
+          { "key": "disfagia", "label": "Disfagia / odinofagia progressiva" },
+          { "key": "vomitos", "label": "Vômitos persistentes" },
+          { "key": "sincope", "label": "Síncope / hipotensão" },
+          { "key": "dorToracica", "label": "Dor torácica em aperto / dispneia (equivalente anginoso)" },
+          { "key": "anemia", "label": "Anemia conhecida ou suspeita" }
         ]
       }
     },
@@ -90,6 +121,16 @@
           "BEG, febril ou subfebril",
           "ORL: hiperemia intensa com exsudato em amígdalas",
           "Linfadenomegalia cervical dolorosa"
+        ],
+        "alarmItems": [
+          { "key": "dispneia", "label": "Dispneia / estridor" },
+          { "key": "sialorreia", "label": "Sialorreia / incapaz de deglutir saliva" },
+          { "key": "trismo", "label": "Trismo / voz abafada" },
+          { "key": "abscesso", "label": "Desvio de úvula (suspeita abscesso peritonsilar)" },
+          { "key": "desidratacao", "label": "Desidratação importante / recusa VO" },
+          { "key": "febreAlta", "label": "Febre alta persistente / toxemia" },
+          { "key": "meningismo", "label": "Rigidez de nuca / sinais meníngeos" },
+          { "key": "imuno", "label": "Imunossupressão" }
         ]
       }
     },
@@ -114,6 +155,16 @@
           "BEG, corado, hidratado",
           "ORL: hiperemia de orofaringe sem exsudato",
           "Ausculta pulmonar sem ruídos adventícios"
+        ],
+        "alarmItems": [
+          { "key": "dispneia", "label": "Dispneia / estridor" },
+          { "key": "sialorreia", "label": "Sialorreia / incapaz de deglutir saliva" },
+          { "key": "trismo", "label": "Trismo / voz abafada" },
+          { "key": "desidratacao", "label": "Desidratação importante / recusa VO" },
+          { "key": "febreAlta", "label": "Febre alta persistente" },
+          { "key": "meningismo", "label": "Rigidez de nuca / sinais meníngeos" },
+          { "key": "abscesso", "label": "Sinais de abscesso peritonsilar (desvio de úvula)" },
+          { "key": "imuno", "label": "Imunossupressão" }
         ]
       }
     },
@@ -137,6 +188,17 @@
         "exame": [
           "BEG, sinais de hidratação preservados ou levemente reduzidos",
           "Abdome flácido, dor difusa leve, sem sinais de peritonite"
+        ],
+        "alarmItems": [
+          { "key": "desidratacao", "label": "Sinais de desidratação importante" },
+          { "key": "incapazVo", "label": "Incapaz de manter VO" },
+          { "key": "sangue", "label": "Sangue nas fezes / melena" },
+          { "key": "dorIntensa", "label": "Dor abdominal intensa ou localizada" },
+          { "key": "febreAlta", "label": "Febre alta persistente" },
+          { "key": "choque", "label": "Sinais de choque" },
+          { "key": "idosoCrianca", "label": "Idoso frágil / criança pequena" },
+          { "key": "imuno", "label": "Imunossupressão" },
+          { "key": "antibioticoRecente", "label": "Uso recente de antibiótico / suspeita de colite" }
         ]
       }
     },
@@ -169,8 +231,9 @@
           { "key": "confusao", "label": "Confusão mental / rebaixamento" },
           { "key": "desidratacao", "label": "Sinais de desidratação importante" },
           { "key": "vomitos", "label": "Vômitos incoercíveis" },
-          { "key": "febrePersistente", "label": "Febre persistente >72h ou piora após melhora" },
-          { "key": "risco", "label": "Imunossupressão / gestante / puérpera / idoso frágil" }
+          { "key": "febrePersistente", "label": "Febre persistente (>72h) ou piora após melhora" },
+          { "key": "risco", "label": "Imunossupressão / gestante / puérpera / idoso frágil" },
+          { "key": "cronico", "label": "Doença crônica descompensada" }
         ],
         "rxGroups": ["analgesicos", "aines", "antivirais"],
         "rxDefaults": ["paracetamol750", "dipirona20", "oseltamivir_75mg_tamiflu"]
@@ -225,10 +288,15 @@
           "Pulmões: MV presente bilateral, sem ruídos adventícios"
         ],
         "alarmItems": [
-          { "key": "dispneia", "label": "Dispneia" },
+          { "key": "dispneia", "label": "Dispneia / esforço respiratório" },
           { "key": "dorT", "label": "Dor torácica" },
-          { "key": "prostr", "label": "Prostração importante" },
-          { "key": "dessat", "label": "Dessaturação" }
+          { "key": "satBaixa", "label": "Saturação baixa" },
+          { "key": "confusao", "label": "Confusão mental / sonolência importante" },
+          { "key": "febrePersistente", "label": "Febre alta ou persistente (>72h)" },
+          { "key": "piora", "label": "Piora progressiva ou piora após melhora" },
+          { "key": "desidratacao", "label": "Desidratação importante / baixa aceitação VO" },
+          { "key": "risco", "label": "Imunossupressão / gestante / puérpera / idoso frágil" },
+          { "key": "lactente", "label": "Lactente <3 meses com febre" }
         ],
         "rxGroups": ["ivassintomatico", "antibioticos", "antihistaminicos", "corticoides", "mucoliticos", "antitussigenos", "descongestionantes_nasal", "lavagem_nasal"],
         "rxDefaults": ["paracetamol750", "loratadina10", "soroNasal"]
