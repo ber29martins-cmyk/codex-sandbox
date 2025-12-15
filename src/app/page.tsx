@@ -136,6 +136,7 @@ const currentTemplate = useMemo(
   const [pa, setPa] = useState("");
   const [fc, setFc] = useState("");
   const [sat, setSat] = useState("");
+  const [includeRx, setIncludeRx] = useState(false);
   const didHydrate = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
@@ -429,6 +430,18 @@ const currentTemplate = useMemo(
     }
   }
 
+  function handlePrintRx() {
+    if (!rxText) return;
+    const prev = includeRx;
+    setIncludeRx(true);
+    setTimeout(() => {
+      window.print();
+      if (!prev) {
+        setIncludeRx(false);
+      }
+    }, 100);
+  }
+
   function handleToggleRx(id: string) {
     setRxSelected((prev) => {
       if (prev.includes(id)) {
@@ -467,7 +480,8 @@ const currentTemplate = useMemo(
     setRxSelected([]);
   }
 
-  const allText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
+  const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
+  const allText = includeRx && rxText ? `${baseText}\n\nReceituário:\n${rxText}` : baseText;
 
   return (
     <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
@@ -583,17 +597,21 @@ const currentTemplate = useMemo(
 
         </section>
 
-        <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
-          <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Saída (copiar/colar)</h2>
+      <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Saída (copiar/colar)</h2>
 
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
-            <button onClick={() => copy(formatBlock("anamnese"))}>Copiar anamnese</button>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
+          <button onClick={() => copy(formatBlock("anamnese"))}>Copiar anamnese</button>
             <button onClick={() => copy(formatBlock("exame"))}>Copiar exame</button>
             <button onClick={() => copy(formatBlock("hipotese"))}>Copiar hipótese</button>
             <button onClick={() => copy(formatBlock("conduta"))}>Copiar conduta</button>
             <button onClick={() => copy(allText)}>Copiar tudo</button>
             <button type="button" onClick={handlePrint}>Imprimir</button>
           </div>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+            <input type="checkbox" checked={includeRx} onChange={(e) => setIncludeRx(e.target.checked)} />
+            Incluir receituário na impressão/cópia do prontuário
+          </label>
 
           <textarea readOnly value={allText} style={{ width: "100%", height: 420, fontFamily: "ui-monospace, SFMono-Regular", whiteSpace: "pre", padding: 12 }} />
         </section>
@@ -601,90 +619,105 @@ const currentTemplate = useMemo(
 
       <section className="no-print" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, marginBottom: 16 }}>
         <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Receituário</h2>
-        {templateRxGroups.length === 0 && <p style={{ margin: "4px 0 0", color: "#666" }}>Template sem grupos de receita.</p>}
-        {templateRxGroups.map((group) => (
-          <div key={group.id} style={{ marginBottom: 12 }}>
-            <div style={{ fontWeight: 500, marginBottom: 6 }}>{group.label}</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {group.itemIds.map((itemId) => {
-                const item = RX_CATALOG_MAP[itemId];
-                const label = item?.label ?? itemId;
-                const route = item?.route ? `(${item.route})` : "";
-                const checked = rxSelected.includes(itemId);
-                return (
-                  <label key={itemId} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
-                    <span>
-                      {label}{" "}
-                      {route ? <span style={{ color: "#666", fontSize: 12 }}>{route}</span> : null}
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-        <div className="no-print" style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap", alignItems: "center" }}>
-          <button
-            type="button"
-            onClick={() => copy(rxText || "Sem itens selecionados")}
-            disabled={!rxText}
-            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
-          >
-            Copiar receita
-          </button>
-          <button
-            type="button"
-            onClick={handleSaveRxKit}
-            disabled={!rxSelected.length}
-            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
-          >
-            Salvar como meu padrão
-          </button>
-          <button
-            type="button"
-            onClick={handleRestoreRxDefaults}
-            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
-          >
-            Restaurar padrão do template
-          </button>
-          <button
-            type="button"
-            onClick={handleClearRxSelection}
-            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
-          >
-            Limpar seleção
-          </button>
-        </div>
-        {groupedRx.length ? (
-          <div style={{ marginTop: 12, padding: 12, background: "#f7f7f7", border: "1px solid #e5e7eb", borderRadius: 8 }}>
-            {groupedRx.map((group) => (
-              <div key={group.route} style={{ marginBottom: 12 }}>
-                <div style={{ fontWeight: 700, marginBottom: 6 }}>USO {group.route}:</div>
+        {templateRxGroups.length === 0 ? (
+          <p style={{ margin: "4px 0 0", color: "#666" }}>Receituário não configurado para esta queixa.</p>
+        ) : (
+          <>
+            {templateRxGroups.map((group) => (
+              <div key={group.id} style={{ marginBottom: 12 }}>
+                <div style={{ fontWeight: 500, marginBottom: 6 }}>{group.label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  {group.items.map((item, idx) => {
-                    const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+                  {group.itemIds.map((itemId) => {
+                    const item = RX_CATALOG_MAP[itemId];
+                    const label = item?.label ?? itemId;
+                    const route = item?.route ? `(${item.route})` : "";
+                    const checked = rxSelected.includes(itemId);
                     return (
-                      <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                        <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-                          <span style={{ fontWeight: 600, whiteSpace: "pre-wrap" }}>{`${idx + 1}. ${titleBrand}`}</span>
-                          <span style={{ flex: 1, borderBottom: "1px dotted #9ca3af" }} />
-                          <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
-                        </div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13 }}>
-                          {item.directions.map((dir, dirIdx) => (
-                            <span key={dirIdx}>{dir}</span>
-                          ))}
-                        </div>
-                      </div>
+                      <label key={itemId} style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                        <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
+                        <span>
+                          {label}{" "}
+                          {route ? <span style={{ color: "#666", fontSize: 12 }}>{route}</span> : null}
+                        </span>
+                      </label>
                     );
                   })}
                 </div>
               </div>
             ))}
-          </div>
-        ) : (
-          <p style={{ marginTop: 8, color: "#666" }}>Selecione itens para gerar o receituário.</p>
+
+            <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap", alignItems: "center" }}>
+              <button
+                type="button"
+                onClick={() => copy(rxText || "Sem itens selecionados")}
+                disabled={!rxText}
+                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+              >
+                Copiar receita
+              </button>
+              <button
+                type="button"
+                onClick={handlePrintRx}
+                disabled={!rxText}
+                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+              >
+                Imprimir receita
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveRxKit}
+                disabled={!rxSelected.length}
+                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+              >
+                Salvar como meu padrão
+              </button>
+              <button
+                type="button"
+                onClick={handleRestoreRxDefaults}
+                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+              >
+                Restaurar padrão do template
+              </button>
+              <button
+                type="button"
+                onClick={handleClearRxSelection}
+                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+              >
+                Limpar seleção
+              </button>
+            </div>
+
+            {groupedRx.length ? (
+              <div style={{ marginTop: 12, padding: 12, background: "#f7f7f7", border: "1px solid #e5e7eb", borderRadius: 8 }}>
+                {groupedRx.map((group) => (
+                  <div key={group.route} style={{ marginBottom: 12 }}>
+                    <div style={{ fontWeight: 700, marginBottom: 6 }}>USO {group.route}:</div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      {group.items.map((item, idx) => {
+                        const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+                        return (
+                          <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                            <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                              <span style={{ fontWeight: 600, whiteSpace: "pre-wrap" }}>{`${idx + 1}. ${titleBrand}`}</span>
+                              <span style={{ flex: 1, borderBottom: "1px dotted #9ca3af" }} />
+                              <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13 }}>
+                              {item.directions.map((dir, dirIdx) => (
+                                <span key={dirIdx}>{dir}</span>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p style={{ marginTop: 8, color: "#666" }}>Selecione itens para gerar o receituário.</p>
+            )}
+          </>
         )}
       </section>
 
@@ -701,7 +734,7 @@ const currentTemplate = useMemo(
           <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receita / Conduta</h3>
           <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{formatBlock("conduta")}</pre>
         </div>
-        {rxText && (
+        {includeRx && rxText && (
           <div className="print-doc print-rx" style={{ marginBottom: 16, paddingTop: 8 }}>
             <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receituário</h3>
             {groupedRx.map((group) => (
