@@ -71,8 +71,8 @@ function buildDefaultAlarmStates(template: Template): AlarmStateMap {
 
 function getTemplateQP(template: Template) {
   const qpCandidates = [
-    template.defaults.qp,
     template.defaults.qpDefault,
+    template.defaults.qp,
     ...(((template as unknown as { complaintItems?: string[] }).complaintItems ?? []).slice(0, 1)),
     ...(((template as unknown as { symptoms?: string[] }).symptoms ?? []).slice(0, 1))
   ].filter(Boolean) as string[];
@@ -80,8 +80,7 @@ function getTemplateQP(template: Template) {
 }
 
 function getTemplateHma(template: Template) {
-  const isResfriado = (template.id ?? "").toLowerCase().includes("resfri") || (template.label ?? "").toLowerCase().includes("resfri");
-  if (isResfriado) return RESFRIADO_HMA;
+  if (template.defaults.hmaDefault?.length) return template.defaults.hmaDefault;
   return [];
 }
 
@@ -115,13 +114,6 @@ const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
 const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
 const RX_GROUP_MAP: Record<string, RxGroup> = Object.fromEntries(RX_GROUPS.map((group) => [group.id, group]));
 const FEEDBACK_URL = process.env.NEXT_PUBLIC_FEEDBACK_URL;
-const RESFRIADO_HMA = [
-  "Paciente procura o serviço com queixa de coriza, obstrução nasal, espirros e mal-estar há 2–3 dias",
-  "Refere odinofagia leve e tosse seca esporádica, sem piora progressiva",
-  "Nega febre medida, dispneia, dor torácica, chiado no peito, síncope, cefaleia intensa, vômitos ou diarreia",
-  "Mantém aceitação preservada de líquidos e alimentos, sem redução importante do estado geral",
-  "Nega comorbidades relevantes, alergias medicamentosas conhecidas, internações recentes ou uso atual de antibióticos"
-];
 
 
 export default function Page() {
