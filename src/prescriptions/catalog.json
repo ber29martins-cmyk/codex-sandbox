@@ -66,6 +66,139 @@
       "directions": [
         "Aplicar em cada narina várias vezes ao dia para higiene nasal"
       ]
+    },
+    {
+      "id": "dipirona_500mg_novalgina",
+      "label": "Dipirona 500mg",
+      "route": "ORAL",
+      "title": "Dipirona 500mg",
+      "brand": "NOVALGINA®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 2 comprimidos, até de 6/6 horas, se dor ou febre."
+      ]
+    },
+    {
+      "id": "paracetamol_750mg_tylenol",
+      "label": "Paracetamol 750mg",
+      "route": "ORAL",
+      "title": "Paracetamol 750mg",
+      "brand": "TYLENOL®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, se dor ou febre."
+      ]
+    },
+    {
+      "id": "ibuprofeno_600mg_alivium",
+      "label": "Ibuprofeno 600mg",
+      "route": "ORAL",
+      "title": "Ibuprofeno 600mg",
+      "brand": "ALIVIUM®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, por 5 dias, se dor."
+      ]
+    },
+    {
+      "id": "naproxeno_550mg_flanax",
+      "label": "Naproxeno 550mg",
+      "route": "ORAL",
+      "title": "Naproxeno 550mg",
+      "brand": "FLANAX®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, por 5 dias, se dor."
+      ]
+    },
+    {
+      "id": "cetoprofeno_150mg_bi_profenid",
+      "label": "Cetoprofeno 150mg",
+      "route": "ORAL",
+      "title": "Cetoprofeno 150mg",
+      "brand": "BI-PROFENID®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, por 5 dias, se dor."
+      ]
+    },
+    {
+      "id": "diclofenaco_50mg_voltaren",
+      "label": "Diclofenaco 50mg",
+      "route": "ORAL",
+      "title": "Diclofenaco 50mg",
+      "brand": "VOLTAREN®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, por 5 dias, se dor."
+      ]
+    },
+    {
+      "id": "etodolaco_500mg_flancox",
+      "label": "Etodolaco 500mg",
+      "route": "ORAL",
+      "title": "Etodolaco 500mg",
+      "brand": "FLANCOX®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, por 5 dias, se dor."
+      ]
+    },
+    {
+      "id": "cetorolaco_10mg_toragesic_sl",
+      "label": "Cetorolaco 10mg",
+      "route": "ORAL",
+      "title": "Cetorolaco 10mg",
+      "brand": "TORAGESIC®",
+      "qty": "1 caixa",
+      "directions": [
+        "Colocar 1 comprimido embaixo da língua e esperar dissolver.",
+        "Tomar até de 8/8 horas, por 5 dias, se dor intensa."
+      ]
+    },
+    {
+      "id": "nimesulida_100mg_nimesulid",
+      "label": "Nimesulida 100mg",
+      "route": "ORAL",
+      "title": "Nimesulida 100mg",
+      "brand": "NIMESULID®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, por 5 dias, se dor."
+      ]
+    },
+    {
+      "id": "celecoxib_100mg_celebra",
+      "label": "Celecoxib 100mg",
+      "route": "ORAL",
+      "title": "Celecoxib 100mg",
+      "brand": "CELEBRA®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 12/12 horas, por 5 dias, se dor intensa."
+      ]
+    },
+    {
+      "id": "meloxicam_7_5mg_movatec",
+      "label": "Meloxicam 7,5mg",
+      "route": "ORAL",
+      "title": "Meloxicam 7,5mg",
+      "brand": "MOVATEC®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, até de 12/12 horas, por 5 dias, se dor."
+      ]
+    },
+    {
+      "id": "oseltamivir_75mg_tamiflu",
+      "label": "Oseltamivir 75mg",
+      "route": "ORAL",
+      "title": "Oseltamivir 75mg",
+      "brand": "TAMIFLU®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, de 12/12 horas, por 5 dias."
+      ]
     }
   ]
 }

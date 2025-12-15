@@ -14,6 +14,21 @@
       "id": "ivassintomatico",
       "label": "IVAS - sintomáticos",
       "itemIds": ["paracetamol750", "loratadina10", "soroNasal"]
+    },
+    {
+      "id": "analgesicos",
+      "label": "Analgésicos",
+      "itemIds": ["dipirona_500mg_novalgina", "paracetamol_750mg_tylenol"]
+    },
+    {
+      "id": "aines",
+      "label": "AINES",
+      "itemIds": ["ibuprofeno_600mg_alivium", "naproxeno_550mg_flanax", "cetoprofeno_150mg_bi_profenid", "diclofenaco_50mg_voltaren", "etodolaco_500mg_flancox", "cetorolaco_10mg_toragesic_sl", "nimesulida_100mg_nimesulid", "celecoxib_100mg_celebra", "meloxicam_7_5mg_movatec"]
+    },
+    {
+      "id": "antivirais",
+      "label": "Antivirais",
+      "itemIds": ["oseltamivir_75mg_tamiflu"]
     }
   ]
 }
