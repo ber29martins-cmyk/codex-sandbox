@@ -213,7 +213,7 @@ const currentTemplate = useMemo(
     return parts.join(" / ");
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
-    return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id]).filter(Boolean);
+    return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
   }, [currentTemplate]);
   const groupedRx = useMemo(() => {
     const byRoute: Record<string, RxItem[]> = {};
@@ -555,12 +555,16 @@ const currentTemplate = useMemo(
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {group.itemIds.map((itemId) => {
                 const item = RX_CATALOG_MAP[itemId];
-                if (!item) return null;
+                const label = item?.label ?? itemId;
+                const route = item?.route ? `(${item.route})` : "";
                 const checked = rxSelected.includes(itemId);
                 return (
                   <label key={itemId} style={{ display: "flex", gap: 8, alignItems: "center" }}>
                     <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
-                    <span>{item.label} <span style={{ color: "#666", fontSize: 12 }}>({item.route})</span></span>
+                    <span>
+                      {label}{" "}
+                      {route ? <span style={{ color: "#666", fontSize: 12 }}>{route}</span> : null}
+                    </span>
                   </label>
                 );
               })}
