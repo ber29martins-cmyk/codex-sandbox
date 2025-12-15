@@ -108,7 +108,7 @@ import templatesData from "../templates/templates.json";
 import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
 import { INVITE_CODES, isInviteValid } from "../lib/invite";
-const TEMPLATES = (templatesData as { templates: Template[] }).templates;
+const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const RX_CATALOG = (rxCatalogData as { items: RxItem[] }).items;
 const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
 const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
@@ -471,7 +471,8 @@ const currentTemplate = useMemo(
 
   return (
     <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
-      <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12 }}>MVP Prontuário (blocos)</h1>
+      <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>MVP Prontuário (blocos)</h1>
+      <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>Templates carregados: {TEMPLATES.length}</div>
       {feedbackUrl && (
         <div className="no-print" style={{ marginBottom: 12 }}>
           <a href={feedbackUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 8, border: "1px solid #d1d5db", textDecoration: "none", color: "#111827", background: "#fff" }}>

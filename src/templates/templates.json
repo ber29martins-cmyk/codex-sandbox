@@ -1,6 +1,170 @@
 {
   "templates": [
     {
+      "id": "bronquite",
+      "label": "Bronquite aguda / Tosse pós-viral",
+      "defaults": {
+        "qpDefault": "Tosse",
+        "hmaDefault": [
+          "Paciente refere tosse predominante há 5–10 dias, inicialmente seca, evoluindo para tosse produtiva com pouca secreção",
+          "Relata antecedente recente de quadro de IVAS (coriza, dor de garganta, febre baixa) já em resolução",
+          "Nega dispneia importante, dor torácica ventilatório-dependente intensa, hemoptise ou sibilância prévia conhecida",
+          "Nega febre alta persistente nos últimos dias, nega perda de peso ou sudorese noturna",
+          "Nega tabagismo pesado ou DPOC conhecida (ajustar conforme paciente real)"
+        ],
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Bronquite aguda / Tosse pós-viral",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG, corado, hidratado",
+          "MV presente, eventuais roncos dispersos, sem sinais de dificuldade respiratória"
+        ]
+      }
+    },
+    {
+      "id": "cistite",
+      "label": "Cistite não complicada",
+      "defaults": {
+        "qpDefault": "Disúria e urgência miccional",
+        "hmaDefault": [
+          "Paciente relata disúria, polaciúria e urgência miccional há 1–3 dias",
+          "Refere sensação de esvaziamento vesical incompleto e desconforto suprapúbico leve",
+          "Nega febre, calafrios, dor lombar importante, náuseas ou vômitos",
+          "Nega corrimento vaginal significativo, dor pélvica profunda ou sangramento genital anormal",
+          "Nega gestação conhecida, doenças renais prévias graves, imunossupressão ou uso recente de antibióticos (ajustar conforme caso)"
+        ],
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Cistite não complicada",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG, afebril",
+          "Palpação suprapúbica discretamente dolorosa, sem dor à punho percussão lombar"
+        ]
+      }
+    },
+    {
+      "id": "dispepsia",
+      "label": "Dispepsia / Dor epigástrica",
+      "defaults": {
+        "qpDefault": "Dor epigástrica",
+        "hmaDefault": [
+          "Paciente refere dor ou queimação em região epigástrica há dias a semanas, relacionada a períodos de jejum prolongado ou pós-prandial",
+          "Refere pirose, sensação de refluxo, eructações frequentes, às vezes náusea leve sem vômitos incoercíveis",
+          "Nega perda de peso importante, disfagia progressiva, odinofagia severa, melena ou hematêmese",
+          "Nega dor torácica típica em aperto associada a esforço, dispneia ou síncope",
+          "Nega uso abusivo recente de AINEs, etilismo pesado ou tabagismo intenso (ajustar conforme caso real)"
+        ],
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Dispepsia",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG, abdome plano, ruídos hidroaéreos presentes",
+          "Dor leve à palpação epigástrica sem sinais de irritação peritoneal"
+        ]
+      }
+    },
+    {
+      "id": "faringoamigdalite_bacteriana",
+      "label": "Faringoamigdalite bacteriana",
+      "defaults": {
+        "qpDefault": "Dor intensa em garganta",
+        "hmaDefault": [
+          "Paciente relata dor intensa em garganta há 2–3 dias, pior à deglutição, associada a febre alta aferida em domicílio",
+          "Refere mal-estar, inapetência e dificuldade importante para alimentação sólida",
+          "Nega tosse produtiva importante, coriza ou outros sintomas respiratórios altos marcantes",
+          "Nega diarreia, vômitos persistentes ou dor abdominal intensa",
+          "Nega comorbidades relevantes ou história de alergia prévia a betalactâmicos, nega uso recente de antibiótico"
+        ],
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Faringoamigdalite bacteriana",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG, febril ou subfebril",
+          "ORL: hiperemia intensa com exsudato em amígdalas",
+          "Linfadenomegalia cervical dolorosa"
+        ]
+      }
+    },
+    {
+      "id": "faringoamigdalite_viral",
+      "label": "Faringoamigdalite viral",
+      "defaults": {
+        "qpDefault": "Dor de garganta",
+        "hmaDefault": [
+          "Paciente procura serviço com dor de garganta há 2–4 dias, dificuldade para deglutir e sensação de garganta “arranhando”",
+          "Refere febre baixa ou sensação febril, sem escalada significativa nas últimas 24h",
+          "Relata tosse seca ou produtiva leve, sem dispneia, sem dor torácica",
+          "Nega vômitos frequentes, diarreia, exantema, perda de peso ou outros sintomas sistêmicos importantes",
+          "Nega comorbidades relevantes, alergias medicamentosas conhecidas ou uso recente de antibióticos"
+        ],
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Faringoamigdalite viral",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG, corado, hidratado",
+          "ORL: hiperemia de orofaringe sem exsudato",
+          "Ausculta pulmonar sem ruídos adventícios"
+        ]
+      }
+    },
+    {
+      "id": "gastroenterite",
+      "label": "Gastroenterite aguda",
+      "defaults": {
+        "qpDefault": "Diarreia e cólicas",
+        "hmaDefault": [
+          "Paciente refere início há 1–3 dias de diarreia aquosa, com múltiplos episódios diários, associada a cólicas abdominais difusas",
+          "Relata náuseas e episódios de vômitos, porém mantendo ingesta parcial de líquidos",
+          "Refere febre baixa ou sensação febril em algum momento do quadro",
+          "Nega sangue vivo ou muco abundante nas fezes, nega dor abdominal localizada intensa, nega história de viagem recente ou consumo de alimentos claramente suspeitos (ajustar conforme caso)",
+          "Nega comorbidades importantes ou imunossupressão, nega uso recente de antibióticos"
+        ],
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Gastroenterite aguda",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG, sinais de hidratação preservados ou levemente reduzidos",
+          "Abdome flácido, dor difusa leve, sem sinais de peritonite"
+        ]
+      }
+    },
+    {
+      "id": "gripe",
+      "label": "Síndrome gripal / gripe",
+      "defaults": {
+        "qpDefault": "Febre e mialgias",
+        "hmaDefault": [
+          "Paciente refere início há 1–3 dias de febre alta não aferida ou em torno de 38,5–39 ºC, acompanhada de mialgias difusas, cefaleia, calafrios e mal-estar intenso",
+          "Relata tosse seca, dor de garganta leve e prostração maior que o habitual",
+          "Nega dispneia importante, dor torácica em aperto, síncope, confusão mental, vômitos incoercíveis ou diarreia intensa",
+          "Mantém ingesta de líquidos reduzida, mas ainda satisfatória, com aceitação parcial de alimentos",
+          "Nega comorbidades conhecidas ou uso recente de antibióticos"
+        ],
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Síndrome gripal",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG, corado, hidratado",
+          "ORL: hiperemia orofaríngea discreta",
+          "Pulmões: MV presente bilateral, sem ruídos adventícios"
+        ]
+      }
+    },
+    {
       "id": "lombalgia",
       "label": "Lombalgia / Lombociatalgia",
       "defaults": {
@@ -56,146 +220,6 @@
         ],
         "rxGroups": ["ivassintomatico", "antibioticos", "antihistaminicos", "corticoides", "mucoliticos", "antitussigenos", "descongestionantes_nasal", "lavagem_nasal"],
         "rxDefaults": ["paracetamol750", "loratadina10", "soroNasal"]
-      }
-    },
-    {
-      "id": "gripe",
-      "label": "Síndrome gripal / gripe",
-      "defaults": {
-        "qpDefault": "Febre e mialgias",
-        "hmaDefault": [
-          "Paciente refere início há 1–3 dias de febre alta não aferida ou em torno de 38,5–39 ºC, acompanhada de mialgias difusas, cefaleia, calafrios e mal-estar intenso",
-          "Relata tosse seca, dor de garganta leve e prostração maior que o habitual",
-          "Nega dispneia importante, dor torácica em aperto, síncope, confusão mental, vômitos incoercíveis ou diarreia intensa",
-          "Mantém ingesta de líquidos reduzida, mas ainda satisfatória, com aceitação parcial de alimentos",
-          "Nega comorbidades conhecidas ou uso recente de antibióticos"
-        ],
-        "alarme": "",
-        "comorb": "",
-        "meds": "",
-        "hipotese": "Síndrome gripal",
-        "condutaAlarmes": "",
-        "exame": ["BEG, corado, hidratado", "ORL: hiperemia orofaríngea discreta", "Pulmões: MV presente bilateral, sem ruídos adventícios"]
-      }
-    },
-    {
-      "id": "faringoViral",
-      "label": "Faringoamigdalite viral",
-      "defaults": {
-        "qpDefault": "Dor de garganta",
-        "hmaDefault": [
-          "Paciente procura serviço com dor de garganta há 2–4 dias, dificuldade para deglutir e sensação de garganta “arranhando”",
-          "Refere febre baixa ou sensação febril, sem escalada significativa nas últimas 24h",
-          "Relata tosse seca ou produtiva leve, sem dispneia, sem dor torácica",
-          "Nega vômitos frequentes, diarreia, exantema, perda de peso ou outros sintomas sistêmicos importantes",
-          "Nega comorbidades relevantes, alergias medicamentosas conhecidas ou uso recente de antibióticos"
-        ],
-        "alarme": "",
-        "comorb": "",
-        "meds": "",
-        "hipotese": "Faringoamigdalite viral",
-        "condutaAlarmes": "",
-        "exame": ["BEG, corado, hidratado", "ORL: hiperemia de orofaringe sem exsudato", "Ausculta pulmonar sem ruídos adventícios"]
-      }
-    },
-    {
-      "id": "faringoBacteriana",
-      "label": "Faringoamigdalite bacteriana",
-      "defaults": {
-        "qpDefault": "Dor intensa em garganta",
-        "hmaDefault": [
-          "Paciente relata dor intensa em garganta há 2–3 dias, pior à deglutição, associada a febre alta aferida em domicílio",
-          "Refere mal-estar, inapetência e dificuldade importante para alimentação sólida",
-          "Nega tosse produtiva importante, coriza ou outros sintomas respiratórios altos marcantes",
-          "Nega diarreia, vômitos persistentes ou dor abdominal intensa",
-          "Nega comorbidades relevantes ou história de alergia prévia a betalactâmicos, nega uso recente de antibiótico"
-        ],
-        "alarme": "",
-        "comorb": "",
-        "meds": "",
-        "hipotese": "Faringoamigdalite bacteriana",
-        "condutaAlarmes": "",
-        "exame": ["BEG, febril ou subfebril", "ORL: hiperemia intensa com exsudato em amígdalas", "Linfadenomegalia cervical dolorosa"]
-      }
-    },
-    {
-      "id": "dispepsia",
-      "label": "Dispepsia / Dor epigástrica",
-      "defaults": {
-        "qpDefault": "Dor epigástrica",
-        "hmaDefault": [
-          "Paciente refere dor ou queimação em região epigástrica há dias a semanas, relacionada a períodos de jejum prolongado ou pós-prandial",
-          "Refere pirose, sensação de refluxo, eructações frequentes, às vezes náusea leve sem vômitos incoercíveis",
-          "Nega perda de peso importante, disfagia progressiva, odinofagia severa, melena ou hematêmese",
-          "Nega dor torácica típica em aperto associada a esforço, dispneia ou síncope",
-          "Nega uso abusivo recente de AINEs, etilismo pesado ou tabagismo intenso (ajustar conforme caso real)"
-        ],
-        "alarme": "",
-        "comorb": "",
-        "meds": "",
-        "hipotese": "Dispepsia",
-        "condutaAlarmes": "",
-        "exame": ["BEG, abdome plano, ruídos hidroaéreos presentes", "Dor leve à palpação epigástrica sem sinais de irritação peritoneal"]
-      }
-    },
-    {
-      "id": "gastroenterite",
-      "label": "Gastroenterite aguda",
-      "defaults": {
-        "qpDefault": "Diarreia e cólicas",
-        "hmaDefault": [
-          "Paciente refere início há 1–3 dias de diarreia aquosa, com múltiplos episódios diários, associada a cólicas abdominais difusas",
-          "Relata náuseas e episódios de vômitos, porém mantendo ingesta parcial de líquidos",
-          "Refere febre baixa ou sensação febril em algum momento do quadro",
-          "Nega sangue vivo ou muco abundante nas fezes, nega dor abdominal localizada intensa, nega história de viagem recente ou consumo de alimentos claramente suspeitos (ajustar conforme caso)",
-          "Nega comorbidades importantes ou imunossupressão, nega uso recente de antibióticos"
-        ],
-        "alarme": "",
-        "comorb": "",
-        "meds": "",
-        "hipotese": "Gastroenterite aguda",
-        "condutaAlarmes": "",
-        "exame": ["BEG, sinais de hidratação preservados ou levemente reduzidos", "Abdome flácido, dor difusa leve, sem sinais de peritonite"]
-      }
-    },
-    {
-      "id": "cistite",
-      "label": "Cistite não complicada",
-      "defaults": {
-        "qpDefault": "Disúria e urgência miccional",
-        "hmaDefault": [
-          "Paciente relata disúria, polaciúria e urgência miccional há 1–3 dias",
-          "Refere sensação de esvaziamento vesical incompleto e desconforto suprapúbico leve",
-          "Nega febre, calafrios, dor lombar importante, náuseas ou vômitos",
-          "Nega corrimento vaginal significativo, dor pélvica profunda ou sangramento genital anormal",
-          "Nega gestação conhecida, doenças renais prévias graves, imunossupressão ou uso recente de antibióticos (ajustar conforme caso)"
-        ],
-        "alarme": "",
-        "comorb": "",
-        "meds": "",
-        "hipotese": "Cistite não complicada",
-        "condutaAlarmes": "",
-        "exame": ["BEG, afebril", "Palpação suprapúbica discretamente dolorosa, sem dor à punho percussão lombar"]
-      }
-    },
-    {
-      "id": "bronquite",
-      "label": "Bronquite aguda / Tosse pós-viral",
-      "defaults": {
-        "qpDefault": "Tosse",
-        "hmaDefault": [
-          "Paciente refere tosse predominante há 5–10 dias, inicialmente seca, evoluindo para tosse produtiva com pouca secreção",
-          "Relata antecedente recente de quadro de IVAS (coriza, dor de garganta, febre baixa) já em resolução",
-          "Nega dispneia importante, dor torácica ventilatório-dependente intensa, hemoptise ou sibilância prévia conhecida",
-          "Nega febre alta persistente nos últimos dias, nega perda de peso ou sudorese noturna",
-          "Nega tabagismo pesado ou DPOC conhecida (ajustar conforme paciente real)"
-        ],
-        "alarme": "",
-        "comorb": "",
-        "meds": "",
-        "hipotese": "Bronquite aguda / Tosse pós-viral",
-        "condutaAlarmes": "",
-        "exame": ["BEG, corado, hidratado", "MV presente, eventuais roncos dispersos, sem sinais de dificuldade respiratória"]
       }
     }
   ]
