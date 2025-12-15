@@ -4,8 +4,8 @@
       "id": "lombalgia",
       "label": "Lombalgia / Lombociatalgia",
       "defaults": {
-        "qp": "Dor lombar",
-        "hma": "Há 3 dias, sem trauma, sem irradiação",
+        "qpDefault": "Dor lombar",
+        "hmaDefault": ["Há 3 dias, sem trauma, sem irradiação"],
         "alarme": "Nega parestesia/hipoestesia, perda de força e alteração esfincteriana",
         "comorb": "DM NIR, HAS",
         "meds": "Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1",
@@ -30,8 +30,14 @@
       "id": "resfriado",
       "label": "Resfriado",
       "defaults": {
-        "qp": "Coriza/congestão/tosse/odinofagia",
-        "hma": "Há 2 dias, sem dispneia",
+        "qpDefault": "Coriza e obstrução nasal",
+        "hmaDefault": [
+          "Paciente procura o serviço com queixa de coriza, obstrução nasal, espirros e mal-estar há 2–3 dias",
+          "Refere odinofagia leve e tosse seca esporádica, sem piora progressiva",
+          "Nega febre medida, dispneia, dor torácica, chiado no peito, síncope, cefaleia intensa, vômitos ou diarreia",
+          "Mantém aceitação preservada de líquidos e alimentos, sem redução importante do estado geral",
+          "Nega comorbidades relevantes, alergias medicamentosas conhecidas, internações recentes ou uso atual de antibióticos"
+        ],
         "alarme": "Nega dispneia, dor torácica e prostração importante",
         "comorb": "",
         "meds": "",

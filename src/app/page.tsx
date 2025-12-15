@@ -10,8 +10,10 @@ type Template = {
   id: string;
   label: string;
   defaults: {
-    qp: string;
-    hma: string;
+    qp?: string;
+    hma?: string;
+    qpDefault?: string;
+    hmaDefault?: string[];
     alarme: string;
     comorb: string;
     meds: string;
@@ -67,10 +69,29 @@ function buildDefaultAlarmStates(template: Template): AlarmStateMap {
   return initialState;
 }
 
+function getTemplateQP(template: Template) {
+  const qp = template.defaults.qpDefault ?? template.defaults.qp;
+  return qp ?? "";
+}
+
+function getTemplateHma(template: Template) {
+  if (template.defaults.hmaDefault && template.defaults.hmaDefault.length) return template.defaults.hmaDefault;
+  if (template.defaults.hma) return [template.defaults.hma];
+  const complaintItems = (template as unknown as { complaintItems?: string[] }).complaintItems ?? [];
+  if (complaintItems.length) {
+    return complaintItems.slice(1);
+  }
+  const symptoms = (template as unknown as { symptoms?: string[] }).symptoms ?? [];
+  if (symptoms.length) {
+    return symptoms;
+  }
+  return [];
+}
+
 function buildTemplateDefaults(template: Template): TemplateState {
   return {
-    qp: template.defaults.qp,
-    hma: template.defaults.hma,
+    qp: getTemplateQP(template),
+    hma: getTemplateHma(template).join("\n"),
     alarme: template.defaults.alarme,
     comorb: template.defaults.comorb,
     meds: template.defaults.meds,
@@ -488,7 +509,7 @@ const currentTemplate = useMemo(
           </div>
 
           <label>QP<br /><input value={qp} onChange={(e) => setQp(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
-          <label>HMA<br /><input value={hma} onChange={(e) => setHma(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>HMA (uma linha por parágrafo)<br /><textarea value={hma} onChange={(e) => setHma(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label><br /><br />
           {hasAlarmItems ? (
             <div style={{ marginBottom: 12 }}>
               <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>Sinais de alarme</div>
