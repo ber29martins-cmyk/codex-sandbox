@@ -256,7 +256,8 @@ const currentTemplate = useMemo(
     }
   }, [templateId, qpText, hmaText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected]);
 
-  const hasAlarmItems = (currentTemplate.defaults.alarmItems ?? []).length > 0;
+  const alarmCount = (currentTemplate.defaults.alarmItems ?? []).length;
+  const hasAlarmItems = alarmCount > 0;
   const alarmLine = useMemo(() => {
     const items = currentTemplate.defaults.alarmItems ?? [];
     if (!items.length) return alarme.trim();
@@ -550,7 +551,9 @@ const currentTemplate = useMemo(
           <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaText} onChange={(e) => setHmaText(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label><br /><br />
           {hasAlarmItems ? (
             <div style={{ marginBottom: 12 }}>
-              <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>Sinais de alarme</div>
+              <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>
+                Sinais de alarme <span style={{ color: "#6b7280", fontWeight: 400 }}>(Alarmes: {alarmCount})</span>
+              </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {currentTemplate.defaults.alarmItems?.map((item) => {
                   const status = alarmStates[item.key] ?? "unknown";
