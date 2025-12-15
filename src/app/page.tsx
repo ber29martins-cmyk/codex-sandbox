@@ -26,8 +26,8 @@ type Template = {
   };
 };
 type TemplateState = {
-  qp: string;
-  hma: string;
+  qpText: string;
+  hmaText: string;
   alarme: string;
   comorb: string;
   meds: string;
@@ -70,28 +70,25 @@ function buildDefaultAlarmStates(template: Template): AlarmStateMap {
 }
 
 function getTemplateQP(template: Template) {
-  const qp = template.defaults.qpDefault ?? template.defaults.qp;
-  return qp ?? "";
+  const qpCandidates = [
+    template.defaults.qp,
+    template.defaults.qpDefault,
+    ...(((template as unknown as { complaintItems?: string[] }).complaintItems ?? []).slice(0, 1)),
+    ...(((template as unknown as { symptoms?: string[] }).symptoms ?? []).slice(0, 1))
+  ].filter(Boolean) as string[];
+  return qpCandidates[0] ?? "";
 }
 
 function getTemplateHma(template: Template) {
-  if (template.defaults.hmaDefault && template.defaults.hmaDefault.length) return template.defaults.hmaDefault;
-  if (template.defaults.hma) return [template.defaults.hma];
-  const complaintItems = (template as unknown as { complaintItems?: string[] }).complaintItems ?? [];
-  if (complaintItems.length) {
-    return complaintItems.slice(1);
-  }
-  const symptoms = (template as unknown as { symptoms?: string[] }).symptoms ?? [];
-  if (symptoms.length) {
-    return symptoms;
-  }
+  const isResfriado = (template.id ?? "").toLowerCase().includes("resfri") || (template.label ?? "").toLowerCase().includes("resfri");
+  if (isResfriado) return RESFRIADO_HMA;
   return [];
 }
 
 function buildTemplateDefaults(template: Template): TemplateState {
   return {
-    qp: getTemplateQP(template),
-    hma: getTemplateHma(template).join("\n"),
+    qpText: getTemplateQP(template),
+    hmaText: getTemplateHma(template).join("\n"),
     alarme: template.defaults.alarme,
     comorb: template.defaults.comorb,
     meds: template.defaults.meds,
@@ -118,6 +115,13 @@ const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
 const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
 const RX_GROUP_MAP: Record<string, RxGroup> = Object.fromEntries(RX_GROUPS.map((group) => [group.id, group]));
 const FEEDBACK_URL = process.env.NEXT_PUBLIC_FEEDBACK_URL;
+const RESFRIADO_HMA = [
+  "Paciente procura o serviço com queixa de coriza, obstrução nasal, espirros e mal-estar há 2–3 dias",
+  "Refere odinofagia leve e tosse seca esporádica, sem piora progressiva",
+  "Nega febre medida, dispneia, dor torácica, chiado no peito, síncope, cefaleia intensa, vômitos ou diarreia",
+  "Mantém aceitação preservada de líquidos e alimentos, sem redução importante do estado geral",
+  "Nega comorbidades relevantes, alergias medicamentosas conhecidas, internações recentes ou uso atual de antibióticos"
+];
 
 
 export default function Page() {
@@ -128,8 +132,8 @@ const currentTemplate = useMemo(
   () => TEMPLATES.find((t) => t.id === templateId) ?? TEMPLATES[0],
   [templateId]
 );
-  const [qp, setQp] = useState("Dor lombar");
-  const [hma, setHma] = useState("");
+  const [qpText, setQpText] = useState("");
+  const [hmaText, setHmaText] = useState("");
   const [alarme, setAlarme] = useState("Nega perda de força, anestesia em sela e alteração esfincteriana");
   const [comorb, setComorb] = useState("DM NIR, HAS");
   const [meds, setMeds] = useState("Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1");
@@ -187,8 +191,8 @@ const currentTemplate = useMemo(
     const templateState = { ...buildTemplateDefaults(currentTemplate), ...savedState };
 
     isApplyingTemplate.current = true;
-    setQp(templateState.qp);
-    setHma(templateState.hma);
+    setQpText(templateState.qpText ?? "");
+    setHmaText(templateState.hmaText ?? "");
     setAlarme(templateState.alarme);
     setComorb(templateState.comorb);
     setMeds(templateState.meds);
@@ -210,8 +214,8 @@ const currentTemplate = useMemo(
     if (!didHydrate.current || isApplyingTemplate.current) return;
 
     const currentState: TemplateState = {
-      qp,
-      hma,
+      qpText,
+      hmaText,
       alarme,
       comorb,
       meds,
@@ -237,7 +241,7 @@ const currentTemplate = useMemo(
         })
       );
     }
-  }, [templateId, qp, hma, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat]);
+  }, [templateId, qpText, hmaText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat]);
 
   const hasAlarmItems = (currentTemplate.defaults.alarmItems ?? []).length > 0;
   const alarmLine = useMemo(() => {
@@ -324,9 +328,11 @@ const currentTemplate = useMemo(
   }, [rxSelected]);
   
   const blocks = useMemo(() => {
+    const hmaLines = hmaText ? hmaText.split("\n").filter(Boolean) : [];
     const anamnese = [
-      `QP: ${qp}`,
-      `HMA: ${hma}`,
+      `QP: ${qpText}`,
+      hmaLines.length ? `HMA: ${hmaLines[0]}` : "",
+      ...hmaLines.slice(1),
       alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
       comorb ? `Comorbidades: ${comorb}` : "",
       meds ? `Medicações de uso contínuo: ${meds}` : "",
@@ -368,8 +374,8 @@ const currentTemplate = useMemo(
 
     const defaults = buildTemplateDefaults(currentTemplate);
     isApplyingTemplate.current = true;
-    setQp(defaults.qp);
-    setHma(defaults.hma);
+    setQpText(defaults.qpText);
+    setHmaText(defaults.hmaText);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -405,8 +411,8 @@ const currentTemplate = useMemo(
     savedTemplatesRef.current = {};
     isApplyingTemplate.current = true;
     setTemplateId(firstTemplate.id);
-    setQp(defaults.qp);
-    setHma(defaults.hma);
+    setQpText(defaults.qpText);
+    setHmaText(defaults.hmaText);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -508,8 +514,8 @@ const currentTemplate = useMemo(
             <button type="button" onClick={handleResetApp}>Resetar app (limpar dados locais)</button>
           </div>
 
-          <label>QP<br /><input value={qp} onChange={(e) => setQp(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
-          <label>HMA (uma linha por parágrafo)<br /><textarea value={hma} onChange={(e) => setHma(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label><br /><br />
+          <label>QP<br /><input value={qpText} onChange={(e) => setQpText(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaText} onChange={(e) => setHmaText(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label><br /><br />
           {hasAlarmItems ? (
             <div style={{ marginBottom: 12 }}>
               <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>Sinais de alarme</div>
