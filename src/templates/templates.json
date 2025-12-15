@@ -161,7 +161,19 @@
           "BEG, corado, hidratado",
           "ORL: hiperemia orofaríngea discreta",
           "Pulmões: MV presente bilateral, sem ruídos adventícios"
-        ]
+        ],
+        "alarmItems": [
+          { "key": "dispneia", "label": "Dispneia / esforço respiratório" },
+          { "key": "dorToracica", "label": "Dor torácica" },
+          { "key": "satBaixa", "label": "Saturação baixa" },
+          { "key": "confusao", "label": "Confusão mental / rebaixamento" },
+          { "key": "desidratacao", "label": "Sinais de desidratação importante" },
+          { "key": "vomitos", "label": "Vômitos incoercíveis" },
+          { "key": "febrePersistente", "label": "Febre persistente >72h ou piora após melhora" },
+          { "key": "risco", "label": "Imunossupressão / gestante / puérpera / idoso frágil" }
+        ],
+        "rxGroups": ["analgesicos", "aines", "antivirais"],
+        "rxDefaults": ["paracetamol750", "dipirona20", "oseltamivir_75mg_tamiflu"]
       }
     },
     {
