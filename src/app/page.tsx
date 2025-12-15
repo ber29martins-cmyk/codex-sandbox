@@ -343,7 +343,7 @@ const currentTemplate = useMemo(
 
     const avaliacao = [hipotese].filter(Boolean);
 
-    const conduta = [
+  const conduta = [
       "Orientado sobre o quadro e conduta",
       `Orientado sinais de alarme: ${condutaAlarmes}`,
       "Retorno imediato se sinais de alarme ou piora do quadro",
@@ -351,7 +351,7 @@ const currentTemplate = useMemo(
     ];
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qp, hma, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate]);
+  }, [qpText, hmaText, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
