@@ -50,6 +50,7 @@ const ALARM_STATUS_STYLES: Record<AlarmStatus, { background: string; border: str
 };
 const STORAGE_KEY = "codex-app-state-v1";
 const RX_ROUTE_ORDER = ["ORAL", "PARENTERAL", "TOPICO", "OFTALMICO", "INALATORIO"];
+const RX_KIT_KEY = "codex-rx-kits-v1";
 
 function buildDefaultAlarmStates(template: Template): AlarmStateMap {
   const items = template.defaults.alarmItems ?? [];
@@ -107,14 +108,16 @@ const currentTemplate = useMemo(
   const didHydrate = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, TemplateState>>({});
+  const rxKitsRef = useRef<Record<string, string[]>>({});
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      const parsed = raw ? (JSON.parse(raw) as { templateId?: string; templates?: Record<string, TemplateState> }) : {};
+      const parsed = raw ? (JSON.parse(raw) as { templateId?: string; templates?: Record<string, TemplateState>; rxKits?: Record<string, string[]> }) : {};
       savedTemplatesRef.current = parsed.templates ?? {};
+      rxKitsRef.current = parsed.rxKits ?? {};
 
       const storedTemplateId =
         parsed.templateId && TEMPLATES.some((t) => t.id === parsed.templateId) ? parsed.templateId : TEMPLATES[0]?.id;
@@ -143,7 +146,8 @@ const currentTemplate = useMemo(
     setHipotese(templateState.hipotese);
     setCondutaAlarmes(templateState.condutaAlarmes);
     setAlarmStates(templateState.alarmStates ?? buildDefaultAlarmStates(currentTemplate));
-    setRxSelected(templateState.rxSelected ?? currentTemplate.defaults.rxDefaults ?? []);
+    const kit = rxKitsRef.current[templateId];
+    setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
     isApplyingTemplate.current = false;
   }, [templateId, currentTemplate]);
 
@@ -177,7 +181,8 @@ const currentTemplate = useMemo(
         STORAGE_KEY,
         JSON.stringify({
           templateId,
-          templates: savedTemplatesRef.current
+          templates: savedTemplatesRef.current,
+          rxKits: rxKitsRef.current
         })
       );
     }
@@ -330,12 +335,14 @@ const currentTemplate = useMemo(
     isApplyingTemplate.current = false;
 
     savedTemplatesRef.current = { ...savedTemplatesRef.current, [templateId]: defaults };
+    delete rxKitsRef.current[templateId];
     if (typeof window !== "undefined") {
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify({
           templateId,
-          templates: savedTemplatesRef.current
+          templates: savedTemplatesRef.current,
+          rxKits: rxKitsRef.current
         })
       );
     }
@@ -363,6 +370,7 @@ const currentTemplate = useMemo(
     setPa("");
     setFc("");
     setSat("");
+    rxKitsRef.current = {};
     if (typeof window !== "undefined") {
       localStorage.removeItem(STORAGE_KEY);
     }
@@ -382,6 +390,35 @@ const currentTemplate = useMemo(
       }
       return [...prev, id];
     });
+  }
+
+  function persistStorage(currentTemplateId: string) {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        templateId: currentTemplateId,
+        templates: savedTemplatesRef.current,
+        rxKits: rxKitsRef.current
+      })
+    );
+  }
+
+  function handleSaveRxKit() {
+    rxKitsRef.current = { ...rxKitsRef.current, [templateId]: rxSelected };
+    persistStorage(templateId);
+  }
+
+  function handleRestoreRxDefaults() {
+    if (!currentTemplate) return;
+    delete rxKitsRef.current[templateId];
+    const defaults = currentTemplate.defaults.rxDefaults ?? [];
+    setRxSelected(defaults);
+    persistStorage(templateId);
+  }
+
+  function handleClearRxSelection() {
+    setRxSelected([]);
   }
 
   const allText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
@@ -530,9 +567,36 @@ const currentTemplate = useMemo(
             </div>
           </div>
         ))}
-        <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}>
-          <button type="button" onClick={() => copy(rxText || "Sem itens selecionados")} disabled={!rxText}>
+        <div className="no-print" style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap", alignItems: "center" }}>
+          <button
+            type="button"
+            onClick={() => copy(rxText || "Sem itens selecionados")}
+            disabled={!rxText}
+            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+          >
             Copiar receita
+          </button>
+          <button
+            type="button"
+            onClick={handleSaveRxKit}
+            disabled={!rxSelected.length}
+            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+          >
+            Salvar como meu padrão
+          </button>
+          <button
+            type="button"
+            onClick={handleRestoreRxDefaults}
+            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+          >
+            Restaurar padrão do template
+          </button>
+          <button
+            type="button"
+            onClick={handleClearRxSelection}
+            style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
+          >
+            Limpar seleção
           </button>
         </div>
         {groupedRx.length ? (
