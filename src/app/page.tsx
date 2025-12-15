@@ -1,65 +1,187 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect, useMemo, useState } from "react";
+
+type BlockKey = "anamnese" | "exame" | "hipotese" | "conduta";
+type Template = {
+  id: string;
+  label: string;
+  defaults: {
+    qp: string;
+    te: string;
+    assoc: string;
+    alarme: string;
+    comorb: string;
+    meds: string;
+    hipotese: string;
+    condutaAlarmes: string;
+    alarmItems?: { key: string; label: string }[];
+  };
+};
+
+
+
+import templatesData from "../templates/templates.json";
+const TEMPLATES = (templatesData as { templates: Template[] }).templates;
+
+
+export default function Page() {
+    const [templateId, setTemplateId] = useState<string>(TEMPLATES[0]?.id ?? "lombalgia");
+const currentTemplate = useMemo(
+  () => TEMPLATES.find((t) => t.id === templateId) ?? TEMPLATES[0],
+  [templateId]
+);
+  const [qp, setQp] = useState("Dor lombar");
+  const [te, setTe] = useState("3 dias");
+  const [assoc, setAssoc] = useState("Sem irradiação, sem trauma");
+  const [alarme, setAlarme] = useState("Nega perda de força, anestesia em sela e alteração esfincteriana");
+  const [comorb, setComorb] = useState("DM NIR, HAS");
+  const [meds, setMeds] = useState("Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1");
+  const [alergiaNega, setAlergiaNega] = useState(true);
+useEffect(() => {
+  if (!currentTemplate) return;
+
+  setQp(currentTemplate.defaults.qp);
+  setTe(currentTemplate.defaults.te);
+  setAssoc(currentTemplate.defaults.assoc);
+  setAlarme(currentTemplate.defaults.alarme);
+  setComorb(currentTemplate.defaults.comorb);
+  setMeds(currentTemplate.defaults.meds);
+  setHipotese(currentTemplate.defaults.hipotese);
+  setCondutaAlarmes(currentTemplate.defaults.condutaAlarmes);
+}, [templateId, currentTemplate]);
+
+  const [triagem, setTriagem] = useState(true);
+  const [pa, setPa] = useState("");
+  const [fc, setFc] = useState("");
+  const [sat, setSat] = useState("");
+
+  const [hipotese, setHipotese] = useState("Lombalgia");
+  const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
+  
+  const blocks = useMemo(() => {
+    const anamnese = [
+      `QP: ${qp}`,
+      `TE: ${te}`,
+      assoc ? `Associados: ${assoc}` : "",
+      `Sinais de alarme: ${alarme}`,
+      comorb ? `Comorbidades: ${comorb}` : "",
+      meds ? `Medicações de uso contínuo: ${meds}` : "",
+      alergiaNega ? "Nega alergias" : ""
+    ].filter(Boolean);
+
+    const vitalsLine =
+      !triagem && (pa || fc || sat)
+        ? `PA ${pa || "___"} FC ${fc || "___"} Sat ${sat || "___"}`
+        : triagem
+          ? "Sinais vitais conforme triagem"
+          : "";
+
+    const exame = [
+      "BEG, consciente e orientado, corado, hidratado",
+      vitalsLine,
+      "Coluna: dor à palpação paravertebral, sem deformidades aparentes",
+      "Neuro: força e sensibilidade preservadas, sem déficit focal"
+    ].filter(Boolean);
+
+    const avaliacao = [hipotese].filter(Boolean);
+
+    const conduta = [
+      "Orientado sobre o quadro e conduta",
+      `Orientado sinais de alarme: ${condutaAlarmes}`,
+      "Retorno imediato se sinais de alarme ou piora do quadro",
+      "Paciente esclarecido e de acordo com as orientações"
+    ];
+
+    return { anamnese, exame, hipotese: avaliacao, conduta };
+  }, [qp, te, assoc, alarme, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes]);
+
+  function formatBlock(key: BlockKey) {
+    return blocks[key].join("\n");
+  }
+
+  async function copy(text: string) {
+    await navigator.clipboard.writeText(text);
+  }
+
+  const allText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
+      <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12 }}>MVP Prontuário (blocos)</h1>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Entrada rápida</h2>
+<label>
+  Queixa
+  <br />
+  <select
+    value={templateId}
+    onChange={(e) => setTemplateId(e.target.value)}
+    style={{ width: "100%" }}
+  >
+    {TEMPLATES.map((t) => (
+      <option key={t.id} value={t.id}>
+        {t.label}
+      </option>
+    ))}
+  </select>
+</label>
+<br />
+<br />
+
+          <label>QP<br /><input value={qp} onChange={(e) => setQp(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>TE<br /><input value={te} onChange={(e) => setTe(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>Associados<br /><input value={assoc} onChange={(e) => setAssoc(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>Sinais de alarme (linha)<br /><input value={alarme} onChange={(e) => setAlarme(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+
+          <label>Comorbidades (linha)<br /><input value={comorb} onChange={(e) => setComorb(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>Medicações contínuas (linha)<br /><input value={meds} onChange={(e) => setMeds(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+
+          <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <input type="checkbox" checked={alergiaNega} onChange={(e) => setAlergiaNega(e.target.checked)} />
+            Nega alergias
+          </label>
+
+          <hr style={{ margin: "16px 0" }} />
+
+          <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <input type="checkbox" checked={triagem} onChange={(e) => setTriagem(e.target.checked)} />
+            Sinais vitais conforme triagem
+          </label>
+
+          {!triagem && (
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginTop: 8 }}>
+              <label>PA<br /><input value={pa} onChange={(e) => setPa(e.target.value)} /></label>
+              <label>FC<br /><input value={fc} onChange={(e) => setFc(e.target.value)} /></label>
+              <label>Sat<br /><input value={sat} onChange={(e) => setSat(e.target.value)} /></label>
+            </div>
+          )}
+
+          <hr style={{ margin: "16px 0" }} />
+          <label>Hipótese (1 linha)<br /><input value={hipotese} onChange={(e) => setHipotese(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>Alarmes na conduta (texto)<br /><input value={condutaAlarmes} onChange={(e) => setCondutaAlarmes(e.target.value)} style={{ width: "100%" }} /></label>
+        </section>
+
+        <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Saída (copiar/colar)</h2>
+
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
+            <button onClick={() => copy(formatBlock("anamnese"))}>Copiar anamnese</button>
+            <button onClick={() => copy(formatBlock("exame"))}>Copiar exame</button>
+            <button onClick={() => copy(formatBlock("hipotese"))}>Copiar hipótese</button>
+            <button onClick={() => copy(formatBlock("conduta"))}>Copiar conduta</button>
+            <button onClick={() => copy(allText)}>Copiar tudo</button>
+          </div>
+
+          <textarea readOnly value={allText} style={{ width: "100%", height: 420, fontFamily: "ui-monospace, SFMono-Regular", whiteSpace: "pre", padding: 12 }} />
+        </section>
+      </div>
+
+      <p style={{ color: "#666", fontSize: 13 }}>
+        Próximo passo: transformar “Sinais de alarme” em tri-state e carregar templates (resfriado/gripe/lombalgia/gastro/sinusite) via JSON.
+      </p>
+    </main>
   );
 }

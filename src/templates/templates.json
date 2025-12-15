@@ -1,0 +1,44 @@
+{
+  "templates": [
+    {
+      "id": "lombalgia",
+      "label": "Lombalgia / Lombociatalgia",
+      "defaults": {
+        "qp": "Dor lombar",
+        "te": "3 dias",
+        "assoc": "Sem trauma",
+        "alarme": "Nega parestesia/hipoestesia, perda de força e alteração esfincteriana",
+        "comorb": "DM NIR, HAS",
+        "meds": "Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1",
+        "hipotese": "Lombalgia",
+        "condutaAlarmes": "Perda de força em MMII, anestesia em sela, retenção urinária/incontinência",
+        "alarmItems": [
+          { "key": "parestesia", "label": "Parestesia/hipoestesia" },
+          { "key": "forca", "label": "Perda de força" },
+          { "key": "esf", "label": "Alteração esfincteriana" },
+          { "key": "sela", "label": "Anestesia em sela" }
+        ]
+      }
+    },
+    {
+      "id": "resfriado",
+      "label": "Resfriado",
+      "defaults": {
+        "qp": "Coriza/congestão/tosse/odinofagia",
+        "te": "2 dias",
+        "assoc": "Sem dispneia",
+        "alarme": "Nega dispneia, dor torácica e prostração importante",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "IVAS viral / resfriado",
+        "condutaAlarmes": "Dispneia, dor torácica, prostração importante, dessaturação",
+        "alarmItems": [
+          { "key": "dispneia", "label": "Dispneia" },
+          { "key": "dorT", "label": "Dor torácica" },
+          { "key": "prostr", "label": "Prostração importante" },
+          { "key": "dessat", "label": "Dessaturação" }
+        ]
+      }
+    }
+  ]
+}
