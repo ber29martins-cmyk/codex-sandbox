@@ -251,11 +251,10 @@ const currentTemplate = useMemo(
 
     const parts: string[] = [];
     if (negatives.length) {
-      parts.push(`Nega ${negatives.join(", ")}`);
+      parts.push(`Nega sinais de alarme: ${negatives.join(", ")}`);
     }
     if (positives.length) {
-      const suffix = positives.length > 1 ? "presentes" : "presente";
-      parts.push(`${positives.join(", ")} ${suffix}`);
+      parts.push(`Apresenta sinais de alarme: ${positives.join(", ")}`);
     }
 
     return parts.join(" / ");
@@ -544,7 +543,7 @@ const currentTemplate = useMemo(
                       }
                       style={{
                         borderRadius: 999,
-                        padding: "8px 12px",
+                        padding: "10px 14px",
                         border: `1px solid ${ALARM_STATUS_STYLES[status].border}`,
                         background: ALARM_STATUS_STYLES[status].background,
                         color: ALARM_STATUS_STYLES[status].color,
@@ -552,11 +551,13 @@ const currentTemplate = useMemo(
                         display: "flex",
                         alignItems: "center",
                         gap: 8,
-                        boxShadow: "none"
+                        boxShadow: "none",
+                        minWidth: 160,
+                        justifyContent: "space-between"
                       }}
                     >
                       <span>{item.label}</span>
-                      <span style={{ fontSize: 12, opacity: 0.9 }}>({statusLabel})</span>
+                      <span style={{ fontSize: 12, opacity: 0.9 }}>{statusLabel}</span>
                     </button>
                   );
                 })}
