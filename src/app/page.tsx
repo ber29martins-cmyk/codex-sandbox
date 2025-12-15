@@ -210,6 +210,23 @@ const currentTemplate = useMemo(
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id]).filter(Boolean);
   }, [currentTemplate]);
+  const groupedRx = useMemo(() => {
+    const byRoute: Record<string, RxItem[]> = {};
+    for (const id of rxSelected) {
+      const item = RX_CATALOG_MAP[id];
+      if (!item) continue;
+      const route = (item.route || "OUTROS").toUpperCase();
+      if (!byRoute[route]) byRoute[route] = [];
+      byRoute[route].push(item);
+    }
+    const orderIndex = (route: string) => {
+      const idx = RX_ROUTE_ORDER.indexOf(route);
+      return idx === -1 ? RX_ROUTE_ORDER.length + 1 : idx;
+    };
+    return Object.entries(byRoute)
+      .sort(([a], [b]) => orderIndex(a) - orderIndex(b) || a.localeCompare(b, "pt"))
+      .map(([route, items]) => ({ route, items }));
+  }, [rxSelected]);
   const rxText = useMemo(() => {
     if (!rxSelected.length) return "";
     const byRoute: Record<string, RxItem[]> = {};
@@ -518,10 +535,33 @@ const currentTemplate = useMemo(
             Copiar receita
           </button>
         </div>
-        {rxText ? (
-          <pre style={{ marginTop: 8, padding: 12, background: "#f7f7f7", border: "1px solid #e5e7eb", borderRadius: 8, whiteSpace: "pre-wrap", fontFamily: "ui-monospace, SFMono-Regular" }}>
-            {rxText}
-          </pre>
+        {groupedRx.length ? (
+          <div style={{ marginTop: 12, padding: 12, background: "#f7f7f7", border: "1px solid #e5e7eb", borderRadius: 8 }}>
+            {groupedRx.map((group) => (
+              <div key={group.route} style={{ marginBottom: 12 }}>
+                <div style={{ fontWeight: 700, marginBottom: 6 }}>USO {group.route}:</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {group.items.map((item, idx) => {
+                    const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+                    return (
+                      <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                          <span style={{ fontWeight: 600, whiteSpace: "pre-wrap" }}>{`${idx + 1}. ${titleBrand}`}</span>
+                          <span style={{ flex: 1, borderBottom: "1px dotted #9ca3af" }} />
+                          <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13 }}>
+                          {item.directions.map((dir, dirIdx) => (
+                            <span key={dirIdx}>{dir}</span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <p style={{ marginTop: 8, color: "#666" }}>Selecione itens para gerar o receituário.</p>
         )}
@@ -541,9 +581,32 @@ const currentTemplate = useMemo(
           <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{formatBlock("conduta")}</pre>
         </div>
         {rxText && (
-          <div className="print-doc print-rx" style={{ marginBottom: 16 }}>
+          <div className="print-doc print-rx" style={{ marginBottom: 16, paddingTop: 8 }}>
             <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receituário</h3>
-            <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{rxText}</pre>
+            {groupedRx.map((group) => (
+              <div key={group.route} style={{ marginBottom: 10 }}>
+                <div style={{ fontWeight: 700, marginBottom: 4 }}>USO {group.route}:</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {group.items.map((item, idx) => {
+                    const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+                    return (
+                      <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                          <span style={{ fontWeight: 600 }}>{`${idx + 1}. ${titleBrand}`}</span>
+                          <span style={{ flex: 1, borderBottom: "1px dotted #9ca3af" }} />
+                          <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16 }}>
+                          {item.directions.map((dir, dirIdx) => (
+                            <span key={dirIdx}>{dir}</span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </section>
