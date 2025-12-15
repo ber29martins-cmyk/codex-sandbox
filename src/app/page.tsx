@@ -39,6 +39,7 @@ type TemplateState = {
   pa: string;
   fc: string;
   sat: string;
+  comorbSelected: string[];
 };
 type RxItem = { id: string; label: string; route: string; title: string; brand?: string; qty: string; directions: string[] };
 type RxGroup = { id: string; label: string; itemIds: string[] };
@@ -98,7 +99,8 @@ function buildTemplateDefaults(template: Template): TemplateState {
     triagem: true,
     pa: "",
     fc: "",
-    sat: ""
+    sat: "",
+    comorbSelected: []
   };
 }
 
@@ -114,6 +116,21 @@ const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
 const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
 const RX_GROUP_MAP: Record<string, RxGroup> = Object.fromEntries(RX_GROUPS.map((group) => [group.id, group]));
 const FEEDBACK_URL = process.env.NEXT_PUBLIC_FEEDBACK_URL;
+const COMORB_OPTIONS = [
+  { id: "HAS", label: "Hipertensão arterial sistêmica", abbr: "HAS" },
+  { id: "DM2", label: "Diabetes mellitus tipo 2", abbr: "DM2" },
+  { id: "DLP", label: "Dislipidemia", abbr: "DLP" },
+  { id: "Asma", label: "Asma", abbr: "Asma" },
+  { id: "DPOC", label: "DPOC", abbr: "DPOC" },
+  { id: "ICC", label: "Insuficiência cardíaca", abbr: "ICC" },
+  { id: "DAC", label: "Doença arterial coronariana", abbr: "DAC" },
+  { id: "IRC", label: "Doença renal crônica", abbr: "IRC" },
+  { id: "Hipotireoidismo", label: "Hipotireoidismo", abbr: "Hipotireoidismo" },
+  { id: "Obesidade", label: "Obesidade", abbr: "Obesidade" },
+  { id: "Tabagismo", label: "Tabagismo", abbr: "Tabagismo" },
+  { id: "Gestante", label: "Gestante", abbr: "Gestante" },
+  { id: "Imunossupressao", label: "Imunossupressão", abbr: "Imunossupressão" }
+];
 
 
 export default function Page() {
@@ -137,6 +154,7 @@ const currentTemplate = useMemo(
   const [fc, setFc] = useState("");
   const [sat, setSat] = useState("");
   const [includeRx, setIncludeRx] = useState(false);
+  const [comorbSelected, setComorbSelected] = useState<string[]>([]);
   const didHydrate = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
@@ -196,6 +214,7 @@ const currentTemplate = useMemo(
     setPa(templateState.pa ?? "");
     setFc(templateState.fc ?? "");
     setSat(templateState.sat ?? "");
+    setComorbSelected(templateState.comorbSelected ?? []);
     const kit = rxKitsRef.current[templateId];
     setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
     isApplyingTemplate.current = false;
@@ -219,7 +238,8 @@ const currentTemplate = useMemo(
       triagem,
       pa,
       fc,
-      sat
+      sat,
+      comorbSelected
     };
 
     savedTemplatesRef.current = { ...savedTemplatesRef.current, [templateId]: currentState };
@@ -234,7 +254,7 @@ const currentTemplate = useMemo(
         })
       );
     }
-  }, [templateId, qpText, hmaText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat]);
+  }, [templateId, qpText, hmaText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected]);
 
   const hasAlarmItems = (currentTemplate.defaults.alarmItems ?? []).length > 0;
   const alarmLine = useMemo(() => {
@@ -326,7 +346,13 @@ const currentTemplate = useMemo(
       hmaLines.length ? `HMA: ${hmaLines[0]}` : "",
       ...hmaLines.slice(1),
       alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
-      comorb ? `Comorbidades: ${comorb}` : "",
+      (() => {
+        const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.abbr);
+        const manual = comorb ? [comorb] : [];
+        const combined = [...selectedAbbrs, ...manual].filter(Boolean);
+        if (!combined.length) return "Nega comorbidades relevantes";
+        return `Comorbidades: ${combined.join(", ")}`;
+      })(),
       meds ? `Medicações de uso contínuo: ${meds}` : "",
       alergiaNega ? "Nega alergias" : ""
     ].filter(Boolean);
@@ -569,7 +595,39 @@ const currentTemplate = useMemo(
           <br />
           <br />
 
-          <label>Comorbidades (linha)<br /><input value={comorb} onChange={(e) => setComorb(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <div style={{ marginBottom: 8 }}>
+            <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>Comorbidades (clique para marcar)</div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              {COMORB_OPTIONS.map((opt) => {
+                const active = comorbSelected.includes(opt.id);
+                return (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() =>
+                      setComorbSelected((prev) =>
+                        prev.includes(opt.id) ? prev.filter((id) => id !== opt.id) : [...prev, opt.id]
+                      )
+                    }
+                    style={{
+                      borderRadius: 999,
+                      padding: "8px 12px",
+                      border: `1px solid ${active ? "#2563eb" : "#d1d5db"}`,
+                      background: active ? "#e0ebff" : "#fff",
+                      color: "#111827",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6
+                    }}
+                  >
+                    <span>{opt.abbr}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <label>Comorbidades (texto livre)<br /><input value={comorb} onChange={(e) => setComorb(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>Medicações contínuas (linha)<br /><input value={meds} onChange={(e) => setMeds(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
 
           <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
