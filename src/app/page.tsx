@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 
 type BlockKey = "anamnese" | "exame" | "hipotese" | "conduta";
+type AlarmStatus = "unknown" | "nega" | "presente";
+type AlarmStateMap = Record<string, AlarmStatus>;
 type Template = {
   id: string;
   label: string;
@@ -17,6 +19,18 @@ type Template = {
     condutaAlarmes: string;
     alarmItems?: { key: string; label: string }[];
   };
+};
+
+const ALARM_STATUS_ORDER: AlarmStatus[] = ["unknown", "nega", "presente"];
+const ALARM_STATUS_LABELS: Record<AlarmStatus, string> = {
+  unknown: "Não avaliado",
+  nega: "Nega",
+  presente: "Presente"
+};
+const ALARM_STATUS_STYLES: Record<AlarmStatus, { background: string; border: string; color: string }> = {
+  unknown: { background: "#f5f5f5", border: "#d0d0d0", color: "#444" },
+  nega: { background: "#e6f4ea", border: "#c5e1ca", color: "#1b5e20" },
+  presente: { background: "#fdecea", border: "#f5c6bf", color: "#7f1d1d" }
 };
 
 
@@ -38,18 +52,29 @@ const currentTemplate = useMemo(
   const [comorb, setComorb] = useState("DM NIR, HAS");
   const [meds, setMeds] = useState("Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1");
   const [alergiaNega, setAlergiaNega] = useState(true);
-useEffect(() => {
-  if (!currentTemplate) return;
+  const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
+  useEffect(() => {
+    if (!currentTemplate) return;
 
-  setQp(currentTemplate.defaults.qp);
-  setTe(currentTemplate.defaults.te);
-  setAssoc(currentTemplate.defaults.assoc);
-  setAlarme(currentTemplate.defaults.alarme);
-  setComorb(currentTemplate.defaults.comorb);
-  setMeds(currentTemplate.defaults.meds);
-  setHipotese(currentTemplate.defaults.hipotese);
-  setCondutaAlarmes(currentTemplate.defaults.condutaAlarmes);
-}, [templateId, currentTemplate]);
+    setQp(currentTemplate.defaults.qp);
+    setTe(currentTemplate.defaults.te);
+    setAssoc(currentTemplate.defaults.assoc);
+    setAlarme(currentTemplate.defaults.alarme);
+    setComorb(currentTemplate.defaults.comorb);
+    setMeds(currentTemplate.defaults.meds);
+    setHipotese(currentTemplate.defaults.hipotese);
+    setCondutaAlarmes(currentTemplate.defaults.condutaAlarmes);
+    setAlarmStates(() => {
+      const items = currentTemplate.defaults.alarmItems ?? [];
+      if (!items.length) return {};
+
+      const initialState: AlarmStateMap = {};
+      for (const item of items) {
+        initialState[item.key] = "nega";
+      }
+      return initialState;
+    });
+  }, [templateId, currentTemplate]);
 
   const [triagem, setTriagem] = useState(true);
   const [pa, setPa] = useState("");
@@ -58,13 +83,38 @@ useEffect(() => {
 
   const [hipotese, setHipotese] = useState("Lombalgia");
   const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
+
+  const hasAlarmItems = (currentTemplate.defaults.alarmItems ?? []).length > 0;
+  const alarmLine = useMemo(() => {
+    const items = currentTemplate.defaults.alarmItems ?? [];
+    if (!items.length) return alarme.trim();
+
+    const negatives: string[] = [];
+    const positives: string[] = [];
+    for (const item of items) {
+      const status = alarmStates[item.key] ?? "unknown";
+      if (status === "nega") negatives.push(item.label);
+      if (status === "presente") positives.push(item.label);
+    }
+
+    const parts: string[] = [];
+    if (negatives.length) {
+      parts.push(`Nega ${negatives.join(", ")}`);
+    }
+    if (positives.length) {
+      const suffix = positives.length > 1 ? "presentes" : "presente";
+      parts.push(`${positives.join(", ")} ${suffix}`);
+    }
+
+    return parts.join(" / ");
+  }, [alarme, alarmStates, currentTemplate]);
   
   const blocks = useMemo(() => {
     const anamnese = [
       `QP: ${qp}`,
       `TE: ${te}`,
       assoc ? `Associados: ${assoc}` : "",
-      `Sinais de alarme: ${alarme}`,
+      alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
       comorb ? `Comorbidades: ${comorb}` : "",
       meds ? `Medicações de uso contínuo: ${meds}` : "",
       alergiaNega ? "Nega alergias" : ""
@@ -94,7 +144,7 @@ useEffect(() => {
     ];
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qp, te, assoc, alarme, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes]);
+  }, [qp, te, assoc, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
@@ -134,7 +184,50 @@ useEffect(() => {
           <label>QP<br /><input value={qp} onChange={(e) => setQp(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>TE<br /><input value={te} onChange={(e) => setTe(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>Associados<br /><input value={assoc} onChange={(e) => setAssoc(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
-          <label>Sinais de alarme (linha)<br /><input value={alarme} onChange={(e) => setAlarme(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          {hasAlarmItems ? (
+            <div style={{ marginBottom: 12 }}>
+              <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>Sinais de alarme</div>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                {currentTemplate.defaults.alarmItems?.map((item) => {
+                  const status = alarmStates[item.key] ?? "unknown";
+                  const statusLabel = ALARM_STATUS_LABELS[status];
+
+                  return (
+                    <button
+                      key={item.key}
+                      type="button"
+                      onClick={() =>
+                        setAlarmStates((prev) => {
+                          const current = prev[item.key] ?? "unknown";
+                          const next = ALARM_STATUS_ORDER[(ALARM_STATUS_ORDER.indexOf(current) + 1) % ALARM_STATUS_ORDER.length];
+                          return { ...prev, [item.key]: next };
+                        })
+                      }
+                      style={{
+                        borderRadius: 999,
+                        padding: "8px 12px",
+                        border: `1px solid ${ALARM_STATUS_STYLES[status].border}`,
+                        background: ALARM_STATUS_STYLES[status].background,
+                        color: ALARM_STATUS_STYLES[status].color,
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        boxShadow: "none"
+                      }}
+                    >
+                      <span>{item.label}</span>
+                      <span style={{ fontSize: 12, opacity: 0.9 }}>({statusLabel})</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <label>Sinais de alarme (linha)<br /><input value={alarme} onChange={(e) => setAlarme(e.target.value)} style={{ width: "100%" }} /></label>
+          )}
+          <br />
+          <br />
 
           <label>Comorbidades (linha)<br /><input value={comorb} onChange={(e) => setComorb(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>Medicações contínuas (linha)<br /><input value={meds} onChange={(e) => setMeds(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
@@ -180,7 +273,7 @@ useEffect(() => {
       </div>
 
       <p style={{ color: "#666", fontSize: 13 }}>
-        Próximo passo: transformar “Sinais de alarme” em tri-state e carregar templates (resfriado/gripe/lombalgia/gastro/sinusite) via JSON.
+        Alarmes carregados dos templates: clique nos chips para alternar entre Não avaliado, Nega e Presente.
       </p>
     </main>
   );
