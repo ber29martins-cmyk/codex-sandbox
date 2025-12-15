@@ -5,13 +5,17 @@
       "label": "Lombalgia / Lombociatalgia",
       "defaults": {
         "qp": "Dor lombar",
-        "te": "3 dias",
-        "assoc": "Sem trauma",
+        "hma": "Há 3 dias, sem trauma, sem irradiação",
         "alarme": "Nega parestesia/hipoestesia, perda de força e alteração esfincteriana",
         "comorb": "DM NIR, HAS",
         "meds": "Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1",
         "hipotese": "Lombalgia",
         "condutaAlarmes": "Perda de força em MMII, anestesia em sela, retenção urinária/incontinência",
+        "exame": [
+          "BEG, consciente e orientado, corado, hidratado",
+          "Coluna: dor à palpação paravertebral, sem deformidades aparentes",
+          "Neuro: força e sensibilidade preservadas, sem déficit focal"
+        ],
         "alarmItems": [
           { "key": "parestesia", "label": "Parestesia/hipoestesia" },
           { "key": "forca", "label": "Perda de força" },
@@ -27,13 +31,17 @@
       "label": "Resfriado",
       "defaults": {
         "qp": "Coriza/congestão/tosse/odinofagia",
-        "te": "2 dias",
-        "assoc": "Sem dispneia",
+        "hma": "Há 2 dias, sem dispneia",
         "alarme": "Nega dispneia, dor torácica e prostração importante",
         "comorb": "",
         "meds": "",
         "hipotese": "IVAS viral / resfriado",
         "condutaAlarmes": "Dispneia, dor torácica, prostração importante, dessaturação",
+        "exame": [
+          "BEG, corado, hidratado",
+          "ORL: mucosa hiperemiada, coriza",
+          "Pulmões: MV presente bilateral, sem ruídos adventícios"
+        ],
         "alarmItems": [
           { "key": "dispneia", "label": "Dispneia" },
           { "key": "dorT", "label": "Dor torácica" },

@@ -11,13 +11,13 @@ type Template = {
   label: string;
   defaults: {
     qp: string;
-    te: string;
-    assoc: string;
+    hma: string;
     alarme: string;
     comorb: string;
     meds: string;
     hipotese: string;
     condutaAlarmes: string;
+    exame: string[];
     alarmItems?: { key: string; label: string }[];
     rxGroups?: string[];
     rxDefaults?: string[];
@@ -25,8 +25,7 @@ type Template = {
 };
 type TemplateState = {
   qp: string;
-  te: string;
-  assoc: string;
+  hma: string;
   alarme: string;
   comorb: string;
   meds: string;
@@ -34,6 +33,10 @@ type TemplateState = {
   condutaAlarmes: string;
   alarmStates: AlarmStateMap;
   rxSelected: string[];
+  triagem: boolean;
+  pa: string;
+  fc: string;
+  sat: string;
 };
 type RxItem = { id: string; label: string; route: string; title: string; brand?: string; qty: string; directions: string[] };
 type RxGroup = { id: string; label: string; itemIds: string[] };
@@ -67,15 +70,18 @@ function buildDefaultAlarmStates(template: Template): AlarmStateMap {
 function buildTemplateDefaults(template: Template): TemplateState {
   return {
     qp: template.defaults.qp,
-    te: template.defaults.te,
-    assoc: template.defaults.assoc,
+    hma: template.defaults.hma,
     alarme: template.defaults.alarme,
     comorb: template.defaults.comorb,
     meds: template.defaults.meds,
     hipotese: template.defaults.hipotese,
     condutaAlarmes: template.defaults.condutaAlarmes,
     alarmStates: buildDefaultAlarmStates(template),
-    rxSelected: template.defaults.rxDefaults ?? []
+    rxSelected: template.defaults.rxDefaults ?? [],
+    triagem: true,
+    pa: "",
+    fc: "",
+    sat: ""
   };
 }
 
@@ -102,17 +108,20 @@ const currentTemplate = useMemo(
   [templateId]
 );
   const [qp, setQp] = useState("Dor lombar");
-  const [te, setTe] = useState("3 dias");
-  const [assoc, setAssoc] = useState("Sem irradiação, sem trauma");
+  const [hma, setHma] = useState("");
   const [alarme, setAlarme] = useState("Nega perda de força, anestesia em sela e alteração esfincteriana");
   const [comorb, setComorb] = useState("DM NIR, HAS");
   const [meds, setMeds] = useState("Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1");
   const [alergiaNega, setAlergiaNega] = useState(true);
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
   const [rxSelected, setRxSelected] = useState<string[]>([]);
+  const [triagem, setTriagem] = useState(true);
+  const [pa, setPa] = useState("");
+  const [fc, setFc] = useState("");
+  const [sat, setSat] = useState("");
   const didHydrate = useRef(false);
   const isApplyingTemplate = useRef(false);
-  const savedTemplatesRef = useRef<Record<string, TemplateState>>({});
+  const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
   const rxKitsRef = useRef<Record<string, string[]>>({});
   const inviteChecked = useRef(false);
   const feedbackUrl = FEEDBACK_URL;
@@ -154,27 +163,25 @@ const currentTemplate = useMemo(
   useEffect(() => {
     if (!currentTemplate || !didHydrate.current) return;
     const savedState = savedTemplatesRef.current[templateId];
-    const templateState = savedState ?? buildTemplateDefaults(currentTemplate);
+    const templateState = { ...buildTemplateDefaults(currentTemplate), ...savedState };
 
     isApplyingTemplate.current = true;
     setQp(templateState.qp);
-    setTe(templateState.te);
-    setAssoc(templateState.assoc);
+    setHma(templateState.hma);
     setAlarme(templateState.alarme);
     setComorb(templateState.comorb);
     setMeds(templateState.meds);
     setHipotese(templateState.hipotese);
     setCondutaAlarmes(templateState.condutaAlarmes);
     setAlarmStates(templateState.alarmStates ?? buildDefaultAlarmStates(currentTemplate));
+    setTriagem(templateState.triagem ?? true);
+    setPa(templateState.pa ?? "");
+    setFc(templateState.fc ?? "");
+    setSat(templateState.sat ?? "");
     const kit = rxKitsRef.current[templateId];
     setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
     isApplyingTemplate.current = false;
   }, [templateId, currentTemplate]);
-
-  const [triagem, setTriagem] = useState(true);
-  const [pa, setPa] = useState("");
-  const [fc, setFc] = useState("");
-  const [sat, setSat] = useState("");
 
   const [hipotese, setHipotese] = useState("Lombalgia");
   const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
@@ -183,15 +190,18 @@ const currentTemplate = useMemo(
 
     const currentState: TemplateState = {
       qp,
-      te,
-      assoc,
+      hma,
       alarme,
       comorb,
       meds,
       hipotese,
       condutaAlarmes,
       alarmStates,
-      rxSelected
+      rxSelected,
+      triagem,
+      pa,
+      fc,
+      sat
     };
 
     savedTemplatesRef.current = { ...savedTemplatesRef.current, [templateId]: currentState };
@@ -206,7 +216,7 @@ const currentTemplate = useMemo(
         })
       );
     }
-  }, [templateId, qp, te, assoc, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected]);
+  }, [templateId, qp, hma, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat]);
 
   const hasAlarmItems = (currentTemplate.defaults.alarmItems ?? []).length > 0;
   const alarmLine = useMemo(() => {
@@ -295,8 +305,7 @@ const currentTemplate = useMemo(
   const blocks = useMemo(() => {
     const anamnese = [
       `QP: ${qp}`,
-      `TE: ${te}`,
-      assoc ? `Associados: ${assoc}` : "",
+      `HMA: ${hma}`,
       alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
       comorb ? `Comorbidades: ${comorb}` : "",
       meds ? `Medicações de uso contínuo: ${meds}` : "",
@@ -310,12 +319,8 @@ const currentTemplate = useMemo(
           ? "Sinais vitais conforme triagem"
           : "";
 
-    const exame = [
-      "BEG, consciente e orientado, corado, hidratado",
-      vitalsLine,
-      "Coluna: dor à palpação paravertebral, sem deformidades aparentes",
-      "Neuro: força e sensibilidade preservadas, sem déficit focal"
-    ].filter(Boolean);
+    const exameBase = currentTemplate.defaults.exame ?? [];
+    const exame = [vitalsLine, ...exameBase].filter(Boolean);
 
     const avaliacao = [hipotese].filter(Boolean);
 
@@ -327,7 +332,7 @@ const currentTemplate = useMemo(
     ];
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qp, te, assoc, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes]);
+  }, [qp, hma, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
@@ -343,8 +348,7 @@ const currentTemplate = useMemo(
     const defaults = buildTemplateDefaults(currentTemplate);
     isApplyingTemplate.current = true;
     setQp(defaults.qp);
-    setTe(defaults.te);
-    setAssoc(defaults.assoc);
+    setHma(defaults.hma);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -352,6 +356,10 @@ const currentTemplate = useMemo(
     setCondutaAlarmes(defaults.condutaAlarmes);
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
+    setTriagem(defaults.triagem);
+    setPa(defaults.pa);
+    setFc(defaults.fc);
+    setSat(defaults.sat);
     isApplyingTemplate.current = false;
 
     savedTemplatesRef.current = { ...savedTemplatesRef.current, [templateId]: defaults };
@@ -377,8 +385,7 @@ const currentTemplate = useMemo(
     isApplyingTemplate.current = true;
     setTemplateId(firstTemplate.id);
     setQp(defaults.qp);
-    setTe(defaults.te);
-    setAssoc(defaults.assoc);
+    setHma(defaults.hma);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -386,10 +393,10 @@ const currentTemplate = useMemo(
     setCondutaAlarmes(defaults.condutaAlarmes);
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
-    setTriagem(true);
-    setPa("");
-    setFc("");
-    setSat("");
+    setTriagem(defaults.triagem);
+    setPa(defaults.pa);
+    setFc(defaults.fc);
+    setSat(defaults.sat);
     rxKitsRef.current = {};
     if (typeof window !== "undefined") {
       localStorage.removeItem(STORAGE_KEY);
@@ -481,8 +488,7 @@ const currentTemplate = useMemo(
           </div>
 
           <label>QP<br /><input value={qp} onChange={(e) => setQp(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
-          <label>TE<br /><input value={te} onChange={(e) => setTe(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
-          <label>Associados<br /><input value={assoc} onChange={(e) => setAssoc(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <label>HMA<br /><input value={hma} onChange={(e) => setHma(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           {hasAlarmItems ? (
             <div style={{ marginBottom: 12 }}>
               <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>Sinais de alarme</div>
