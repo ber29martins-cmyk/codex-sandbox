@@ -17,7 +17,9 @@
           { "key": "forca", "label": "Perda de força" },
           { "key": "esf", "label": "Alteração esfincteriana" },
           { "key": "sela", "label": "Anestesia em sela" }
-        ]
+        ],
+        "rxGroups": ["analgesia", "relaxante"],
+        "rxDefaults": ["dipirona20", "ibuprofeno400"]
       }
     },
     {
@@ -37,7 +39,9 @@
           { "key": "dorT", "label": "Dor torácica" },
           { "key": "prostr", "label": "Prostração importante" },
           { "key": "dessat", "label": "Dessaturação" }
-        ]
+        ],
+        "rxGroups": ["ivassintomatico"],
+        "rxDefaults": ["paracetamol750", "loratadina10", "soroNasal"]
       }
     }
   ]

@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "id": "analgesia",
+      "label": "Analgesia / Antitérmico",
+      "itemIds": ["dipirona20", "ibuprofeno400"]
+    },
+    {
+      "id": "relaxante",
+      "label": "Relaxante",
+      "itemIds": ["ciclobenzaprina5"]
+    },
+    {
+      "id": "ivassintomatico",
+      "label": "IVAS - sintomáticos",
+      "itemIds": ["paracetamol750", "loratadina10", "soroNasal"]
+    }
+  ]
+}

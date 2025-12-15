@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type BlockKey = "anamnese" | "exame" | "hipotese" | "conduta";
 type AlarmStatus = "unknown" | "nega" | "presente";
@@ -18,8 +18,24 @@ type Template = {
     hipotese: string;
     condutaAlarmes: string;
     alarmItems?: { key: string; label: string }[];
+    rxGroups?: string[];
+    rxDefaults?: string[];
   };
 };
+type TemplateState = {
+  qp: string;
+  te: string;
+  assoc: string;
+  alarme: string;
+  comorb: string;
+  meds: string;
+  hipotese: string;
+  condutaAlarmes: string;
+  alarmStates: AlarmStateMap;
+  rxSelected: string[];
+};
+type RxItem = { id: string; label: string; route: string; text: string };
+type RxGroup = { id: string; label: string; itemIds: string[] };
 
 const ALARM_STATUS_ORDER: AlarmStatus[] = ["unknown", "nega", "presente"];
 const ALARM_STATUS_LABELS: Record<AlarmStatus, string> = {
@@ -32,11 +48,44 @@ const ALARM_STATUS_STYLES: Record<AlarmStatus, { background: string; border: str
   nega: { background: "#e6f4ea", border: "#c5e1ca", color: "#1b5e20" },
   presente: { background: "#fdecea", border: "#f5c6bf", color: "#7f1d1d" }
 };
+const STORAGE_KEY = "codex-app-state-v1";
+
+function buildDefaultAlarmStates(template: Template): AlarmStateMap {
+  const items = template.defaults.alarmItems ?? [];
+  if (!items.length) return {};
+
+  const initialState: AlarmStateMap = {};
+  for (const item of items) {
+    initialState[item.key] = "nega";
+  }
+  return initialState;
+}
+
+function buildTemplateDefaults(template: Template): TemplateState {
+  return {
+    qp: template.defaults.qp,
+    te: template.defaults.te,
+    assoc: template.defaults.assoc,
+    alarme: template.defaults.alarme,
+    comorb: template.defaults.comorb,
+    meds: template.defaults.meds,
+    hipotese: template.defaults.hipotese,
+    condutaAlarmes: template.defaults.condutaAlarmes,
+    alarmStates: buildDefaultAlarmStates(template),
+    rxSelected: template.defaults.rxDefaults ?? []
+  };
+}
 
 
 
 import templatesData from "../templates/templates.json";
+import rxCatalogData from "../prescriptions/catalog.json";
+import rxGroupsData from "../prescriptions/groups.json";
 const TEMPLATES = (templatesData as { templates: Template[] }).templates;
+const RX_CATALOG = (rxCatalogData as { items: RxItem[] }).items;
+const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
+const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
+const RX_GROUP_MAP: Record<string, RxGroup> = Object.fromEntries(RX_GROUPS.map((group) => [group.id, group]));
 
 
 export default function Page() {
@@ -53,27 +102,48 @@ const currentTemplate = useMemo(
   const [meds, setMeds] = useState("Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1");
   const [alergiaNega, setAlergiaNega] = useState(true);
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
+  const [rxSelected, setRxSelected] = useState<string[]>([]);
+  const didHydrate = useRef(false);
+  const isApplyingTemplate = useRef(false);
+  const savedTemplatesRef = useRef<Record<string, TemplateState>>({});
+
   useEffect(() => {
-    if (!currentTemplate) return;
+    if (typeof window === "undefined") return;
 
-    setQp(currentTemplate.defaults.qp);
-    setTe(currentTemplate.defaults.te);
-    setAssoc(currentTemplate.defaults.assoc);
-    setAlarme(currentTemplate.defaults.alarme);
-    setComorb(currentTemplate.defaults.comorb);
-    setMeds(currentTemplate.defaults.meds);
-    setHipotese(currentTemplate.defaults.hipotese);
-    setCondutaAlarmes(currentTemplate.defaults.condutaAlarmes);
-    setAlarmStates(() => {
-      const items = currentTemplate.defaults.alarmItems ?? [];
-      if (!items.length) return {};
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? (JSON.parse(raw) as { templateId?: string; templates?: Record<string, TemplateState> }) : {};
+      savedTemplatesRef.current = parsed.templates ?? {};
 
-      const initialState: AlarmStateMap = {};
-      for (const item of items) {
-        initialState[item.key] = "nega";
+      const storedTemplateId =
+        parsed.templateId && TEMPLATES.some((t) => t.id === parsed.templateId) ? parsed.templateId : TEMPLATES[0]?.id;
+      if (storedTemplateId) {
+        setTemplateId(storedTemplateId);
       }
-      return initialState;
-    });
+    } catch (err) {
+      console.error("Falha ao carregar estado local:", err);
+    } finally {
+      didHydrate.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!currentTemplate || !didHydrate.current) return;
+    const savedState = savedTemplatesRef.current[templateId];
+    const templateState = savedState ?? buildTemplateDefaults(currentTemplate);
+
+    isApplyingTemplate.current = true;
+    setQp(templateState.qp);
+    setTe(templateState.te);
+    setAssoc(templateState.assoc);
+    setAlarme(templateState.alarme);
+    setComorb(templateState.comorb);
+    setMeds(templateState.meds);
+    setHipotese(templateState.hipotese);
+    setCondutaAlarmes(templateState.condutaAlarmes);
+    setAlarmStates(templateState.alarmStates ?? buildDefaultAlarmStates(currentTemplate));
+    setRxSelected(templateState.rxSelected ?? currentTemplate.defaults.rxDefaults ?? []);
+    isApplyingTemplate.current = false;
   }, [templateId, currentTemplate]);
 
   const [triagem, setTriagem] = useState(true);
@@ -83,6 +153,34 @@ const currentTemplate = useMemo(
 
   const [hipotese, setHipotese] = useState("Lombalgia");
   const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
+  useEffect(() => {
+    if (!didHydrate.current || isApplyingTemplate.current) return;
+
+    const currentState: TemplateState = {
+      qp,
+      te,
+      assoc,
+      alarme,
+      comorb,
+      meds,
+      hipotese,
+      condutaAlarmes,
+      alarmStates,
+      rxSelected
+    };
+
+    savedTemplatesRef.current = { ...savedTemplatesRef.current, [templateId]: currentState };
+
+    if (typeof window !== "undefined") {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          templateId,
+          templates: savedTemplatesRef.current
+        })
+      );
+    }
+  }, [templateId, qp, te, assoc, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected]);
 
   const hasAlarmItems = (currentTemplate.defaults.alarmItems ?? []).length > 0;
   const alarmLine = useMemo(() => {
@@ -108,6 +206,33 @@ const currentTemplate = useMemo(
 
     return parts.join(" / ");
   }, [alarme, alarmStates, currentTemplate]);
+  const templateRxGroups = useMemo(() => {
+    return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id]).filter(Boolean);
+  }, [currentTemplate]);
+  const rxText = useMemo(() => {
+    if (!rxSelected.length) return "";
+    const byRoute: Record<string, string[]> = {};
+
+    for (const id of rxSelected) {
+      const item = RX_CATALOG_MAP[id];
+      if (!item) continue;
+      const route = item.route?.trim() || "Outros";
+      if (!byRoute[route]) byRoute[route] = [];
+      byRoute[route].push(item.text);
+    }
+
+    const routeBlocks = Object.entries(byRoute)
+      .sort(([a], [b]) => a.localeCompare(b, "pt"))
+      .map(
+        ([route, items]) =>
+          `${route.toUpperCase()}\n${items
+            .map((line) => line.trim())
+            .filter(Boolean)
+            .join("\n")}`
+      );
+
+    return routeBlocks.join("\n\n");
+  }, [rxSelected]);
   
   const blocks = useMemo(() => {
     const anamnese = [
@@ -154,13 +279,85 @@ const currentTemplate = useMemo(
     await navigator.clipboard.writeText(text);
   }
 
+  function handleRestoreTemplateDefaults() {
+    if (!currentTemplate) return;
+
+    const defaults = buildTemplateDefaults(currentTemplate);
+    isApplyingTemplate.current = true;
+    setQp(defaults.qp);
+    setTe(defaults.te);
+    setAssoc(defaults.assoc);
+    setAlarme(defaults.alarme);
+    setComorb(defaults.comorb);
+    setMeds(defaults.meds);
+    setHipotese(defaults.hipotese);
+    setCondutaAlarmes(defaults.condutaAlarmes);
+    setAlarmStates(defaults.alarmStates);
+    setRxSelected(defaults.rxSelected);
+    isApplyingTemplate.current = false;
+
+    savedTemplatesRef.current = { ...savedTemplatesRef.current, [templateId]: defaults };
+    if (typeof window !== "undefined") {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          templateId,
+          templates: savedTemplatesRef.current
+        })
+      );
+    }
+  }
+
+  function handleResetApp() {
+    const firstTemplate = TEMPLATES[0];
+    if (!firstTemplate) return;
+
+    const defaults = buildTemplateDefaults(firstTemplate);
+    savedTemplatesRef.current = {};
+    isApplyingTemplate.current = true;
+    setTemplateId(firstTemplate.id);
+    setQp(defaults.qp);
+    setTe(defaults.te);
+    setAssoc(defaults.assoc);
+    setAlarme(defaults.alarme);
+    setComorb(defaults.comorb);
+    setMeds(defaults.meds);
+    setHipotese(defaults.hipotese);
+    setCondutaAlarmes(defaults.condutaAlarmes);
+    setAlarmStates(defaults.alarmStates);
+    setRxSelected(defaults.rxSelected);
+    setTriagem(true);
+    setPa("");
+    setFc("");
+    setSat("");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+    isApplyingTemplate.current = false;
+  }
+
+  function handlePrint() {
+    if (typeof window !== "undefined") {
+      window.print();
+    }
+  }
+
+  function handleToggleRx(id: string) {
+    setRxSelected((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((rx) => rx !== id);
+      }
+      return [...prev, id];
+    });
+  }
+
   const allText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
 
   return (
     <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
       <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12 }}>MVP Prontuário (blocos)</h1>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+      <div className="no-print" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
         <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Entrada rápida</h2>
 <label>
@@ -180,6 +377,11 @@ const currentTemplate = useMemo(
 </label>
 <br />
 <br />
+
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
+            <button type="button" onClick={handleRestoreTemplateDefaults}>Restaurar padrão do template</button>
+            <button type="button" onClick={handleResetApp}>Resetar app (limpar dados locais)</button>
+          </div>
 
           <label>QP<br /><input value={qp} onChange={(e) => setQp(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>TE<br /><input value={te} onChange={(e) => setTe(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
@@ -255,6 +457,42 @@ const currentTemplate = useMemo(
           <hr style={{ margin: "16px 0" }} />
           <label>Hipótese (1 linha)<br /><input value={hipotese} onChange={(e) => setHipotese(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>Alarmes na conduta (texto)<br /><input value={condutaAlarmes} onChange={(e) => setCondutaAlarmes(e.target.value)} style={{ width: "100%" }} /></label>
+
+          <hr style={{ margin: "16px 0" }} />
+          <div>
+            <div style={{ fontWeight: 600, marginBottom: 8 }}>Receituário</div>
+            {templateRxGroups.length === 0 && <p style={{ margin: "4px 0 0", color: "#666" }}>Template sem grupos de receita.</p>}
+            {templateRxGroups.map((group) => (
+              <div key={group.id} style={{ marginBottom: 8 }}>
+                <div style={{ fontWeight: 500, marginBottom: 4 }}>{group.label}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  {group.itemIds.map((itemId) => {
+                    const item = RX_CATALOG_MAP[itemId];
+                    if (!item) return null;
+                    const checked = rxSelected.includes(itemId);
+                    return (
+                      <label key={itemId} style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                        <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
+                        <span>{item.label} <span style={{ color: "#666", fontSize: 12 }}>({item.route})</span></span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+            <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}>
+              <button type="button" onClick={() => copy(rxText || "Sem itens selecionados")} disabled={!rxText}>
+                Copiar receita
+              </button>
+            </div>
+            {rxText ? (
+              <pre style={{ marginTop: 8, padding: 8, background: "#f7f7f7", border: "1px solid #e5e7eb", borderRadius: 8, whiteSpace: "pre-wrap", fontFamily: "ui-monospace, SFMono-Regular" }}>
+                {rxText}
+              </pre>
+            ) : (
+              <p style={{ marginTop: 8, color: "#666" }}>Selecione itens para gerar o receituário.</p>
+            )}
+          </div>
         </section>
 
         <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
@@ -266,6 +504,7 @@ const currentTemplate = useMemo(
             <button onClick={() => copy(formatBlock("hipotese"))}>Copiar hipótese</button>
             <button onClick={() => copy(formatBlock("conduta"))}>Copiar conduta</button>
             <button onClick={() => copy(allText)}>Copiar tudo</button>
+            <button type="button" onClick={handlePrint}>Imprimir</button>
           </div>
 
           <textarea readOnly value={allText} style={{ width: "100%", height: 420, fontFamily: "ui-monospace, SFMono-Regular", whiteSpace: "pre", padding: 12 }} />
@@ -275,6 +514,63 @@ const currentTemplate = useMemo(
       <p style={{ color: "#666", fontSize: 13 }}>
         Alarmes carregados dos templates: clique nos chips para alternar entre Não avaliado, Nega e Presente.
       </p>
+      <section className="print-area" style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, background: "#fff", marginTop: 16 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12 }}>Documentos gerados</h2>
+        <div className="print-doc" style={{ marginBottom: 16 }}>
+          <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Prontuário / Admissão</h3>
+          <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{allText}</pre>
+        </div>
+        <div className="print-doc" style={{ marginBottom: 16 }}>
+          <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receita / Conduta</h3>
+          <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{formatBlock("conduta")}</pre>
+        </div>
+        {rxText && (
+          <div className="print-doc" style={{ marginBottom: 16 }}>
+            <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receituário</h3>
+            <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{rxText}</pre>
+          </div>
+        )}
+      </section>
+
+      <style jsx global>{`
+        @media print {
+          body {
+            margin: 0;
+            padding: 0;
+          }
+
+          .no-print,
+          button,
+          input,
+          select,
+          textarea {
+            display: none !important;
+          }
+
+          .print-area {
+            display: block !important;
+            padding: 16mm !important;
+            border: none !important;
+            box-shadow: none !important;
+          }
+
+          .print-doc {
+            page-break-inside: avoid;
+            margin-bottom: 14mm;
+          }
+
+          .print-doc h3 {
+            font-size: 14pt !important;
+            margin-bottom: 4mm !important;
+          }
+
+          .print-doc pre {
+            font-size: 12pt !important;
+            line-height: 1.4 !important;
+            white-space: pre-wrap !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

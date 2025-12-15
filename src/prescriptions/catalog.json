@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "dipirona20",
+      "label": "Dipirona 500 mg/mL (20 mL)",
+      "route": "Uso oral",
+      "text": "Dipirona 500 mg/mL: 20-40 gotas VO até 4x/dia se dor ou febre por 3-5 dias"
+    },
+    {
+      "id": "ibuprofeno400",
+      "label": "Ibuprofeno 400 mg",
+      "route": "Uso oral",
+      "text": "Ibuprofeno 400 mg VO 8/8h se dor por até 5 dias. Tomar após alimentação"
+    },
+    {
+      "id": "ciclobenzaprina5",
+      "label": "Ciclobenzaprina 5 mg",
+      "route": "Uso oral",
+      "text": "Ciclobenzaprina 5 mg VO à noite por 7 dias. Reavaliar sonolência"
+    },
+    {
+      "id": "paracetamol750",
+      "label": "Paracetamol 750 mg",
+      "route": "Uso oral",
+      "text": "Paracetamol 750 mg VO 6/6h se dor ou febre (máx 4 g/dia) por 3-5 dias"
+    },
+    {
+      "id": "loratadina10",
+      "label": "Loratadina 10 mg",
+      "route": "Uso oral",
+      "text": "Loratadina 10 mg VO 1x/dia por 7-10 dias"
+    },
+    {
+      "id": "soroNasal",
+      "label": "Soro fisiológico nasal",
+      "route": "Uso nasal",
+      "text": "Soro fisiológico 0,9% em cada narina várias vezes ao dia para higiene nasal"
+    }
+  ]
+}
