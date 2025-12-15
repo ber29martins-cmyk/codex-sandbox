@@ -34,7 +34,7 @@ type TemplateState = {
   alarmStates: AlarmStateMap;
   rxSelected: string[];
 };
-type RxItem = { id: string; label: string; route: string; text: string };
+type RxItem = { id: string; label: string; route: string; title: string; brand?: string; qty: string; directions: string[] };
 type RxGroup = { id: string; label: string; itemIds: string[] };
 
 const ALARM_STATUS_ORDER: AlarmStatus[] = ["unknown", "nega", "presente"];
@@ -49,6 +49,7 @@ const ALARM_STATUS_STYLES: Record<AlarmStatus, { background: string; border: str
   presente: { background: "#fdecea", border: "#f5c6bf", color: "#7f1d1d" }
 };
 const STORAGE_KEY = "codex-app-state-v1";
+const RX_ROUTE_ORDER = ["ORAL", "PARENTERAL", "TOPICO", "OFTALMICO", "INALATORIO"];
 
 function buildDefaultAlarmStates(template: Template): AlarmStateMap {
   const items = template.defaults.alarmItems ?? [];
@@ -211,27 +212,42 @@ const currentTemplate = useMemo(
   }, [currentTemplate]);
   const rxText = useMemo(() => {
     if (!rxSelected.length) return "";
-    const byRoute: Record<string, string[]> = {};
+    const byRoute: Record<string, RxItem[]> = {};
 
     for (const id of rxSelected) {
       const item = RX_CATALOG_MAP[id];
       if (!item) continue;
-      const route = item.route?.trim() || "Outros";
+      const route = (item.route || "OUTROS").toUpperCase();
       if (!byRoute[route]) byRoute[route] = [];
-      byRoute[route].push(item.text);
+      byRoute[route].push(item);
     }
 
-    const routeBlocks = Object.entries(byRoute)
-      .sort(([a], [b]) => a.localeCompare(b, "pt"))
-      .map(
-        ([route, items]) =>
-          `${route.toUpperCase()}\n${items
-            .map((line) => line.trim())
-            .filter(Boolean)
-            .join("\n")}`
-      );
+    const orderIndex = (route: string) => {
+      const idx = RX_ROUTE_ORDER.indexOf(route);
+      return idx === -1 ? RX_ROUTE_ORDER.length + 1 : idx;
+    };
 
-    return routeBlocks.join("\n\n");
+    const routeBlocks = Object.entries(byRoute)
+      .sort(([a], [b]) => orderIndex(a) - orderIndex(b) || a.localeCompare(b, "pt"))
+      .map(([route, items]) => {
+        const lines: string[] = [`USO ${route}:`];
+        items.forEach((item, index) => {
+          const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+          const base = `${index + 1}. ${titleBrand}`;
+          const dotsWidth = Math.max(2, 80 - base.length - item.qty.length - 2);
+          const dotted = `${base} ${".".repeat(dotsWidth)} ${item.qty}`;
+          lines.push(dotted);
+          item.directions.forEach((dir) => {
+            if (dir.trim()) lines.push(dir.trim());
+          });
+          if (index < items.length - 1) {
+            lines.push("");
+          }
+        });
+        return lines.join("\n").trim();
+      });
+
+    return routeBlocks.join("\n\n").trim();
   }, [rxSelected]);
   
   const blocks = useMemo(() => {
@@ -458,41 +474,6 @@ const currentTemplate = useMemo(
           <label>Hipótese (1 linha)<br /><input value={hipotese} onChange={(e) => setHipotese(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>Alarmes na conduta (texto)<br /><input value={condutaAlarmes} onChange={(e) => setCondutaAlarmes(e.target.value)} style={{ width: "100%" }} /></label>
 
-          <hr style={{ margin: "16px 0" }} />
-          <div>
-            <div style={{ fontWeight: 600, marginBottom: 8 }}>Receituário</div>
-            {templateRxGroups.length === 0 && <p style={{ margin: "4px 0 0", color: "#666" }}>Template sem grupos de receita.</p>}
-            {templateRxGroups.map((group) => (
-              <div key={group.id} style={{ marginBottom: 8 }}>
-                <div style={{ fontWeight: 500, marginBottom: 4 }}>{group.label}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  {group.itemIds.map((itemId) => {
-                    const item = RX_CATALOG_MAP[itemId];
-                    if (!item) return null;
-                    const checked = rxSelected.includes(itemId);
-                    return (
-                      <label key={itemId} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                        <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
-                        <span>{item.label} <span style={{ color: "#666", fontSize: 12 }}>({item.route})</span></span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-            <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}>
-              <button type="button" onClick={() => copy(rxText || "Sem itens selecionados")} disabled={!rxText}>
-                Copiar receita
-              </button>
-            </div>
-            {rxText ? (
-              <pre style={{ marginTop: 8, padding: 8, background: "#f7f7f7", border: "1px solid #e5e7eb", borderRadius: 8, whiteSpace: "pre-wrap", fontFamily: "ui-monospace, SFMono-Regular" }}>
-                {rxText}
-              </pre>
-            ) : (
-              <p style={{ marginTop: 8, color: "#666" }}>Selecione itens para gerar o receituário.</p>
-            )}
-          </div>
         </section>
 
         <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
@@ -511,6 +492,41 @@ const currentTemplate = useMemo(
         </section>
       </div>
 
+      <section className="no-print" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, marginBottom: 16 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Receituário</h2>
+        {templateRxGroups.length === 0 && <p style={{ margin: "4px 0 0", color: "#666" }}>Template sem grupos de receita.</p>}
+        {templateRxGroups.map((group) => (
+          <div key={group.id} style={{ marginBottom: 12 }}>
+            <div style={{ fontWeight: 500, marginBottom: 6 }}>{group.label}</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {group.itemIds.map((itemId) => {
+                const item = RX_CATALOG_MAP[itemId];
+                if (!item) return null;
+                const checked = rxSelected.includes(itemId);
+                return (
+                  <label key={itemId} style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                    <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
+                    <span>{item.label} <span style={{ color: "#666", fontSize: 12 }}>({item.route})</span></span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+        <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}>
+          <button type="button" onClick={() => copy(rxText || "Sem itens selecionados")} disabled={!rxText}>
+            Copiar receita
+          </button>
+        </div>
+        {rxText ? (
+          <pre style={{ marginTop: 8, padding: 12, background: "#f7f7f7", border: "1px solid #e5e7eb", borderRadius: 8, whiteSpace: "pre-wrap", fontFamily: "ui-monospace, SFMono-Regular" }}>
+            {rxText}
+          </pre>
+        ) : (
+          <p style={{ marginTop: 8, color: "#666" }}>Selecione itens para gerar o receituário.</p>
+        )}
+      </section>
+
       <p style={{ color: "#666", fontSize: 13 }}>
         Alarmes carregados dos templates: clique nos chips para alternar entre Não avaliado, Nega e Presente.
       </p>
@@ -525,7 +541,7 @@ const currentTemplate = useMemo(
           <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{formatBlock("conduta")}</pre>
         </div>
         {rxText && (
-          <div className="print-doc" style={{ marginBottom: 16 }}>
+          <div className="print-doc print-rx" style={{ marginBottom: 16 }}>
             <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receituário</h3>
             <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{rxText}</pre>
           </div>
@@ -568,6 +584,10 @@ const currentTemplate = useMemo(
             font-size: 12pt !important;
             line-height: 1.4 !important;
             white-space: pre-wrap !important;
+          }
+
+          .print-rx {
+            page-break-before: always;
           }
         }
       `}</style>
