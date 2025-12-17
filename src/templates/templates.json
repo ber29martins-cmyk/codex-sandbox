@@ -16,57 +16,99 @@
         ],
         "alarmItems": [
           {
-            "key": "dispneia",
-            "label": "Dispneia / esforço respiratório"
+            "id": "dispneia",
+            "label": "Dispneia / esforço respiratório",
+            "absentText": "Sem Dispneia / esforço respiratório",
+            "presentText": "Com Dispneia / esforço respiratório"
           },
           {
-            "key": "satBaixa",
-            "label": "Saturação baixa"
+            "id": "satbaixa",
+            "label": "Saturação baixa",
+            "absentText": "Sem Saturação baixa",
+            "presentText": "Com Saturação baixa"
           },
           {
-            "key": "dorToracica",
-            "label": "Dor torácica importante"
+            "id": "dortoracica",
+            "label": "Dor torácica importante",
+            "absentText": "Sem Dor torácica importante",
+            "presentText": "Com Dor torácica importante"
           },
           {
-            "key": "hemoptise",
-            "label": "Hemoptise"
+            "id": "hemoptise",
+            "label": "Hemoptise",
+            "absentText": "Sem Hemoptise",
+            "presentText": "Com Hemoptise"
           },
           {
-            "key": "febreAlta",
-            "label": "Febre alta persistente"
+            "id": "febrealta",
+            "label": "Febre alta persistente",
+            "absentText": "Sem Febre alta persistente",
+            "presentText": "Com Febre alta persistente"
           },
           {
-            "key": "piora",
-            "label": "Piora progressiva"
+            "id": "piora",
+            "label": "Piora progressiva",
+            "absentText": "Sem Piora progressiva",
+            "presentText": "Com Piora progressiva"
           },
           {
-            "key": "desidratacao",
-            "label": "Desidratação importante / incapaz VO"
+            "id": "desidratacao",
+            "label": "Desidratação importante / incapaz VO",
+            "absentText": "Sem Desidratação importante / incapaz VO",
+            "presentText": "Com Desidratação importante / incapaz VO"
           },
           {
-            "key": "idosoComorb",
-            "label": "Idoso frágil / comorbidade cardiopulmonar"
+            "id": "idosocomorb",
+            "label": "Idoso frágil / comorbidade cardiopulmonar",
+            "absentText": "Sem Idoso frágil / comorbidade cardiopulmonar",
+            "presentText": "Com Idoso frágil / comorbidade cardiopulmonar"
           },
           {
-            "key": "imuno",
-            "label": "Imunossupressão"
+            "id": "imuno",
+            "label": "Imunossupressão",
+            "absentText": "Sem Imunossupressão",
+            "presentText": "Com Imunossupressão"
           }
         ],
         "hmaItems": [
-          "Paciente procura o serviço por tosse persistente após quadro viral recente, há 1–3 semanas",
-          "Refere tosse inicialmente seca, podendo se tornar produtiva com expectoração clara ou amarelada",
-          "Refere piora noturna e gatilhos por ar frio, fala prolongada, esforço e risadas",
-          "Refere aperto torácico leve e sibilância intermitente, especialmente em asmáticos ou tabagistas",
-          "Refere dor retroesternal ou em musculatura torácica por esforço de tosse",
-          "Refere que a tosse pode durar 3–8 semanas mesmo com melhora dos demais sintomas"
+          {
+            "id": "paciente-procura-o-servico-por-tosse-persistente-apos-quadro-viral-recente-ha-13-semanas",
+            "label": "Paciente procura o serviço por tosse persistent…",
+            "text": "Paciente procura o serviço por tosse persistente após quadro viral recente, há 1–3 semanas"
+          },
+          {
+            "id": "refere-tosse-inicialmente-seca-podendo-se-tornar-produtiva-com-expectoracao-clara-ou-amarelada",
+            "label": "Refere tosse inicialmente seca, podendo se torn…",
+            "text": "Refere tosse inicialmente seca, podendo se tornar produtiva com expectoração clara ou amarelada"
+          },
+          {
+            "id": "refere-piora-noturna-e-gatilhos-por-ar-frio-fala-prolongada-esforco-e-risadas",
+            "label": "Refere piora noturna e gatilhos por ar frio, fa…",
+            "text": "Refere piora noturna e gatilhos por ar frio, fala prolongada, esforço e risadas"
+          },
+          {
+            "id": "refere-aperto-toracico-leve-e-sibilancia-intermitente-especialmente-em-asmaticos-ou-tabagistas",
+            "label": "Refere aperto torácico leve e sibilância interm…",
+            "text": "Refere aperto torácico leve e sibilância intermitente, especialmente em asmáticos ou tabagistas"
+          },
+          {
+            "id": "refere-dor-retroesternal-ou-em-musculatura-toracica-por-esforco-de-tosse",
+            "label": "Refere dor retroesternal ou em musculatura torá…",
+            "text": "Refere dor retroesternal ou em musculatura torácica por esforço de tosse"
+          },
+          {
+            "id": "refere-que-a-tosse-pode-durar-38-semanas-mesmo-com-melhora-dos-demais-sintomas",
+            "label": "Refere que a tosse pode durar 3–8 semanas mesmo…",
+            "text": "Refere que a tosse pode durar 3–8 semanas mesmo com melhora dos demais sintomas"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por tosse persistente após quadro viral recente, há 1–3 semanas",
-          "Refere tosse inicialmente seca, podendo se tornar produtiva com expectoração clara ou amarelada",
-          "Refere piora noturna e gatilhos por ar frio, fala prolongada, esforço e risadas",
-          "Refere aperto torácico leve e sibilância intermitente, especialmente em asmáticos ou tabagistas",
-          "Refere dor retroesternal ou em musculatura torácica por esforço de tosse",
-          "Refere que a tosse pode durar 3–8 semanas mesmo com melhora dos demais sintomas"
+          "paciente-procura-o-servico-por-tosse-persistente-apos-quadro-viral-recente-ha-13-semanas",
+          "refere-tosse-inicialmente-seca-podendo-se-tornar-produtiva-com-expectoracao-clara-ou-amarelada",
+          "refere-piora-noturna-e-gatilhos-por-ar-frio-fala-prolongada-esforco-e-risadas",
+          "refere-aperto-toracico-leve-e-sibilancia-intermitente-especialmente-em-asmaticos-ou-tabagistas",
+          "refere-dor-retroesternal-ou-em-musculatura-toracica-por-esforco-de-tosse",
+          "refere-que-a-tosse-pode-durar-38-semanas-mesmo-com-melhora-dos-demais-sintomas"
         ]
       }
     },
@@ -86,51 +128,87 @@
         ],
         "alarmItems": [
           {
-            "key": "febre",
-            "label": "Febre / calafrios"
+            "id": "febre",
+            "label": "Febre / calafrios",
+            "absentText": "Sem Febre / calafrios",
+            "presentText": "Com Febre / calafrios"
           },
           {
-            "key": "dorLombar",
-            "label": "Dor lombar / dor em flanco"
+            "id": "dorlombar",
+            "label": "Dor lombar / dor em flanco",
+            "absentText": "Sem Dor lombar / dor em flanco",
+            "presentText": "Com Dor lombar / dor em flanco"
           },
           {
-            "key": "vomitos",
-            "label": "Náuseas/vômitos importantes"
+            "id": "vomitos",
+            "label": "Náuseas/vômitos importantes",
+            "absentText": "Sem Náuseas/vômitos importantes",
+            "presentText": "Com Náuseas/vômitos importantes"
           },
           {
-            "key": "gestacao",
-            "label": "Gestação"
+            "id": "gestacao",
+            "label": "Gestação",
+            "absentText": "Sem Gestação",
+            "presentText": "Com Gestação"
           },
           {
-            "key": "sexoMasculino",
-            "label": "Sexo masculino"
+            "id": "sexomasculino",
+            "label": "Sexo masculino",
+            "absentText": "Sem Sexo masculino",
+            "presentText": "Com Sexo masculino"
           },
           {
-            "key": "imuno",
-            "label": "Imunossupressão"
+            "id": "imuno",
+            "label": "Imunossupressão",
+            "absentText": "Sem Imunossupressão",
+            "presentText": "Com Imunossupressão"
           },
           {
-            "key": "sepse",
-            "label": "Sinais de sepse (hipotensão/confusão)"
+            "id": "sepse",
+            "label": "Sinais de sepse (hipotensão/confusão)",
+            "absentText": "Sem Sinais de sepse (hipotensão/confusão)",
+            "presentText": "Com Sinais de sepse (hipotensão/confusão)"
           },
           {
-            "key": "piora",
-            "label": "Piora progressiva ou falha terapêutica"
+            "id": "piora",
+            "label": "Piora progressiva ou falha terapêutica",
+            "absentText": "Sem Piora progressiva ou falha terapêutica",
+            "presentText": "Com Piora progressiva ou falha terapêutica"
           }
         ],
         "hmaItems": [
-          "Paciente procura o serviço por disúria, polaciúria e urgência miccional há 1–4 dias",
-          "Refere sensação de esvaziamento incompleto e dor suprapúbica leve a moderada",
-          "Refere urina turva e odor forte; pode haver hematúria leve",
-          "Nega corrimento vaginal, prurido vaginal e dor pélvica profunda quando foco é urinário",
-          "Refere episódios prévios semelhantes ou fatores predisponentes como relação sexual recente e baixa ingesta hídrica"
+          {
+            "id": "paciente-procura-o-servico-por-disuria-polaciuria-e-urgencia-miccional-ha-14-dias",
+            "label": "Paciente procura o serviço por disúria, polaciú…",
+            "text": "Paciente procura o serviço por disúria, polaciúria e urgência miccional há 1–4 dias"
+          },
+          {
+            "id": "refere-sensacao-de-esvaziamento-incompleto-e-dor-suprapubica-leve-a-moderada",
+            "label": "Refere sensação de esvaziamento incompleto e do…",
+            "text": "Refere sensação de esvaziamento incompleto e dor suprapúbica leve a moderada"
+          },
+          {
+            "id": "refere-urina-turva-e-odor-forte-pode-haver-hematuria-leve",
+            "label": "Refere urina turva e odor forte; pode haver hem…",
+            "text": "Refere urina turva e odor forte; pode haver hematúria leve"
+          },
+          {
+            "id": "nega-corrimento-vaginal-prurido-vaginal-e-dor-pelvica-profunda-quando-foco-e-urinario",
+            "label": "Nega corrimento vaginal, prurido vaginal e dor …",
+            "text": "Nega corrimento vaginal, prurido vaginal e dor pélvica profunda quando foco é urinário"
+          },
+          {
+            "id": "refere-episodios-previos-semelhantes-ou-fatores-predisponentes-como-relacao-sexual-recente-e-baixa-ingesta-hidrica",
+            "label": "Refere episódios prévios semelhantes ou fatores…",
+            "text": "Refere episódios prévios semelhantes ou fatores predisponentes como relação sexual recente e baixa ingesta hídrica"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por disúria, polaciúria e urgência miccional há 1–4 dias",
-          "Refere sensação de esvaziamento incompleto e dor suprapúbica leve a moderada",
-          "Refere urina turva e odor forte; pode haver hematúria leve",
-          "Nega corrimento vaginal, prurido vaginal e dor pélvica profunda quando foco é urinário",
-          "Refere episódios prévios semelhantes ou fatores predisponentes como relação sexual recente e baixa ingesta hídrica"
+          "paciente-procura-o-servico-por-disuria-polaciuria-e-urgencia-miccional-ha-14-dias",
+          "refere-sensacao-de-esvaziamento-incompleto-e-dor-suprapubica-leve-a-moderada",
+          "refere-urina-turva-e-odor-forte-pode-haver-hematuria-leve",
+          "nega-corrimento-vaginal-prurido-vaginal-e-dor-pelvica-profunda-quando-foco-e-urinario",
+          "refere-episodios-previos-semelhantes-ou-fatores-predisponentes-como-relacao-sexual-recente-e-baixa-ingesta-hidrica"
         ]
       }
     },
@@ -150,51 +228,87 @@
         ],
         "alarmItems": [
           {
-            "key": "hematemese",
-            "label": "Hematêmese"
+            "id": "hematemese",
+            "label": "Hematêmese",
+            "absentText": "Sem Hematêmese",
+            "presentText": "Com Hematêmese"
           },
           {
-            "key": "melena",
-            "label": "Melena / sangramento digestivo"
+            "id": "melena",
+            "label": "Melena / sangramento digestivo",
+            "absentText": "Sem Melena / sangramento digestivo",
+            "presentText": "Com Melena / sangramento digestivo"
           },
           {
-            "key": "perdaPeso",
-            "label": "Perda ponderal / anorexia importante"
+            "id": "perdapeso",
+            "label": "Perda ponderal / anorexia importante",
+            "absentText": "Sem Perda ponderal / anorexia importante",
+            "presentText": "Com Perda ponderal / anorexia importante"
           },
           {
-            "key": "disfagia",
-            "label": "Disfagia / odinofagia progressiva"
+            "id": "disfagia",
+            "label": "Disfagia / odinofagia progressiva",
+            "absentText": "Sem Disfagia / odinofagia progressiva",
+            "presentText": "Com Disfagia / odinofagia progressiva"
           },
           {
-            "key": "vomitos",
-            "label": "Vômitos persistentes"
+            "id": "vomitos",
+            "label": "Vômitos persistentes",
+            "absentText": "Sem Vômitos persistentes",
+            "presentText": "Com Vômitos persistentes"
           },
           {
-            "key": "sincope",
-            "label": "Síncope / hipotensão"
+            "id": "sincope",
+            "label": "Síncope / hipotensão",
+            "absentText": "Sem Síncope / hipotensão",
+            "presentText": "Com Síncope / hipotensão"
           },
           {
-            "key": "dorToracica",
-            "label": "Dor torácica em aperto / dispneia (equivalente anginoso)"
+            "id": "dortoracica",
+            "label": "Dor torácica em aperto / dispneia (equivalente anginoso)",
+            "absentText": "Sem Dor torácica em aperto / dispneia (equivalente anginoso)",
+            "presentText": "Com Dor torácica em aperto / dispneia (equivalente anginoso)"
           },
           {
-            "key": "anemia",
-            "label": "Anemia conhecida ou suspeita"
+            "id": "anemia",
+            "label": "Anemia conhecida ou suspeita",
+            "absentText": "Sem Anemia conhecida ou suspeita",
+            "presentText": "Com Anemia conhecida ou suspeita"
           }
         ],
         "hmaItems": [
-          "Paciente procura o serviço por dor ou queimação em epigástrio, plenitude pós-prandial e empachamento há dias a semanas",
-          "Refere azia e regurgitação ácida associadas ou náuseas leves",
-          "Refere piora após refeições volumosas/gordurosas, álcool, café, anti-inflamatórios e estresse; melhora parcial com antiácidos",
-          "Refere distensão abdominal e eructações frequentes",
-          "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo quando aplicável"
+          {
+            "id": "paciente-procura-o-servico-por-dor-ou-queimacao-em-epigastrio-plenitude-pos-prandial-e-empachamento-ha-dias-a-semanas",
+            "label": "Paciente procura o serviço por dor ou queimação…",
+            "text": "Paciente procura o serviço por dor ou queimação em epigástrio, plenitude pós-prandial e empachamento há dias a semanas"
+          },
+          {
+            "id": "refere-azia-e-regurgitacao-acida-associadas-ou-nauseas-leves",
+            "label": "Refere azia e regurgitação ácida associadas ou …",
+            "text": "Refere azia e regurgitação ácida associadas ou náuseas leves"
+          },
+          {
+            "id": "refere-piora-apos-refeicoes-volumosasgordurosas-alcool-cafe-anti-inflamatorios-e-estresse-melhora-parcial-com-antiacidos",
+            "label": "Refere piora após refeições volumosas/gordurosa…",
+            "text": "Refere piora após refeições volumosas/gordurosas, álcool, café, anti-inflamatórios e estresse; melhora parcial com antiácidos"
+          },
+          {
+            "id": "refere-distensao-abdominal-e-eructacoes-frequentes",
+            "label": "Refere distensão abdominal e eructações frequentes",
+            "text": "Refere distensão abdominal e eructações frequentes"
+          },
+          {
+            "id": "refere-historia-de-gastritedrge-uso-recente-de-aine-ou-tabagismo-quando-aplicavel",
+            "label": "Refere história de gastrite/DRGE, uso recente d…",
+            "text": "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo quando aplicável"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por dor ou queimação em epigástrio, plenitude pós-prandial e empachamento há dias a semanas",
-          "Refere azia e regurgitação ácida associadas ou náuseas leves",
-          "Refere piora após refeições volumosas/gordurosas, álcool, café, anti-inflamatórios e estresse; melhora parcial com antiácidos",
-          "Refere distensão abdominal e eructações frequentes",
-          "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo quando aplicável"
+          "paciente-procura-o-servico-por-dor-ou-queimacao-em-epigastrio-plenitude-pos-prandial-e-empachamento-ha-dias-a-semanas",
+          "refere-azia-e-regurgitacao-acida-associadas-ou-nauseas-leves",
+          "refere-piora-apos-refeicoes-volumosasgordurosas-alcool-cafe-anti-inflamatorios-e-estresse-melhora-parcial-com-antiacidos",
+          "refere-distensao-abdominal-e-eructacoes-frequentes",
+          "refere-historia-de-gastritedrge-uso-recente-de-aine-ou-tabagismo-quando-aplicavel"
         ]
       }
     },
@@ -215,51 +329,87 @@
         ],
         "alarmItems": [
           {
-            "key": "dispneia",
-            "label": "Dispneia / estridor"
+            "id": "dispneia",
+            "label": "Dispneia / estridor",
+            "absentText": "Sem Dispneia / estridor",
+            "presentText": "Com Dispneia / estridor"
           },
           {
-            "key": "sialorreia",
-            "label": "Sialorreia / incapaz de deglutir saliva"
+            "id": "sialorreia",
+            "label": "Sialorreia / incapaz de deglutir saliva",
+            "absentText": "Sem Sialorreia / incapaz de deglutir saliva",
+            "presentText": "Com Sialorreia / incapaz de deglutir saliva"
           },
           {
-            "key": "trismo",
-            "label": "Trismo / voz abafada"
+            "id": "trismo",
+            "label": "Trismo / voz abafada",
+            "absentText": "Sem Trismo / voz abafada",
+            "presentText": "Com Trismo / voz abafada"
           },
           {
-            "key": "abscesso",
-            "label": "Desvio de úvula (suspeita abscesso peritonsilar)"
+            "id": "abscesso",
+            "label": "Desvio de úvula (suspeita abscesso peritonsilar)",
+            "absentText": "Sem Desvio de úvula (suspeita abscesso peritonsilar)",
+            "presentText": "Com Desvio de úvula (suspeita abscesso peritonsilar)"
           },
           {
-            "key": "desidratacao",
-            "label": "Desidratação importante / recusa VO"
+            "id": "desidratacao",
+            "label": "Desidratação importante / recusa VO",
+            "absentText": "Sem Desidratação importante / recusa VO",
+            "presentText": "Com Desidratação importante / recusa VO"
           },
           {
-            "key": "febreAlta",
-            "label": "Febre alta persistente / toxemia"
+            "id": "febrealta",
+            "label": "Febre alta persistente / toxemia",
+            "absentText": "Sem Febre alta persistente / toxemia",
+            "presentText": "Com Febre alta persistente / toxemia"
           },
           {
-            "key": "meningismo",
-            "label": "Rigidez de nuca / sinais meníngeos"
+            "id": "meningismo",
+            "label": "Rigidez de nuca / sinais meníngeos",
+            "absentText": "Sem Rigidez de nuca / sinais meníngeos",
+            "presentText": "Com Rigidez de nuca / sinais meníngeos"
           },
           {
-            "key": "imuno",
-            "label": "Imunossupressão"
+            "id": "imuno",
+            "label": "Imunossupressão",
+            "absentText": "Sem Imunossupressão",
+            "presentText": "Com Imunossupressão"
           }
         ],
         "hmaItems": [
-          "Paciente procura o serviço por odinofagia intensa de início relativamente súbito há 1–3 dias",
-          "Refere febre e mal-estar, com ausência de tosse e coriza como padrão mais típico",
-          "Refere dor ao engolir com redução importante da ingesta, halitose e cefaleia",
-          "Refere adenomegalia cervical anterior dolorosa e amígdalas hiperemiadas com exsudato",
-          "Refere dor abdominal e náusea podem ocorrer, especialmente em crianças"
+          {
+            "id": "paciente-procura-o-servico-por-odinofagia-intensa-de-inicio-relativamente-subito-ha-13-dias",
+            "label": "Paciente procura o serviço por odinofagia inten…",
+            "text": "Paciente procura o serviço por odinofagia intensa de início relativamente súbito há 1–3 dias"
+          },
+          {
+            "id": "refere-febre-e-mal-estar-com-ausencia-de-tosse-e-coriza-como-padrao-mais-tipico",
+            "label": "Refere febre e mal-estar, com ausência de tosse…",
+            "text": "Refere febre e mal-estar, com ausência de tosse e coriza como padrão mais típico"
+          },
+          {
+            "id": "refere-dor-ao-engolir-com-reducao-importante-da-ingesta-halitose-e-cefaleia",
+            "label": "Refere dor ao engolir com redução importante da…",
+            "text": "Refere dor ao engolir com redução importante da ingesta, halitose e cefaleia"
+          },
+          {
+            "id": "refere-adenomegalia-cervical-anterior-dolorosa-e-amigdalas-hiperemiadas-com-exsudato",
+            "label": "Refere adenomegalia cervical anterior dolorosa …",
+            "text": "Refere adenomegalia cervical anterior dolorosa e amígdalas hiperemiadas com exsudato"
+          },
+          {
+            "id": "refere-dor-abdominal-e-nausea-podem-ocorrer-especialmente-em-criancas",
+            "label": "Refere dor abdominal e náusea podem ocorrer, es…",
+            "text": "Refere dor abdominal e náusea podem ocorrer, especialmente em crianças"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por odinofagia intensa de início relativamente súbito há 1–3 dias",
-          "Refere febre e mal-estar, com ausência de tosse e coriza como padrão mais típico",
-          "Refere dor ao engolir com redução importante da ingesta, halitose e cefaleia",
-          "Refere adenomegalia cervical anterior dolorosa e amígdalas hiperemiadas com exsudato",
-          "Refere dor abdominal e náusea podem ocorrer, especialmente em crianças"
+          "paciente-procura-o-servico-por-odinofagia-intensa-de-inicio-relativamente-subito-ha-13-dias",
+          "refere-febre-e-mal-estar-com-ausencia-de-tosse-e-coriza-como-padrao-mais-tipico",
+          "refere-dor-ao-engolir-com-reducao-importante-da-ingesta-halitose-e-cefaleia",
+          "refere-adenomegalia-cervical-anterior-dolorosa-e-amigdalas-hiperemiadas-com-exsudato",
+          "refere-dor-abdominal-e-nausea-podem-ocorrer-especialmente-em-criancas"
         ]
       }
     },
@@ -280,51 +430,87 @@
         ],
         "alarmItems": [
           {
-            "key": "dispneia",
-            "label": "Dispneia / estridor"
+            "id": "dispneia",
+            "label": "Dispneia / estridor",
+            "absentText": "Sem Dispneia / estridor",
+            "presentText": "Com Dispneia / estridor"
           },
           {
-            "key": "sialorreia",
-            "label": "Sialorreia / incapaz de deglutir saliva"
+            "id": "sialorreia",
+            "label": "Sialorreia / incapaz de deglutir saliva",
+            "absentText": "Sem Sialorreia / incapaz de deglutir saliva",
+            "presentText": "Com Sialorreia / incapaz de deglutir saliva"
           },
           {
-            "key": "trismo",
-            "label": "Trismo / voz abafada"
+            "id": "trismo",
+            "label": "Trismo / voz abafada",
+            "absentText": "Sem Trismo / voz abafada",
+            "presentText": "Com Trismo / voz abafada"
           },
           {
-            "key": "desidratacao",
-            "label": "Desidratação importante / recusa VO"
+            "id": "desidratacao",
+            "label": "Desidratação importante / recusa VO",
+            "absentText": "Sem Desidratação importante / recusa VO",
+            "presentText": "Com Desidratação importante / recusa VO"
           },
           {
-            "key": "febreAlta",
-            "label": "Febre alta persistente"
+            "id": "febrealta",
+            "label": "Febre alta persistente",
+            "absentText": "Sem Febre alta persistente",
+            "presentText": "Com Febre alta persistente"
           },
           {
-            "key": "meningismo",
-            "label": "Rigidez de nuca / sinais meníngeos"
+            "id": "meningismo",
+            "label": "Rigidez de nuca / sinais meníngeos",
+            "absentText": "Sem Rigidez de nuca / sinais meníngeos",
+            "presentText": "Com Rigidez de nuca / sinais meníngeos"
           },
           {
-            "key": "abscesso",
-            "label": "Sinais de abscesso peritonsilar (desvio de úvula)"
+            "id": "abscesso",
+            "label": "Sinais de abscesso peritonsilar (desvio de úvula)",
+            "absentText": "Sem Sinais de abscesso peritonsilar (desvio de úvula)",
+            "presentText": "Com Sinais de abscesso peritonsilar (desvio de úvula)"
           },
           {
-            "key": "imuno",
-            "label": "Imunossupressão"
+            "id": "imuno",
+            "label": "Imunossupressão",
+            "absentText": "Sem Imunossupressão",
+            "presentText": "Com Imunossupressão"
           }
         ],
         "hmaItems": [
-          "Paciente procura o serviço por odinofagia, coriza, tosse e rouquidão há 2–5 dias",
-          "Refere febre ausente ou baixa e mal-estar leve a moderado",
-          "Refere conjuntivite ou aftas podem ocorrer, além de cefaleia leve",
-          "Refere dor de garganta difusa, geralmente sem predomínio de exsudato; pode haver hiperemia de orofaringe",
-          "Refere melhora gradual espontânea ao longo de 3–7 dias"
+          {
+            "id": "paciente-procura-o-servico-por-odinofagia-coriza-tosse-e-rouquidao-ha-25-dias",
+            "label": "Paciente procura o serviço por odinofagia, cori…",
+            "text": "Paciente procura o serviço por odinofagia, coriza, tosse e rouquidão há 2–5 dias"
+          },
+          {
+            "id": "refere-febre-ausente-ou-baixa-e-mal-estar-leve-a-moderado",
+            "label": "Refere febre ausente ou baixa e mal-estar leve …",
+            "text": "Refere febre ausente ou baixa e mal-estar leve a moderado"
+          },
+          {
+            "id": "refere-conjuntivite-ou-aftas-podem-ocorrer-alem-de-cefaleia-leve",
+            "label": "Refere conjuntivite ou aftas podem ocorrer, alé…",
+            "text": "Refere conjuntivite ou aftas podem ocorrer, além de cefaleia leve"
+          },
+          {
+            "id": "refere-dor-de-garganta-difusa-geralmente-sem-predominio-de-exsudato-pode-haver-hiperemia-de-orofaringe",
+            "label": "Refere dor de garganta difusa, geralmente sem p…",
+            "text": "Refere dor de garganta difusa, geralmente sem predomínio de exsudato; pode haver hiperemia de orofaringe"
+          },
+          {
+            "id": "refere-melhora-gradual-espontanea-ao-longo-de-37-dias",
+            "label": "Refere melhora gradual espontânea ao longo de 3…",
+            "text": "Refere melhora gradual espontânea ao longo de 3–7 dias"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por odinofagia, coriza, tosse e rouquidão há 2–5 dias",
-          "Refere febre ausente ou baixa e mal-estar leve a moderado",
-          "Refere conjuntivite ou aftas podem ocorrer, além de cefaleia leve",
-          "Refere dor de garganta difusa, geralmente sem predomínio de exsudato; pode haver hiperemia de orofaringe",
-          "Refere melhora gradual espontânea ao longo de 3–7 dias"
+          "paciente-procura-o-servico-por-odinofagia-coriza-tosse-e-rouquidao-ha-25-dias",
+          "refere-febre-ausente-ou-baixa-e-mal-estar-leve-a-moderado",
+          "refere-conjuntivite-ou-aftas-podem-ocorrer-alem-de-cefaleia-leve",
+          "refere-dor-de-garganta-difusa-geralmente-sem-predominio-de-exsudato-pode-haver-hiperemia-de-orofaringe",
+          "refere-melhora-gradual-espontanea-ao-longo-de-37-dias"
         ]
       }
     },
@@ -344,55 +530,93 @@
         ],
         "alarmItems": [
           {
-            "key": "desidratacao",
-            "label": "Sinais de desidratação importante"
+            "id": "desidratacao",
+            "label": "Sinais de desidratação importante",
+            "absentText": "Sem Sinais de desidratação importante",
+            "presentText": "Com Sinais de desidratação importante"
           },
           {
-            "key": "incapazVo",
-            "label": "Incapaz de manter VO"
+            "id": "incapazvo",
+            "label": "Incapaz de manter VO",
+            "absentText": "Sem Incapaz de manter VO",
+            "presentText": "Com Incapaz de manter VO"
           },
           {
-            "key": "sangue",
-            "label": "Sangue nas fezes / melena"
+            "id": "sangue",
+            "label": "Sangue nas fezes / melena",
+            "absentText": "Sem Sangue nas fezes / melena",
+            "presentText": "Com Sangue nas fezes / melena"
           },
           {
-            "key": "dorIntensa",
-            "label": "Dor abdominal intensa ou localizada"
+            "id": "dorintensa",
+            "label": "Dor abdominal intensa ou localizada",
+            "absentText": "Sem Dor abdominal intensa ou localizada",
+            "presentText": "Com Dor abdominal intensa ou localizada"
           },
           {
-            "key": "febreAlta",
-            "label": "Febre alta persistente"
+            "id": "febrealta",
+            "label": "Febre alta persistente",
+            "absentText": "Sem Febre alta persistente",
+            "presentText": "Com Febre alta persistente"
           },
           {
-            "key": "choque",
-            "label": "Sinais de choque"
+            "id": "choque",
+            "label": "Sinais de choque",
+            "absentText": "Sem Sinais de choque",
+            "presentText": "Com Sinais de choque"
           },
           {
-            "key": "idosoCrianca",
-            "label": "Idoso frágil / criança pequena"
+            "id": "idosocrianca",
+            "label": "Idoso frágil / criança pequena",
+            "absentText": "Sem Idoso frágil / criança pequena",
+            "presentText": "Com Idoso frágil / criança pequena"
           },
           {
-            "key": "imuno",
-            "label": "Imunossupressão"
+            "id": "imuno",
+            "label": "Imunossupressão",
+            "absentText": "Sem Imunossupressão",
+            "presentText": "Com Imunossupressão"
           },
           {
-            "key": "antibioticoRecente",
-            "label": "Uso recente de antibiótico / suspeita de colite"
+            "id": "antibioticorecente",
+            "label": "Uso recente de antibiótico / suspeita de colite",
+            "absentText": "Sem Uso recente de antibiótico / suspeita de colite",
+            "presentText": "Com Uso recente de antibiótico / suspeita de colite"
           }
         ],
         "hmaItems": [
-          "Paciente procura o serviço por diarreia aquosa e cólicas abdominais há 12–72h",
-          "Refere náuseas e vômitos associados, com redução do apetite e intolerância alimentar parcial",
-          "Refere febre baixa e mal-estar podem ocorrer",
-          "Refere exposição a alimento suspeito, água não tratada, contato com doentes ou viagem recente",
-          "Refere sinais de desidratação como sede intensa, boca seca, tontura postural e redução de diurese"
+          {
+            "id": "paciente-procura-o-servico-por-diarreia-aquosa-e-colicas-abdominais-ha-1272h",
+            "label": "Paciente procura o serviço por diarreia aquosa …",
+            "text": "Paciente procura o serviço por diarreia aquosa e cólicas abdominais há 12–72h"
+          },
+          {
+            "id": "refere-nauseas-e-vomitos-associados-com-reducao-do-apetite-e-intolerancia-alimentar-parcial",
+            "label": "Refere náuseas e vômitos associados, com reduçã…",
+            "text": "Refere náuseas e vômitos associados, com redução do apetite e intolerância alimentar parcial"
+          },
+          {
+            "id": "refere-febre-baixa-e-mal-estar-podem-ocorrer",
+            "label": "Refere febre baixa e mal-estar podem ocorrer",
+            "text": "Refere febre baixa e mal-estar podem ocorrer"
+          },
+          {
+            "id": "refere-exposicao-a-alimento-suspeito-agua-nao-tratada-contato-com-doentes-ou-viagem-recente",
+            "label": "Refere exposição a alimento suspeito, água não …",
+            "text": "Refere exposição a alimento suspeito, água não tratada, contato com doentes ou viagem recente"
+          },
+          {
+            "id": "refere-sinais-de-desidratacao-como-sede-intensa-boca-seca-tontura-postural-e-reducao-de-diurese",
+            "label": "Refere sinais de desidratação como sede intensa…",
+            "text": "Refere sinais de desidratação como sede intensa, boca seca, tontura postural e redução de diurese"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por diarreia aquosa e cólicas abdominais há 12–72h",
-          "Refere náuseas e vômitos associados, com redução do apetite e intolerância alimentar parcial",
-          "Refere febre baixa e mal-estar podem ocorrer",
-          "Refere exposição a alimento suspeito, água não tratada, contato com doentes ou viagem recente",
-          "Refere sinais de desidratação como sede intensa, boca seca, tontura postural e redução de diurese"
+          "paciente-procura-o-servico-por-diarreia-aquosa-e-colicas-abdominais-ha-1272h",
+          "refere-nauseas-e-vomitos-associados-com-reducao-do-apetite-e-intolerancia-alimentar-parcial",
+          "refere-febre-baixa-e-mal-estar-podem-ocorrer",
+          "refere-exposicao-a-alimento-suspeito-agua-nao-tratada-contato-com-doentes-ou-viagem-recente",
+          "refere-sinais-de-desidratacao-como-sede-intensa-boca-seca-tontura-postural-e-reducao-de-diurese"
         ]
       }
     },
@@ -413,40 +637,58 @@
         ],
         "alarmItems": [
           {
-            "key": "dispneia",
-            "label": "Dispneia / esforço respiratório"
+            "id": "dispneia",
+            "label": "Dispneia / esforço respiratório",
+            "absentText": "Sem Dispneia / esforço respiratório",
+            "presentText": "Com Dispneia / esforço respiratório"
           },
           {
-            "key": "dorToracica",
-            "label": "Dor torácica"
+            "id": "dortoracica",
+            "label": "Dor torácica",
+            "absentText": "Sem Dor torácica",
+            "presentText": "Com Dor torácica"
           },
           {
-            "key": "satBaixa",
-            "label": "Saturação baixa"
+            "id": "satbaixa",
+            "label": "Saturação baixa",
+            "absentText": "Sem Saturação baixa",
+            "presentText": "Com Saturação baixa"
           },
           {
-            "key": "confusao",
-            "label": "Confusão mental / rebaixamento"
+            "id": "confusao",
+            "label": "Confusão mental / rebaixamento",
+            "absentText": "Sem Confusão mental / rebaixamento",
+            "presentText": "Com Confusão mental / rebaixamento"
           },
           {
-            "key": "desidratacao",
-            "label": "Sinais de desidratação importante"
+            "id": "desidratacao",
+            "label": "Sinais de desidratação importante",
+            "absentText": "Sem Sinais de desidratação importante",
+            "presentText": "Com Sinais de desidratação importante"
           },
           {
-            "key": "vomitos",
-            "label": "Vômitos incoercíveis"
+            "id": "vomitos",
+            "label": "Vômitos incoercíveis",
+            "absentText": "Sem Vômitos incoercíveis",
+            "presentText": "Com Vômitos incoercíveis"
           },
           {
-            "key": "febrePersistente",
-            "label": "Febre persistente (>72h) ou piora após melhora"
+            "id": "febrepersistente",
+            "label": "Febre persistente (>72h) ou piora após melhora",
+            "absentText": "Sem Febre persistente (>72h) ou piora após melhora",
+            "presentText": "Com Febre persistente (>72h) ou piora após melhora"
           },
           {
-            "key": "risco",
-            "label": "Imunossupressão / gestante / puérpera / idoso frágil"
+            "id": "risco",
+            "label": "Imunossupressão / gestante / puérpera / idoso frágil",
+            "absentText": "Sem Imunossupressão / gestante / puérpera / idoso frágil",
+            "presentText": "Com Imunossupressão / gestante / puérpera / idoso frágil"
           },
           {
-            "key": "cronico",
-            "label": "Doença crônica descompensada"
+            "id": "cronico",
+            "label": "Doença crônica descompensada",
+            "absentText": "Sem Doença crônica descompensada",
+            "presentText": "Com Doença crônica descompensada"
           }
         ],
         "rxGroups": [
@@ -460,23 +702,63 @@
           "oseltamivir_75mg_tamiflu"
         ],
         "hmaItems": [
-          "Paciente procura o serviço por febre, calafrios, mialgia intensa, cefaleia e prostração há 1–3 dias",
-          "Refere início mais abrupto do que resfriado, com piora importante do estado geral e redução do apetite",
-          "Refere tosse seca nas primeiras 24–48h, podendo evoluir para tosse produtiva leve ao longo de alguns dias",
-          "Refere odinofagia e coriza possíveis, geralmente menos proeminentes do que mialgia e febre",
-          "Refere contato com sintomáticos em casa/trabalho ou surto local e ausência de vacina recente quando aplicável",
-          "Febre alta com mialgia difusa e prostração",
-          "Cefaleia frontal ou retroorbital importante",
-          "Tosse seca evoluindo para escassa expectoração",
-          "Odinofagia leve a moderada",
-          "Contato próximo com casos semelhantes"
+          {
+            "id": "paciente-procura-o-servico-por-febre-calafrios-mialgia-intensa-cefaleia-e-prostracao-ha-13-dias",
+            "label": "Paciente procura o serviço por febre, calafrios…",
+            "text": "Paciente procura o serviço por febre, calafrios, mialgia intensa, cefaleia e prostração há 1–3 dias"
+          },
+          {
+            "id": "refere-inicio-mais-abrupto-do-que-resfriado-com-piora-importante-do-estado-geral-e-reducao-do-apetite",
+            "label": "Refere início mais abrupto do que resfriado, co…",
+            "text": "Refere início mais abrupto do que resfriado, com piora importante do estado geral e redução do apetite"
+          },
+          {
+            "id": "refere-tosse-seca-nas-primeiras-2448h-podendo-evoluir-para-tosse-produtiva-leve-ao-longo-de-alguns-dias",
+            "label": "Refere tosse seca nas primeiras 24–48h, podendo…",
+            "text": "Refere tosse seca nas primeiras 24–48h, podendo evoluir para tosse produtiva leve ao longo de alguns dias"
+          },
+          {
+            "id": "refere-odinofagia-e-coriza-possiveis-geralmente-menos-proeminentes-do-que-mialgia-e-febre",
+            "label": "Refere odinofagia e coriza possíveis, geralment…",
+            "text": "Refere odinofagia e coriza possíveis, geralmente menos proeminentes do que mialgia e febre"
+          },
+          {
+            "id": "refere-contato-com-sintomaticos-em-casatrabalho-ou-surto-local-e-ausencia-de-vacina-recente-quando-aplicavel",
+            "label": "Refere contato com sintomáticos em casa/trabalh…",
+            "text": "Refere contato com sintomáticos em casa/trabalho ou surto local e ausência de vacina recente quando aplicável"
+          },
+          {
+            "id": "febre-alta-com-mialgia-difusa-e-prostracao",
+            "label": "Febre alta com mialgia difusa e prostração",
+            "text": "Febre alta com mialgia difusa e prostração"
+          },
+          {
+            "id": "cefaleia-frontal-ou-retroorbital-importante",
+            "label": "Cefaleia frontal ou retroorbital importante",
+            "text": "Cefaleia frontal ou retroorbital importante"
+          },
+          {
+            "id": "tosse-seca-evoluindo-para-escassa-expectoracao",
+            "label": "Tosse seca evoluindo para escassa expectoração",
+            "text": "Tosse seca evoluindo para escassa expectoração"
+          },
+          {
+            "id": "odinofagia-leve-a-moderada",
+            "label": "Odinofagia leve a moderada",
+            "text": "Odinofagia leve a moderada"
+          },
+          {
+            "id": "contato-proximo-com-casos-semelhantes",
+            "label": "Contato próximo com casos semelhantes",
+            "text": "Contato próximo com casos semelhantes"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por febre, calafrios, mialgia intensa, cefaleia e prostração há 1–3 dias",
-          "Refere início mais abrupto do que resfriado, com piora importante do estado geral e redução do apetite",
-          "Refere tosse seca nas primeiras 24–48h, podendo evoluir para tosse produtiva leve ao longo de alguns dias",
-          "Refere odinofagia e coriza possíveis, geralmente menos proeminentes do que mialgia e febre",
-          "Refere contato com sintomáticos em casa/trabalho ou surto local e ausência de vacina recente quando aplicável"
+          "paciente-procura-o-servico-por-febre-calafrios-mialgia-intensa-cefaleia-e-prostracao-ha-13-dias",
+          "refere-inicio-mais-abrupto-do-que-resfriado-com-piora-importante-do-estado-geral-e-reducao-do-apetite",
+          "refere-tosse-seca-nas-primeiras-2448h-podendo-evoluir-para-tosse-produtiva-leve-ao-longo-de-alguns-dias",
+          "refere-odinofagia-e-coriza-possiveis-geralmente-menos-proeminentes-do-que-mialgia-e-febre",
+          "refere-contato-com-sintomaticos-em-casatrabalho-ou-surto-local-e-ausencia-de-vacina-recente-quando-aplicavel"
         ]
       }
     },
@@ -497,20 +779,28 @@
         ],
         "alarmItems": [
           {
-            "key": "parestesia",
-            "label": "Parestesia/hipoestesia"
+            "id": "parestesia",
+            "label": "Parestesia/hipoestesia",
+            "absentText": "Sem Parestesia/hipoestesia",
+            "presentText": "Com Parestesia/hipoestesia"
           },
           {
-            "key": "forca",
-            "label": "Perda de força"
+            "id": "forca",
+            "label": "Perda de força",
+            "absentText": "Sem Perda de força",
+            "presentText": "Com Perda de força"
           },
           {
-            "key": "esf",
-            "label": "Alteração esfincteriana"
+            "id": "esf",
+            "label": "Alteração esfincteriana",
+            "absentText": "Sem Alteração esfincteriana",
+            "presentText": "Com Alteração esfincteriana"
           },
           {
-            "key": "sela",
-            "label": "Anestesia em sela"
+            "id": "sela",
+            "label": "Anestesia em sela",
+            "absentText": "Sem Anestesia em sela",
+            "presentText": "Com Anestesia em sela"
           }
         ],
         "rxGroups": [
@@ -525,23 +815,63 @@
           "ibuprofeno400"
         ],
         "hmaItems": [
-          "Paciente procura o serviço por dor lombar mecânica há dias a semanas, após esforço, postura prolongada ou movimento brusco",
-          "Refere dor em faixa na região lombar com piora à flexão/rotação e ao carregar peso, com melhora parcial com repouso relativo",
-          "Refere rigidez matinal curta e espasmo muscular, com limitação funcional para sentar, levantar e deambular",
-          "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada",
-          "Refere piora ao tossir, espirrar ou manobra de Valsalva quando há componente radicular",
-          "Espasmo paravertebral palpável",
-          "Rigidez matinal curta",
-          "Piora após esforço ou levantar peso",
-          "Irradiação para glúteo/perna com parestesia leve",
-          "Melhora parcial com repouso relativo"
+          {
+            "id": "paciente-procura-o-servico-por-dor-lombar-mecanica-ha-dias-a-semanas-apos-esforco-postura-prolongada-ou-movimento-brusco",
+            "label": "Paciente procura o serviço por dor lombar mecân…",
+            "text": "Paciente procura o serviço por dor lombar mecânica há dias a semanas, após esforço, postura prolongada ou movimento brusco"
+          },
+          {
+            "id": "refere-dor-em-faixa-na-regiao-lombar-com-piora-a-flexaorotacao-e-ao-carregar-peso-com-melhora-parcial-com-repouso-relativo",
+            "label": "Refere dor em faixa na região lombar com piora …",
+            "text": "Refere dor em faixa na região lombar com piora à flexão/rotação e ao carregar peso, com melhora parcial com repouso relativo"
+          },
+          {
+            "id": "refere-rigidez-matinal-curta-e-espasmo-muscular-com-limitacao-funcional-para-sentar-levantar-e-deambular",
+            "label": "Refere rigidez matinal curta e espasmo muscular…",
+            "text": "Refere rigidez matinal curta e espasmo muscular, com limitação funcional para sentar, levantar e deambular"
+          },
+          {
+            "id": "quando-lombociatalgia-refere-irradiacao-para-gluteo-e-face-posteriorlateral-de-coxaperna-por-vezes-com-parestesia-associada",
+            "label": "Quando lombociatalgia, refere irradiação para g…",
+            "text": "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada"
+          },
+          {
+            "id": "refere-piora-ao-tossir-espirrar-ou-manobra-de-valsalva-quando-ha-componente-radicular",
+            "label": "Refere piora ao tossir, espirrar ou manobra de …",
+            "text": "Refere piora ao tossir, espirrar ou manobra de Valsalva quando há componente radicular"
+          },
+          {
+            "id": "espasmo-paravertebral-palpavel",
+            "label": "Espasmo paravertebral palpável",
+            "text": "Espasmo paravertebral palpável"
+          },
+          {
+            "id": "rigidez-matinal-curta",
+            "label": "Rigidez matinal curta",
+            "text": "Rigidez matinal curta"
+          },
+          {
+            "id": "piora-apos-esforco-ou-levantar-peso",
+            "label": "Piora após esforço ou levantar peso",
+            "text": "Piora após esforço ou levantar peso"
+          },
+          {
+            "id": "irradiacao-para-gluteoperna-com-parestesia-leve",
+            "label": "Irradiação para glúteo/perna com parestesia leve",
+            "text": "Irradiação para glúteo/perna com parestesia leve"
+          },
+          {
+            "id": "melhora-parcial-com-repouso-relativo",
+            "label": "Melhora parcial com repouso relativo",
+            "text": "Melhora parcial com repouso relativo"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço por dor lombar mecânica há dias a semanas, após esforço, postura prolongada ou movimento brusco",
-          "Refere dor em faixa na região lombar com piora à flexão/rotação e ao carregar peso, com melhora parcial com repouso relativo",
-          "Refere rigidez matinal curta e espasmo muscular, com limitação funcional para sentar, levantar e deambular",
-          "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada",
-          "Refere piora ao tossir, espirrar ou manobra de Valsalva quando há componente radicular"
+          "paciente-procura-o-servico-por-dor-lombar-mecanica-ha-dias-a-semanas-apos-esforco-postura-prolongada-ou-movimento-brusco",
+          "refere-dor-em-faixa-na-regiao-lombar-com-piora-a-flexaorotacao-e-ao-carregar-peso-com-melhora-parcial-com-repouso-relativo",
+          "refere-rigidez-matinal-curta-e-espasmo-muscular-com-limitacao-funcional-para-sentar-levantar-e-deambular",
+          "quando-lombociatalgia-refere-irradiacao-para-gluteo-e-face-posteriorlateral-de-coxaperna-por-vezes-com-parestesia-associada",
+          "refere-piora-ao-tossir-espirrar-ou-manobra-de-valsalva-quando-ha-componente-radicular"
         ]
       }
     },
@@ -562,40 +892,58 @@
         ],
         "alarmItems": [
           {
-            "key": "dispneia",
-            "label": "Dispneia / esforço respiratório"
+            "id": "dispneia",
+            "label": "Dispneia / esforço respiratório",
+            "absentText": "Sem Dispneia / esforço respiratório",
+            "presentText": "Com Dispneia / esforço respiratório"
           },
           {
-            "key": "dorT",
-            "label": "Dor torácica"
+            "id": "dort",
+            "label": "Dor torácica",
+            "absentText": "Sem Dor torácica",
+            "presentText": "Com Dor torácica"
           },
           {
-            "key": "satBaixa",
-            "label": "Saturação baixa"
+            "id": "satbaixa",
+            "label": "Saturação baixa",
+            "absentText": "Sem Saturação baixa",
+            "presentText": "Com Saturação baixa"
           },
           {
-            "key": "confusao",
-            "label": "Confusão mental / sonolência importante"
+            "id": "confusao",
+            "label": "Confusão mental / sonolência importante",
+            "absentText": "Sem Confusão mental / sonolência importante",
+            "presentText": "Com Confusão mental / sonolência importante"
           },
           {
-            "key": "febrePersistente",
-            "label": "Febre alta ou persistente (>72h)"
+            "id": "febrepersistente",
+            "label": "Febre alta ou persistente (>72h)",
+            "absentText": "Sem Febre alta ou persistente (>72h)",
+            "presentText": "Com Febre alta ou persistente (>72h)"
           },
           {
-            "key": "piora",
-            "label": "Piora progressiva ou piora após melhora"
+            "id": "piora",
+            "label": "Piora progressiva ou piora após melhora",
+            "absentText": "Sem Piora progressiva ou piora após melhora",
+            "presentText": "Com Piora progressiva ou piora após melhora"
           },
           {
-            "key": "desidratacao",
-            "label": "Desidratação importante / baixa aceitação VO"
+            "id": "desidratacao",
+            "label": "Desidratação importante / baixa aceitação VO",
+            "absentText": "Sem Desidratação importante / baixa aceitação VO",
+            "presentText": "Com Desidratação importante / baixa aceitação VO"
           },
           {
-            "key": "risco",
-            "label": "Imunossupressão / gestante / puérpera / idoso frágil"
+            "id": "risco",
+            "label": "Imunossupressão / gestante / puérpera / idoso frágil",
+            "absentText": "Sem Imunossupressão / gestante / puérpera / idoso frágil",
+            "presentText": "Com Imunossupressão / gestante / puérpera / idoso frágil"
           },
           {
-            "key": "lactente",
-            "label": "Lactente <3 meses com febre"
+            "id": "lactente",
+            "label": "Lactente <3 meses com febre",
+            "absentText": "Sem Lactente <3 meses com febre",
+            "presentText": "Com Lactente <3 meses com febre"
           }
         ],
         "rxGroups": [
@@ -614,21 +962,57 @@
           "soroNasal"
         ],
         "hmaItems": [
-          "Paciente procura o serviço com coriza, obstrução nasal, espirros e irritação de garganta há 2–5 dias",
-          "Refere tosse seca leve ou pigarro por gotejamento pós-nasal, pior à noite",
-          "Refere febre ausente ou baixa e preservação relativa do estado geral",
-          "Refere lacrimejamento e rouquidão leves; sensação de ouvido tampado pode ocorrer",
-          "Coriza aquosa abundante",
-          "Obstrução nasal pior à noite",
-          "Pigarro por gotejamento pós-nasal",
-          "Mal-estar leve com discreta cefaleia",
-          "Tosse seca esporádica"
+          {
+            "id": "paciente-procura-o-servico-com-coriza-obstrucao-nasal-espirros-e-irritacao-de-garganta-ha-25-dias",
+            "label": "Paciente procura o serviço com coriza, obstruçã…",
+            "text": "Paciente procura o serviço com coriza, obstrução nasal, espirros e irritação de garganta há 2–5 dias"
+          },
+          {
+            "id": "refere-tosse-seca-leve-ou-pigarro-por-gotejamento-pos-nasal-pior-a-noite",
+            "label": "Refere tosse seca leve ou pigarro por gotejamen…",
+            "text": "Refere tosse seca leve ou pigarro por gotejamento pós-nasal, pior à noite"
+          },
+          {
+            "id": "refere-febre-ausente-ou-baixa-e-preservacao-relativa-do-estado-geral",
+            "label": "Refere febre ausente ou baixa e preservação rel…",
+            "text": "Refere febre ausente ou baixa e preservação relativa do estado geral"
+          },
+          {
+            "id": "refere-lacrimejamento-e-rouquidao-leves-sensacao-de-ouvido-tampado-pode-ocorrer",
+            "label": "Refere lacrimejamento e rouquidão leves; sensaç…",
+            "text": "Refere lacrimejamento e rouquidão leves; sensação de ouvido tampado pode ocorrer"
+          },
+          {
+            "id": "coriza-aquosa-abundante",
+            "label": "Coriza aquosa abundante",
+            "text": "Coriza aquosa abundante"
+          },
+          {
+            "id": "obstrucao-nasal-pior-a-noite",
+            "label": "Obstrução nasal pior à noite",
+            "text": "Obstrução nasal pior à noite"
+          },
+          {
+            "id": "pigarro-por-gotejamento-pos-nasal",
+            "label": "Pigarro por gotejamento pós-nasal",
+            "text": "Pigarro por gotejamento pós-nasal"
+          },
+          {
+            "id": "mal-estar-leve-com-discreta-cefaleia",
+            "label": "Mal-estar leve com discreta cefaleia",
+            "text": "Mal-estar leve com discreta cefaleia"
+          },
+          {
+            "id": "tosse-seca-esporadica",
+            "label": "Tosse seca esporádica",
+            "text": "Tosse seca esporádica"
+          }
         ],
         "hmaDefaults": [
-          "Paciente procura o serviço com coriza, obstrução nasal, espirros e irritação de garganta há 2–5 dias",
-          "Refere tosse seca leve ou pigarro por gotejamento pós-nasal, pior à noite",
-          "Refere febre ausente ou baixa e preservação relativa do estado geral",
-          "Refere lacrimejamento e rouquidão leves; sensação de ouvido tampado pode ocorrer"
+          "paciente-procura-o-servico-com-coriza-obstrucao-nasal-espirros-e-irritacao-de-garganta-ha-25-dias",
+          "refere-tosse-seca-leve-ou-pigarro-por-gotejamento-pos-nasal-pior-a-noite",
+          "refere-febre-ausente-ou-baixa-e-preservacao-relativa-do-estado-geral",
+          "refere-lacrimejamento-e-rouquidao-leves-sensacao-de-ouvido-tampado-pode-ocorrer"
         ]
       }
     }

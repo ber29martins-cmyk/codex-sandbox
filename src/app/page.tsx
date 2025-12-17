@@ -12,7 +12,7 @@ type Template = {
   defaults: {
     qp?: string;
     qpDefault?: string;
-    hmaItems?: string[];
+    hmaItems?: { id: string; label: string; text: string }[];
     hmaDefaults?: string[];
     alarme: string;
     comorb: string;
@@ -20,7 +20,7 @@ type Template = {
     hipotese: string;
     condutaAlarmes: string;
     exame: string[];
-    alarmItems?: { key: string; label: string }[];
+    alarmItems?: AlarmItem[];
     rxGroups?: string[];
     rxDefaults?: string[];
   };
@@ -40,6 +40,7 @@ type TemplateState = {
   sat: string;
   comorbSelected: string[];
 };
+type AlarmItem = { id: string; label: string; absentText: string; presentText: string };
 type RxItem = { id: string; label: string; route: string; title: string; brand?: string; qty: string; directions: string[] };
 type RxGroup = { id: string; label: string; itemIds: string[] };
 
@@ -56,6 +57,7 @@ const ALARM_STATUS_STYLES: Record<AlarmStatus, { background: string; border: str
 };
 const STORAGE_KEY = "codex-app-state-v1";
 const HMA_SELECTED_PREFIX = "mvp:hmaSelected:";
+const HMA_FREE_PREFIX = "mvp:hmaFree:";
 const RX_ROUTE_ORDER = ["ORAL", "PARENTERAL", "TOPICO", "OFTALMICO", "INALATORIO"];
 const RX_KIT_KEY = "codex-rx-kits-v1";
 
@@ -65,7 +67,7 @@ function buildDefaultAlarmStates(template: Template): AlarmStateMap {
 
   const initialState: AlarmStateMap = {};
   for (const item of items) {
-    initialState[item.key] = "nega";
+    initialState[item.id] = "nega";
   }
   return initialState;
 }
@@ -87,7 +89,7 @@ function getTemplateHmaItems(template: Template) {
 function getTemplateHmaDefaults(template: Template) {
   const defaults = Array.isArray(template.defaults.hmaDefaults) ? template.defaults.hmaDefaults : [];
   if (defaults.length) return defaults;
-  return getTemplateHmaItems(template);
+  return getTemplateHmaItems(template).map((item) => item.id);
 }
 
 function buildTemplateDefaults(template: Template): TemplateState {
@@ -153,6 +155,7 @@ const currentTemplate = useMemo(
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
   const [rxSelected, setRxSelected] = useState<string[]>([]);
   const [hmaSelected, setHmaSelected] = useState<string[]>([]);
+  const [hmaFreeText, setHmaFreeText] = useState("");
   const [triagem, setTriagem] = useState(true);
   const [pa, setPa] = useState("");
   const [fc, setFc] = useState("");
@@ -208,6 +211,7 @@ const currentTemplate = useMemo(
     isApplyingTemplate.current = true;
     setQpText(templateState.qpText ?? "");
     let selectedFromStorage: string[] | undefined;
+    let freeFromStorage = "";
     if (typeof window !== "undefined") {
       try {
         const storedSelected = localStorage.getItem(`${HMA_SELECTED_PREFIX}${templateId}`);
@@ -215,18 +219,25 @@ const currentTemplate = useMemo(
           const parsed = JSON.parse(storedSelected);
           if (Array.isArray(parsed)) selectedFromStorage = parsed.filter((v) => typeof v === "string");
         }
+        const storedFree = localStorage.getItem(`${HMA_FREE_PREFIX}${templateId}`);
+        if (typeof storedFree === "string") {
+          freeFromStorage = storedFree;
+        }
       } catch (err) {
         console.error("Erro ao carregar HMA do storage", err);
       }
     }
     const defaultsHma = getTemplateHmaDefaults(currentTemplate);
     setHmaSelected((selectedFromStorage && selectedFromStorage.length ? selectedFromStorage : defaultsHma).filter(Boolean));
+    setHmaFreeText(freeFromStorage || "");
     setAlarme(templateState.alarme);
     setComorb(templateState.comorb);
     setMeds(templateState.meds);
     setHipotese(templateState.hipotese);
     setCondutaAlarmes(templateState.condutaAlarmes);
-    setAlarmStates(templateState.alarmStates ?? buildDefaultAlarmStates(currentTemplate));
+    const defaultAlarms = buildDefaultAlarmStates(currentTemplate);
+    const savedAlarms = templateState.alarmStates ?? {};
+    setAlarmStates({ ...defaultAlarms, ...savedAlarms });
     setTriagem(templateState.triagem ?? true);
     setPa(templateState.pa ?? "");
     setFc(templateState.fc ?? "");
@@ -277,10 +288,11 @@ const currentTemplate = useMemo(
     if (typeof window === "undefined") return;
     try {
       localStorage.setItem(`${HMA_SELECTED_PREFIX}${templateId}`, JSON.stringify(hmaSelected));
+      localStorage.setItem(`${HMA_FREE_PREFIX}${templateId}`, hmaFreeText);
     } catch (err) {
       console.error("Erro ao salvar HMA", err);
     }
-  }, [hmaSelected, templateId]);
+  }, [hmaSelected, hmaFreeText, templateId]);
 
   const alarmCount = (currentTemplate.defaults.alarmItems ?? []).length;
   const hasAlarmItems = alarmCount > 0;
@@ -288,23 +300,13 @@ const currentTemplate = useMemo(
     const items = currentTemplate.defaults.alarmItems ?? [];
     if (!items.length) return alarme.trim();
 
-    const negatives: string[] = [];
-    const positives: string[] = [];
-    for (const item of items) {
-      const status = alarmStates[item.key] ?? "unknown";
-      if (status === "nega") negatives.push(item.label);
-      if (status === "presente") positives.push(item.label);
-    }
-
     const parts: string[] = [];
-    if (negatives.length) {
-      parts.push(`Nega sinais de alarme: ${negatives.join(", ")}`);
+    for (const item of items) {
+      const status = alarmStates[item.id] ?? "unknown";
+      if (status === "nega" && item.absentText) parts.push(item.absentText);
+      if (status === "presente" && item.presentText) parts.push(item.presentText);
     }
-    if (positives.length) {
-      parts.push(`Apresenta sinais de alarme: ${positives.join(", ")}`);
-    }
-
-    return parts.join(" / ");
+    return parts.join("; ");
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
@@ -369,14 +371,26 @@ const currentTemplate = useMemo(
   const hmaFinalLines = useMemo(() => {
     const merged: string[] = [];
     const seen = new Set<string>();
-    for (const line of hmaSelected) {
-      if (line && !seen.has(line)) {
-        merged.push(line);
-        seen.add(line);
+    const items = getTemplateHmaItems(currentTemplate);
+    const selectedSet = new Set(hmaSelected);
+    for (const item of items) {
+      if (selectedSet.has(item.id) && item.text && !seen.has(item.text)) {
+        merged.push(item.text);
+        seen.add(item.text);
+      }
+    }
+    if (hmaFreeText) {
+      const freeLines = hmaFreeText.split("\n").filter((l) => l.trim().length);
+      for (const line of freeLines) {
+        const trimmed = line.trim();
+        if (!seen.has(trimmed)) {
+          merged.push(trimmed);
+          seen.add(trimmed);
+        }
       }
     }
     return merged;
-  }, [hmaSelected]);
+  }, [hmaSelected, hmaFreeText, currentTemplate]);
 
   const blocks = useMemo(() => {
     const anamnese = [
@@ -432,6 +446,7 @@ const currentTemplate = useMemo(
     isApplyingTemplate.current = true;
     setQpText(defaults.qpText);
     setHmaSelected(getTemplateHmaDefaults(currentTemplate));
+    setHmaFreeText("");
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -486,6 +501,7 @@ const currentTemplate = useMemo(
     setTemplateId(firstTemplate.id);
     setQpText(defaults.qpText);
     setHmaSelected(getTemplateHmaDefaults(firstTemplate));
+    setHmaFreeText("");
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -615,12 +631,12 @@ const currentTemplate = useMemo(
               <>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {getTemplateHmaItems(currentTemplate).map((opt) => {
-                    const active = hmaSelected.includes(opt);
+                    const active = hmaSelected.includes(opt.id);
                     return (
                       <button
-                        key={opt}
+                        key={opt.id}
                         type="button"
-                        onClick={() => handleToggleHmaChip(opt)}
+                        onClick={() => handleToggleHmaChip(opt.id)}
                         style={{
                           borderRadius: 999,
                           padding: "8px 12px",
@@ -630,14 +646,14 @@ const currentTemplate = useMemo(
                           color: "#111827"
                         }}
                       >
-                        {opt}
+                        {opt.label}
                       </button>
                     );
                   })}
                 </div>
                 <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
-                  <button type="button" onClick={() => setHmaSelected([])}>Limpar HMA</button>
-                  <button type="button" onClick={() => setHmaSelected(getTemplateHmaDefaults(currentTemplate))}>
+                  <button type="button" onClick={() => { setHmaSelected([]); setHmaFreeText(""); }}>Limpar HMA</button>
+                  <button type="button" onClick={() => { setHmaSelected(getTemplateHmaDefaults(currentTemplate)); setHmaFreeText(""); }}>
                     Restaurar HMA do template
                   </button>
                 </div>
@@ -645,6 +661,9 @@ const currentTemplate = useMemo(
             ) : (
               <p style={{ color: "#6b7280", margin: 0 }}>HMA não configurada para esta queixa.</p>
             )}
+          </div>
+          <div style={{ marginBottom: 12 }}>
+            <label>Complemento livre (opcional)<br /><textarea value={hmaFreeText} onChange={(e) => setHmaFreeText(e.target.value)} style={{ width: "100%", minHeight: 100 }} /></label>
           </div>
           <br />
           {hasAlarmItems ? (
@@ -654,18 +673,18 @@ const currentTemplate = useMemo(
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 {currentTemplate.defaults.alarmItems?.map((item) => {
-                  const status = alarmStates[item.key] ?? "unknown";
+                  const status = alarmStates[item.id] ?? "unknown";
                   const statusLabel = ALARM_STATUS_LABELS[status];
 
                   return (
                     <button
-                      key={item.key}
+                      key={item.id}
                       type="button"
                       onClick={() =>
                         setAlarmStates((prev) => {
-                          const current = prev[item.key] ?? "unknown";
+                          const current = prev[item.id] ?? "unknown";
                           const next = ALARM_STATUS_ORDER[(ALARM_STATUS_ORDER.indexOf(current) + 1) % ALARM_STATUS_ORDER.length];
-                          return { ...prev, [item.key]: next };
+                          return { ...prev, [item.id]: next };
                         })
                       }
                       style={{
