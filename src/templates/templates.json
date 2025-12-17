@@ -114,6 +114,18 @@
           "piora-noturna",
           "gatilhos-ar-frio",
           "dor-tosse"
+        ],
+        "rxGroups": [
+          "analgesicos",
+          "aines",
+          "antitussigenos",
+          "mucoliticos"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium",
+          "dextrometorfano_2mg_ml_bisoltussin",
+          "acetilcisteina_200mg_fluimucil"
         ]
       }
     },
@@ -214,6 +226,16 @@
           "refere-urina-turva-e-odor-forte-pode-haver-hematuria-leve",
           "nega-corrimento-vaginal-prurido-vaginal-e-dor-pelvica-profunda-quando-foco-e-urinario",
           "refere-episodios-previos-semelhantes-ou-fatores-predisponentes-como-relacao-sexual-recente-e-baixa-ingesta-hidrica"
+        ],
+        "rxGroups": [
+          "analgesicos",
+          "aines",
+          "antibioticos"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium",
+          "amoxicilina_500mg_amoxil"
         ]
       }
     },
@@ -314,6 +336,12 @@
           "refere-piora-apos-refeicoes-volumosasgordurosas-alcool-cafe-anti-inflamatorios-e-estresse-melhora-parcial-com-antiacidos",
           "refere-distensao-abdominal-e-eructacoes-frequentes",
           "refere-historia-de-gastritedrge-uso-recente-de-aine-ou-tabagismo-quando-aplicavel"
+        ],
+        "rxGroups": [
+          "analgesicos"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol"
         ]
       }
     },
@@ -415,6 +443,16 @@
           "refere-dor-ao-engolir-com-reducao-importante-da-ingesta-halitose-e-cefaleia",
           "refere-adenomegalia-cervical-anterior-dolorosa-e-amigdalas-hiperemiadas-com-exsudato",
           "refere-dor-abdominal-e-nausea-podem-ocorrer-especialmente-em-criancas"
+        ],
+        "rxGroups": [
+          "analgesicos",
+          "aines",
+          "antibioticos"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium",
+          "amoxicilina_500mg_amoxil"
         ]
       }
     },
@@ -516,6 +554,16 @@
           "refere-conjuntivite-ou-aftas-podem-ocorrer-alem-de-cefaleia-leve",
           "refere-dor-de-garganta-difusa-geralmente-sem-predominio-de-exsudato-pode-haver-hiperemia-de-orofaringe",
           "refere-melhora-gradual-espontanea-ao-longo-de-37-dias"
+        ],
+        "rxGroups": [
+          "analgesicos",
+          "aines",
+          "antihistaminicos"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium",
+          "loratadina_10mg_claritin"
         ]
       }
     },
@@ -622,6 +670,14 @@
           "refere-febre-baixa-e-mal-estar-podem-ocorrer",
           "refere-exposicao-a-alimento-suspeito-agua-nao-tratada-contato-com-doentes-ou-viagem-recente",
           "refere-sinais-de-desidratacao-como-sede-intensa-boca-seca-tontura-postural-e-reducao-de-diurese"
+        ],
+        "rxGroups": [
+          "analgesicos",
+          "aines"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium"
         ]
       }
     },
@@ -702,8 +758,8 @@
           "antivirais"
         ],
         "rxDefaults": [
-          "paracetamol750",
-          "dipirona20",
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium",
           "oseltamivir_75mg_tamiflu"
         ],
         "hmaItems": [
@@ -816,15 +872,14 @@
           }
         ],
         "rxGroups": [
-          "analgesia",
-          "relaxante",
           "analgesicos",
           "aines",
-          "corticoides"
+          "relaxante"
         ],
         "rxDefaults": [
-          "dipirona20",
-          "ibuprofeno400"
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium",
+          "ciclobenzaprina5"
         ],
         "hmaItems": [
           {
@@ -960,13 +1015,11 @@
         ],
         "rxGroups": [
           "ivassintomatico",
-          "antibioticos",
           "antihistaminicos",
-          "corticoides",
-          "mucoliticos",
-          "antitussigenos",
           "descongestionantes_nasal",
-          "lavagem_nasal"
+          "lavagem_nasal",
+          "mucoliticos",
+          "antitussigenos"
         ],
         "rxDefaults": [
           "paracetamol750",

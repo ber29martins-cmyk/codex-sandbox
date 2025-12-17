@@ -88,6 +88,17 @@ function shortenLabel(text: string, maxLen = 42) {
   return `${clean.slice(0, maxLen - 1).trim()}…`;
 }
 
+function formatParagraph(lines: string[]) {
+  const parts: string[] = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) continue;
+    const hasPunct = /[.!?]$/.test(line);
+    parts.push(hasPunct ? line : `${line}.`);
+  }
+  return parts.join(" ");
+}
+
 function getTemplateHmaItems(template: Template) {
   if (!Array.isArray(template.defaults.hmaItems)) return [];
   return template.defaults.hmaItems.map((item, idx) => {
@@ -315,14 +326,14 @@ const currentTemplate = useMemo(
     for (const item of items) {
       const status = alarmStates[item.id] ?? "unknown";
       if (status === "nega" && item.absentLabel) ausentes.push(item.absentLabel);
-      if (status === "presente" && (item.presentText || item.label)) presentes.push(item.presentText || item.label);
+      if (status === "presente") presentes.push(item.label || item.presentText || "");
     }
 
-    const parts: string[] = [];
-    if (ausentes.length) parts.push(`ausentes — ${ausentes.join(", ")}`);
-    if (presentes.length) parts.push(`presentes — ${presentes.join(", ")}`);
-    if (!parts.length) return "";
-    return `Sinais de alarme: ${parts.join("; ")}`;
+    if (!ausentes.length && !presentes.length) return "";
+    const segments: string[] = [];
+    if (ausentes.length) segments.push(`ausentes: ${ausentes.join(", ")}`);
+    if (presentes.length) segments.push(`presentes: ${presentes.join(", ")}`);
+    return `Sinais de alarme — ${segments.join("; ")}`;
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
@@ -384,36 +395,33 @@ const currentTemplate = useMemo(
     return routeBlocks.join("\n\n").trim();
   }, [rxSelected]);
   
-  const hmaFinalLines = useMemo(() => {
-    const merged: string[] = [];
-    const seen = new Set<string>();
+  const hmaParagraphs = useMemo(() => {
     const items = getTemplateHmaItems(currentTemplate);
     const selectedSet = new Set(hmaSelected);
-    for (const item of items) {
-      if (selectedSet.has(item.id) && item.text && !seen.has(item.text)) {
-        merged.push(item.text);
-        seen.add(item.text);
-      }
-    }
-    if (hmaFreeText) {
-      const freeLines = hmaFreeText.split("\n").filter((l) => l.trim().length);
-      for (const line of freeLines) {
-        const trimmed = line.trim();
-        if (!seen.has(trimmed)) {
-          merged.push(trimmed);
-          seen.add(trimmed);
-        }
-      }
-    }
-    return merged;
+    const selectedTexts = items.filter((it) => selectedSet.has(it.id)).map((it) => it.text).filter(Boolean);
+    const mainParagraph = formatParagraph(selectedTexts);
+
+    const freeParagraph = hmaFreeText
+      ? formatParagraph(
+          hmaFreeText
+            .split("\n")
+            .map((l) => l.trim())
+            .filter(Boolean)
+        )
+      : "";
+
+    const paragraphs = [];
+    if (mainParagraph) paragraphs.push(mainParagraph);
+    if (freeParagraph) paragraphs.push(freeParagraph);
+    return paragraphs;
   }, [hmaSelected, hmaFreeText, currentTemplate]);
 
   const blocks = useMemo(() => {
     const anamnese = [
       `QP: ${currentTemplate.label}`,
-      hmaFinalLines.length ? `HMA: ${hmaFinalLines[0]}` : "",
-      ...hmaFinalLines.slice(1),
-      alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
+      hmaParagraphs.length ? `HMA: ${hmaParagraphs[0]}` : "",
+      ...(hmaParagraphs.slice(1).length ? ["", ...hmaParagraphs.slice(1)] : []),
+      alarmLine ? alarmLine : "",
       (() => {
         const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.abbr);
         const manual = comorb ? [comorb] : [];
@@ -445,7 +453,7 @@ const currentTemplate = useMemo(
     ];
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaFinalLines, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
+  }, [qpText, hmaParagraphs, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
