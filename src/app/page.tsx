@@ -436,8 +436,25 @@ const currentTemplate = useMemo(
     const firstTemplate = TEMPLATES[0];
     if (!firstTemplate) return;
 
-    const defaults = buildTemplateDefaults(firstTemplate);
     savedTemplatesRef.current = {};
+    rxKitsRef.current = {};
+
+    if (typeof window !== "undefined") {
+      try {
+        const keys = Object.keys(localStorage);
+        for (const key of keys) {
+          if (key.startsWith("mvp:") || key === STORAGE_KEY || key === RX_KIT_KEY || key === "invite_code") {
+            localStorage.removeItem(key);
+          }
+        }
+      } catch (err) {
+        console.error("Erro limpando storage", err);
+      }
+      window.location.reload();
+      return;
+    }
+
+    const defaults = buildTemplateDefaults(firstTemplate);
     isApplyingTemplate.current = true;
     setTemplateId(firstTemplate.id);
     setQpText(defaults.qpText);
@@ -453,10 +470,6 @@ const currentTemplate = useMemo(
     setPa(defaults.pa);
     setFc(defaults.fc);
     setSat(defaults.sat);
-    rxKitsRef.current = {};
-    if (typeof window !== "undefined") {
-      localStorage.removeItem(STORAGE_KEY);
-    }
     isApplyingTemplate.current = false;
   }
 
