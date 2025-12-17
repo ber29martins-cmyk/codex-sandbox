@@ -11,7 +11,6 @@ type Template = {
   label: string;
   defaults: {
     qp?: string;
-    hma?: string;
     qpDefault?: string;
     hmaDefault?: string[];
     hmaOptions?: string[];
@@ -28,8 +27,6 @@ type Template = {
 };
 type TemplateState = {
   qpText: string;
-  hmaText: string;
-  hmaExtraSelected: string[];
   alarme: string;
   comorb: string;
   meds: string;
@@ -58,6 +55,8 @@ const ALARM_STATUS_STYLES: Record<AlarmStatus, { background: string; border: str
   presente: { background: "#fdecea", border: "#f5c6bf", color: "#7f1d1d" }
 };
 const STORAGE_KEY = "codex-app-state-v1";
+const HMA_BASE_PREFIX = "mvp:hmbase:";
+const HMA_EXTRA_PREFIX = "mvp:hmextra:";
 const RX_ROUTE_ORDER = ["ORAL", "PARENTERAL", "TOPICO", "OFTALMICO", "INALATORIO"];
 const RX_KIT_KEY = "codex-rx-kits-v1";
 
@@ -90,8 +89,6 @@ function getTemplateHma(template: Template) {
 function buildTemplateDefaults(template: Template): TemplateState {
   return {
     qpText: getTemplateQP(template),
-    hmaText: getTemplateHma(template).join("\n"),
-    hmaExtraSelected: [],
     alarme: template.defaults.alarme,
     comorb: template.defaults.comorb,
     meds: template.defaults.meds,
@@ -145,7 +142,7 @@ const currentTemplate = useMemo(
   [templateId]
 );
   const [qpText, setQpText] = useState("");
-  const [hmaText, setHmaText] = useState("");
+  const [hmaBase, setHmaBase] = useState("");
   const [alarme, setAlarme] = useState("Nega perda de força, anestesia em sela e alteração esfincteriana");
   const [comorb, setComorb] = useState("DM NIR, HAS");
   const [meds, setMeds] = useState("Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1");
@@ -207,18 +204,33 @@ const currentTemplate = useMemo(
 
     isApplyingTemplate.current = true;
     setQpText(templateState.qpText ?? "");
-    setHmaText(
-      templateState.hmaText && templateState.hmaText.length
-        ? templateState.hmaText
-        : getTemplateHma(currentTemplate).join("\n")
-    );
+    const defaultHma = getTemplateHma(currentTemplate).join("\n");
+    let baseFromStorage = defaultHma;
+    let extrasFromStorage: string[] | undefined;
+    if (typeof window !== "undefined") {
+      try {
+        const storedBase = localStorage.getItem(`${HMA_BASE_PREFIX}${templateId}`);
+        if (storedBase !== null) baseFromStorage = storedBase;
+        const storedExtra = localStorage.getItem(`${HMA_EXTRA_PREFIX}${templateId}`);
+        if (storedExtra) {
+          const parsed = JSON.parse(storedExtra);
+          if (Array.isArray(parsed)) extrasFromStorage = parsed.filter((v) => typeof v === "string");
+        }
+      } catch (err) {
+        console.error("Erro ao carregar HMA do storage", err);
+      }
+    }
+    const options = currentTemplate.defaults.hmaOptions ?? [];
+    const baseLines = baseFromStorage.split("\n").filter((l) => l.length > 0);
+    const derivedExtras = options.filter((opt) => baseLines.includes(opt));
+    setHmaBase(baseFromStorage);
+    setHmaExtraSelected(extrasFromStorage ?? derivedExtras);
     setAlarme(templateState.alarme);
     setComorb(templateState.comorb);
     setMeds(templateState.meds);
     setHipotese(templateState.hipotese);
     setCondutaAlarmes(templateState.condutaAlarmes);
     setAlarmStates(templateState.alarmStates ?? buildDefaultAlarmStates(currentTemplate));
-    setHmaExtraSelected(templateState.hmaExtraSelected ?? []);
     setTriagem(templateState.triagem ?? true);
     setPa(templateState.pa ?? "");
     setFc(templateState.fc ?? "");
@@ -236,7 +248,6 @@ const currentTemplate = useMemo(
 
     const currentState: TemplateState = {
       qpText,
-      hmaText,
       alarme,
       comorb,
       meds,
@@ -244,7 +255,6 @@ const currentTemplate = useMemo(
       condutaAlarmes,
       alarmStates,
       rxSelected,
-      hmaExtraSelected,
       triagem,
       pa,
       fc,
@@ -264,7 +274,27 @@ const currentTemplate = useMemo(
         })
       );
     }
-  }, [templateId, qpText, hmaText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected, hmaExtraSelected]);
+  }, [templateId, qpText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected]);
+
+  useEffect(() => {
+    if (!didHydrate.current || isApplyingTemplate.current) return;
+    if (typeof window === "undefined") return;
+    try {
+      localStorage.setItem(`${HMA_BASE_PREFIX}${templateId}`, hmaBase);
+    } catch (err) {
+      console.error("Erro ao salvar HMA base", err);
+    }
+  }, [hmaBase, templateId]);
+
+  useEffect(() => {
+    if (!didHydrate.current || isApplyingTemplate.current) return;
+    if (typeof window === "undefined") return;
+    try {
+      localStorage.setItem(`${HMA_EXTRA_PREFIX}${templateId}`, JSON.stringify(hmaExtraSelected));
+    } catch (err) {
+      console.error("Erro ao salvar HMA rápida", err);
+    }
+  }, [hmaExtraSelected, templateId]);
 
   const alarmCount = (currentTemplate.defaults.alarmItems ?? []).length;
   const hasAlarmItems = alarmCount > 0;
@@ -350,12 +380,31 @@ const currentTemplate = useMemo(
     return routeBlocks.join("\n\n").trim();
   }, [rxSelected]);
   
+  const hmaFinalLines = useMemo(() => {
+    const baseLines = hmaBase ? hmaBase.split("\n").filter(Boolean) : [];
+    const extras = hmaExtraSelected.filter(Boolean);
+    const merged: string[] = [];
+    const seen = new Set<string>();
+    for (const line of baseLines) {
+      if (!seen.has(line)) {
+        merged.push(line);
+        seen.add(line);
+      }
+    }
+    for (const line of extras) {
+      if (!seen.has(line)) {
+        merged.push(line);
+        seen.add(line);
+      }
+    }
+    return merged;
+  }, [hmaBase, hmaExtraSelected]);
+
   const blocks = useMemo(() => {
-    const hmaLinesBase = hmaText ? Array.from(new Set(hmaText.split("\n").filter(Boolean))) : [];
     const anamnese = [
       `QP: ${currentTemplate.label}`,
-      hmaLinesBase.length ? `HMA: ${hmaLinesBase[0]}` : "",
-      ...hmaLinesBase.slice(1),
+      hmaFinalLines.length ? `HMA: ${hmaFinalLines[0]}` : "",
+      ...hmaFinalLines.slice(1),
       alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
       (() => {
         const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.abbr);
@@ -388,7 +437,7 @@ const currentTemplate = useMemo(
     ];
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaText, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
+  }, [qpText, hmaFinalLines, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
@@ -401,7 +450,7 @@ const currentTemplate = useMemo(
   function handleRestoreHmaFromTemplate() {
     if (!currentTemplate) return;
     const hmaLines = getTemplateHma(currentTemplate);
-    setHmaText(hmaLines.join("\n"));
+    setHmaBase(hmaLines.join("\n"));
     setHmaExtraSelected([]);
   }
 
@@ -411,8 +460,8 @@ const currentTemplate = useMemo(
     const defaults = buildTemplateDefaults(currentTemplate);
     isApplyingTemplate.current = true;
     setQpText(defaults.qpText);
-    setHmaText(defaults.hmaText);
-    setHmaExtraSelected(defaults.hmaExtraSelected ?? []);
+    setHmaBase(getTemplateHma(currentTemplate).join("\n"));
+    setHmaExtraSelected([]);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -466,8 +515,8 @@ const currentTemplate = useMemo(
     isApplyingTemplate.current = true;
     setTemplateId(firstTemplate.id);
     setQpText(defaults.qpText);
-    setHmaText(defaults.hmaText);
-    setHmaExtraSelected(defaults.hmaExtraSelected ?? []);
+    setHmaBase(getTemplateHma(firstTemplate).join("\n"));
+    setHmaExtraSelected([]);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -540,7 +589,7 @@ const currentTemplate = useMemo(
 
   function handleToggleHmaChip(opt: string) {
     const options = currentTemplate.defaults.hmaOptions ?? [];
-    setHmaText((prev) => {
+    setHmaBase((prev) => {
       const lines = prev.split("\n").filter((l) => l.length > 0);
       const idx = lines.indexOf(opt);
       if (idx === -1) {
@@ -548,22 +597,21 @@ const currentTemplate = useMemo(
       } else {
         lines.splice(idx, 1);
       }
-      const nextLines = lines.join("\n");
       const nextSelected = options.filter((o) => lines.includes(o));
       setHmaExtraSelected(nextSelected);
-      return nextLines;
+      return lines.join("\n");
     });
   }
 
   useEffect(() => {
     const options = currentTemplate.defaults.hmaOptions ?? [];
-    const lines = hmaText.split("\n").filter((l) => l.length > 0);
+    const lines = hmaBase.split("\n").filter((l) => l.length > 0);
     const nextSelected = options.filter((o) => lines.includes(o));
     const currentSelected = hmaExtraSelected;
     if (currentSelected.length !== nextSelected.length || currentSelected.some((v, i) => v !== nextSelected[i])) {
       setHmaExtraSelected(nextSelected);
     }
-  }, [hmaText, currentTemplate]);
+  }, [hmaBase, currentTemplate]);
 
   const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
   const allText = includeRx && rxText ? `${baseText}\n\nReceituário:\n${rxText}` : baseText;
@@ -639,7 +687,7 @@ const currentTemplate = useMemo(
                   type="button"
                   onClick={() => {
                     const options = currentTemplate.defaults.hmaOptions ?? [];
-                    setHmaText((prev) => {
+                    setHmaBase((prev) => {
                       const defaults = getTemplateHma(currentTemplate);
                       const lines = prev.split("\n").filter((l) => l.length > 0);
                       const cleaned = lines.filter((line) => {
@@ -659,7 +707,7 @@ const currentTemplate = useMemo(
               </div>
             </div>
           )}
-          <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaText} onChange={(e) => setHmaText(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label>
+          <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaBase} onChange={(e) => setHmaBase(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label>
           <div style={{ display: "flex", gap: 8, marginTop: 6, marginBottom: 12 }}>
             <button type="button" onClick={handleRestoreHmaFromTemplate}>Restaurar HMA do template</button>
           </div>
