@@ -203,7 +203,11 @@ const currentTemplate = useMemo(
 
     isApplyingTemplate.current = true;
     setQpText(templateState.qpText ?? "");
-    setHmaText(templateState.hmaText ?? "");
+    setHmaText(
+      templateState.hmaText && templateState.hmaText.length
+        ? templateState.hmaText
+        : getTemplateHma(currentTemplate).join("\n")
+    );
     setAlarme(templateState.alarme);
     setComorb(templateState.comorb);
     setMeds(templateState.meds);
@@ -388,6 +392,12 @@ const currentTemplate = useMemo(
     await navigator.clipboard.writeText(text);
   }
 
+  function handleRestoreHmaFromTemplate() {
+    if (!currentTemplate) return;
+    const hmaLines = getTemplateHma(currentTemplate);
+    setHmaText(hmaLines.join("\n"));
+  }
+
   function handleRestoreTemplateDefaults() {
     if (!currentTemplate) return;
 
@@ -548,7 +558,11 @@ const currentTemplate = useMemo(
           </div>
 
           <label>QP<br /><input value={qpText} onChange={(e) => setQpText(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
-          <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaText} onChange={(e) => setHmaText(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label><br /><br />
+          <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaText} onChange={(e) => setHmaText(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label>
+          <div style={{ display: "flex", gap: 8, marginTop: 6, marginBottom: 12 }}>
+            <button type="button" onClick={handleRestoreHmaFromTemplate}>Restaurar HMA do template</button>
+          </div>
+          <br />
           {hasAlarmItems ? (
             <div style={{ marginBottom: 12 }}>
               <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>
