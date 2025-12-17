@@ -40,7 +40,7 @@ type TemplateState = {
   sat: string;
   comorbSelected: string[];
 };
-type AlarmItem = { id: string; label: string; absentText: string; presentText: string };
+type AlarmItem = { id: string; label: string; absentLabel: string; presentText: string };
 type RxItem = { id: string; label: string; route: string; title: string; brand?: string; qty: string; directions: string[] };
 type RxGroup = { id: string; label: string; itemIds: string[] };
 
@@ -82,8 +82,18 @@ function getTemplateQP(template: Template) {
   return qpCandidates[0] ?? "";
 }
 
+function shortenLabel(text: string, maxLen = 42) {
+  const clean = text.replace(/^Refere\s+/i, "").replace(/^Nega\s+/i, "").trim();
+  if (clean.length <= maxLen) return clean;
+  return `${clean.slice(0, maxLen - 1).trim()}…`;
+}
+
 function getTemplateHmaItems(template: Template) {
-  return Array.isArray(template.defaults.hmaItems) ? template.defaults.hmaItems : [];
+  if (!Array.isArray(template.defaults.hmaItems)) return [];
+  return template.defaults.hmaItems.map((item, idx) => {
+    const label = item.label && item.label.trim().length ? item.label : shortenLabel(item.text || `HMA ${idx + 1}`);
+    return { ...item, label };
+  });
 }
 
 function getTemplateHmaDefaults(template: Template) {
@@ -300,13 +310,19 @@ const currentTemplate = useMemo(
     const items = currentTemplate.defaults.alarmItems ?? [];
     if (!items.length) return alarme.trim();
 
-    const parts: string[] = [];
+    const ausentes: string[] = [];
+    const presentes: string[] = [];
     for (const item of items) {
       const status = alarmStates[item.id] ?? "unknown";
-      if (status === "nega" && item.absentText) parts.push(item.absentText);
-      if (status === "presente" && item.presentText) parts.push(item.presentText);
+      if (status === "nega" && item.absentLabel) ausentes.push(item.absentLabel);
+      if (status === "presente" && (item.presentText || item.label)) presentes.push(item.presentText || item.label);
     }
-    return parts.join("; ");
+
+    const parts: string[] = [];
+    if (ausentes.length) parts.push(`ausentes — ${ausentes.join(", ")}`);
+    if (presentes.length) parts.push(`presentes — ${presentes.join(", ")}`);
+    if (!parts.length) return "";
+    return `Sinais de alarme: ${parts.join("; ")}`;
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
