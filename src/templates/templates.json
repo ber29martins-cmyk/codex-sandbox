@@ -68,47 +68,52 @@
             "label": "Imunossupressão",
             "absentLabel": "Sem Imunossupressão",
             "presentText": "Com Imunossupressão"
+          },
+          {
+            "id": "febre-alta-persistente",
+            "label": "febre alta persistente",
+            "absentLabel": "febre alta persistente",
+            "presentText": "Apresenta febre alta persistente"
           }
         ],
         "hmaItems": [
           {
-            "id": "paciente-procura-o-servico-por-tosse-persistente-apos-quadro-viral-recente-ha-13-semanas",
-            "label": "Paciente procura o serviço por tosse persistent…",
+            "id": "tosse-persistente",
+            "label": "tosse persistente",
             "text": "Paciente procura o serviço por tosse persistente após quadro viral recente, há 1–3 semanas"
           },
           {
-            "id": "refere-tosse-inicialmente-seca-podendo-se-tornar-produtiva-com-expectoracao-clara-ou-amarelada",
-            "label": "Refere tosse inicialmente seca, podendo se torn…",
-            "text": "Refere tosse inicialmente seca, podendo se tornar produtiva com expectoração clara ou amarelada"
+            "id": "tosse-seca-prod",
+            "label": "seca → produtiva",
+            "text": "Refere tosse inicialmente seca com evolução para produtiva com expectoração clara/amarelada, sem toxemia"
           },
           {
-            "id": "refere-piora-noturna-e-gatilhos-por-ar-frio-fala-prolongada-esforco-e-risadas",
-            "label": "Refere piora noturna e gatilhos por ar frio, fa…",
-            "text": "Refere piora noturna e gatilhos por ar frio, fala prolongada, esforço e risadas"
+            "id": "piora-noturna",
+            "label": "piora noturna",
+            "text": "Refere piora noturna"
           },
           {
-            "id": "refere-aperto-toracico-leve-e-sibilancia-intermitente-especialmente-em-asmaticos-ou-tabagistas",
-            "label": "Refere aperto torácico leve e sibilância interm…",
-            "text": "Refere aperto torácico leve e sibilância intermitente, especialmente em asmáticos ou tabagistas"
+            "id": "gatilhos-ar-frio",
+            "label": "gatilho ar frio/fala",
+            "text": "Refere piora com ar frio, fala prolongada, esforço e risadas"
           },
           {
-            "id": "refere-dor-retroesternal-ou-em-musculatura-toracica-por-esforco-de-tosse",
-            "label": "Refere dor retroesternal ou em musculatura torá…",
+            "id": "dor-tosse",
+            "label": "dor por tosse",
             "text": "Refere dor retroesternal ou em musculatura torácica por esforço de tosse"
           },
           {
-            "id": "refere-que-a-tosse-pode-durar-38-semanas-mesmo-com-melhora-dos-demais-sintomas",
-            "label": "Refere que a tosse pode durar 3–8 semanas mesmo…",
-            "text": "Refere que a tosse pode durar 3–8 semanas mesmo com melhora dos demais sintomas"
+            "id": "duracao-3-8s",
+            "label": "pode durar semanas",
+            "text": "Orientado que a tosse pode durar 3–8 semanas mesmo com melhora dos demais sintomas"
           }
         ],
         "hmaDefaults": [
-          "paciente-procura-o-servico-por-tosse-persistente-apos-quadro-viral-recente-ha-13-semanas",
-          "refere-tosse-inicialmente-seca-podendo-se-tornar-produtiva-com-expectoracao-clara-ou-amarelada",
-          "refere-piora-noturna-e-gatilhos-por-ar-frio-fala-prolongada-esforco-e-risadas",
-          "refere-aperto-toracico-leve-e-sibilancia-intermitente-especialmente-em-asmaticos-ou-tabagistas",
-          "refere-dor-retroesternal-ou-em-musculatura-toracica-por-esforco-de-tosse",
-          "refere-que-a-tosse-pode-durar-38-semanas-mesmo-com-melhora-dos-demais-sintomas"
+          "tosse-persistente",
+          "tosse-seca-prod",
+          "piora-noturna",
+          "gatilhos-ar-frio",
+          "dor-tosse"
         ]
       }
     },
@@ -703,62 +708,69 @@
         ],
         "hmaItems": [
           {
-            "id": "paciente-procura-o-servico-por-febre-calafrios-mialgia-intensa-cefaleia-e-prostracao-ha-13-dias",
-            "label": "Paciente procura o serviço por febre, calafrios…",
-            "text": "Paciente procura o serviço por febre, calafrios, mialgia intensa, cefaleia e prostração há 1–3 dias"
+            "id": "febre-alta",
+            "label": "febre alta",
+            "text": "Paciente procura o serviço por febre alta referida ou medida há 1–3 dias"
           },
           {
-            "id": "refere-inicio-mais-abrupto-do-que-resfriado-com-piora-importante-do-estado-geral-e-reducao-do-apetite",
-            "label": "Refere início mais abrupto do que resfriado, co…",
-            "text": "Refere início mais abrupto do que resfriado, com piora importante do estado geral e redução do apetite"
+            "id": "calafrios",
+            "label": "calafrios",
+            "text": "Refere calafrios associados"
           },
           {
-            "id": "refere-tosse-seca-nas-primeiras-2448h-podendo-evoluir-para-tosse-produtiva-leve-ao-longo-de-alguns-dias",
-            "label": "Refere tosse seca nas primeiras 24–48h, podendo…",
-            "text": "Refere tosse seca nas primeiras 24–48h, podendo evoluir para tosse produtiva leve ao longo de alguns dias"
+            "id": "mialgia-intensa",
+            "label": "mialgia intensa",
+            "text": "Refere mialgias difusas intensas"
           },
           {
-            "id": "refere-odinofagia-e-coriza-possiveis-geralmente-menos-proeminentes-do-que-mialgia-e-febre",
-            "label": "Refere odinofagia e coriza possíveis, geralment…",
-            "text": "Refere odinofagia e coriza possíveis, geralmente menos proeminentes do que mialgia e febre"
+            "id": "cefaleia",
+            "label": "cefaleia",
+            "text": "Refere cefaleia associada"
           },
           {
-            "id": "refere-contato-com-sintomaticos-em-casatrabalho-ou-surto-local-e-ausencia-de-vacina-recente-quando-aplicavel",
-            "label": "Refere contato com sintomáticos em casa/trabalh…",
-            "text": "Refere contato com sintomáticos em casa/trabalho ou surto local e ausência de vacina recente quando aplicável"
+            "id": "prostracao",
+            "label": "prostração importante",
+            "text": "Refere prostração e mal-estar intenso"
           },
           {
-            "id": "febre-alta-com-mialgia-difusa-e-prostracao",
-            "label": "Febre alta com mialgia difusa e prostração",
-            "text": "Febre alta com mialgia difusa e prostração"
+            "id": "inicio-abrupto",
+            "label": "início abrupto",
+            "text": "Refere início mais abrupto do que resfriado e piora importante do estado geral"
           },
           {
-            "id": "cefaleia-frontal-ou-retroorbital-importante",
-            "label": "Cefaleia frontal ou retroorbital importante",
-            "text": "Cefaleia frontal ou retroorbital importante"
+            "id": "tosse-seca",
+            "label": "tosse seca",
+            "text": "Refere tosse seca, podendo iniciar nas primeiras 24–48h"
           },
           {
-            "id": "tosse-seca-evoluindo-para-escassa-expectoracao",
-            "label": "Tosse seca evoluindo para escassa expectoração",
-            "text": "Tosse seca evoluindo para escassa expectoração"
+            "id": "odinofagia",
+            "label": "odinofagia",
+            "text": "Refere odinofagia leve"
           },
           {
-            "id": "odinofagia-leve-a-moderada",
-            "label": "Odinofagia leve a moderada",
-            "text": "Odinofagia leve a moderada"
+            "id": "coriza",
+            "label": "coriza",
+            "text": "Refere coriza, geralmente menos proeminente que febre/mialgia"
           },
           {
-            "id": "contato-proximo-com-casos-semelhantes",
-            "label": "Contato próximo com casos semelhantes",
-            "text": "Contato próximo com casos semelhantes"
+            "id": "contato-surto",
+            "label": "contato/surto",
+            "text": "Refere contato com sintomáticos e/ou surto local quando aplicável"
+          },
+          {
+            "id": "sem-vacina-recente",
+            "label": "sem vacina recente",
+            "text": "Refere ausência de vacina recente quando aplicável"
           }
         ],
         "hmaDefaults": [
-          "paciente-procura-o-servico-por-febre-calafrios-mialgia-intensa-cefaleia-e-prostracao-ha-13-dias",
-          "refere-inicio-mais-abrupto-do-que-resfriado-com-piora-importante-do-estado-geral-e-reducao-do-apetite",
-          "refere-tosse-seca-nas-primeiras-2448h-podendo-evoluir-para-tosse-produtiva-leve-ao-longo-de-alguns-dias",
-          "refere-odinofagia-e-coriza-possiveis-geralmente-menos-proeminentes-do-que-mialgia-e-febre",
-          "refere-contato-com-sintomaticos-em-casatrabalho-ou-surto-local-e-ausencia-de-vacina-recente-quando-aplicavel"
+          "febre-alta",
+          "calafrios",
+          "mialgia-intensa",
+          "cefaleia",
+          "prostracao",
+          "inicio-abrupto",
+          "tosse-seca"
         ]
       }
     },
@@ -963,56 +975,57 @@
         ],
         "hmaItems": [
           {
-            "id": "paciente-procura-o-servico-com-coriza-obstrucao-nasal-espirros-e-irritacao-de-garganta-ha-25-dias",
-            "label": "Paciente procura o serviço com coriza, obstruçã…",
-            "text": "Paciente procura o serviço com coriza, obstrução nasal, espirros e irritação de garganta há 2–5 dias"
+            "id": "coriza-obstrucao",
+            "label": "coriza/obstrução nasal",
+            "text": "Paciente procura o serviço com coriza e obstrução nasal há 2–5 dias"
           },
           {
-            "id": "refere-tosse-seca-leve-ou-pigarro-por-gotejamento-pos-nasal-pior-a-noite",
-            "label": "Refere tosse seca leve ou pigarro por gotejamen…",
+            "id": "espirros",
+            "label": "espirros",
+            "text": "Refere espirros frequentes"
+          },
+          {
+            "id": "irritacao-garganta",
+            "label": "irritação/odinofagia leve",
+            "text": "Refere irritação de garganta/odinofagia leve"
+          },
+          {
+            "id": "tosse-seca-pigarro",
+            "label": "tosse seca/pigarro",
             "text": "Refere tosse seca leve ou pigarro por gotejamento pós-nasal, pior à noite"
           },
           {
-            "id": "refere-febre-ausente-ou-baixa-e-preservacao-relativa-do-estado-geral",
-            "label": "Refere febre ausente ou baixa e preservação rel…",
+            "id": "febre-ausente-baixa",
+            "label": "sem febre alta",
             "text": "Refere febre ausente ou baixa e preservação relativa do estado geral"
           },
           {
-            "id": "refere-lacrimejamento-e-rouquidao-leves-sensacao-de-ouvido-tampado-pode-ocorrer",
-            "label": "Refere lacrimejamento e rouquidão leves; sensaç…",
-            "text": "Refere lacrimejamento e rouquidão leves; sensação de ouvido tampado pode ocorrer"
+            "id": "rouquidao",
+            "label": "rouquidão",
+            "text": "Refere rouquidão leve"
           },
           {
-            "id": "coriza-aquosa-abundante",
-            "label": "Coriza aquosa abundante",
-            "text": "Coriza aquosa abundante"
+            "id": "lacrimejamento",
+            "label": "lacrimejamento",
+            "text": "Refere lacrimejamento leve"
           },
           {
-            "id": "obstrucao-nasal-pior-a-noite",
-            "label": "Obstrução nasal pior à noite",
-            "text": "Obstrução nasal pior à noite"
+            "id": "ouvido-tampado",
+            "label": "ouvido tampado",
+            "text": "Refere sensação de ouvido tampado"
           },
           {
-            "id": "pigarro-por-gotejamento-pos-nasal",
-            "label": "Pigarro por gotejamento pós-nasal",
-            "text": "Pigarro por gotejamento pós-nasal"
-          },
-          {
-            "id": "mal-estar-leve-com-discreta-cefaleia",
-            "label": "Mal-estar leve com discreta cefaleia",
-            "text": "Mal-estar leve com discreta cefaleia"
-          },
-          {
-            "id": "tosse-seca-esporadica",
-            "label": "Tosse seca esporádica",
-            "text": "Tosse seca esporádica"
+            "id": "contato-sintomaticos",
+            "label": "contato com sintomáticos",
+            "text": "Refere contato com sintomáticos em casa/trabalho"
           }
         ],
         "hmaDefaults": [
-          "paciente-procura-o-servico-com-coriza-obstrucao-nasal-espirros-e-irritacao-de-garganta-ha-25-dias",
-          "refere-tosse-seca-leve-ou-pigarro-por-gotejamento-pos-nasal-pior-a-noite",
-          "refere-febre-ausente-ou-baixa-e-preservacao-relativa-do-estado-geral",
-          "refere-lacrimejamento-e-rouquidao-leves-sensacao-de-ouvido-tampado-pode-ocorrer"
+          "coriza-obstrucao",
+          "espirros",
+          "irritacao-garganta",
+          "tosse-seca-pigarro",
+          "febre-ausente-baixa"
         ]
       }
     }
