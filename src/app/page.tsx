@@ -584,40 +584,42 @@ const currentTemplate = useMemo(
           </div>
 
           <label>QP<br /><input value={qpText} onChange={(e) => setQpText(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
-          <div style={{ marginBottom: 8 }}>
-            <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 14 }}>
-              HMA rápida <span style={{ color: "#6b7280", fontWeight: 400 }}>(Selecionados: {hmaExtraSelected.length})</span>
+          {(currentTemplate.defaults.hmaOptions ?? []).length > 0 && (
+            <div style={{ marginBottom: 8 }}>
+              <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 14 }}>
+                HMA rápida <span style={{ color: "#6b7280", fontWeight: 400 }}>(Selecionados: {hmaExtraSelected.length})</span>
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {(currentTemplate.defaults.hmaOptions ?? []).map((opt) => {
+                  const active = hmaExtraSelected.includes(opt);
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() =>
+                        setHmaExtraSelected((prev) =>
+                          prev.includes(opt) ? prev.filter((v) => v !== opt) : [...prev, opt]
+                        )
+                      }
+                      style={{
+                        borderRadius: 999,
+                        padding: "8px 12px",
+                        border: `1px solid ${active ? "#2563eb" : "#d1d5db"}`,
+                        background: active ? "#e0ebff" : "#fff",
+                        cursor: "pointer",
+                        color: "#111827"
+                      }}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+              <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+                <button type="button" onClick={() => setHmaExtraSelected([])}>Limpar HMA rápida</button>
+              </div>
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {(currentTemplate.defaults.hmaOptions ?? []).map((opt) => {
-                const active = hmaExtraSelected.includes(opt);
-                return (
-                  <button
-                    key={opt}
-                    type="button"
-                    onClick={() =>
-                      setHmaExtraSelected((prev) =>
-                        prev.includes(opt) ? prev.filter((v) => v !== opt) : [...prev, opt]
-                      )
-                    }
-                    style={{
-                      borderRadius: 999,
-                      padding: "8px 12px",
-                      border: `1px solid ${active ? "#2563eb" : "#d1d5db"}`,
-                      background: active ? "#e0ebff" : "#fff",
-                      cursor: "pointer",
-                      color: "#111827"
-                    }}
-                  >
-                    {opt}
-                  </button>
-                );
-              })}
-            </div>
-            <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
-              <button type="button" onClick={() => setHmaExtraSelected([])}>Limpar HMA rápida</button>
-            </div>
-          </div>
+          )}
           <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaText} onChange={(e) => setHmaText(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label>
           <div style={{ display: "flex", gap: 8, marginTop: 6, marginBottom: 12 }}>
             <button type="button" onClick={handleRestoreHmaFromTemplate}>Restaurar HMA do template</button>
