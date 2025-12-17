@@ -351,13 +351,11 @@ const currentTemplate = useMemo(
   }, [rxSelected]);
   
   const blocks = useMemo(() => {
-    const hmaLinesBase = hmaText ? hmaText.split("\n").filter(Boolean) : [];
-    const extraLines = hmaExtraSelected.filter(Boolean);
-    const mergedHma = Array.from(new Set([...hmaLinesBase, ...extraLines]));
+    const hmaLinesBase = hmaText ? Array.from(new Set(hmaText.split("\n").filter(Boolean))) : [];
     const anamnese = [
       `QP: ${currentTemplate.label}`,
-      mergedHma.length ? `HMA: ${mergedHma[0]}` : "",
-      ...mergedHma.slice(1),
+      hmaLinesBase.length ? `HMA: ${hmaLinesBase[0]}` : "",
+      ...hmaLinesBase.slice(1),
       alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
       (() => {
         const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.abbr);
@@ -390,7 +388,7 @@ const currentTemplate = useMemo(
     ];
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaText, hmaExtraSelected, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
+  }, [qpText, hmaText, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
@@ -540,6 +538,33 @@ const currentTemplate = useMemo(
     setRxSelected([]);
   }
 
+  function handleToggleHmaChip(opt: string) {
+    const options = currentTemplate.defaults.hmaOptions ?? [];
+    setHmaText((prev) => {
+      const lines = prev.split("\n").filter((l) => l.length > 0);
+      const idx = lines.indexOf(opt);
+      if (idx === -1) {
+        lines.push(opt);
+      } else {
+        lines.splice(idx, 1);
+      }
+      const nextLines = lines.join("\n");
+      const nextSelected = options.filter((o) => lines.includes(o));
+      setHmaExtraSelected(nextSelected);
+      return nextLines;
+    });
+  }
+
+  useEffect(() => {
+    const options = currentTemplate.defaults.hmaOptions ?? [];
+    const lines = hmaText.split("\n").filter((l) => l.length > 0);
+    const nextSelected = options.filter((o) => lines.includes(o));
+    const currentSelected = hmaExtraSelected;
+    if (currentSelected.length !== nextSelected.length || currentSelected.some((v, i) => v !== nextSelected[i])) {
+      setHmaExtraSelected(nextSelected);
+    }
+  }, [hmaText, currentTemplate]);
+
   const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
   const allText = includeRx && rxText ? `${baseText}\n\nReceituário:\n${rxText}` : baseText;
 
@@ -594,11 +619,7 @@ const currentTemplate = useMemo(
                     <button
                       key={opt}
                       type="button"
-                      onClick={() =>
-                        setHmaExtraSelected((prev) =>
-                          prev.includes(opt) ? prev.filter((v) => v !== opt) : [...prev, opt]
-                        )
-                      }
+                      onClick={() => handleToggleHmaChip(opt)}
                       style={{
                         borderRadius: 999,
                         padding: "8px 12px",
@@ -614,7 +635,27 @@ const currentTemplate = useMemo(
                 })}
               </div>
               <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
-                <button type="button" onClick={() => setHmaExtraSelected([])}>Limpar HMA rápida</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const options = currentTemplate.defaults.hmaOptions ?? [];
+                    setHmaText((prev) => {
+                      const defaults = getTemplateHma(currentTemplate);
+                      const lines = prev.split("\n").filter((l) => l.length > 0);
+                      const cleaned = lines.filter((line) => {
+                        if (!options.includes(line)) return true;
+                        // preserve if part of default narrative
+                        if (defaults.includes(line)) return true;
+                        return false;
+                      });
+                      const nextSelected = options.filter((o) => cleaned.includes(o));
+                      setHmaExtraSelected(nextSelected);
+                      return cleaned.join("\n");
+                    });
+                  }}
+                >
+                  Limpar HMA rápida
+                </button>
               </div>
             </div>
           )}
