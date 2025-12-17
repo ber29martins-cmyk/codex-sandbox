@@ -14,6 +14,7 @@ type Template = {
     hma?: string;
     qpDefault?: string;
     hmaDefault?: string[];
+    hmaOptions?: string[];
     alarme: string;
     comorb: string;
     meds: string;
@@ -28,6 +29,7 @@ type Template = {
 type TemplateState = {
   qpText: string;
   hmaText: string;
+  hmaExtraSelected: string[];
   alarme: string;
   comorb: string;
   meds: string;
@@ -89,6 +91,7 @@ function buildTemplateDefaults(template: Template): TemplateState {
   return {
     qpText: getTemplateQP(template),
     hmaText: getTemplateHma(template).join("\n"),
+    hmaExtraSelected: [],
     alarme: template.defaults.alarme,
     comorb: template.defaults.comorb,
     meds: template.defaults.meds,
@@ -149,6 +152,7 @@ const currentTemplate = useMemo(
   const [alergiaNega, setAlergiaNega] = useState(true);
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
   const [rxSelected, setRxSelected] = useState<string[]>([]);
+  const [hmaExtraSelected, setHmaExtraSelected] = useState<string[]>([]);
   const [triagem, setTriagem] = useState(true);
   const [pa, setPa] = useState("");
   const [fc, setFc] = useState("");
@@ -214,6 +218,7 @@ const currentTemplate = useMemo(
     setHipotese(templateState.hipotese);
     setCondutaAlarmes(templateState.condutaAlarmes);
     setAlarmStates(templateState.alarmStates ?? buildDefaultAlarmStates(currentTemplate));
+    setHmaExtraSelected(templateState.hmaExtraSelected ?? []);
     setTriagem(templateState.triagem ?? true);
     setPa(templateState.pa ?? "");
     setFc(templateState.fc ?? "");
@@ -239,6 +244,7 @@ const currentTemplate = useMemo(
       condutaAlarmes,
       alarmStates,
       rxSelected,
+      hmaExtraSelected,
       triagem,
       pa,
       fc,
@@ -258,7 +264,7 @@ const currentTemplate = useMemo(
         })
       );
     }
-  }, [templateId, qpText, hmaText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected]);
+  }, [templateId, qpText, hmaText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected, hmaExtraSelected]);
 
   const alarmCount = (currentTemplate.defaults.alarmItems ?? []).length;
   const hasAlarmItems = alarmCount > 0;
@@ -345,11 +351,13 @@ const currentTemplate = useMemo(
   }, [rxSelected]);
   
   const blocks = useMemo(() => {
-    const hmaLines = hmaText ? hmaText.split("\n").filter(Boolean) : [];
+    const hmaLinesBase = hmaText ? hmaText.split("\n").filter(Boolean) : [];
+    const extraLines = hmaExtraSelected.filter(Boolean);
+    const mergedHma = Array.from(new Set([...hmaLinesBase, ...extraLines]));
     const anamnese = [
       `QP: ${currentTemplate.label}`,
-      hmaLines.length ? `HMA: ${hmaLines[0]}` : "",
-      ...hmaLines.slice(1),
+      mergedHma.length ? `HMA: ${mergedHma[0]}` : "",
+      ...mergedHma.slice(1),
       alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
       (() => {
         const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.abbr);
@@ -382,7 +390,7 @@ const currentTemplate = useMemo(
     ];
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaText, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
+  }, [qpText, hmaText, hmaExtraSelected, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
@@ -396,6 +404,7 @@ const currentTemplate = useMemo(
     if (!currentTemplate) return;
     const hmaLines = getTemplateHma(currentTemplate);
     setHmaText(hmaLines.join("\n"));
+    setHmaExtraSelected([]);
   }
 
   function handleRestoreTemplateDefaults() {
@@ -405,6 +414,7 @@ const currentTemplate = useMemo(
     isApplyingTemplate.current = true;
     setQpText(defaults.qpText);
     setHmaText(defaults.hmaText);
+    setHmaExtraSelected(defaults.hmaExtraSelected ?? []);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -459,6 +469,7 @@ const currentTemplate = useMemo(
     setTemplateId(firstTemplate.id);
     setQpText(defaults.qpText);
     setHmaText(defaults.hmaText);
+    setHmaExtraSelected(defaults.hmaExtraSelected ?? []);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -571,6 +582,40 @@ const currentTemplate = useMemo(
           </div>
 
           <label>QP<br /><input value={qpText} onChange={(e) => setQpText(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
+          <div style={{ marginBottom: 8 }}>
+            <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 14 }}>
+              HMA rápida <span style={{ color: "#6b7280", fontWeight: 400 }}>(Selecionados: {hmaExtraSelected.length})</span>
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {(currentTemplate.defaults.hmaOptions ?? []).map((opt) => {
+                const active = hmaExtraSelected.includes(opt);
+                return (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() =>
+                      setHmaExtraSelected((prev) =>
+                        prev.includes(opt) ? prev.filter((v) => v !== opt) : [...prev, opt]
+                      )
+                    }
+                    style={{
+                      borderRadius: 999,
+                      padding: "8px 12px",
+                      border: `1px solid ${active ? "#2563eb" : "#d1d5db"}`,
+                      background: active ? "#e0ebff" : "#fff",
+                      cursor: "pointer",
+                      color: "#111827"
+                    }}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
+            <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
+              <button type="button" onClick={() => setHmaExtraSelected([])}>Limpar HMA rápida</button>
+            </div>
+          </div>
           <label>HMA (uma linha por parágrafo)<br /><textarea value={hmaText} onChange={(e) => setHmaText(e.target.value)} style={{ width: "100%", minHeight: 120 }} /></label>
           <div style={{ display: "flex", gap: 8, marginTop: 6, marginBottom: 12 }}>
             <button type="button" onClick={handleRestoreHmaFromTemplate}>Restaurar HMA do template</button>

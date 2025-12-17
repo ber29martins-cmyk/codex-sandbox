@@ -13,6 +13,7 @@
           "Refere dor retroesternal ou em musculatura torácica por esforço de tosse",
           "Refere que a tosse pode durar 3–8 semanas mesmo com melhora dos demais sintomas"
         ],
+        "hmaOptions": [],
         "alarme": "",
         "comorb": "",
         "meds": "",
@@ -47,6 +48,7 @@
           "Nega corrimento vaginal, prurido vaginal e dor pélvica profunda quando foco é urinário",
           "Refere episódios prévios semelhantes ou fatores predisponentes como relação sexual recente e baixa ingesta hídrica"
         ],
+        "hmaOptions": [],
         "alarme": "",
         "comorb": "",
         "meds": "",
@@ -80,6 +82,7 @@
           "Refere distensão abdominal e eructações frequentes",
           "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo quando aplicável"
         ],
+        "hmaOptions": [],
         "alarme": "",
         "comorb": "",
         "meds": "",
@@ -113,6 +116,7 @@
           "Refere adenomegalia cervical anterior dolorosa e amígdalas hiperemiadas com exsudato",
           "Refere dor abdominal e náusea podem ocorrer, especialmente em crianças"
         ],
+        "hmaOptions": [],
         "alarme": "",
         "comorb": "",
         "meds": "",
@@ -147,6 +151,7 @@
           "Refere dor de garganta difusa, geralmente sem predomínio de exsudato; pode haver hiperemia de orofaringe",
           "Refere melhora gradual espontânea ao longo de 3–7 dias"
         ],
+        "hmaOptions": [],
         "alarme": "",
         "comorb": "",
         "meds": "",
@@ -181,6 +186,7 @@
           "Refere exposição a alimento suspeito, água não tratada, contato com doentes ou viagem recente",
           "Refere sinais de desidratação como sede intensa, boca seca, tontura postural e redução de diurese"
         ],
+        "hmaOptions": [],
         "alarme": "",
         "comorb": "",
         "meds": "",
@@ -214,6 +220,13 @@
           "Refere tosse seca nas primeiras 24–48h, podendo evoluir para tosse produtiva leve ao longo de alguns dias",
           "Refere odinofagia e coriza possíveis, geralmente menos proeminentes do que mialgia e febre",
           "Refere contato com sintomáticos em casa/trabalho ou surto local e ausência de vacina recente quando aplicável"
+        ],
+        "hmaOptions": [
+          "Febre alta com mialgia difusa e prostração",
+          "Cefaleia frontal ou retroorbital importante",
+          "Tosse seca evoluindo para escassa expectoração",
+          "Odinofagia leve a moderada",
+          "Contato próximo com casos semelhantes"
         ],
         "alarme": "",
         "comorb": "",
@@ -252,6 +265,13 @@
           "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada",
           "Refere piora ao tossir, espirrar ou manobra de Valsalva quando há componente radicular"
         ],
+        "hmaOptions": [
+          "Espasmo paravertebral palpável",
+          "Rigidez matinal curta",
+          "Piora após esforço ou levantar peso",
+          "Irradiação para glúteo/perna com parestesia leve",
+          "Melhora parcial com repouso relativo"
+        ],
         "alarme": "Nega parestesia/hipoestesia, perda de força e alteração esfincteriana",
         "comorb": "DM NIR, HAS",
         "meds": "Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1",
@@ -282,6 +302,13 @@
           "Refere tosse seca leve ou pigarro por gotejamento pós-nasal, pior à noite",
           "Refere febre ausente ou baixa e preservação relativa do estado geral",
           "Refere lacrimejamento e rouquidão leves; sensação de ouvido tampado pode ocorrer"
+        ],
+        "hmaOptions": [
+          "Coriza aquosa abundante",
+          "Obstrução nasal pior à noite",
+          "Pigarro por gotejamento pós-nasal",
+          "Mal-estar leve com discreta cefaleia",
+          "Tosse seca esporádica"
         ],
         "alarme": "Nega dispneia, dor torácica e prostração importante",
         "comorb": "",
