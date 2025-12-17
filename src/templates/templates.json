@@ -6,11 +6,12 @@
       "defaults": {
         "qpDefault": "Tosse",
         "hmaDefault": [
-          "Paciente refere tosse predominante há 5–10 dias, inicialmente seca, evoluindo para tosse produtiva com pouca secreção",
-          "Relata antecedente recente de quadro de IVAS (coriza, dor de garganta, febre baixa) já em resolução",
-          "Nega dispneia importante, dor torácica ventilatório-dependente intensa, hemoptise ou sibilância prévia conhecida",
-          "Nega febre alta persistente nos últimos dias, nega perda de peso ou sudorese noturna",
-          "Nega tabagismo pesado ou DPOC conhecida (ajustar conforme paciente real)"
+          "Paciente procura o serviço por tosse persistente após quadro viral recente, há 1–3 semanas",
+          "Refere tosse inicialmente seca, podendo se tornar produtiva com expectoração clara ou amarelada",
+          "Refere piora noturna e gatilhos por ar frio, fala prolongada, esforço e risadas",
+          "Refere aperto torácico leve e sibilância intermitente, especialmente em asmáticos ou tabagistas",
+          "Refere dor retroesternal ou em musculatura torácica por esforço de tosse",
+          "Refere que a tosse pode durar 3–8 semanas mesmo com melhora dos demais sintomas"
         ],
         "alarme": "",
         "comorb": "",
@@ -40,11 +41,11 @@
       "defaults": {
         "qpDefault": "Disúria e urgência miccional",
         "hmaDefault": [
-          "Paciente relata disúria, polaciúria e urgência miccional há 1–3 dias",
-          "Refere sensação de esvaziamento vesical incompleto e desconforto suprapúbico leve",
-          "Nega febre, calafrios, dor lombar importante, náuseas ou vômitos",
-          "Nega corrimento vaginal significativo, dor pélvica profunda ou sangramento genital anormal",
-          "Nega gestação conhecida, doenças renais prévias graves, imunossupressão ou uso recente de antibióticos (ajustar conforme caso)"
+          "Paciente procura o serviço por disúria, polaciúria e urgência miccional há 1–4 dias",
+          "Refere sensação de esvaziamento incompleto e dor suprapúbica leve a moderada",
+          "Refere urina turva e odor forte; pode haver hematúria leve",
+          "Nega corrimento vaginal, prurido vaginal e dor pélvica profunda quando foco é urinário",
+          "Refere episódios prévios semelhantes ou fatores predisponentes como relação sexual recente e baixa ingesta hídrica"
         ],
         "alarme": "",
         "comorb": "",
@@ -73,11 +74,11 @@
       "defaults": {
         "qpDefault": "Dor epigástrica",
         "hmaDefault": [
-          "Paciente refere dor ou queimação em região epigástrica há dias a semanas, relacionada a períodos de jejum prolongado ou pós-prandial",
-          "Refere pirose, sensação de refluxo, eructações frequentes, às vezes náusea leve sem vômitos incoercíveis",
-          "Nega perda de peso importante, disfagia progressiva, odinofagia severa, melena ou hematêmese",
-          "Nega dor torácica típica em aperto associada a esforço, dispneia ou síncope",
-          "Nega uso abusivo recente de AINEs, etilismo pesado ou tabagismo intenso (ajustar conforme caso real)"
+          "Paciente procura o serviço por dor ou queimação em epigástrio, plenitude pós-prandial e empachamento há dias a semanas",
+          "Refere azia e regurgitação ácida associadas ou náuseas leves",
+          "Refere piora após refeições volumosas/gordurosas, álcool, café, anti-inflamatórios e estresse; melhora parcial com antiácidos",
+          "Refere distensão abdominal e eructações frequentes",
+          "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo quando aplicável"
         ],
         "alarme": "",
         "comorb": "",
@@ -106,11 +107,11 @@
       "defaults": {
         "qpDefault": "Dor intensa em garganta",
         "hmaDefault": [
-          "Paciente relata dor intensa em garganta há 2–3 dias, pior à deglutição, associada a febre alta aferida em domicílio",
-          "Refere mal-estar, inapetência e dificuldade importante para alimentação sólida",
-          "Nega tosse produtiva importante, coriza ou outros sintomas respiratórios altos marcantes",
-          "Nega diarreia, vômitos persistentes ou dor abdominal intensa",
-          "Nega comorbidades relevantes ou história de alergia prévia a betalactâmicos, nega uso recente de antibiótico"
+          "Paciente procura o serviço por odinofagia intensa de início relativamente súbito há 1–3 dias",
+          "Refere febre e mal-estar, com ausência de tosse e coriza como padrão mais típico",
+          "Refere dor ao engolir com redução importante da ingesta, halitose e cefaleia",
+          "Refere adenomegalia cervical anterior dolorosa e amígdalas hiperemiadas com exsudato",
+          "Refere dor abdominal e náusea podem ocorrer, especialmente em crianças"
         ],
         "alarme": "",
         "comorb": "",
@@ -140,11 +141,11 @@
       "defaults": {
         "qpDefault": "Dor de garganta",
         "hmaDefault": [
-          "Paciente procura serviço com dor de garganta há 2–4 dias, dificuldade para deglutir e sensação de garganta “arranhando”",
-          "Refere febre baixa ou sensação febril, sem escalada significativa nas últimas 24h",
-          "Relata tosse seca ou produtiva leve, sem dispneia, sem dor torácica",
-          "Nega vômitos frequentes, diarreia, exantema, perda de peso ou outros sintomas sistêmicos importantes",
-          "Nega comorbidades relevantes, alergias medicamentosas conhecidas ou uso recente de antibióticos"
+          "Paciente procura o serviço por odinofagia, coriza, tosse e rouquidão há 2–5 dias",
+          "Refere febre ausente ou baixa e mal-estar leve a moderado",
+          "Refere conjuntivite ou aftas podem ocorrer, além de cefaleia leve",
+          "Refere dor de garganta difusa, geralmente sem predomínio de exsudato; pode haver hiperemia de orofaringe",
+          "Refere melhora gradual espontânea ao longo de 3–7 dias"
         ],
         "alarme": "",
         "comorb": "",
@@ -174,11 +175,11 @@
       "defaults": {
         "qpDefault": "Diarreia e cólicas",
         "hmaDefault": [
-          "Paciente refere início há 1–3 dias de diarreia aquosa, com múltiplos episódios diários, associada a cólicas abdominais difusas",
-          "Relata náuseas e episódios de vômitos, porém mantendo ingesta parcial de líquidos",
-          "Refere febre baixa ou sensação febril em algum momento do quadro",
-          "Nega sangue vivo ou muco abundante nas fezes, nega dor abdominal localizada intensa, nega história de viagem recente ou consumo de alimentos claramente suspeitos (ajustar conforme caso)",
-          "Nega comorbidades importantes ou imunossupressão, nega uso recente de antibióticos"
+          "Paciente procura o serviço por diarreia aquosa e cólicas abdominais há 12–72h",
+          "Refere náuseas e vômitos associados, com redução do apetite e intolerância alimentar parcial",
+          "Refere febre baixa e mal-estar podem ocorrer",
+          "Refere exposição a alimento suspeito, água não tratada, contato com doentes ou viagem recente",
+          "Refere sinais de desidratação como sede intensa, boca seca, tontura postural e redução de diurese"
         ],
         "alarme": "",
         "comorb": "",
@@ -208,11 +209,11 @@
       "defaults": {
         "qpDefault": "Febre e mialgias",
         "hmaDefault": [
-          "Paciente refere início há 1–3 dias de febre alta não aferida ou em torno de 38,5–39 ºC, acompanhada de mialgias difusas, cefaleia, calafrios e mal-estar intenso",
-          "Relata tosse seca, dor de garganta leve e prostração maior que o habitual",
-          "Nega dispneia importante, dor torácica em aperto, síncope, confusão mental, vômitos incoercíveis ou diarreia intensa",
-          "Mantém ingesta de líquidos reduzida, mas ainda satisfatória, com aceitação parcial de alimentos",
-          "Nega comorbidades conhecidas ou uso recente de antibióticos"
+          "Paciente procura o serviço por febre, calafrios, mialgia intensa, cefaleia e prostração há 1–3 dias",
+          "Refere início mais abrupto do que resfriado, com piora importante do estado geral e redução do apetite",
+          "Refere tosse seca nas primeiras 24–48h, podendo evoluir para tosse produtiva leve ao longo de alguns dias",
+          "Refere odinofagia e coriza possíveis, geralmente menos proeminentes do que mialgia e febre",
+          "Refere contato com sintomáticos em casa/trabalho ou surto local e ausência de vacina recente quando aplicável"
         ],
         "alarme": "",
         "comorb": "",
@@ -244,7 +245,13 @@
       "label": "Lombalgia / Lombociatalgia",
       "defaults": {
         "qpDefault": "Dor lombar",
-        "hmaDefault": ["Há 3 dias, sem trauma, sem irradiação"],
+        "hmaDefault": [
+          "Paciente procura o serviço por dor lombar mecânica há dias a semanas, após esforço, postura prolongada ou movimento brusco",
+          "Refere dor em faixa na região lombar com piora à flexão/rotação e ao carregar peso, com melhora parcial com repouso relativo",
+          "Refere rigidez matinal curta e espasmo muscular, com limitação funcional para sentar, levantar e deambular",
+          "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada",
+          "Refere piora ao tossir, espirrar ou manobra de Valsalva quando há componente radicular"
+        ],
         "alarme": "Nega parestesia/hipoestesia, perda de força e alteração esfincteriana",
         "comorb": "DM NIR, HAS",
         "meds": "Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1",
@@ -271,11 +278,10 @@
       "defaults": {
         "qpDefault": "Coriza e obstrução nasal",
         "hmaDefault": [
-          "Paciente procura o serviço com queixa de coriza, obstrução nasal, espirros e mal-estar há 2–3 dias",
-          "Refere odinofagia leve e tosse seca esporádica, sem piora progressiva",
-          "Nega febre medida, dispneia, dor torácica, chiado no peito, síncope, cefaleia intensa, vômitos ou diarreia",
-          "Mantém aceitação preservada de líquidos e alimentos, sem redução importante do estado geral",
-          "Nega comorbidades relevantes, alergias medicamentosas conhecidas, internações recentes ou uso atual de antibióticos"
+          "Paciente procura o serviço com coriza, obstrução nasal, espirros e irritação de garganta há 2–5 dias",
+          "Refere tosse seca leve ou pigarro por gotejamento pós-nasal, pior à noite",
+          "Refere febre ausente ou baixa e preservação relativa do estado geral",
+          "Refere lacrimejamento e rouquidão leves; sensação de ouvido tampado pode ocorrer"
         ],
         "alarme": "Nega dispneia, dor torácica e prostração importante",
         "comorb": "",

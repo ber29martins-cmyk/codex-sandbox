@@ -343,7 +343,7 @@ const currentTemplate = useMemo(
   const blocks = useMemo(() => {
     const hmaLines = hmaText ? hmaText.split("\n").filter(Boolean) : [];
     const anamnese = [
-      `QP: ${qpText}`,
+      `QP: ${currentTemplate.label}`,
       hmaLines.length ? `HMA: ${hmaLines[0]}` : "",
       ...hmaLines.slice(1),
       alarmLine ? `Sinais de alarme: ${alarmLine}` : "",
