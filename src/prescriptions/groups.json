@@ -64,6 +64,70 @@
       "id": "lavagem_nasal",
       "label": "Lavagem nasal",
       "itemIds": ["soro_0_9_sorimax"]
+    },
+    {
+      "id": "antibioticos_oftalmicos",
+      "label": "Antibióticos oftálmicos",
+      "itemIds": [
+        "tobramicina_3mg_ml_tobrex",
+        "tobramicina_3mg_ml_dexametasona_1mg_ml_tobradex",
+        "ciprofloxacino_3_5mg_ml_maxiflox",
+        "ciprofloxacino_3_5mg_ml_dexametasona_1mg_ml_biamotil_d",
+        "ofloxacino_3mg_ml_oflox",
+        "moxifloxacino_5mg_ml_vigamox",
+        "polimixinaB_6000ui_g_neomicina_5mg_g_dexametasona_1mg_g_maxitrol"
+      ]
+    },
+    {
+      "id": "oftalmologicos_sintomaticos",
+      "label": "Oftálmicos sintomáticos",
+      "itemIds": [
+        "carmelose_5mg_ml_lacrifilm",
+        "dextrana_1mg_ml_hipromelose_3mg_ml_lacrima_plus",
+        "cetotifeno_0_25mg_ml_octifen"
+      ]
+    },
+    {
+      "id": "antiemeticos",
+      "label": "Antieméticos",
+      "itemIds": [
+        "metoclopramida_10mg_plasil",
+        "domperidona_10mg_motilium",
+        "ondansetrona_8mg_vonau",
+        "bromoprida_10mg_digesan",
+        "dimenidrinato_50mg_piridoxina_10mg_dramin"
+      ]
+    },
+    {
+      "id": "opioides",
+      "label": "Opioides",
+      "itemIds": [
+        "codeina_30mg_codein",
+        "paracetamol_500mg_codeina_30mg_paco",
+        "tramadol_50mg_tramal",
+        "paracetamol_325mg_tramadol_37_5mg_revange"
+      ]
+    },
+    {
+      "id": "analgesico_urinario",
+      "label": "Analgesia urinária",
+      "itemIds": ["fenazopiridina_200mg_pyridium"]
+    },
+    {
+      "id": "antibioticos_urinarios",
+      "label": "Antibióticos urinários",
+      "itemIds": [
+        "nitrofurantoina_100mg_macrodantina",
+        "fosfomicina_3g_monuril",
+        "amox_clav_500_125_clavulin",
+        "cipro_500mg_ciflox",
+        "levofloxacino_500mg_tavanic"
+      ]
+    },
+    {
+      "id": "antiespasmodicos",
+      "label": "Antiespasmódicos",
+      "itemIds": ["escopolamina_10mg_buscopam"]
     }
   ]
 }

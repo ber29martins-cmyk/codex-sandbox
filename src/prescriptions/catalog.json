@@ -512,6 +512,213 @@
         "Posicionar o bico da seringa em uma das narinas e iniciar uma pressão suave.",
         "Realizar a manobra utilizando de 100mL, com frequência diária mínima de 4 vezes."
       ]
+    },
+    {
+      "id": "tobramicina_3mg_ml_tobrex",
+      "label": "Tobramicina 3mg/mL",
+      "route": "OFTALMICO",
+      "title": "Tobramicina 3mg/mL",
+      "brand": "TOBREX®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+    },
+    {
+      "id": "tobramicina_3mg_ml_dexametasona_1mg_ml_tobradex",
+      "label": "Tobramicina 3mg/mL + dexametasona 1mg/mL",
+      "route": "OFTALMICO",
+      "title": "Tobramicina 3mg/mL + dexametasona 1mg/mL",
+      "brand": "TOBRADEX®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+    },
+    {
+      "id": "ciprofloxacino_3_5mg_ml_maxiflox",
+      "label": "Ciprofloxacino 3,5mg/mL",
+      "route": "OFTALMICO",
+      "title": "Ciprofloxacino 3,5mg/mL",
+      "brand": "MAXIFLOX®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+    },
+    {
+      "id": "ciprofloxacino_3_5mg_ml_dexametasona_1mg_ml_biamotil_d",
+      "label": "Ciprofloxacino 3,5mg/mL + dexametasona 1mg/mL",
+      "route": "OFTALMICO",
+      "title": "Ciprofloxacino 3,5mg/mL + dexametasona 1mg/mL",
+      "brand": "BIAMOTIL-D®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+    },
+    {
+      "id": "ofloxacino_3mg_ml_oflox",
+      "label": "Ofloxacino 3mg/mL",
+      "route": "OFTALMICO",
+      "title": "Ofloxacino 3mg/mL",
+      "brand": "OFLOX®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+    },
+    {
+      "id": "moxifloxacino_5mg_ml_vigamox",
+      "label": "Moxifloxacino 5mg/mL",
+      "route": "OFTALMICO",
+      "title": "Moxifloxacino 5mg/mL",
+      "brand": "VIGAMOX®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota no olho afetado, a cada 8 horas, por 7 dias."]
+    },
+    {
+      "id": "polimixinaB_6000ui_g_neomicina_5mg_g_dexametasona_1mg_g_maxitrol",
+      "label": "Polimixina B 6.000UI/g + neomicina 5mg/g + dexametasona 1mg/g",
+      "route": "OFTALMICO",
+      "title": "Polimixina B 6.000UI/g + neomicina 5mg/g + dexametasona 1mg/g",
+      "brand": "MAXITROL®",
+      "qty": "1 bisnaga",
+      "directions": ["Aplicar 1cm da pomada no olho afetado, 4 vezes por dia, por 7 dias."]
+    },
+    {
+      "id": "carmelose_5mg_ml_lacrifilm",
+      "label": "Carmelose sódica 5mg/mL",
+      "route": "OFTALMICO",
+      "title": "Carmelose sódica 5mg/mL",
+      "brand": "LACRIFILM®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota, de 6/6 horas, se vermelhidão, irritação ou ardor nos olhos."]
+    },
+    {
+      "id": "dextrana_1mg_ml_hipromelose_3mg_ml_lacrima_plus",
+      "label": "Dextrana 1mg/mL + hipromelose 3mg/mL",
+      "route": "OFTALMICO",
+      "title": "Dextrana 1mg/mL + hipromelose 3mg/mL",
+      "brand": "LACRIMA PLUS®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota, de 6/6 horas, se vermelhidão, irritação ou ardor nos olhos."]
+    },
+    {
+      "id": "cetotifeno_0_25mg_ml_octifen",
+      "label": "Cetotifeno 0,25mg/mL",
+      "route": "OFTALMICO",
+      "title": "Cetotifeno 0,25mg/mL",
+      "brand": "OCTIFEN®",
+      "qty": "1 frasco",
+      "directions": ["Pingar 1 gota, de 12/12 horas, se vermelhidão, irritação ou ardor nos olhos."]
+    },
+    {
+      "id": "metoclopramida_10mg_plasil",
+      "label": "Metoclopramida 10mg",
+      "route": "ORAL",
+      "title": "Metoclopramida 10mg",
+      "brand": "PLASIL®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas e vômitos."]
+    },
+    {
+      "id": "domperidona_10mg_motilium",
+      "label": "Domperidona 10mg",
+      "route": "ORAL",
+      "title": "Domperidona 10mg",
+      "brand": "MOTILIUM®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas e vômitos."]
+    },
+    {
+      "id": "ondansetrona_8mg_vonau",
+      "label": "Ondansetrona 8mg",
+      "route": "ORAL",
+      "title": "Ondansetrona 8mg",
+      "brand": "VONAU®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas ou vômitos."]
+    },
+    {
+      "id": "bromoprida_10mg_digesan",
+      "label": "Bromoprida 10mg",
+      "route": "ORAL",
+      "title": "Bromoprida 10mg",
+      "brand": "DIGESAN®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se náusea ou vômitos."]
+    },
+    {
+      "id": "dimenidrinato_50mg_piridoxina_10mg_dramin",
+      "label": "Dimenidrinato 50mg + piridoxina 10mg",
+      "route": "ORAL",
+      "title": "Dimenidrinato 50mg + piridoxina 10mg",
+      "brand": "DRAMIN®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas ou vômitos. Atenção: pode causar sonolência e hipotensão."]
+    },
+    {
+      "id": "codeina_30mg_codein",
+      "label": "Codeína 30mg",
+      "route": "ORAL",
+      "title": "Codeína 30mg",
+      "brand": "CODEIN®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."]
+    },
+    {
+      "id": "paracetamol_500mg_codeina_30mg_paco",
+      "label": "Paracetamol 500mg + codeína 30mg",
+      "route": "ORAL",
+      "title": "Paracetamol 500mg + codeína 30mg",
+      "brand": "PACO®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."]
+    },
+    {
+      "id": "tramadol_50mg_tramal",
+      "label": "Tramadol 50mg",
+      "route": "ORAL",
+      "title": "Tramadol 50mg",
+      "brand": "TRAMAL®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 6/6 horas, se dor intensa e persistente."]
+    },
+    {
+      "id": "paracetamol_325mg_tramadol_37_5mg_revange",
+      "label": "Paracetamol 325mg + tramadol 37,5mg",
+      "route": "ORAL",
+      "title": "Paracetamol 325mg + tramadol 37,5mg",
+      "brand": "REVANGE®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."]
+    },
+    {
+      "id": "fenazopiridina_200mg_pyridium",
+      "label": "Fenazopiridina 200mg",
+      "route": "ORAL",
+      "title": "Fenazopiridina 200mg",
+      "brand": "PYRIDIUM®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor ao urinar, por até 3 dias. Atenção: é normal a urina tornar-se alaranjada ou avermelhada."]
+    },
+    {
+      "id": "nitrofurantoina_100mg_macrodantina",
+      "label": "Nitrofurantoína 100mg",
+      "route": "ORAL",
+      "title": "Nitrofurantoína 100mg",
+      "brand": "MACRODANTINA®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, de 6/6 horas, por 7 dias. Sugestão de horários: 6h, 12h, 18h e 24h."]
+    },
+    {
+      "id": "fosfomicina_3g_monuril",
+      "label": "Fosfomicina 3g",
+      "route": "ORAL",
+      "title": "Fosfomicina 3g",
+      "brand": "MONURIL®",
+      "qty": "1 envelope",
+      "directions": ["Diluir 1 envelope em 1 copo de água potável. Ingerir preferivelmente antes de deitar-se, após ter esvaziado a bexiga."]
+    },
+    {
+      "id": "escopolamina_10mg_buscopam",
+      "label": "Escopolamina 10mg",
+      "route": "ORAL",
+      "title": "Escopolamina 10mg",
+      "brand": "BUSCOPAM®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor abdominal."]
     }
   ]
 }
