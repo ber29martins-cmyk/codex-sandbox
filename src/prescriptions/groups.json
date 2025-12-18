@@ -159,6 +159,28 @@
       "id": "sro",
       "label": "Reidratação oral",
       "itemIds": ["sro_sais_reidratacao_oral"]
+    },
+    {
+      "id": "oftalmo_antibiotico",
+      "label": "Antibiótico oftálmico",
+      "itemIds": [
+        "tobramicina_3mg_ml_tobrex",
+        "tobramicina_3mg_ml_dexametasona_1mg_ml_tobradex",
+        "ciprofloxacino_3_5mg_ml_maxiflox",
+        "ciprofloxacino_3_5mg_ml_dexametasona_1mg_ml_biamotil_d",
+        "ofloxacino_3mg_ml_oflox",
+        "moxifloxacino_5mg_ml_vigamox",
+        "polimixinaB_6000ui_g_neomicina_5mg_g_dexametasona_1mg_g_maxitrol"
+      ]
+    },
+    {
+      "id": "oftalmo_sintomatico",
+      "label": "Sintomáticos oftálmicos",
+      "itemIds": [
+        "carmelose_5mg_ml_lacrifilm",
+        "dextrana_1mg_ml_hipromelose_3mg_ml_lacrima_plus",
+        "cetotifeno_0_25mg_ml_octifen"
+      ]
     }
   ]
 }
