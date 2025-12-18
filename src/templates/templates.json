@@ -118,14 +118,14 @@
         "rxGroups": [
           "analgesicos",
           "aines",
+          "mucoliticos",
           "antitussigenos",
-          "mucoliticos"
+          "corticoides"
         ],
         "rxDefaults": [
           "paracetamol_750mg_tylenol",
-          "ibuprofeno_600mg_alivium",
-          "dextrometorfano_2mg_ml_bisoltussin",
-          "acetilcisteina_200mg_fluimucil"
+          "acetilcisteina_200mg_fluimucil",
+          "dextrometorfano_2mg_ml_bisoltussin"
         ]
       }
     },
@@ -229,13 +229,12 @@
         ],
         "rxGroups": [
           "analgesicos",
-          "aines",
-          "antibioticos"
+          "analgesico_urinario",
+          "antibioticos_urinarios"
         ],
         "rxDefaults": [
-          "paracetamol_750mg_tylenol",
-          "ibuprofeno_600mg_alivium",
-          "amoxicilina_500mg_amoxil"
+          "fenazopiridina_200mg_pyridium",
+          "nitrofurantoina_100mg_macrodantina"
         ]
       }
     },
@@ -447,11 +446,11 @@
         "rxGroups": [
           "analgesicos",
           "aines",
-          "antibioticos"
+          "antibioticos",
+          "corticoides"
         ],
         "rxDefaults": [
           "paracetamol_750mg_tylenol",
-          "ibuprofeno_600mg_alivium",
           "amoxicilina_500mg_amoxil"
         ]
       }
@@ -557,13 +556,10 @@
         ],
         "rxGroups": [
           "analgesicos",
-          "aines",
-          "antihistaminicos"
+          "aines"
         ],
         "rxDefaults": [
-          "paracetamol_750mg_tylenol",
-          "ibuprofeno_600mg_alivium",
-          "loratadina_10mg_claritin"
+          "paracetamol_750mg_tylenol"
         ]
       }
     },
@@ -673,11 +669,12 @@
         ],
         "rxGroups": [
           "analgesicos",
-          "aines"
+          "antiemeticos",
+          "antiespasmodicos"
         ],
         "rxDefaults": [
-          "paracetamol_750mg_tylenol",
-          "ibuprofeno_600mg_alivium"
+          "ondansetrona_8mg_vonau",
+          "escopolamina_10mg_buscopam"
         ]
       }
     },
@@ -755,12 +752,18 @@
         "rxGroups": [
           "analgesicos",
           "aines",
-          "antivirais"
+          "antivirais",
+          "antihistaminicos",
+          "mucoliticos",
+          "antitussigenos",
+          "descongestionantes_nasal",
+          "lavagem_nasal"
         ],
         "rxDefaults": [
           "paracetamol_750mg_tylenol",
-          "ibuprofeno_600mg_alivium",
-          "oseltamivir_75mg_tamiflu"
+          "oseltamivir_75mg_tamiflu",
+          "loratadina_10mg_claritin",
+          "soro_0_9_sorimax"
         ],
         "hmaItems": [
           {
@@ -874,10 +877,12 @@
         "rxGroups": [
           "analgesicos",
           "aines",
-          "relaxante"
+          "relaxante",
+          "opioides",
+          "corticoides"
         ],
         "rxDefaults": [
-          "paracetamol_750mg_tylenol",
+          "dipirona_500mg_novalgina",
           "ibuprofeno_600mg_alivium",
           "ciclobenzaprina5"
         ],
@@ -1014,17 +1019,16 @@
           }
         ],
         "rxGroups": [
-          "ivassintomatico",
+          "analgesicos",
           "antihistaminicos",
+          "antitussigenos",
           "descongestionantes_nasal",
-          "lavagem_nasal",
-          "mucoliticos",
-          "antitussigenos"
+          "lavagem_nasal"
         ],
         "rxDefaults": [
-          "paracetamol750",
-          "loratadina10",
-          "soroNasal"
+          "paracetamol_750mg_tylenol",
+          "loratadina_10mg_claritin",
+          "soro_0_9_sorimax"
         ],
         "hmaItems": [
           {
