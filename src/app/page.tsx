@@ -88,6 +88,10 @@ function shortenLabel(text: string, maxLen = 42) {
   return `${clean.slice(0, maxLen - 1).trim()}…`;
 }
 
+function cleanAlarmLabel(s: string) {
+  return s.replace(/^(sem|nega)\s+/i, "").replace(/^não\s+apresenta\s+/i, "").trim();
+}
+
 function formatParagraph(lines: string[]) {
   const parts: string[] = [];
   for (const raw of lines) {
@@ -325,15 +329,21 @@ const currentTemplate = useMemo(
     const presentes: string[] = [];
     for (const item of items) {
       const status = alarmStates[item.id] ?? "unknown";
-      if (status === "nega" && item.absentLabel) ausentes.push(item.absentLabel);
-      if (status === "presente") presentes.push(item.label || item.presentText || "");
+      if (status === "nega") {
+        const lbl = cleanAlarmLabel(item.absentLabel ?? item.label ?? "");
+        if (lbl) ausentes.push(lbl);
+      }
+      if (status === "presente") {
+        const lbl = cleanAlarmLabel(item.label || item.presentText || "");
+        if (lbl) presentes.push(lbl);
+      }
     }
 
     if (!ausentes.length && !presentes.length) return "";
     const segments: string[] = [];
     if (ausentes.length) segments.push(`ausentes: ${ausentes.join(", ")}`);
     if (presentes.length) segments.push(`presentes: ${presentes.join(", ")}`);
-    return `Sinais de alarme — ${segments.join("; ")}`;
+    return segments.length ? `Sinais de alarme — ${segments.join("; ")}` : "";
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
