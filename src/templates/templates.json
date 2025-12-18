@@ -447,11 +447,15 @@
           "analgesicos",
           "aines",
           "antibioticos",
-          "corticoides"
+          "corticoides",
+          "antihistaminicos",
+          "antitussigenos",
+          "lavagem_nasal"
         ],
         "rxDefaults": [
           "paracetamol_750mg_tylenol",
-          "amoxicilina_500mg_amoxil"
+          "amoxicilina_500mg_amoxil",
+          "soro_0_9_sorimax"
         ]
       }
     },
@@ -556,10 +560,15 @@
         ],
         "rxGroups": [
           "analgesicos",
-          "aines"
+          "aines",
+          "antihistaminicos",
+          "antitussigenos",
+          "lavagem_nasal"
         ],
         "rxDefaults": [
-          "paracetamol_750mg_tylenol"
+          "paracetamol_750mg_tylenol",
+          "loratadina_10mg_claritin",
+          "soro_0_9_sorimax"
         ]
       }
     },
@@ -670,11 +679,13 @@
         "rxGroups": [
           "analgesicos",
           "antiemeticos",
-          "antiespasmodicos"
+          "antiespasmodicos",
+          "sro"
         ],
         "rxDefaults": [
           "ondansetrona_8mg_vonau",
-          "escopolamina_10mg_buscopam"
+          "escopolamina_10mg_buscopam",
+          "sro_sais_reidratacao_oral"
         ]
       }
     },

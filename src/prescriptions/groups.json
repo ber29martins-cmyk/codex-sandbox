@@ -128,6 +128,37 @@
       "id": "antiespasmodicos",
       "label": "Antiespasmódicos",
       "itemIds": ["escopolamina_10mg_buscopam"]
+    },
+    {
+      "id": "ibps",
+      "label": "IBPs",
+      "itemIds": [
+        "omeprazol_20mg_gaspiren",
+        "lansoprazol_15mg_prazol",
+        "pantoprazol_40mg_pantocal",
+        "rabeprazol_10mg_pariet",
+        "esomeprazol_20mg_nexium"
+      ]
+    },
+    {
+      "id": "antiacidos",
+      "label": "Antiácidos / Protetores",
+      "itemIds": [
+        "vonoprazana_10mg_inzelm",
+        "alginato_100mg_ml_bic_20mg_ml_lufta_gastro_pro",
+        "hidroxido_aluminio_230mg_pepsamar",
+        "hidroxido_magnesio_1200mg_15ml_phillips"
+      ]
+    },
+    {
+      "id": "bloqueadores_h2",
+      "label": "Bloqueadores H2",
+      "itemIds": ["cimetidina_400mg_tagamet", "famotidina_20mg_famox"]
+    },
+    {
+      "id": "sro",
+      "label": "Reidratação oral",
+      "itemIds": ["sro_sais_reidratacao_oral"]
     }
   ]
 }

@@ -719,6 +719,114 @@
       "brand": "BUSCOPAM®",
       "qty": "1 caixa",
       "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor abdominal."]
+    },
+    {
+      "id": "omeprazol_20mg_gaspiren",
+      "label": "Omeprazol 20mg",
+      "route": "ORAL",
+      "title": "Omeprazol 20mg",
+      "brand": "GASPIREN®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+    },
+    {
+      "id": "lansoprazol_15mg_prazol",
+      "label": "Lansoprazol 15mg",
+      "route": "ORAL",
+      "title": "Lansoprazol 15mg",
+      "brand": "PRAZOL®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+    },
+    {
+      "id": "pantoprazol_40mg_pantocal",
+      "label": "Pantoprazol 40mg",
+      "route": "ORAL",
+      "title": "Pantoprazol 40mg",
+      "brand": "PANTOCAL®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+    },
+    {
+      "id": "rabeprazol_10mg_pariet",
+      "label": "Rabeprazol 10mg",
+      "route": "ORAL",
+      "title": "Rabeprazol 10mg",
+      "brand": "PARIET®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+    },
+    {
+      "id": "esomeprazol_20mg_nexium",
+      "label": "Esomeprazol 20mg",
+      "route": "ORAL",
+      "title": "Esomeprazol 20mg",
+      "brand": "NEXIUM®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+    },
+    {
+      "id": "vonoprazana_10mg_inzelm",
+      "label": "Vonoprazana 10mg",
+      "route": "ORAL",
+      "title": "Vonoprazana 10mg",
+      "brand": "INZELM®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido por dia, pela manhã."]
+    },
+    {
+      "id": "alginato_100mg_ml_bic_20mg_ml_lufta_gastro_pro",
+      "label": "Alginato de sódio 100mg/mL + bicarbonato 20mg/mL",
+      "route": "ORAL",
+      "title": "Alginato de sódio 100mg/mL + bicarbonato 20mg/mL",
+      "brand": "LUFTA GASTRO PRO®",
+      "qty": "1 frasco",
+      "directions": ["Tomar 5mL após as principais refeições do dia e antes de dormir."]
+    },
+    {
+      "id": "hidroxido_aluminio_230mg_pepsamar",
+      "label": "Hidróxido de alumínio 230mg",
+      "route": "ORAL",
+      "title": "Hidróxido de alumínio 230mg",
+      "brand": "PEPSAMAR®",
+      "qty": "1 caixa",
+      "directions": ["Mastigar e engolir 1 comprimido, 1 hora após as refeições e ao deitar."]
+    },
+    {
+      "id": "hidroxido_magnesio_1200mg_15ml_phillips",
+      "label": "Hidróxido de magnésio 1.200mg/15 mL",
+      "route": "ORAL",
+      "title": "Hidróxido de magnésio 1.200mg/15 mL",
+      "brand": "LEITE DE MAGNÉSIA DE PHILLIPS®",
+      "qty": "1 frasco",
+      "directions": ["Tomar 3 colheres de sopa, uma vez ao dia, por 3 dias, se constipação intestinal."]
+    },
+    {
+      "id": "cimetidina_400mg_tagamet",
+      "label": "Cimetidina 400mg",
+      "route": "ORAL",
+      "title": "Cimetidina 400mg",
+      "brand": "TAGAMET®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido pela manhã, em jejum. Tomar mais 1 comprimido antes do jantar."]
+    },
+    {
+      "id": "famotidina_20mg_famox",
+      "label": "Famotidina 20mg",
+      "route": "ORAL",
+      "title": "Famotidina 20mg",
+      "brand": "FAMOX®",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido pela manhã, em jejum. Tomar mais 1 comprimido antes do jantar."]
+    },
+    {
+      "id": "sro_sais_reidratacao_oral",
+      "label": "Sais de reidratação oral (SRO)",
+      "route": "ORAL",
+      "title": "Sais de reidratação oral (SRO)",
+      "brand": "",
+      "qty": "1 caixa",
+      "directions": ["Diluir 1 envelope conforme instruções da embalagem. Ofertar em pequenos volumes e repetidamente após cada episódio de diarreia/vômito."]
     }
   ]
 }
