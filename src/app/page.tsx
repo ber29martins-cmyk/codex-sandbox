@@ -39,6 +39,10 @@ type TemplateState = {
   fc: string;
   sat: string;
   comorbSelected: string[];
+  atestadoEmitir?: boolean;
+  atestadoDias?: number;
+  atestadoCid?: string;
+  exameLivre?: string;
 };
 type AlarmItem = { id: string; label: string; absentLabel: string; presentText: string };
 type RxItem = { id: string; label: string; route: string; title: string; brand?: string; qty: string; directions: string[] };
@@ -131,7 +135,11 @@ function buildTemplateDefaults(template: Template): TemplateState {
     pa: "",
     fc: "",
     sat: "",
-    comorbSelected: []
+    comorbSelected: [],
+    atestadoEmitir: true,
+    atestadoDias: 1,
+    atestadoCid: "",
+    exameLivre: ""
   };
 }
 
@@ -181,6 +189,10 @@ const currentTemplate = useMemo(
   const [rxSelected, setRxSelected] = useState<string[]>([]);
   const [hmaSelected, setHmaSelected] = useState<string[]>([]);
   const [hmaFreeText, setHmaFreeText] = useState("");
+  const [atestadoEmitir, setAtestadoEmitir] = useState(true);
+  const [atestadoDias, setAtestadoDias] = useState(1);
+  const [atestadoCid, setAtestadoCid] = useState("");
+  const [exameLivre, setExameLivre] = useState("");
   const [triagem, setTriagem] = useState(true);
   const [pa, setPa] = useState("");
   const [fc, setFc] = useState("");
@@ -268,6 +280,10 @@ const currentTemplate = useMemo(
     setFc(templateState.fc ?? "");
     setSat(templateState.sat ?? "");
     setComorbSelected(templateState.comorbSelected ?? []);
+    setAtestadoEmitir(templateState.atestadoEmitir ?? true);
+    setAtestadoDias(templateState.atestadoDias ?? 1);
+    setAtestadoCid(templateState.atestadoCid ?? "");
+    setExameLivre(templateState.exameLivre ?? "");
     const kit = rxKitsRef.current[templateId];
     setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
     isApplyingTemplate.current = false;
@@ -275,6 +291,10 @@ const currentTemplate = useMemo(
 
   const [hipotese, setHipotese] = useState("Lombalgia");
   const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
+  const [atestadoEmitir, setAtestadoEmitir] = useState(true);
+  const [atestadoDias, setAtestadoDias] = useState(1);
+  const [atestadoCid, setAtestadoCid] = useState("");
+  const [exameLivre, setExameLivre] = useState("");
   useEffect(() => {
     if (!didHydrate.current || isApplyingTemplate.current) return;
 
@@ -291,7 +311,11 @@ const currentTemplate = useMemo(
       pa,
       fc,
       sat,
-      comorbSelected
+      comorbSelected,
+      atestadoEmitir,
+      atestadoDias,
+      atestadoCid,
+      exameLivre
     };
 
     savedTemplatesRef.current = { ...savedTemplatesRef.current, [templateId]: currentState };
@@ -306,7 +330,7 @@ const currentTemplate = useMemo(
         })
       );
     }
-  }, [templateId, qpText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected]);
+  }, [templateId, qpText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected, atestadoEmitir, atestadoDias, atestadoCid, exameLivre]);
 
   useEffect(() => {
     if (!didHydrate.current || isApplyingTemplate.current) return;
@@ -321,9 +345,9 @@ const currentTemplate = useMemo(
 
   const alarmCount = (currentTemplate.defaults.alarmItems ?? []).length;
   const hasAlarmItems = alarmCount > 0;
-  const alarmLine = useMemo(() => {
+  const alarmLines = useMemo(() => {
     const items = currentTemplate.defaults.alarmItems ?? [];
-    if (!items.length) return alarme.trim();
+    if (!items.length) return [];
 
     const ausentes: string[] = [];
     const presentes: string[] = [];
@@ -339,11 +363,10 @@ const currentTemplate = useMemo(
       }
     }
 
-    if (!ausentes.length && !presentes.length) return "";
-    const segments: string[] = [];
-    if (ausentes.length) segments.push(`ausentes: ${ausentes.join(", ")}`);
-    if (presentes.length) segments.push(`presentes: ${presentes.join(", ")}`);
-    return segments.length ? `Sinais de alarme — ${segments.join("; ")}` : "";
+    const lines: string[] = [];
+    if (ausentes.length) lines.push(`Ausência de: ${ausentes.join(", ")}`);
+    if (presentes.length) lines.push(`Sinais de alarme presentes: ${presentes.join(", ")}`);
+    return lines;
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
@@ -431,7 +454,7 @@ const currentTemplate = useMemo(
       `QP: ${currentTemplate.label}`,
       hmaParagraphs.length ? `HMA: ${hmaParagraphs[0]}` : "",
       ...(hmaParagraphs.slice(1).length ? ["", ...hmaParagraphs.slice(1)] : []),
-      alarmLine ? alarmLine : "",
+      ...alarmLines,
       (() => {
         const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.abbr);
         const manual = comorb ? [comorb] : [];
@@ -451,19 +474,33 @@ const currentTemplate = useMemo(
           : "";
 
     const exameBase = currentTemplate.defaults.exame ?? [];
-    const exame = [vitalsLine, ...exameBase].filter(Boolean);
+    const exameLivreLinhas = exameLivre
+      ? exameLivre
+          .split("\n")
+          .map((l) => l.trim())
+          .filter(Boolean)
+      : [];
+
+    const exame = [vitalsLine, ...exameBase, ...exameLivreLinhas].filter(Boolean);
 
     const avaliacao = [hipotese].filter(Boolean);
 
-  const conduta = [
+    const conduta = [
       "Orientado sobre o quadro e conduta",
       `Orientado sinais de alarme: ${condutaAlarmes}`,
       "Retorno imediato se sinais de alarme ou piora do quadro",
       "Paciente esclarecido e de acordo com as orientações"
     ];
 
+    if (atestadoEmitir) {
+      const dias = Number.isFinite(atestadoDias) ? atestadoDias : 1;
+      const plural = dias === 1 ? "dia" : "dias";
+      const cidText = atestadoCid?.trim() ? atestadoCid.trim() : "____";
+      conduta.push(`Emitido atestado médico (${dias} ${plural}) (CID: ${cidText})`);
+    }
+
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaParagraphs, alarmLine, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId]);
+  }, [qpText, hmaParagraphs, alarmLines, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId, exameLivre, atestadoEmitir, atestadoDias, atestadoCid]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
@@ -486,6 +523,10 @@ const currentTemplate = useMemo(
     setMeds(defaults.meds);
     setHipotese(defaults.hipotese);
     setCondutaAlarmes(defaults.condutaAlarmes);
+    setAtestadoEmitir(defaults.atestadoEmitir ?? true);
+    setAtestadoDias(defaults.atestadoDias ?? 1);
+    setAtestadoCid(defaults.atestadoCid ?? "");
+    setExameLivre(defaults.exameLivre ?? "");
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
     setTriagem(defaults.triagem);
@@ -541,6 +582,10 @@ const currentTemplate = useMemo(
     setMeds(defaults.meds);
     setHipotese(defaults.hipotese);
     setCondutaAlarmes(defaults.condutaAlarmes);
+    setAtestadoEmitir(defaults.atestadoEmitir ?? true);
+    setAtestadoDias(defaults.atestadoDias ?? 1);
+    setAtestadoCid(defaults.atestadoCid ?? "");
+    setExameLivre(defaults.exameLivre ?? "");
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
     setTriagem(defaults.triagem);
@@ -804,9 +849,21 @@ const currentTemplate = useMemo(
             </div>
           )}
 
+          <div style={{ marginTop: 12 }}>
+            <label>Exame físico livre (opcional)<br /><textarea value={exameLivre} onChange={(e) => setExameLivre(e.target.value)} style={{ width: "100%", minHeight: 80 }} /></label>
+          </div>
+
           <hr style={{ margin: "16px 0" }} />
           <label>Hipótese (1 linha)<br /><input value={hipotese} onChange={(e) => setHipotese(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <label>Alarmes na conduta (texto)<br /><input value={condutaAlarmes} onChange={(e) => setCondutaAlarmes(e.target.value)} style={{ width: "100%" }} /></label>
+          <div style={{ display: "flex", gap: 8, alignItems: "center", marginTop: 8, flexWrap: "wrap" }}>
+            <label style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <input type="checkbox" checked={atestadoEmitir} onChange={(e) => setAtestadoEmitir(e.target.checked)} />
+              Emitir atestado
+            </label>
+            <label>Dias<br /><input type="number" min={1} value={atestadoDias} onChange={(e) => setAtestadoDias(Number(e.target.value) || 1)} style={{ width: 80 }} /></label>
+            <label>CID<br /><input value={atestadoCid} onChange={(e) => setAtestadoCid(e.target.value)} style={{ width: 140 }} placeholder="ex: J06.9" /></label>
+          </div>
 
         </section>
 

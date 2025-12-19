@@ -230,7 +230,8 @@
         "rxGroups": [
           "analgesicos",
           "analgesico_urinario",
-          "antibioticos_urinarios"
+          "antibioticos_urinarios",
+          "antiemeticos"
         ],
         "rxDefaults": [
           "fenazopiridina_200mg_pyridium",
@@ -590,7 +591,7 @@
         "hipotese": "Gastroenterite aguda",
         "condutaAlarmes": "",
         "exame": [
-          "BEG, sinais de hidratação preservados ou levemente reduzidos",
+          "Hidratado",
           "Abdome flácido, dor difusa leve, sem sinais de peritonite"
         ],
         "alarmItems": [
@@ -599,12 +600,6 @@
             "label": "Sinais de desidratação importante",
             "absentLabel": "Sem Sinais de desidratação importante",
             "presentText": "Com Sinais de desidratação importante"
-          },
-          {
-            "id": "incapazvo",
-            "label": "Incapaz de manter VO",
-            "absentLabel": "Sem Incapaz de manter VO",
-            "presentText": "Com Incapaz de manter VO"
           },
           {
             "id": "sangue",
