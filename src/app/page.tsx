@@ -291,10 +291,6 @@ const currentTemplate = useMemo(
 
   const [hipotese, setHipotese] = useState("Lombalgia");
   const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
-  const [atestadoEmitir, setAtestadoEmitir] = useState(true);
-  const [atestadoDias, setAtestadoDias] = useState(1);
-  const [atestadoCid, setAtestadoCid] = useState("");
-  const [exameLivre, setExameLivre] = useState("");
   useEffect(() => {
     if (!didHydrate.current || isApplyingTemplate.current) return;
 
