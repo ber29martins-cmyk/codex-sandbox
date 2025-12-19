@@ -337,10 +337,17 @@
           "refere-historia-de-gastritedrge-uso-recente-de-aine-ou-tabagismo-quando-aplicavel"
         ],
         "rxGroups": [
-          "analgesicos"
+          "analgesicos",
+          "antiespasmodicos",
+          "ibps",
+          "antiacidos",
+          "bloqueadores_h2",
+          "antiemeticos"
         ],
         "rxDefaults": [
-          "paracetamol_750mg_tylenol"
+          "omeprazol_20mg_gaspiren",
+          "alginato_100mg_ml_bic_20mg_ml_lufta_gastro_pro",
+          "ondansetrona_8mg_vonau"
         ]
       }
     },
