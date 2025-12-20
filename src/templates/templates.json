@@ -976,6 +976,112 @@
           "tosse-seca-pigarro"
         ]
       }
+    },
+    {
+      "id": "otite_media_aguda",
+      "label": "Otite média aguda",
+      "title": "Otite média aguda",
+      "defaults": {
+        "qpDefault": "Dor de ouvido",
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Otite média aguda",
+        "condutaAlarmes": "",
+        "exame": [
+          "BEG/afetado conforme quadro, TEP preservado",
+          "Otoscopia: hiperemia de membrana timpânica, sem perfuração evidente"
+        ],
+        "alarmItems": [
+          {
+            "id": "dor-retroauricular",
+            "label": "Dor retroauric",
+            "absentLabel": "Sem Dor retroauric",
+            "presentText": "Com Dor retroauric"
+          },
+          {
+            "id": "edema-retroauricular",
+            "label": "Edema retroauric",
+            "absentLabel": "Sem Edema retroauric",
+            "presentText": "Com Edema retroauric"
+          },
+          {
+            "id": "pavilhao-protruso",
+            "label": "Pavilhão protru",
+            "absentLabel": "Sem Pavilhão protru",
+            "presentText": "Com Pavilhão protru"
+          },
+          {
+            "id": "paralisia-facial",
+            "label": "Paralisia facial",
+            "absentLabel": "Sem Paralisia facial",
+            "presentText": "Com Paralisia facial"
+          },
+          {
+            "id": "cefaleia-intensa",
+            "label": "Cefaleia intensa",
+            "absentLabel": "Sem Cefaleia intensa",
+            "presentText": "Com Cefaleia intensa"
+          },
+          {
+            "id": "meningismo",
+            "label": "Meningismo",
+            "absentLabel": "Sem Meningismo",
+            "presentText": "Com Meningismo"
+          },
+          {
+            "id": "toxemia",
+            "label": "Toxemia",
+            "absentLabel": "Sem Toxemia",
+            "presentText": "Com Toxemia"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "otalgia_aguda",
+            "label": "Otalgia aguda",
+            "text": "Refere dor de ouvido de início agudo, geralmente unilateral, com piora ao deitar e ao toque"
+          },
+          {
+            "id": "febre",
+            "label": "Febre",
+            "text": "Refere febre associada, com mal-estar e irritabilidade"
+          },
+          {
+            "id": "ivras_previa",
+            "label": "IVAS prévia",
+            "text": "Refere quadro viral/IVAS nos últimos dias com coriza e tosse antecedendo a dor"
+          },
+          {
+            "id": "hipoacusia",
+            "label": "Hipoacusia",
+            "text": "Refere sensação de ouvido tampado e redução da audição"
+          },
+          {
+            "id": "otalgia_choro",
+            "label": "Irritabilidade",
+            "text": "Em criança, refere choro/irritabilidade e sono prejudicado"
+          },
+          {
+            "id": "otorreia",
+            "label": "Otorréia",
+            "text": "Refere saída de secreção pelo ouvido, especialmente após pico de dor"
+          },
+          {
+            "id": "recusa_vo",
+            "label": "Recusa VO",
+            "text": "Refere redução de ingesta por dor, com risco de desidratação em pediatria"
+          }
+        ],
+        "hmaDefaults": [
+          "otalgia_aguda",
+          "febre",
+          "ivras_previa",
+          "hipoacusia"
+        ],
+        "rxGroups": [],
+        "rxDefaults": []
+      }
     }
   ]
 }
