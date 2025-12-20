@@ -85,7 +85,7 @@
           {
             "id": "tosse-seca-prod",
             "label": "seca → produtiva",
-            "text": "Refere tosse inicialmente seca com evolução para produtiva com expectoração clara/amarelada, sem toxemia"
+            "text": "Refere tosse inicialmente seca com evolução para produtiva com expectoração clara/amarelada"
           },
           {
             "id": "piora-noturna",
@@ -94,7 +94,7 @@
           },
           {
             "id": "gatilhos-ar-frio",
-            "label": "gatilho ar frio/fala",
+            "label": "Gatilhos",
             "text": "Refere piora com ar frio, fala prolongada, esforço e risadas"
           },
           {
@@ -196,27 +196,27 @@
         "hmaItems": [
           {
             "id": "paciente-procura-o-servico-por-disuria-polaciuria-e-urgencia-miccional-ha-14-dias",
-            "label": "Paciente procura o serviço por disúria, polaciú…",
+            "label": "Sintomas urinários",
             "text": "Paciente procura o serviço por disúria, polaciúria e urgência miccional há 1–4 dias"
           },
           {
             "id": "refere-sensacao-de-esvaziamento-incompleto-e-dor-suprapubica-leve-a-moderada",
-            "label": "Refere sensação de esvaziamento incompleto e do…",
+            "label": "Dor suprapúbica",
             "text": "Refere sensação de esvaziamento incompleto e dor suprapúbica leve a moderada"
           },
           {
             "id": "refere-urina-turva-e-odor-forte-pode-haver-hematuria-leve",
-            "label": "Refere urina turva e odor forte; pode haver hem…",
+            "label": "Urina turva/odor",
             "text": "Refere urina turva e odor forte; pode haver hematúria leve"
           },
           {
             "id": "nega-corrimento-vaginal-prurido-vaginal-e-dor-pelvica-profunda-quando-foco-e-urinario",
-            "label": "Nega corrimento vaginal, prurido vaginal e dor …",
-            "text": "Nega corrimento vaginal, prurido vaginal e dor pélvica profunda quando foco é urinário"
+            "label": "Corrimento aval.",
+            "text": "Corrimento, prurido vaginal ou dor pélvica profunda não presentes no momento (avaliado)"
           },
           {
             "id": "refere-episodios-previos-semelhantes-ou-fatores-predisponentes-como-relacao-sexual-recente-e-baixa-ingesta-hidrica",
-            "label": "Refere episódios prévios semelhantes ou fatores…",
+            "label": "Fatores de risco",
             "text": "Refere episódios prévios semelhantes ou fatores predisponentes como relação sexual recente e baixa ingesta hídrica"
           }
         ],
@@ -306,27 +306,27 @@
         "hmaItems": [
           {
             "id": "paciente-procura-o-servico-por-dor-ou-queimacao-em-epigastrio-plenitude-pos-prandial-e-empachamento-ha-dias-a-semanas",
-            "label": "Paciente procura o serviço por dor ou queimação…",
+            "label": "Dor epigástrio",
             "text": "Paciente procura o serviço por dor ou queimação em epigástrio, plenitude pós-prandial e empachamento há dias a semanas"
           },
           {
             "id": "refere-azia-e-regurgitacao-acida-associadas-ou-nauseas-leves",
-            "label": "Refere azia e regurgitação ácida associadas ou …",
+            "label": "Azia/regurgitação",
             "text": "Refere azia e regurgitação ácida associadas ou náuseas leves"
           },
           {
             "id": "refere-piora-apos-refeicoes-volumosasgordurosas-alcool-cafe-anti-inflamatorios-e-estresse-melhora-parcial-com-antiacidos",
-            "label": "Refere piora após refeições volumosas/gordurosa…",
+            "label": "Piora alimentação",
             "text": "Refere piora após refeições volumosas/gordurosas, álcool, café, anti-inflamatórios e estresse; melhora parcial com antiácidos"
           },
           {
             "id": "refere-distensao-abdominal-e-eructacoes-frequentes",
-            "label": "Refere distensão abdominal e eructações frequentes",
+            "label": "Distensão/eruct",
             "text": "Refere distensão abdominal e eructações frequentes"
           },
           {
             "id": "refere-historia-de-gastritedrge-uso-recente-de-aine-ou-tabagismo-quando-aplicavel",
-            "label": "Refere história de gastrite/DRGE, uso recente d…",
+            "label": "História gastrite",
             "text": "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo quando aplicável"
           }
         ],
@@ -420,27 +420,27 @@
         "hmaItems": [
           {
             "id": "paciente-procura-o-servico-por-odinofagia-intensa-de-inicio-relativamente-subito-ha-13-dias",
-            "label": "Paciente procura o serviço por odinofagia inten…",
+            "label": "Odinofagia intensa",
             "text": "Paciente procura o serviço por odinofagia intensa de início relativamente súbito há 1–3 dias"
           },
           {
             "id": "refere-febre-e-mal-estar-com-ausencia-de-tosse-e-coriza-como-padrao-mais-tipico",
-            "label": "Refere febre e mal-estar, com ausência de tosse…",
-            "text": "Refere febre e mal-estar, com ausência de tosse e coriza como padrão mais típico"
+            "label": "Febre/mal-estar",
+            "text": "Refere febre e mal-estar; tosse/coriza pouco proeminentes como padrão mais típico"
           },
           {
             "id": "refere-dor-ao-engolir-com-reducao-importante-da-ingesta-halitose-e-cefaleia",
-            "label": "Refere dor ao engolir com redução importante da…",
+            "label": "Disfagia/halitose",
             "text": "Refere dor ao engolir com redução importante da ingesta, halitose e cefaleia"
           },
           {
             "id": "refere-adenomegalia-cervical-anterior-dolorosa-e-amigdalas-hiperemiadas-com-exsudato",
-            "label": "Refere adenomegalia cervical anterior dolorosa …",
+            "label": "Adenopatia/exs",
             "text": "Refere adenomegalia cervical anterior dolorosa e amígdalas hiperemiadas com exsudato"
           },
           {
             "id": "refere-dor-abdominal-e-nausea-podem-ocorrer-especialmente-em-criancas",
-            "label": "Refere dor abdominal e náusea podem ocorrer, es…",
+            "label": "Dor abd/náusea",
             "text": "Refere dor abdominal e náusea podem ocorrer, especialmente em crianças"
           }
         ],
@@ -535,27 +535,27 @@
         "hmaItems": [
           {
             "id": "paciente-procura-o-servico-por-odinofagia-coriza-tosse-e-rouquidao-ha-25-dias",
-            "label": "Paciente procura o serviço por odinofagia, cori…",
+            "label": "Quadro resp.",
             "text": "Paciente procura o serviço por odinofagia, coriza, tosse e rouquidão há 2–5 dias"
           },
           {
             "id": "refere-febre-ausente-ou-baixa-e-mal-estar-leve-a-moderado",
-            "label": "Refere febre ausente ou baixa e mal-estar leve …",
+            "label": "Febre baixa",
             "text": "Refere febre ausente ou baixa e mal-estar leve a moderado"
           },
           {
             "id": "refere-conjuntivite-ou-aftas-podem-ocorrer-alem-de-cefaleia-leve",
-            "label": "Refere conjuntivite ou aftas podem ocorrer, alé…",
+            "label": "Conjuntivite/aftas",
             "text": "Refere conjuntivite ou aftas podem ocorrer, além de cefaleia leve"
           },
           {
             "id": "refere-dor-de-garganta-difusa-geralmente-sem-predominio-de-exsudato-pode-haver-hiperemia-de-orofaringe",
-            "label": "Refere dor de garganta difusa, geralmente sem p…",
-            "text": "Refere dor de garganta difusa, geralmente sem predomínio de exsudato; pode haver hiperemia de orofaringe"
+            "label": "Dor garganta",
+            "text": "Refere dor de garganta difusa; pode haver hiperemia de orofaringe e exsudato"
           },
           {
             "id": "refere-melhora-gradual-espontanea-ao-longo-de-37-dias",
-            "label": "Refere melhora gradual espontânea ao longo de 3…",
+            "label": "Evolução",
             "text": "Refere melhora gradual espontânea ao longo de 3–7 dias"
           }
         ],
@@ -647,27 +647,27 @@
         "hmaItems": [
           {
             "id": "paciente-procura-o-servico-por-diarreia-aquosa-e-colicas-abdominais-ha-1272h",
-            "label": "Paciente procura o serviço por diarreia aquosa …",
+            "label": "Diarreia/cólicas",
             "text": "Paciente procura o serviço por diarreia aquosa e cólicas abdominais há 12–72h"
           },
           {
             "id": "refere-nauseas-e-vomitos-associados-com-reducao-do-apetite-e-intolerancia-alimentar-parcial",
-            "label": "Refere náuseas e vômitos associados, com reduçã…",
+            "label": "Náuseas/vômitos",
             "text": "Refere náuseas e vômitos associados, com redução do apetite e intolerância alimentar parcial"
           },
           {
             "id": "refere-febre-baixa-e-mal-estar-podem-ocorrer",
-            "label": "Refere febre baixa e mal-estar podem ocorrer",
+            "label": "Febre/mal-estar",
             "text": "Refere febre baixa e mal-estar podem ocorrer"
           },
           {
             "id": "refere-exposicao-a-alimento-suspeito-agua-nao-tratada-contato-com-doentes-ou-viagem-recente",
-            "label": "Refere exposição a alimento suspeito, água não …",
+            "label": "Exposição",
             "text": "Refere exposição a alimento suspeito, água não tratada, contato com doentes ou viagem recente"
           },
           {
             "id": "refere-sinais-de-desidratacao-como-sede-intensa-boca-seca-tontura-postural-e-reducao-de-diurese",
-            "label": "Refere sinais de desidratação como sede intensa…",
+            "label": "Sinais desidrat.",
             "text": "Refere sinais de desidratação como sede intensa, boca seca, tontura postural e redução de diurese"
           }
         ],
@@ -801,7 +801,7 @@
           },
           {
             "id": "prostracao",
-            "label": "prostração importante",
+            "label": "prostração",
             "text": "Refere prostração e mal-estar intenso"
           },
           {
@@ -831,8 +831,8 @@
           },
           {
             "id": "sem-vacina-recente",
-            "label": "sem vacina recente",
-            "text": "Refere ausência de vacina recente quando aplicável"
+            "label": "Vacina atrasada",
+            "text": "Relata vacinação não realizada recentemente"
           }
         ],
         "hmaDefaults": [
@@ -902,52 +902,52 @@
         "hmaItems": [
           {
             "id": "paciente-procura-o-servico-por-dor-lombar-mecanica-ha-dias-a-semanas-apos-esforco-postura-prolongada-ou-movimento-brusco",
-            "label": "Paciente procura o serviço por dor lombar mecân…",
+            "label": "Dor lombar mec.",
             "text": "Paciente procura o serviço por dor lombar mecânica há dias a semanas, após esforço, postura prolongada ou movimento brusco"
           },
           {
             "id": "refere-dor-em-faixa-na-regiao-lombar-com-piora-a-flexaorotacao-e-ao-carregar-peso-com-melhora-parcial-com-repouso-relativo",
-            "label": "Refere dor em faixa na região lombar com piora …",
+            "label": "Piora movimento",
             "text": "Refere dor em faixa na região lombar com piora à flexão/rotação e ao carregar peso, com melhora parcial com repouso relativo"
           },
           {
             "id": "refere-rigidez-matinal-curta-e-espasmo-muscular-com-limitacao-funcional-para-sentar-levantar-e-deambular",
-            "label": "Refere rigidez matinal curta e espasmo muscular…",
+            "label": "Rigidez/espasmo",
             "text": "Refere rigidez matinal curta e espasmo muscular, com limitação funcional para sentar, levantar e deambular"
           },
           {
             "id": "quando-lombociatalgia-refere-irradiacao-para-gluteo-e-face-posteriorlateral-de-coxaperna-por-vezes-com-parestesia-associada",
-            "label": "Quando lombociatalgia, refere irradiação para g…",
+            "label": "Irradiação/perna",
             "text": "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada"
           },
           {
             "id": "refere-piora-ao-tossir-espirrar-ou-manobra-de-valsalva-quando-ha-componente-radicular",
-            "label": "Refere piora ao tossir, espirrar ou manobra de …",
+            "label": "Radicular/vals",
             "text": "Refere piora ao tossir, espirrar ou manobra de Valsalva quando há componente radicular"
           },
           {
             "id": "espasmo-paravertebral-palpavel",
-            "label": "Espasmo paravertebral palpável",
+            "label": "Espasmo paravert",
             "text": "Espasmo paravertebral palpável"
           },
           {
             "id": "rigidez-matinal-curta",
-            "label": "Rigidez matinal curta",
+            "label": "Rigidez curta",
             "text": "Rigidez matinal curta"
           },
           {
             "id": "piora-apos-esforco-ou-levantar-peso",
-            "label": "Piora após esforço ou levantar peso",
+            "label": "Piora esforço",
             "text": "Piora após esforço ou levantar peso"
           },
           {
             "id": "irradiacao-para-gluteoperna-com-parestesia-leve",
-            "label": "Irradiação para glúteo/perna com parestesia leve",
+            "label": "Irradiação c/perna",
             "text": "Irradiação para glúteo/perna com parestesia leve"
           },
           {
             "id": "melhora-parcial-com-repouso-relativo",
-            "label": "Melhora parcial com repouso relativo",
+            "label": "Melhora repouso",
             "text": "Melhora parcial com repouso relativo"
           }
         ],
@@ -1046,7 +1046,7 @@
         "hmaItems": [
           {
             "id": "coriza-obstrucao",
-            "label": "coriza/obstrução nasal",
+            "label": "Coriza/obstrução",
             "text": "Paciente procura o serviço com coriza e obstrução nasal há 2–5 dias"
           },
           {
@@ -1056,7 +1056,7 @@
           },
           {
             "id": "irritacao-garganta",
-            "label": "irritação/odinofagia leve",
+            "label": "Odinofagia leve",
             "text": "Refere irritação de garganta/odinofagia leve"
           },
           {
@@ -1066,8 +1066,8 @@
           },
           {
             "id": "febre-ausente-baixa",
-            "label": "sem febre alta",
-            "text": "Refere febre ausente ou baixa e preservação relativa do estado geral"
+            "label": "Febre baixa",
+            "text": "Afebril ou febre baixa, com preservação do estado geral"
           },
           {
             "id": "rouquidao",
@@ -1086,7 +1086,7 @@
           },
           {
             "id": "contato-sintomaticos",
-            "label": "contato com sintomáticos",
+            "label": "Contato",
             "text": "Refere contato com sintomáticos em casa/trabalho"
           }
         ],
