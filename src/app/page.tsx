@@ -171,6 +171,44 @@ const COMORB_OPTIONS = [
   { id: "Imunossupressao", label: "Imunossupressão", abbr: "Imunossupressão" }
 ];
 
+// AUTO_CID_HELPER
+const normalizeCidKey = (s: string) =>
+  String(s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+const cidFromKey = (keyRaw: string): string => {
+  const key = normalizeCidKey(keyRaw);
+
+  if (key.includes("bronquite")) return "J20.9";
+  if (key.includes("sindrome gripal") || key.includes("gripe") || key.includes("influenza")) return "J11.1";
+  if (key.includes("resfriado") || key.includes("coriza")) return "J00";
+  if (key.includes("tosse") && (key.includes("pos") || key.includes("pós") || key.includes("viral"))) return "R05";
+  if (key.includes("cistite")) return "N30.0";
+  if (key.includes("dispepsia") || key.includes("epigastr")) return "K30";
+  if (key.includes("gastroenterite") || key.includes("diarreia")) return "K52.9";
+
+  if (key.includes("faringo") || key.includes("amigdal")) {
+    if (key.includes("bacter") || key.includes("estrept")) return "J03.0";
+    return "J02.9";
+  }
+
+  if (key.includes("lomb")) return "M54.5";
+
+  return "";
+};
+
+const getTemplateAutoCid = (templateId: string): string => {
+  const list = (templatesData as any)?.templates ?? (templatesData as any);
+  if (!Array.isArray(list)) return "";
+  const tpl = list.find(
+    (t: any) => t?.id === templateId || t?.templateId === templateId || t?.slug === templateId || t?.title === templateId || t?.name === templateId
+  );
+  const key = `${tpl?.id ?? ""} ${tpl?.title ?? ""} ${tpl?.name ?? ""}`;
+  return cidFromKey(key);
+};
+
 
 export default function Page() {
     const [templateId, setTemplateId] = useState<string>(TEMPLATES[0]?.id ?? "lombalgia");
@@ -288,6 +326,12 @@ const currentTemplate = useMemo(
     setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
     isApplyingTemplate.current = false;
   }, [templateId, currentTemplate]);
+
+  // AUTO_CID_EFFECT
+  useEffect(() => {
+    const d = getTemplateAutoCid(templateId);
+    if (d) setAtestadoCid(d);
+  }, [templateId]);
 
   const [hipotese, setHipotese] = useState("Lombalgia");
   const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
@@ -679,7 +723,12 @@ const currentTemplate = useMemo(
   <br />
   <select
     value={templateId}
-    onChange={(e) => setTemplateId(e.target.value)}
+    onChange={(e) => {
+      const nextId = e.target.value;
+      setTemplateId(nextId);
+      const d = getTemplateAutoCid(nextId);
+      if (d) setAtestadoCid(d);
+    }}
     style={{ width: "100%" }}
   >
     {TEMPLATES.map((t) => (
