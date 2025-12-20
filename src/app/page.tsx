@@ -227,6 +227,7 @@ const currentTemplate = useMemo(
   const [rxSelected, setRxSelected] = useState<string[]>([]);
   const [hmaSelected, setHmaSelected] = useState<string[]>([]);
   const [hmaFreeText, setHmaFreeText] = useState("");
+  const [hmaFreeOpen, setHmaFreeOpen] = useState(false);
   const [atestadoEmitir, setAtestadoEmitir] = useState(true);
   const [atestadoDias, setAtestadoDias] = useState(1);
   const [atestadoCid, setAtestadoCid] = useState("");
@@ -305,6 +306,7 @@ const currentTemplate = useMemo(
     const defaultsHma = getTemplateHmaDefaults(currentTemplate);
     setHmaSelected((selectedFromStorage && selectedFromStorage.length ? selectedFromStorage : defaultsHma).filter(Boolean));
     setHmaFreeText(freeFromStorage || "");
+    setHmaFreeOpen(Boolean(freeFromStorage && freeFromStorage.trim().length));
     setAlarme(templateState.alarme);
     setComorb(templateState.comorb);
     setMeds(templateState.meds);
@@ -558,6 +560,7 @@ const currentTemplate = useMemo(
     setQpText(defaults.qpText);
     setHmaSelected(getTemplateHmaDefaults(currentTemplate));
     setHmaFreeText("");
+    setHmaFreeOpen(false);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -617,6 +620,7 @@ const currentTemplate = useMemo(
     setQpText(defaults.qpText);
     setHmaSelected(getTemplateHmaDefaults(firstTemplate));
     setHmaFreeText("");
+    setHmaFreeOpen(false);
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
@@ -776,9 +780,32 @@ const currentTemplate = useMemo(
                   })}
                 </div>
                 <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
-                  <button type="button" onClick={() => { setHmaSelected([]); setHmaFreeText(""); }}>Limpar HMA</button>
-                  <button type="button" onClick={() => { setHmaSelected(getTemplateHmaDefaults(currentTemplate)); setHmaFreeText(""); }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHmaSelected([]);
+                      setHmaFreeText("");
+                      setHmaFreeOpen(false);
+                    }}
+                  >
+                    Limpar HMA
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHmaSelected(getTemplateHmaDefaults(currentTemplate));
+                      setHmaFreeText("");
+                      setHmaFreeOpen(false);
+                    }}
+                  >
                     Restaurar HMA do template
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setHmaFreeOpen((v) => !v)}
+                    style={{ padding: "6px 10px", borderRadius: 8 }}
+                  >
+                    Complemento HMA
                   </button>
                 </div>
               </>
@@ -786,9 +813,21 @@ const currentTemplate = useMemo(
               <p style={{ color: "#6b7280", margin: 0 }}>HMA não configurada para esta queixa.</p>
             )}
           </div>
-          <div style={{ marginBottom: 12 }}>
-            <label>Complemento livre (opcional)<br /><textarea value={hmaFreeText} onChange={(e) => setHmaFreeText(e.target.value)} style={{ width: "100%", minHeight: 100 }} /></label>
-          </div>
+          {(hmaFreeOpen || hmaFreeText.trim().length > 0) && (
+            <div style={{ marginBottom: 12 }}>
+              <label>
+                Complemento livre (opcional)<br />
+                <textarea
+                  value={hmaFreeText}
+                  onChange={(e) => setHmaFreeText(e.target.value)}
+                  rows={2}
+                  className="w-full rounded-md border p-2 text-sm resize-none"
+                  style={{ maxHeight: 96, overflowY: "auto" }}
+                  placeholder="Complemento livre da HMA (opcional)"
+                />
+              </label>
+            </div>
+          )}
           <br />
           {hasAlarmItems ? (
             <div style={{ marginBottom: 12 }}>
