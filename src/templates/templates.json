@@ -921,29 +921,9 @@
             "text": "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada"
           },
           {
-            "id": "refere-piora-ao-tossir-espirrar-ou-manobra-de-valsalva-quando-ha-componente-radicular",
-            "label": "Radicular/vals",
-            "text": "Refere piora ao tossir, espirrar ou manobra de Valsalva quando há componente radicular"
-          },
-          {
-            "id": "espasmo-paravertebral-palpavel",
-            "label": "Espasmo paravert",
-            "text": "Espasmo paravertebral palpável"
-          },
-          {
-            "id": "rigidez-matinal-curta",
-            "label": "Rigidez curta",
-            "text": "Rigidez matinal curta"
-          },
-          {
             "id": "piora-apos-esforco-ou-levantar-peso",
             "label": "Piora esforço",
             "text": "Piora após esforço ou levantar peso"
-          },
-          {
-            "id": "irradiacao-para-gluteoperna-com-parestesia-leve",
-            "label": "Irradiação c/perna",
-            "text": "Irradiação para glúteo/perna com parestesia leve"
           },
           {
             "id": "melhora-parcial-com-repouso-relativo",
@@ -955,8 +935,7 @@
           "paciente-procura-o-servico-por-dor-lombar-mecanica-ha-dias-a-semanas-apos-esforco-postura-prolongada-ou-movimento-brusco",
           "refere-dor-em-faixa-na-regiao-lombar-com-piora-a-flexaorotacao-e-ao-carregar-peso-com-melhora-parcial-com-repouso-relativo",
           "refere-rigidez-matinal-curta-e-espasmo-muscular-com-limitacao-funcional-para-sentar-levantar-e-deambular",
-          "quando-lombociatalgia-refere-irradiacao-para-gluteo-e-face-posteriorlateral-de-coxaperna-por-vezes-com-parestesia-associada",
-          "refere-piora-ao-tossir-espirrar-ou-manobra-de-valsalva-quando-ha-componente-radicular"
+          "quando-lombociatalgia-refere-irradiacao-para-gluteo-e-face-posteriorlateral-de-coxaperna-por-vezes-com-parestesia-associada"
         ]
       }
     },
