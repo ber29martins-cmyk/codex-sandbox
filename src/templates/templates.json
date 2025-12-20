@@ -16,22 +16,22 @@
         ],
         "alarmItems": [
           {
-            "id": "dispneia",
-            "label": "Dispneia / esforço respiratório",
-            "absentLabel": "Sem Dispneia / esforço respiratório",
-            "presentText": "Com Dispneia / esforço respiratório"
+            "id": "dispneia-esforco",
+            "label": "Dispneia/esforço",
+            "absentLabel": "Sem Dispneia/esforço",
+            "presentText": "Com Dispneia/esforço"
           },
           {
-            "id": "satbaixa",
-            "label": "Saturação baixa",
-            "absentLabel": "Sem Saturação baixa",
-            "presentText": "Com Saturação baixa"
+            "id": "sat-baixa",
+            "label": "Sat baixa",
+            "absentLabel": "Sem Sat baixa",
+            "presentText": "Com Sat baixa"
           },
           {
-            "id": "dortoracica",
-            "label": "Dor torácica importante",
-            "absentLabel": "Sem Dor torácica importante",
-            "presentText": "Com Dor torácica importante"
+            "id": "dor-toracica-imp",
+            "label": "Dor torácica imp",
+            "absentLabel": "Sem Dor torácica imp",
+            "presentText": "Com Dor torácica imp"
           },
           {
             "id": "hemoptise",
@@ -40,40 +40,22 @@
             "presentText": "Com Hemoptise"
           },
           {
-            "id": "febrealta",
-            "label": "Febre alta persistente",
-            "absentLabel": "Sem Febre alta persistente",
-            "presentText": "Com Febre alta persistente"
+            "id": "febre-72h",
+            "label": "Febre >72h",
+            "absentLabel": "Sem Febre >72h",
+            "presentText": "Com Febre >72h"
           },
           {
-            "id": "piora",
+            "id": "piora-progressiva",
             "label": "Piora progressiva",
             "absentLabel": "Sem Piora progressiva",
             "presentText": "Com Piora progressiva"
           },
           {
-            "id": "desidratacao",
-            "label": "Desidratação importante / incapaz VO",
-            "absentLabel": "Sem Desidratação importante / incapaz VO",
-            "presentText": "Com Desidratação importante / incapaz VO"
-          },
-          {
-            "id": "idosocomorb",
-            "label": "Idoso frágil / comorbidade cardiopulmonar",
-            "absentLabel": "Sem Idoso frágil / comorbidade cardiopulmonar",
-            "presentText": "Com Idoso frágil / comorbidade cardiopulmonar"
-          },
-          {
-            "id": "imuno",
-            "label": "Imunossupressão",
-            "absentLabel": "Sem Imunossupressão",
-            "presentText": "Com Imunossupressão"
-          },
-          {
-            "id": "febre-alta-persistente",
-            "label": "febre alta persistente",
-            "absentLabel": "febre alta persistente",
-            "presentText": "Apresenta febre alta persistente"
+            "id": "incapaz-vo-desid",
+            "label": "Incapaz VO/desid",
+            "absentLabel": "Sem Incapaz VO/desid",
+            "presentText": "Com Incapaz VO/desid"
           }
         ],
         "hmaItems": [
@@ -144,52 +126,34 @@
         ],
         "alarmItems": [
           {
-            "id": "febre",
-            "label": "Febre / calafrios",
-            "absentLabel": "Sem Febre / calafrios",
-            "presentText": "Com Febre / calafrios"
+            "id": "febre-calafrios",
+            "label": "Febre/calafrios",
+            "absentLabel": "Sem Febre/calafrios",
+            "presentText": "Com Febre/calafrios"
           },
           {
-            "id": "dorlombar",
-            "label": "Dor lombar / dor em flanco",
-            "absentLabel": "Sem Dor lombar / dor em flanco",
-            "presentText": "Com Dor lombar / dor em flanco"
+            "id": "dor-flanco-lomb",
+            "label": "Dor flanco/lomb",
+            "absentLabel": "Sem Dor flanco/lomb",
+            "presentText": "Com Dor flanco/lomb"
           },
           {
-            "id": "vomitos",
-            "label": "Náuseas/vômitos importantes",
-            "absentLabel": "Sem Náuseas/vômitos importantes",
-            "presentText": "Com Náuseas/vômitos importantes"
+            "id": "n-v-importantes",
+            "label": "N/V importantes",
+            "absentLabel": "Sem N/V importantes",
+            "presentText": "Com N/V importantes"
           },
           {
-            "id": "gestacao",
-            "label": "Gestação",
-            "absentLabel": "Sem Gestação",
-            "presentText": "Com Gestação"
+            "id": "sepse-hipot-conf",
+            "label": "Sepse hipot/conf",
+            "absentLabel": "Sem Sepse hipot/conf",
+            "presentText": "Com Sepse hipot/conf"
           },
           {
-            "id": "sexomasculino",
-            "label": "Sexo masculino",
-            "absentLabel": "Sem Sexo masculino",
-            "presentText": "Com Sexo masculino"
-          },
-          {
-            "id": "imuno",
-            "label": "Imunossupressão",
-            "absentLabel": "Sem Imunossupressão",
-            "presentText": "Com Imunossupressão"
-          },
-          {
-            "id": "sepse",
-            "label": "Sinais de sepse (hipotensão/confusão)",
-            "absentLabel": "Sem Sinais de sepse (hipotensão/confusão)",
-            "presentText": "Com Sinais de sepse (hipotensão/confusão)"
-          },
-          {
-            "id": "piora",
-            "label": "Piora progressiva ou falha terapêutica",
-            "absentLabel": "Sem Piora progressiva ou falha terapêutica",
-            "presentText": "Com Piora progressiva ou falha terapêutica"
+            "id": "falha-terapeut",
+            "label": "Falha terapêut",
+            "absentLabel": "Sem Falha terapêut",
+            "presentText": "Com Falha terapêut"
           }
         ],
         "hmaItems": [
@@ -259,46 +223,46 @@
             "presentText": "Com Hematêmese"
           },
           {
-            "id": "melena",
-            "label": "Melena / sangramento digestivo",
-            "absentLabel": "Sem Melena / sangramento digestivo",
-            "presentText": "Com Melena / sangramento digestivo"
+            "id": "melena-sangram",
+            "label": "Melena/sangram",
+            "absentLabel": "Sem Melena/sangram",
+            "presentText": "Com Melena/sangram"
           },
           {
-            "id": "perdapeso",
-            "label": "Perda ponderal / anorexia importante",
-            "absentLabel": "Sem Perda ponderal / anorexia importante",
-            "presentText": "Com Perda ponderal / anorexia importante"
+            "id": "perda-ponderal",
+            "label": "Perda ponderal",
+            "absentLabel": "Sem Perda ponderal",
+            "presentText": "Com Perda ponderal"
           },
           {
-            "id": "disfagia",
-            "label": "Disfagia / odinofagia progressiva",
-            "absentLabel": "Sem Disfagia / odinofagia progressiva",
-            "presentText": "Com Disfagia / odinofagia progressiva"
+            "id": "disfagia-prog",
+            "label": "Disfagia prog",
+            "absentLabel": "Sem Disfagia prog",
+            "presentText": "Com Disfagia prog"
           },
           {
-            "id": "vomitos",
-            "label": "Vômitos persistentes",
-            "absentLabel": "Sem Vômitos persistentes",
-            "presentText": "Com Vômitos persistentes"
+            "id": "vomitos-persist",
+            "label": "Vômitos persist",
+            "absentLabel": "Sem Vômitos persist",
+            "presentText": "Com Vômitos persist"
           },
           {
-            "id": "sincope",
-            "label": "Síncope / hipotensão",
-            "absentLabel": "Sem Síncope / hipotensão",
-            "presentText": "Com Síncope / hipotensão"
+            "id": "sincope-hipot",
+            "label": "Síncope/hipot",
+            "absentLabel": "Sem Síncope/hipot",
+            "presentText": "Com Síncope/hipot"
           },
           {
-            "id": "dortoracica",
-            "label": "Dor torácica em aperto / dispneia (equivalente anginoso)",
-            "absentLabel": "Sem Dor torácica em aperto / dispneia (equivalente anginoso)",
-            "presentText": "Com Dor torácica em aperto / dispneia (equivalente anginoso)"
+            "id": "equiv-anginoso",
+            "label": "Equiv anginoso",
+            "absentLabel": "Sem Equiv anginoso",
+            "presentText": "Com Equiv anginoso"
           },
           {
-            "id": "anemia",
-            "label": "Anemia conhecida ou suspeita",
-            "absentLabel": "Sem Anemia conhecida ou suspeita",
-            "presentText": "Com Anemia conhecida ou suspeita"
+            "id": "anemia-suspeita",
+            "label": "Anemia suspeita",
+            "absentLabel": "Sem Anemia suspeita",
+            "presentText": "Com Anemia suspeita"
           }
         ],
         "hmaItems": [
@@ -365,52 +329,46 @@
         ],
         "alarmItems": [
           {
-            "id": "dispneia",
-            "label": "Dispneia / estridor",
-            "absentLabel": "Sem Dispneia / estridor",
-            "presentText": "Com Dispneia / estridor"
+            "id": "dispneia-estridor",
+            "label": "Dispneia/estridor",
+            "absentLabel": "Sem Dispneia/estridor",
+            "presentText": "Com Dispneia/estridor"
           },
           {
-            "id": "sialorreia",
-            "label": "Sialorreia / incapaz de deglutir saliva",
-            "absentLabel": "Sem Sialorreia / incapaz de deglutir saliva",
-            "presentText": "Com Sialorreia / incapaz de deglutir saliva"
+            "id": "sialorreia-vo",
+            "label": "Sialorreia/VO",
+            "absentLabel": "Sem Sialorreia/VO",
+            "presentText": "Com Sialorreia/VO"
           },
           {
-            "id": "trismo",
-            "label": "Trismo / voz abafada",
-            "absentLabel": "Sem Trismo / voz abafada",
-            "presentText": "Com Trismo / voz abafada"
+            "id": "trismo-voz-abaf",
+            "label": "Trismo/voz abaf",
+            "absentLabel": "Sem Trismo/voz abaf",
+            "presentText": "Com Trismo/voz abaf"
           },
           {
-            "id": "abscesso",
-            "label": "Desvio de úvula (suspeita abscesso peritonsilar)",
-            "absentLabel": "Sem Desvio de úvula (suspeita abscesso peritonsilar)",
-            "presentText": "Com Desvio de úvula (suspeita abscesso peritonsilar)"
+            "id": "desvio-de-uvula",
+            "label": "Desvio de úvula",
+            "absentLabel": "Sem Desvio de úvula",
+            "presentText": "Com Desvio de úvula"
           },
           {
-            "id": "desidratacao",
-            "label": "Desidratação importante / recusa VO",
-            "absentLabel": "Sem Desidratação importante / recusa VO",
-            "presentText": "Com Desidratação importante / recusa VO"
+            "id": "desid-recusa-vo",
+            "label": "Desid/recusa VO",
+            "absentLabel": "Sem Desid/recusa VO",
+            "presentText": "Com Desid/recusa VO"
           },
           {
-            "id": "febrealta",
-            "label": "Febre alta persistente / toxemia",
-            "absentLabel": "Sem Febre alta persistente / toxemia",
-            "presentText": "Com Febre alta persistente / toxemia"
+            "id": "febre-alta-tox",
+            "label": "Febre alta/tox",
+            "absentLabel": "Sem Febre alta/tox",
+            "presentText": "Com Febre alta/tox"
           },
           {
             "id": "meningismo",
-            "label": "Rigidez de nuca / sinais meníngeos",
-            "absentLabel": "Sem Rigidez de nuca / sinais meníngeos",
-            "presentText": "Com Rigidez de nuca / sinais meníngeos"
-          },
-          {
-            "id": "imuno",
-            "label": "Imunossupressão",
-            "absentLabel": "Sem Imunossupressão",
-            "presentText": "Com Imunossupressão"
+            "label": "Meningismo",
+            "absentLabel": "Sem Meningismo",
+            "presentText": "Com Meningismo"
           }
         ],
         "hmaItems": [
@@ -478,52 +436,46 @@
         ],
         "alarmItems": [
           {
-            "id": "dispneia",
-            "label": "Dispneia / estridor",
-            "absentLabel": "Sem Dispneia / estridor",
-            "presentText": "Com Dispneia / estridor"
+            "id": "dispneia-estridor",
+            "label": "Dispneia/estridor",
+            "absentLabel": "Sem Dispneia/estridor",
+            "presentText": "Com Dispneia/estridor"
           },
           {
-            "id": "sialorreia",
-            "label": "Sialorreia / incapaz de deglutir saliva",
-            "absentLabel": "Sem Sialorreia / incapaz de deglutir saliva",
-            "presentText": "Com Sialorreia / incapaz de deglutir saliva"
+            "id": "sialorreia-vo",
+            "label": "Sialorreia/VO",
+            "absentLabel": "Sem Sialorreia/VO",
+            "presentText": "Com Sialorreia/VO"
           },
           {
-            "id": "trismo",
-            "label": "Trismo / voz abafada",
-            "absentLabel": "Sem Trismo / voz abafada",
-            "presentText": "Com Trismo / voz abafada"
+            "id": "trismo-voz-abaf",
+            "label": "Trismo/voz abaf",
+            "absentLabel": "Sem Trismo/voz abaf",
+            "presentText": "Com Trismo/voz abaf"
           },
           {
-            "id": "desidratacao",
-            "label": "Desidratação importante / recusa VO",
-            "absentLabel": "Sem Desidratação importante / recusa VO",
-            "presentText": "Com Desidratação importante / recusa VO"
+            "id": "desvio-de-uvula",
+            "label": "Desvio de úvula",
+            "absentLabel": "Sem Desvio de úvula",
+            "presentText": "Com Desvio de úvula"
           },
           {
-            "id": "febrealta",
-            "label": "Febre alta persistente",
-            "absentLabel": "Sem Febre alta persistente",
-            "presentText": "Com Febre alta persistente"
+            "id": "desid-recusa-vo",
+            "label": "Desid/recusa VO",
+            "absentLabel": "Sem Desid/recusa VO",
+            "presentText": "Com Desid/recusa VO"
+          },
+          {
+            "id": "febre-alta-tox",
+            "label": "Febre alta/tox",
+            "absentLabel": "Sem Febre alta/tox",
+            "presentText": "Com Febre alta/tox"
           },
           {
             "id": "meningismo",
-            "label": "Rigidez de nuca / sinais meníngeos",
-            "absentLabel": "Sem Rigidez de nuca / sinais meníngeos",
-            "presentText": "Com Rigidez de nuca / sinais meníngeos"
-          },
-          {
-            "id": "abscesso",
-            "label": "Sinais de abscesso peritonsilar (desvio de úvula)",
-            "absentLabel": "Sem Sinais de abscesso peritonsilar (desvio de úvula)",
-            "presentText": "Com Sinais de abscesso peritonsilar (desvio de úvula)"
-          },
-          {
-            "id": "imuno",
-            "label": "Imunossupressão",
-            "absentLabel": "Sem Imunossupressão",
-            "presentText": "Com Imunossupressão"
+            "label": "Meningismo",
+            "absentLabel": "Sem Meningismo",
+            "presentText": "Com Meningismo"
           }
         ],
         "hmaItems": [
@@ -550,6 +502,8 @@
         ],
         "hmaDefaults": [
           "paciente-procura-o-servico-por-odinofagia-coriza-tosse-e-rouquidao-ha-25-dias",
+          "refere-febre-ausente-ou-baixa-e-mal-estar-leve-a-moderado",
+          "refere-conjuntivite-ou-aftas-podem-ocorrer-alem-de-cefaleia-leve",
           "refere-melhora-gradual-espontanea-ao-longo-de-37-dias"
         ],
         "rxGroups": [
@@ -582,52 +536,40 @@
         ],
         "alarmItems": [
           {
-            "id": "desidratacao",
-            "label": "Sinais de desidratação importante",
-            "absentLabel": "Sem Sinais de desidratação importante",
-            "presentText": "Com Sinais de desidratação importante"
+            "id": "desid-importante",
+            "label": "Desid importante",
+            "absentLabel": "Sem Desid importante",
+            "presentText": "Com Desid importante"
           },
           {
-            "id": "sangue",
-            "label": "Sangue nas fezes / melena",
-            "absentLabel": "Sem Sangue nas fezes / melena",
-            "presentText": "Com Sangue nas fezes / melena"
+            "id": "sangue-nas-fezes",
+            "label": "Sangue nas fezes",
+            "absentLabel": "Sem Sangue nas fezes",
+            "presentText": "Com Sangue nas fezes"
           },
           {
-            "id": "dorintensa",
-            "label": "Dor abdominal intensa ou localizada",
-            "absentLabel": "Sem Dor abdominal intensa ou localizada",
-            "presentText": "Com Dor abdominal intensa ou localizada"
+            "id": "dor-abd-intensa",
+            "label": "Dor abd intensa",
+            "absentLabel": "Sem Dor abd intensa",
+            "presentText": "Com Dor abd intensa"
           },
           {
-            "id": "febrealta",
-            "label": "Febre alta persistente",
-            "absentLabel": "Sem Febre alta persistente",
-            "presentText": "Com Febre alta persistente"
+            "id": "febre-72h",
+            "label": "Febre >72h",
+            "absentLabel": "Sem Febre >72h",
+            "presentText": "Com Febre >72h"
           },
           {
             "id": "choque",
-            "label": "Sinais de choque",
-            "absentLabel": "Sem Sinais de choque",
-            "presentText": "Com Sinais de choque"
+            "label": "Choque",
+            "absentLabel": "Sem Choque",
+            "presentText": "Com Choque"
           },
           {
-            "id": "idosocrianca",
-            "label": "Idoso frágil / criança pequena",
-            "absentLabel": "Sem Idoso frágil / criança pequena",
-            "presentText": "Com Idoso frágil / criança pequena"
-          },
-          {
-            "id": "imuno",
-            "label": "Imunossupressão",
-            "absentLabel": "Sem Imunossupressão",
-            "presentText": "Com Imunossupressão"
-          },
-          {
-            "id": "antibioticorecente",
-            "label": "Uso recente de antibiótico / suspeita de colite",
-            "absentLabel": "Sem Uso recente de antibiótico / suspeita de colite",
-            "presentText": "Com Uso recente de antibiótico / suspeita de colite"
+            "id": "suspeita-colite",
+            "label": "Suspeita colite",
+            "absentLabel": "Sem Suspeita colite",
+            "presentText": "Com Suspeita colite"
           }
         ],
         "hmaItems": [
@@ -693,58 +635,46 @@
         ],
         "alarmItems": [
           {
-            "id": "dispneia",
-            "label": "Dispneia / esforço respiratório",
-            "absentLabel": "Sem Dispneia / esforço respiratório",
-            "presentText": "Com Dispneia / esforço respiratório"
+            "id": "dispneia-esforco",
+            "label": "Dispneia/esforço",
+            "absentLabel": "Sem Dispneia/esforço",
+            "presentText": "Com Dispneia/esforço"
           },
           {
-            "id": "dortoracica",
+            "id": "dor-toracica",
             "label": "Dor torácica",
             "absentLabel": "Sem Dor torácica",
             "presentText": "Com Dor torácica"
           },
           {
-            "id": "satbaixa",
-            "label": "Saturação baixa",
-            "absentLabel": "Sem Saturação baixa",
-            "presentText": "Com Saturação baixa"
+            "id": "sat-baixa",
+            "label": "Sat baixa",
+            "absentLabel": "Sem Sat baixa",
+            "presentText": "Com Sat baixa"
           },
           {
-            "id": "confusao",
-            "label": "Confusão mental / rebaixamento",
-            "absentLabel": "Sem Confusão mental / rebaixamento",
-            "presentText": "Com Confusão mental / rebaixamento"
+            "id": "confusao-rebaix",
+            "label": "Confusão/rebaix",
+            "absentLabel": "Sem Confusão/rebaix",
+            "presentText": "Com Confusão/rebaix"
           },
           {
-            "id": "desidratacao",
-            "label": "Sinais de desidratação importante",
-            "absentLabel": "Sem Sinais de desidratação importante",
-            "presentText": "Com Sinais de desidratação importante"
+            "id": "desid-importante",
+            "label": "Desid importante",
+            "absentLabel": "Sem Desid importante",
+            "presentText": "Com Desid importante"
           },
           {
-            "id": "vomitos",
-            "label": "Vômitos incoercíveis",
-            "absentLabel": "Sem Vômitos incoercíveis",
-            "presentText": "Com Vômitos incoercíveis"
+            "id": "vomitos-incoerc",
+            "label": "Vômitos incoerc",
+            "absentLabel": "Sem Vômitos incoerc",
+            "presentText": "Com Vômitos incoerc"
           },
           {
-            "id": "febrepersistente",
-            "label": "Febre persistente (>72h) ou piora após melhora",
-            "absentLabel": "Sem Febre persistente (>72h) ou piora após melhora",
-            "presentText": "Com Febre persistente (>72h) ou piora após melhora"
-          },
-          {
-            "id": "risco",
-            "label": "Imunossupressão / gestante / puérpera / idoso frágil",
-            "absentLabel": "Sem Imunossupressão / gestante / puérpera / idoso frágil",
-            "presentText": "Com Imunossupressão / gestante / puérpera / idoso frágil"
-          },
-          {
-            "id": "cronico",
-            "label": "Doença crônica descompensada",
-            "absentLabel": "Sem Doença crônica descompensada",
-            "presentText": "Com Doença crônica descompensada"
+            "id": "febre-72h-piora",
+            "label": "Febre >72h/piora",
+            "absentLabel": "Sem Febre >72h/piora",
+            "presentText": "Com Febre >72h/piora"
           }
         ],
         "rxGroups": [
@@ -845,25 +775,25 @@
         ],
         "alarmItems": [
           {
-            "id": "parestesia",
-            "label": "Parestesia/hipoestesia",
-            "absentLabel": "Sem Parestesia/hipoestesia",
-            "presentText": "Com Parestesia/hipoestesia"
+            "id": "deficit-sensitivo",
+            "label": "Déficit sensitivo",
+            "absentLabel": "Sem Déficit sensitivo",
+            "presentText": "Com Déficit sensitivo"
           },
           {
-            "id": "forca",
+            "id": "perda-de-forca",
             "label": "Perda de força",
             "absentLabel": "Sem Perda de força",
             "presentText": "Com Perda de força"
           },
           {
-            "id": "esf",
-            "label": "Alteração esfincteriana",
-            "absentLabel": "Sem Alteração esfincteriana",
-            "presentText": "Com Alteração esfincteriana"
+            "id": "alteracao-esfinc",
+            "label": "Alteração esfinc",
+            "absentLabel": "Sem Alteração esfinc",
+            "presentText": "Com Alteração esfinc"
           },
           {
-            "id": "sela",
+            "id": "anestesia-em-sela",
             "label": "Anestesia em sela",
             "absentLabel": "Sem Anestesia em sela",
             "presentText": "Com Anestesia em sela"
@@ -938,58 +868,46 @@
         ],
         "alarmItems": [
           {
-            "id": "dispneia",
-            "label": "Dispneia / esforço respiratório",
-            "absentLabel": "Sem Dispneia / esforço respiratório",
-            "presentText": "Com Dispneia / esforço respiratório"
+            "id": "dispneia-esforco",
+            "label": "Dispneia/esforço",
+            "absentLabel": "Sem Dispneia/esforço",
+            "presentText": "Com Dispneia/esforço"
           },
           {
-            "id": "dort",
+            "id": "dor-toracica",
             "label": "Dor torácica",
             "absentLabel": "Sem Dor torácica",
             "presentText": "Com Dor torácica"
           },
           {
-            "id": "satbaixa",
-            "label": "Saturação baixa",
-            "absentLabel": "Sem Saturação baixa",
-            "presentText": "Com Saturação baixa"
+            "id": "sat-baixa",
+            "label": "Sat baixa",
+            "absentLabel": "Sem Sat baixa",
+            "presentText": "Com Sat baixa"
           },
           {
-            "id": "confusao",
-            "label": "Confusão mental / sonolência importante",
-            "absentLabel": "Sem Confusão mental / sonolência importante",
-            "presentText": "Com Confusão mental / sonolência importante"
+            "id": "confusao-sonol",
+            "label": "Confusão/sonol",
+            "absentLabel": "Sem Confusão/sonol",
+            "presentText": "Com Confusão/sonol"
           },
           {
-            "id": "febrepersistente",
-            "label": "Febre alta ou persistente (>72h)",
-            "absentLabel": "Sem Febre alta ou persistente (>72h)",
-            "presentText": "Com Febre alta ou persistente (>72h)"
+            "id": "febre-alta-72h",
+            "label": "Febre alta >72h",
+            "absentLabel": "Sem Febre alta >72h",
+            "presentText": "Com Febre alta >72h"
           },
           {
-            "id": "piora",
-            "label": "Piora progressiva ou piora após melhora",
-            "absentLabel": "Sem Piora progressiva ou piora após melhora",
-            "presentText": "Com Piora progressiva ou piora após melhora"
+            "id": "piora-apos-melhora",
+            "label": "Piora após melhora",
+            "absentLabel": "Sem Piora após melhora",
+            "presentText": "Com Piora após melhora"
           },
           {
-            "id": "desidratacao",
-            "label": "Desidratação importante / baixa aceitação VO",
-            "absentLabel": "Sem Desidratação importante / baixa aceitação VO",
-            "presentText": "Com Desidratação importante / baixa aceitação VO"
-          },
-          {
-            "id": "risco",
-            "label": "Imunossupressão / gestante / puérpera / idoso frágil",
-            "absentLabel": "Sem Imunossupressão / gestante / puérpera / idoso frágil",
-            "presentText": "Com Imunossupressão / gestante / puérpera / idoso frágil"
-          },
-          {
-            "id": "lactente",
-            "label": "Lactente <3 meses com febre",
-            "absentLabel": "Sem Lactente <3 meses com febre",
-            "presentText": "Com Lactente <3 meses com febre"
+            "id": "desid-baixa-vo",
+            "label": "Desid/baixa VO",
+            "absentLabel": "Sem Desid/baixa VO",
+            "presentText": "Com Desid/baixa VO"
           }
         ],
         "rxGroups": [
