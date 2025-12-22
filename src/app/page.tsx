@@ -96,6 +96,65 @@ function cleanAlarmLabel(s: string) {
   return s.replace(/^(sem|nega)\s+/i, "").replace(/^não\s+apresenta\s+/i, "").trim();
 }
 
+const ALARM_PRINT_MAP: Record<string, string> = {
+  "Dispneia/esforço": "dispneia / esforço respiratório",
+  "Sat baixa": "saturação baixa",
+  "Dor torácica": "dor torácica",
+  "Dor torácica imp": "dor torácica importante",
+  "Hemoptise": "hemoptise",
+  "Febre >72h": "febre persistente (>72h)",
+  "Febre alta >72h": "febre alta ou persistente (>72h)",
+  "Febre >72h/piora": "febre persistente (>72h) ou piora após melhora",
+  "Piora progressiva": "piora progressiva",
+  "Piora após melhora": "piora após melhora",
+  "Incapaz VO/desid": "incapaz de via oral / desidratação importante",
+  "Desid importante": "sinais de desidratação importante",
+  "Desid/baixa VO": "desidratação importante / baixa aceitação via oral",
+  "Vômitos incoerc": "vômitos incoercíveis",
+  "Confusão/rebaix": "confusão mental / rebaixamento",
+  "Confusão/sonol": "confusão mental / sonolência importante",
+  "Febre/calafrios": "febre / calafrios",
+  "Dor flanco/lomb": "dor em flanco / lombalgia",
+  "N/V importantes": "náuseas / vômitos importantes",
+  "Sepse hipot/conf": "sinais de sepse (hipotensão / confusão)",
+  "Falha terapêut": "piora progressiva ou falha terapêutica",
+  "Hematêmese": "hematêmese",
+  "Melena/sangram": "melena / sangramento digestivo",
+  "Perda ponderal": "perda ponderal / anorexia importante",
+  "Disfagia prog": "disfagia / odinofagia progressiva",
+  "Vômitos persist": "vômitos persistentes",
+  "Síncope/hipot": "síncope / hipotensão",
+  "Equiv anginoso": "dor torácica em aperto / dispneia (equivalente anginoso)",
+  "Anemia suspeita": "anemia conhecida ou suspeita",
+  "Sangue nas fezes": "sangue nas fezes / melena",
+  "Dor abd intensa": "dor abdominal intensa ou localizada",
+  "Choque": "sinais de choque",
+  "Suspeita colite": "uso recente de antibiótico / suspeita de colite",
+  "Dor retroauric": "dor retroauricular",
+  "Edema retroauric": "edema retroauricular",
+  "Pavilhão protru": "pavilhão auricular protruído",
+  "Paralisia facial": "paralisia facial",
+  "Cefaleia intensa": "cefaleia intensa",
+  "Meningismo": "rigidez de nuca / sinais meníngeos",
+  "Toxemia": "toxemia / mau estado geral",
+  "Dispneia/estridor": "dispneia / estridor",
+  "Sialorreia/VO": "sialorreia / incapaz de deglutir saliva",
+  "Trismo/voz abaf": "trismo / voz abafada",
+  "Desvio de úvula": "desvio de úvula (suspeita de abscesso peritonsilar)",
+  "Desid/recusa VO": "desidratação importante / recusa via oral",
+  "Febre alta/tox": "febre alta persistente / toxemia",
+  "Déficit sensitivo": "parestesia / hipoestesia",
+  "Perda de força": "perda de força",
+  "Alteração esfinc": "alteração esfincteriana",
+  "Anestesia em sela": "anestesia em sela"
+};
+
+function alarmLabelForPrint(input: string) {
+  const cleaned = cleanAlarmLabel(input).trim();
+  const expanded = ALARM_PRINT_MAP[cleaned] ?? ALARM_PRINT_MAP[cleaned.toLowerCase()] ?? cleaned;
+  return expanded.toLocaleLowerCase("pt-BR");
+}
+
 function formatParagraph(lines: string[]) {
   const parts: string[] = [];
   for (const raw of lines) {
@@ -396,11 +455,11 @@ const currentTemplate = useMemo(
     for (const item of items) {
       const status = alarmStates[item.id] ?? "unknown";
       if (status === "nega") {
-        const lbl = cleanAlarmLabel(item.absentLabel ?? item.label ?? "");
+        const lbl = alarmLabelForPrint(item.absentLabel ?? item.label ?? "");
         if (lbl) ausentes.push(lbl);
       }
       if (status === "presente") {
-        const lbl = cleanAlarmLabel(item.label || item.presentText || "");
+        const lbl = alarmLabelForPrint(item.label || item.presentText || "");
         if (lbl) presentes.push(lbl);
       }
     }
