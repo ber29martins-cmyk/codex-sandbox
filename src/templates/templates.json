@@ -1470,6 +1470,8 @@
         ],
         "rxGroups": [
           "antibioticos_oftalmicos",
+          "oftalmo_antibiotico",
+          "oftalmo_sintomatico",
           "antihistaminicos"
         ],
         "rxDefaults": []
