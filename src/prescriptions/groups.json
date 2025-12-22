@@ -161,6 +161,26 @@
       "itemIds": ["sro_sais_reidratacao_oral"]
     },
     {
+      "id": "probioticos",
+      "label": "Probióticos",
+      "itemIds": ["s_boulardii_200mg_floratil"]
+    },
+    {
+      "id": "antidiarreicos",
+      "label": "Anti-diarreicos",
+      "itemIds": ["loperamida_2mg", "racecadotrila_100mg"]
+    },
+    {
+      "id": "corticoide_nasal",
+      "label": "Corticoide nasal",
+      "itemIds": ["mometasona_nasal_50mcg_nasonex", "ciclesonida_nasal_50mcg_omnaris"]
+    },
+    {
+      "id": "hidratacao_oral",
+      "label": "Hidratação oral",
+      "itemIds": ["sro_sais_reidratacao_oral"]
+    },
+    {
       "id": "oftalmo_antibiotico",
       "label": "Antibiótico oftálmico",
       "itemIds": [

@@ -827,6 +827,46 @@
       "brand": "",
       "qty": "1 caixa (sachês)",
       "directions": ["Diluir 1 envelope conforme instruções da embalagem.", "Ofertar em pequenos volumes e repetidamente após cada episódio de diarreia/vômito."]
+    },
+    {
+      "id": "s_boulardii_200mg_floratil",
+      "label": "S. boulardii 200mg (Floratil)",
+      "route": "ORAL",
+      "title": "S. boulardii 200mg",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 cápsula, de 12/12 horas, por 3 dias"]
+    },
+    {
+      "id": "loperamida_2mg",
+      "label": "Loperamida 2mg",
+      "route": "ORAL",
+      "title": "Loperamida 2mg",
+      "qty": "1 caixa",
+      "directions": ["Tomar 2 comprimidos agora e 1 comprimido após cada evacuação", "Máximo de 8 comprimidos por dia"]
+    },
+    {
+      "id": "racecadotrila_100mg",
+      "label": "Racecadotrila 100mg (Tiorfan)",
+      "route": "ORAL",
+      "title": "Racecadotrila 100mg",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, até de 8/8 horas, por até 7 dias"]
+    },
+    {
+      "id": "mometasona_nasal_50mcg_nasonex",
+      "label": "Mometasona nasal 50mcg (Nasonex)",
+      "route": "INALATORIO",
+      "title": "Mometasona nasal 50mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
+    },
+    {
+      "id": "ciclesonida_nasal_50mcg_omnaris",
+      "label": "Ciclesonida nasal 50mcg (Omnaris)",
+      "route": "INALATORIO",
+      "title": "Ciclesonida nasal 50mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
     }
   ]
 }

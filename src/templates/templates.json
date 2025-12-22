@@ -609,12 +609,16 @@
           "analgesicos",
           "antiemeticos",
           "antiespasmodicos",
-          "sro"
+          "sro",
+          "hidratacao_oral",
+          "probioticos",
+          "antidiarreicos"
         ],
         "rxDefaults": [
           "ondansetrona_8mg_vonau",
           "escopolamina_10mg_buscopam",
-          "sro_sais_reidratacao_oral"
+          "sro_sais_reidratacao_oral",
+          "s_boulardii_200mg_floratil"
         ]
       }
     },
@@ -685,13 +689,15 @@
           "mucoliticos",
           "antitussigenos",
           "descongestionantes_nasal",
-          "lavagem_nasal"
+          "lavagem_nasal",
+          "corticoide_nasal"
         ],
         "rxDefaults": [
           "paracetamol_750mg_tylenol",
           "oseltamivir_75mg_tamiflu",
           "loratadina_10mg_claritin",
-          "soro_0_9_sorimax"
+          "soro_0_9_sorimax",
+          "mometasona_nasal_50mcg_nasonex"
         ],
         "hmaItems": [
           {
@@ -915,12 +921,14 @@
           "antihistaminicos",
           "antitussigenos",
           "descongestionantes_nasal",
-          "lavagem_nasal"
+          "lavagem_nasal",
+          "corticoide_nasal"
         ],
         "rxDefaults": [
           "paracetamol_750mg_tylenol",
           "loratadina_10mg_claritin",
-          "soro_0_9_sorimax"
+          "soro_0_9_sorimax",
+          "mometasona_nasal_50mcg_nasonex"
         ],
         "hmaItems": [
           {
