@@ -875,6 +875,78 @@
       "title": "Budesonida 32mcg",
       "qty": "1 frasco",
       "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
+    },
+    {
+      "id": "budesonida_inalatoria_50mcg_busonid",
+      "label": "Budesonida 50mcg (BUSONID)",
+      "route": "INALATORIO",
+      "title": "Budesonida 50mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "beclometasona_aerossol_250mcg_clenil",
+      "label": "Beclometasona aerossol 250mcg (CLENIL)",
+      "route": "INALATORIO",
+      "title": "Beclometasona aerossol 250mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "fluticasona_250mcg_flixotide",
+      "label": "Fluticasona 250mcg (FLIXOTIDE)",
+      "route": "INALATORIO",
+      "title": "Fluticasona 250mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 1 jato, até de 12/12 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "salbutamol_100mcg_aerolin",
+      "label": "Salbutamol 100mcg (AEROLIN)",
+      "route": "INALATORIO",
+      "title": "Salbutamol 100mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos, até de 6/6 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "fenoterol_100mcg_berotec",
+      "label": "Fenoterol 100mcg (BEROTEC)",
+      "route": "INALATORIO",
+      "title": "Fenoterol 100mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos, até de 6/6 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "formoterol_12mcg_foradil",
+      "label": "Formoterol 12mcg (FORADIL)",
+      "route": "INALATORIO",
+      "title": "Formoterol 12mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 1 jato, até de 12/12 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "formoterol_12mcg_budesonida_400mcg_alenia",
+      "label": "Formoterol 12mcg + budesonida 400mcg (ALENIA)",
+      "route": "INALATORIO",
+      "title": "Formoterol 12mcg + budesonida 400mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 1 jato, até de 24/24 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "salmeterol_25mcg_serevent",
+      "label": "Salmeterol 25mcg (SEREVENT)",
+      "route": "INALATORIO",
+      "title": "Salmeterol 25mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "salmeterol_25mcg_fluticasona_125mcg_seretide",
+      "label": "Salmeterol 25mcg + fluticasona 125mcg (SERETIDE)",
+      "route": "INALATORIO",
+      "title": "Salmeterol 25mcg + fluticasona 125mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
     }
   ]
 }

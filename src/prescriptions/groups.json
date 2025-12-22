@@ -180,6 +180,27 @@
       ]
     },
     {
+      "id": "corticoide_inalatorio",
+      "label": "Corticoide inalatório",
+      "itemIds": [
+        "budesonida_inalatoria_50mcg_busonid",
+        "beclometasona_aerossol_250mcg_clenil",
+        "fluticasona_250mcg_flixotide"
+      ]
+    },
+    {
+      "id": "broncodilatadores",
+      "label": "Broncodilatadores",
+      "itemIds": [
+        "salbutamol_100mcg_aerolin",
+        "fenoterol_100mcg_berotec",
+        "formoterol_12mcg_foradil",
+        "formoterol_12mcg_budesonida_400mcg_alenia",
+        "salmeterol_25mcg_serevent",
+        "salmeterol_25mcg_fluticasona_125mcg_seretide"
+      ]
+    },
+    {
       "id": "hidratacao_oral",
       "label": "Hidratação oral",
       "itemIds": ["sro_sais_reidratacao_oral"]

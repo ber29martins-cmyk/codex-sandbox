@@ -1344,9 +1344,17 @@
         ],
         "rxGroups": [
           "analgesia",
-          "corticoide_nasal"
+          "broncodilatadores",
+          "corticoide_inalatorio",
+          "corticoide_nasal",
+          "corticoides",
+          "antihistaminicos",
+          "lavagem_nasal",
+          "antibioticos"
         ],
         "rxDefaults": [
+          "salbutamol_100mcg_aerolin",
+          "budesonida_inalatoria_50mcg_busonid",
           "mometasona_nasal_50mcg_nasonex"
         ]
       }
