@@ -1087,8 +1087,22 @@
           "ivras_previa",
           "hipoacusia"
         ],
-        "rxGroups": [],
-        "rxDefaults": []
+        "rxGroups": [
+          "analgesicos",
+          "aines",
+          "antibioticos",
+          "corticoides",
+          "antihistaminicos",
+          "antitussigenos",
+          "lavagem_nasal",
+          "corticoide_nasal"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol",
+          "amoxicilina_500mg_amoxil",
+          "soro_0_9_sorimax",
+          "mometasona_nasal_50mcg_nasonex"
+        ]
       }
     }
   ]
