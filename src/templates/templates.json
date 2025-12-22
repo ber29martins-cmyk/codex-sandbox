@@ -531,8 +531,9 @@
         "hipotese": "Gastroenterite aguda",
         "condutaAlarmes": "",
         "exame": [
-          "Hidratado",
-          "Abdome flácido, dor difusa leve, sem sinais de peritonite"
+          "Sinais vitais conforme triagem",
+          "BEG, hidratado, corado, afebril no momento, ativo e reativo",
+          "Abdome sem sinais de irritação peritoneal"
         ],
         "alarmItems": [
           {
