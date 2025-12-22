@@ -472,9 +472,34 @@ const currentTemplate = useMemo(
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
   }, [currentTemplate]);
+  const orderedSelectedRxIds = useMemo(() => {
+    const selectedSet = new Set(rxSelected);
+    const ordered: string[] = [];
+    const seen = new Set<string>();
+
+    for (const groupId of currentTemplate.defaults.rxGroups ?? []) {
+      const group = RX_GROUP_MAP[groupId];
+      if (!group?.itemIds) continue;
+      for (const itemId of group.itemIds) {
+        if (selectedSet.has(itemId) && !seen.has(itemId)) {
+          ordered.push(itemId);
+          seen.add(itemId);
+        }
+      }
+    }
+
+    for (const id of rxSelected) {
+      if (!seen.has(id)) {
+        ordered.push(id);
+        seen.add(id);
+      }
+    }
+
+    return ordered;
+  }, [rxSelected, currentTemplate]);
   const groupedRx = useMemo(() => {
     const byRoute: Record<string, RxItem[]> = {};
-    for (const id of rxSelected) {
+    for (const id of orderedSelectedRxIds) {
       const item = RX_CATALOG_MAP[id];
       if (!item) continue;
       const route = (item.route || "OUTROS").toUpperCase();
@@ -488,12 +513,12 @@ const currentTemplate = useMemo(
     return Object.entries(byRoute)
       .sort(([a], [b]) => orderIndex(a) - orderIndex(b) || a.localeCompare(b, "pt"))
       .map(([route, items]) => ({ route, items }));
-  }, [rxSelected]);
+  }, [orderedSelectedRxIds]);
   const rxText = useMemo(() => {
-    if (!rxSelected.length) return "";
+    if (!orderedSelectedRxIds.length) return "";
     const byRoute: Record<string, RxItem[]> = {};
 
-    for (const id of rxSelected) {
+    for (const id of orderedSelectedRxIds) {
       const item = RX_CATALOG_MAP[id];
       if (!item) continue;
       const route = (item.route || "OUTROS").toUpperCase();
@@ -527,7 +552,7 @@ const currentTemplate = useMemo(
       });
 
     return routeBlocks.join("\n\n").trim();
-  }, [rxSelected]);
+  }, [orderedSelectedRxIds]);
   
   const hmaParagraphs = useMemo(() => {
     const items = getTemplateHmaItems(currentTemplate);
