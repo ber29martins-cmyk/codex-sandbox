@@ -247,6 +247,7 @@ const cidFromKey = (keyRaw: string): string => {
   if (key.includes("cistite")) return "N30.0";
   if (key.includes("dispepsia") || key.includes("epigastr")) return "K30";
   if (key.includes("gastroenterite") || key.includes("diarreia")) return "K52.9";
+  if (key.includes("sinusite")) return "J01.9";
 
   if (key.includes("faringo") || key.includes("amigdal")) {
     if (key.includes("bacter") || key.includes("estrept")) return "J03.0";

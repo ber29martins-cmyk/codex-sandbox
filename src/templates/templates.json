@@ -1104,6 +1104,134 @@
           "mometasona_nasal_50mcg_nasonex"
         ]
       }
+    },
+    {
+      "id": "sinusite_aguda",
+      "label": "Sinusite aguda",
+      "title": "Sinusite aguda",
+      "defaults": {
+        "qpDefault": "Congestão nasal e dor facial",
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Sinusite aguda",
+        "condutaAlarmes": "",
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Cavidade nasal com congestão e secreção",
+          "Orofaringe com hiperemia leve e gotejamento pós-nasal",
+          "Sem sinais de gravidade ocular; sem rigidez de nuca",
+          "Ausculta pulmonar sem alterações significativas"
+        ],
+        "alarmItems": [
+          {
+            "id": "edema-periorb",
+            "label": "Edema periorb",
+            "absentLabel": "Sem Edema periorb",
+            "presentText": "Com Edema periorb"
+          },
+          {
+            "id": "dor-ocular",
+            "label": "Dor ocular",
+            "absentLabel": "Sem Dor ocular",
+            "presentText": "Com Dor ocular"
+          },
+          {
+            "id": "alteracao-visual",
+            "label": "Alteração visual",
+            "absentLabel": "Sem Alteração visual",
+            "presentText": "Com Alteração visual"
+          },
+          {
+            "id": "proptose",
+            "label": "Proptose",
+            "absentLabel": "Sem Proptose",
+            "presentText": "Com Proptose"
+          },
+          {
+            "id": "cefaleia-intensa",
+            "label": "Cefaleia intensa",
+            "absentLabel": "Sem Cefaleia intensa",
+            "presentText": "Com Cefaleia intensa"
+          },
+          {
+            "id": "meningismo",
+            "label": "Meningismo",
+            "absentLabel": "Sem Meningismo",
+            "presentText": "Com Meningismo"
+          },
+          {
+            "id": "febre-alta-tox",
+            "label": "Febre alta/tox",
+            "absentLabel": "Sem Febre alta/tox",
+            "presentText": "Com Febre alta/tox"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "obstrucao_nasal",
+            "label": "Obstrução nasal",
+            "text": "Refere obstrução nasal e congestão, com piora ao deitar"
+          },
+          {
+            "id": "rinorreia_purulenta",
+            "label": "Secreção espessa",
+            "text": "Refere rinorreia espessa/purulenta e gotejamento pós-nasal"
+          },
+          {
+            "id": "dor_pressao_facial",
+            "label": "Dor/pressão face",
+            "text": "Refere dor/pressão facial (maxilar/frontal) com piora ao inclinar a cabeça"
+          },
+          {
+            "id": "tosse_noturna",
+            "label": "Tosse noturna",
+            "text": "Refere tosse pior à noite ou ao deitar, associada a gotejamento pós-nasal"
+          },
+          {
+            "id": "persistencia_10d",
+            "label": ">10 dias",
+            "text": "Refere sintomas persistentes por mais de 10 dias sem melhora significativa"
+          },
+          {
+            "id": "piora_dupla",
+            "label": "Piora dupla",
+            "text": "Refere melhora inicial seguida de piora importante (padrão de piora bifásica)"
+          },
+          {
+            "id": "dor_dentaria",
+            "label": "Dor dentária",
+            "text": "Refere dor em arcada dentária superior quando aplicável"
+          },
+          {
+            "id": "febre",
+            "label": "Febre",
+            "text": "Refere febre associada, quando presente"
+          }
+        ],
+        "hmaDefaults": [
+          "obstrucao_nasal",
+          "rinorreia_purulenta",
+          "dor_pressao_facial",
+          "persistencia_10d"
+        ],
+        "rxGroups": [
+          "analgesicos",
+          "aines",
+          "antihistaminicos",
+          "lavagem_nasal",
+          "corticoide_nasal",
+          "antibioticos"
+        ],
+        "rxDefaults": [
+          "paracetamol_750mg_tylenol",
+          "ibuprofeno_600mg_alivium",
+          "loratadina_10mg_claritin",
+          "soro_0_9_sorimax",
+          "mometasona_nasal_50mcg_nasonex"
+        ]
+      }
     }
   ]
 }
