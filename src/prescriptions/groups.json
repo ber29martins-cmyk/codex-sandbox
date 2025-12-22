@@ -173,7 +173,11 @@
     {
       "id": "corticoide_nasal",
       "label": "Corticoide nasal",
-      "itemIds": ["mometasona_nasal_50mcg_nasonex", "ciclesonida_nasal_50mcg_omnaris"]
+      "itemIds": [
+        "mometasona_nasal_50mcg_nasonex",
+        "ciclesonida_nasal_50mcg_omnaris",
+        "budesonida_nasal_32mcg_busonid"
+      ]
     },
     {
       "id": "hidratacao_oral",

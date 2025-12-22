@@ -867,6 +867,14 @@
       "title": "Ciclesonida nasal 50mcg",
       "qty": "1 frasco",
       "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
+    },
+    {
+      "id": "budesonida_nasal_32mcg_busonid",
+      "label": "Budesonida 32mcg (BUSONID)",
+      "route": "INALATORIO",
+      "title": "Budesonida 32mcg",
+      "qty": "1 frasco",
+      "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
     }
   ]
 }
