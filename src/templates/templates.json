@@ -1357,6 +1357,123 @@
           "mometasona_nasal_50mcg_nasonex"
         ]
       }
+    },
+    {
+      "id": "conjuntivite_aguda",
+      "label": "Conjuntivite aguda",
+      "title": "Conjuntivite aguda",
+      "defaults": {
+        "qpDefault": "Olho vermelho",
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Conjuntivite aguda",
+        "condutaAlarmes": "",
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Olhos: hiperemia conjuntival D/E, secreção conforme quadro, sem opacidade corneana evidente",
+          "Pupilas isocóricas e fotorreagentes; motilidade ocular preservada",
+          "Sem sinais de celulite orbitária"
+        ],
+        "alarmItems": [
+          {
+            "id": "dor-ocular-intensa",
+            "label": "dor ocular intensa",
+            "absentLabel": "Sem dor ocular intensa",
+            "presentText": "Com dor ocular intensa"
+          },
+          {
+            "id": "fotofobia",
+            "label": "fotofobia",
+            "absentLabel": "Sem fotofobia",
+            "presentText": "Com fotofobia"
+          },
+          {
+            "id": "visao-reduzida",
+            "label": "visão reduzida",
+            "absentLabel": "Sem visão reduzida",
+            "presentText": "Com visão reduzida"
+          },
+          {
+            "id": "trauma-quimico",
+            "label": "trauma/químico",
+            "absentLabel": "Sem trauma/químico",
+            "presentText": "Com trauma/químico"
+          },
+          {
+            "id": "lente-contato",
+            "label": "lente contato",
+            "absentLabel": "Sem lente contato",
+            "presentText": "Com lente contato"
+          },
+          {
+            "id": "edema-palpebral-imp",
+            "label": "edema palpebral imp",
+            "absentLabel": "Sem edema palpebral imp",
+            "presentText": "Com edema palpebral imp"
+          },
+          {
+            "id": "proptose",
+            "label": "proptose",
+            "absentLabel": "Sem proptose",
+            "presentText": "Com proptose"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "olho_vermelho",
+            "label": "olho vermelho",
+            "text": "refere hiperemia ocular de início recente, unilateral ou bilateral"
+          },
+          {
+            "id": "secrecao",
+            "label": "secreção",
+            "text": "refere secreção ocular (aquosa ou mucopurulenta) e crostas ao acordar"
+          },
+          {
+            "id": "prurido",
+            "label": "prurido",
+            "text": "refere prurido ocular e lacrimejamento, com sensação de areia"
+          },
+          {
+            "id": "contato",
+            "label": "contato doente",
+            "text": "refere contato com pessoa com quadro semelhante ou surto em ambiente escolar/familiar"
+          },
+          {
+            "id": "lente",
+            "label": "lente contato",
+            "text": "refere uso de lente de contato quando aplicável"
+          },
+          {
+            "id": "ivrs",
+            "label": "ivrs recente",
+            "text": "refere sintomas de ivrs recentes (coriza, tosse, febre baixa) associados"
+          },
+          {
+            "id": "unilateral",
+            "label": "unilateral",
+            "text": "refere início unilateral com possível progressão para bilateral"
+          },
+          {
+            "id": "edema_palpebral",
+            "label": "edema palpebral",
+            "text": "refere edema palpebral leve/moderado associado"
+          }
+        ],
+        "hmaDefaults": [
+          "olho_vermelho",
+          "secrecao",
+          "prurido",
+          "contato"
+        ],
+        "rxGroups": [
+          "antibioticos_oftalmicos",
+          "antihistaminicos"
+        ],
+        "rxDefaults": []
+      }
     }
   ]
 }
