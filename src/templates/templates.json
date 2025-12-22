@@ -1231,6 +1231,125 @@
           "mometasona_nasal_50mcg_nasonex"
         ]
       }
+    },
+    {
+      "id": "asma_exacerbada",
+      "label": "Asma exacerbada",
+      "title": "Asma exacerbada",
+      "defaults": {
+        "qpDefault": "Falta de ar",
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Asma exacerbada",
+        "condutaAlarmes": "",
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, consciente, orientado",
+          "FR aumentada conforme gravidade, uso de musculatura acessória quando presente",
+          "Ausculta pulmonar com sibilos difusos e tempo expiratório prolongado, sem sinais de consolidação",
+          "Perfusão periférica preservada"
+        ],
+        "alarmItems": [
+          {
+            "id": "sat-baixa",
+            "label": "Sat baixa",
+            "absentLabel": "Sem Sat baixa",
+            "presentText": "Com Sat baixa"
+          },
+          {
+            "id": "dispneia-esforco",
+            "label": "Dispneia/esforço",
+            "absentLabel": "Sem Dispneia/esforço",
+            "presentText": "Com Dispneia/esforço"
+          },
+          {
+            "id": "fala-entrecort",
+            "label": "Fala entrecort",
+            "absentLabel": "Sem Fala entrecort",
+            "presentText": "Com Fala entrecort"
+          },
+          {
+            "id": "cianose",
+            "label": "Cianose",
+            "absentLabel": "Sem Cianose",
+            "presentText": "Com Cianose"
+          },
+          {
+            "id": "rebaixamento",
+            "label": "Rebaixamento",
+            "absentLabel": "Sem Rebaixamento",
+            "presentText": "Com Rebaixamento"
+          },
+          {
+            "id": "torax-silencioso",
+            "label": "Tórax silenc",
+            "absentLabel": "Sem Tórax silenc",
+            "presentText": "Com Tórax silenc"
+          },
+          {
+            "id": "exaustao",
+            "label": "Exaustão",
+            "absentLabel": "Sem Exaustão",
+            "presentText": "Com Exaustão"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "dispneia",
+            "label": "dispneia",
+            "text": "refere falta de ar de início agudo/subagudo, com piora progressiva nas últimas horas"
+          },
+          {
+            "id": "sibilancia",
+            "label": "sibilância",
+            "text": "refere chiado no peito e sensação de aperto torácico, com limitação para esforços"
+          },
+          {
+            "id": "tosse",
+            "label": "tosse",
+            "text": "refere tosse seca ou com pouca expectoração, por vezes pior à noite"
+          },
+          {
+            "id": "gatilho_ivrs",
+            "label": "ivrs recente",
+            "text": "refere sintomas de ivrs recentes como coriza e odinofagia antecedendo a piora respiratória"
+          },
+          {
+            "id": "gatilho_alergeno",
+            "label": "gatilho alérg.",
+            "text": "refere exposição a poeira, mofo, fumaça, perfume ou outros gatilhos ambientais"
+          },
+          {
+            "id": "uso_saba",
+            "label": "uso de saba",
+            "text": "refere uso prévio de broncodilatador de resgate com resposta parcial ou curta duração"
+          },
+          {
+            "id": "noturno",
+            "label": "piora noturna",
+            "text": "refere despertares noturnos por tosse/dispneia e necessidade de medicação de resgate"
+          },
+          {
+            "id": "historico",
+            "label": "asma prévia",
+            "text": "refere diagnóstico prévio de asma e episódios semelhantes, com uso habitual de medicações de controle quando aplicável"
+          }
+        ],
+        "hmaDefaults": [
+          "dispneia",
+          "sibilancia",
+          "tosse",
+          "uso_saba"
+        ],
+        "rxGroups": [
+          "analgesia",
+          "corticoide_nasal"
+        ],
+        "rxDefaults": [
+          "mometasona_nasal_50mcg_nasonex"
+        ]
+      }
     }
   ]
 }

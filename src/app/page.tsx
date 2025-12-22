@@ -146,7 +146,12 @@ const ALARM_PRINT_MAP: Record<string, string> = {
   "Déficit sensitivo": "parestesia / hipoestesia",
   "Perda de força": "perda de força",
   "Alteração esfinc": "alteração esfincteriana",
-  "Anestesia em sela": "anestesia em sela"
+  "Anestesia em sela": "anestesia em sela",
+  "Fala entrecort": "fala entrecortada / incapaz de falar frases",
+  "Tórax silenc": "tórax silencioso / redução importante do murmúrio vesicular",
+  "Exaustão": "exaustão respiratória iminente",
+  "Cianose": "cianose",
+  "Rebaixamento": "rebaixamento do nível de consciência"
 };
 
 function alarmLabelForPrint(input: string) {
@@ -244,6 +249,8 @@ const cidFromKey = (keyRaw: string): string => {
   if (key.includes("sindrome gripal") || key.includes("gripe") || key.includes("influenza")) return "J11.1";
   if (key.includes("resfriado") || key.includes("coriza")) return "J00";
   if (key.includes("tosse") && (key.includes("pos") || key.includes("pós") || key.includes("viral"))) return "R05";
+  if (key.includes("asma")) return "J45.9";
+  if (key.includes("status") || key.includes("grave")) return "J46";
   if (key.includes("cistite")) return "N30.0";
   if (key.includes("dispepsia") || key.includes("epigastr")) return "K30";
   if (key.includes("gastroenterite") || key.includes("diarreia")) return "K52.9";
