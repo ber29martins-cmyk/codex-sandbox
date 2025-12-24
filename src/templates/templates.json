@@ -1739,23 +1739,90 @@
           "Palpação cervical com tensão muscular paravertebral/trapézio conforme quadro"
         ],
         "alarmItems": [
-          { "id": "pior-cefaleia", "label": "pior cefaleia", "absentLabel": "Sem pior cefaleia", "presentText": "Com pior cefaleia" },
-          { "id": "inicio-subito", "label": "início súbito", "absentLabel": "Sem início súbito", "presentText": "Com início súbito" },
-          { "id": "deficit-neuro", "label": "déficit neuro", "absentLabel": "Sem déficit neuro", "presentText": "Com déficit neuro" },
-          { "id": "febre-mening", "label": "febre/mening", "absentLabel": "Sem febre/mening", "presentText": "Com febre/mening" },
-          { "id": "trauma", "label": "trauma", "absentLabel": "Sem trauma", "presentText": "Com trauma" },
-          { "id": "confusao", "label": "confusão", "absentLabel": "Sem confusão", "presentText": "Com confusão" },
-          { "id": "papiledema", "label": "papiledema", "absentLabel": "Sem papiledema", "presentText": "Com papiledema" }
+          {
+            "id": "pior-cefaleia",
+            "label": "pior cefaleia",
+            "absentLabel": "Sem pior cefaleia",
+            "presentText": "Com pior cefaleia"
+          },
+          {
+            "id": "inicio-subito",
+            "label": "início súbito",
+            "absentLabel": "Sem início súbito",
+            "presentText": "Com início súbito"
+          },
+          {
+            "id": "deficit-neuro",
+            "label": "déficit neuro",
+            "absentLabel": "Sem déficit neuro",
+            "presentText": "Com déficit neuro"
+          },
+          {
+            "id": "febre-mening",
+            "label": "febre/mening",
+            "absentLabel": "Sem febre/mening",
+            "presentText": "Com febre/mening"
+          },
+          {
+            "id": "trauma",
+            "label": "trauma",
+            "absentLabel": "Sem trauma",
+            "presentText": "Com trauma"
+          },
+          {
+            "id": "confusao",
+            "label": "confusão",
+            "absentLabel": "Sem confusão",
+            "presentText": "Com confusão"
+          },
+          {
+            "id": "papiledema",
+            "label": "papiledema",
+            "absentLabel": "Sem papiledema",
+            "presentText": "Com papiledema"
+          }
         ],
         "hmaItems": [
-          { "id": "pressao_faixa", "label": "pressão/faixa", "text": "refere dor em pressão/aperto, bilateral, em faixa, de intensidade leve a moderada" },
-          { "id": "inicio_gradual", "label": "início gradual", "text": "refere início gradual e evolução ao longo do dia, com oscilação da intensidade" },
-          { "id": "estresse_sono", "label": "estresse/sono", "text": "refere estresse, privação de sono ou sobrecarga como gatilhos prováveis" },
-          { "id": "tensao_cerv", "label": "tensão cervical", "text": "refere tensão cervical/ombros e piora com postura prolongada" },
-          { "id": "foto_fono_leve", "label": "foto/fono leve", "text": "refere fotofobia ou fonofobia leves, sem ambos intensos simultaneamente" },
-          { "id": "nausea_leve", "label": "náusea leve", "text": "refere náusea leve ocasional; vômitos não são característica típica" },
-          { "id": "alivio_analg", "label": "alívio analg", "text": "refere melhora parcial com analgésicos comuns e repouso" },
-          { "id": "recorrente", "label": "recorrente", "text": "refere episódios prévios semelhantes, sem sinais neurológicos associados" }
+          {
+            "id": "pressao_faixa",
+            "label": "pressão/faixa",
+            "text": "refere dor em pressão/aperto, bilateral, em faixa, de intensidade leve a moderada"
+          },
+          {
+            "id": "inicio_gradual",
+            "label": "início gradual",
+            "text": "refere início gradual e evolução ao longo do dia, com oscilação da intensidade"
+          },
+          {
+            "id": "estresse_sono",
+            "label": "estresse/sono",
+            "text": "refere estresse, privação de sono ou sobrecarga como gatilhos prováveis"
+          },
+          {
+            "id": "tensao_cerv",
+            "label": "tensão cervical",
+            "text": "refere tensão cervical/ombros e piora com postura prolongada"
+          },
+          {
+            "id": "foto_fono_leve",
+            "label": "foto/fono leve",
+            "text": "refere fotofobia ou fonofobia leves, sem ambos intensos simultaneamente"
+          },
+          {
+            "id": "nausea_leve",
+            "label": "náusea leve",
+            "text": "refere náusea leve ocasional; vômitos não são característica típica"
+          },
+          {
+            "id": "alivio_analg",
+            "label": "alívio analg",
+            "text": "refere melhora parcial com analgésicos comuns e repouso"
+          },
+          {
+            "id": "recorrente",
+            "label": "recorrente",
+            "text": "refere episódios prévios semelhantes, sem sinais neurológicos associados"
+          }
         ],
         "hmaDefaults": [
           "pressao_faixa",
@@ -1790,23 +1857,90 @@
           "Sem rigidez de nuca; avaliação pupilar e pares cranianos sem alterações"
         ],
         "alarmItems": [
-          { "id": "pior-cefaleia", "label": "pior cefaleia", "absentLabel": "Sem pior cefaleia", "presentText": "Com pior cefaleia" },
-          { "id": "inicio-subito", "label": "início súbito", "absentLabel": "Sem início súbito", "presentText": "Com início súbito" },
-          { "id": "deficit-neuro", "label": "déficit neuro", "absentLabel": "Sem déficit neuro", "presentText": "Com déficit neuro" },
-          { "id": "febre-mening", "label": "febre/mening", "absentLabel": "Sem febre/mening", "presentText": "Com febre/mening" },
-          { "id": "trauma", "label": "trauma", "absentLabel": "Sem trauma", "presentText": "Com trauma" },
-          { "id": "gravidez", "label": "gravidez", "absentLabel": "Sem gravidez", "presentText": "Com gravidez" },
-          { "id": "papiledema", "label": "papiledema", "absentLabel": "Sem papiledema", "presentText": "Com papiledema" }
+          {
+            "id": "pior-cefaleia",
+            "label": "pior cefaleia",
+            "absentLabel": "Sem pior cefaleia",
+            "presentText": "Com pior cefaleia"
+          },
+          {
+            "id": "inicio-subito",
+            "label": "início súbito",
+            "absentLabel": "Sem início súbito",
+            "presentText": "Com início súbito"
+          },
+          {
+            "id": "deficit-neuro",
+            "label": "déficit neuro",
+            "absentLabel": "Sem déficit neuro",
+            "presentText": "Com déficit neuro"
+          },
+          {
+            "id": "febre-mening",
+            "label": "febre/mening",
+            "absentLabel": "Sem febre/mening",
+            "presentText": "Com febre/mening"
+          },
+          {
+            "id": "trauma",
+            "label": "trauma",
+            "absentLabel": "Sem trauma",
+            "presentText": "Com trauma"
+          },
+          {
+            "id": "gravidez",
+            "label": "gravidez",
+            "absentLabel": "Sem gravidez",
+            "presentText": "Com gravidez"
+          },
+          {
+            "id": "papiledema",
+            "label": "papiledema",
+            "absentLabel": "Sem papiledema",
+            "presentText": "Com papiledema"
+          }
         ],
         "hmaItems": [
-          { "id": "unilateral", "label": "unilateral", "text": "refere cefaleia tipicamente unilateral, pulsátil, de intensidade moderada a forte" },
-          { "id": "nausea_vom", "label": "náusea/vômito", "text": "refere náuseas e/ou vômitos associados" },
-          { "id": "foto_fono", "label": "foto/fonofobia", "text": "refere fotofobia e fonofobia durante as crises" },
-          { "id": "piora_esforco", "label": "piora esforço", "text": "refere piora com atividade física e necessidade de repouso" },
-          { "id": "aura", "label": "aura", "text": "refere aura visual/sensorial quando aplicável, precedendo a dor" },
-          { "id": "gatilhos", "label": "gatilhos", "text": "refere gatilhos como jejum, sono irregular, estresse, álcool ou certos alimentos" },
-          { "id": "recorrente", "label": "recorrente", "text": "refere crises prévias semelhantes com padrão recorrente" },
-          { "id": "resposta_parcial", "label": "resp parcial", "text": "refere resposta parcial a analgésicos comuns, com recorrência da dor" }
+          {
+            "id": "unilateral",
+            "label": "unilateral",
+            "text": "refere cefaleia tipicamente unilateral, pulsátil, de intensidade moderada a forte"
+          },
+          {
+            "id": "nausea_vom",
+            "label": "náusea/vômito",
+            "text": "refere náuseas e/ou vômitos associados"
+          },
+          {
+            "id": "foto_fono",
+            "label": "foto/fonofobia",
+            "text": "refere fotofobia e fonofobia durante as crises"
+          },
+          {
+            "id": "piora_esforco",
+            "label": "piora esforço",
+            "text": "refere piora com atividade física e necessidade de repouso"
+          },
+          {
+            "id": "aura",
+            "label": "aura",
+            "text": "refere aura visual/sensorial quando aplicável, precedendo a dor"
+          },
+          {
+            "id": "gatilhos",
+            "label": "gatilhos",
+            "text": "refere gatilhos como jejum, sono irregular, estresse, álcool ou certos alimentos"
+          },
+          {
+            "id": "recorrente",
+            "label": "recorrente",
+            "text": "refere crises prévias semelhantes com padrão recorrente"
+          },
+          {
+            "id": "resposta_parcial",
+            "label": "resp parcial",
+            "text": "refere resposta parcial a analgésicos comuns, com recorrência da dor"
+          }
         ],
         "hmaDefaults": [
           "unilateral",
@@ -1846,24 +1980,96 @@
           "Avaliar linfangite/linfonodos regionais conforme localização"
         ],
         "alarmItems": [
-          { "id": "toxemia", "label": "toxemia", "absentLabel": "Sem toxemia", "presentText": "Com toxemia" },
-          { "id": "hipotensao", "label": "hipotensão", "absentLabel": "Sem hipotensão", "presentText": "Com hipotensão" },
-          { "id": "taquicardia", "label": "taquicardia", "absentLabel": "Sem taquicardia", "presentText": "Com taquicardia" },
-          { "id": "bolhas-necrose", "label": "bolhas/necrose", "absentLabel": "Sem bolhas/necrose", "presentText": "Com bolhas/necrose" },
-          { "id": "dor-despropor", "label": "dor despropor", "absentLabel": "Sem dor despropor", "presentText": "Com dor despropor" },
-          { "id": "rapida-progress", "label": "rápida progress", "absentLabel": "Sem rápida progress", "presentText": "Com rápida progress" },
-          { "id": "falha-48-72h", "label": "falha 48-72h", "absentLabel": "Sem falha 48-72h", "presentText": "Com falha 48-72h" },
-          { "id": "imunossupressao", "label": "imunossupressão", "absentLabel": "Sem imunossupressão", "presentText": "Com imunossupressão" }
+          {
+            "id": "toxemia",
+            "label": "toxemia",
+            "absentLabel": "Sem toxemia",
+            "presentText": "Com toxemia"
+          },
+          {
+            "id": "hipotensao",
+            "label": "hipotensão",
+            "absentLabel": "Sem hipotensão",
+            "presentText": "Com hipotensão"
+          },
+          {
+            "id": "taquicardia",
+            "label": "taquicardia",
+            "absentLabel": "Sem taquicardia",
+            "presentText": "Com taquicardia"
+          },
+          {
+            "id": "bolhas-necrose",
+            "label": "bolhas/necrose",
+            "absentLabel": "Sem bolhas/necrose",
+            "presentText": "Com bolhas/necrose"
+          },
+          {
+            "id": "dor-despropor",
+            "label": "dor despropor",
+            "absentLabel": "Sem dor despropor",
+            "presentText": "Com dor despropor"
+          },
+          {
+            "id": "rapida-progress",
+            "label": "rápida progress",
+            "absentLabel": "Sem rápida progress",
+            "presentText": "Com rápida progress"
+          },
+          {
+            "id": "falha-48-72h",
+            "label": "falha 48-72h",
+            "absentLabel": "Sem falha 48-72h",
+            "presentText": "Com falha 48-72h"
+          },
+          {
+            "id": "imunossupressao",
+            "label": "imunossupressão",
+            "absentLabel": "Sem imunossupressão",
+            "presentText": "Com imunossupressão"
+          }
         ],
         "hmaItems": [
-          { "id": "inicio", "label": "início recente", "text": "refere início recente de dor, calor e rubor em área de pele, com progressão local" },
-          { "id": "edema", "label": "edema local", "text": "refere edema e sensibilidade local, com aumento de volume na região acometida" },
-          { "id": "porta", "label": "porta entrada", "text": "refere ferida/trauma, micose interdigital, picada, fissura ou manipulação prévia como porta de entrada" },
-          { "id": "febre", "label": "febre", "text": "refere febre e calafrios quando presentes" },
-          { "id": "linfangite", "label": "linfangite", "text": "refere estrias avermelhadas ascendentes e/ou linfonodos dolorosos quando presentes" },
-          { "id": "comorb", "label": "comorbidades", "text": "refere diabetes, insuficiência venosa/linfedema ou imunossupressão quando aplicável" },
-          { "id": "epis_previos", "label": "epis prévios", "text": "refere episódios prévios semelhantes na mesma região" },
-          { "id": "analgesia", "label": "dor local", "text": "refere dor local de leve a moderada, pior ao toque e deambulação conforme local" }
+          {
+            "id": "inicio",
+            "label": "início recente",
+            "text": "refere início recente de dor, calor e rubor em área de pele, com progressão local"
+          },
+          {
+            "id": "edema",
+            "label": "edema local",
+            "text": "refere edema e sensibilidade local, com aumento de volume na região acometida"
+          },
+          {
+            "id": "porta",
+            "label": "porta entrada",
+            "text": "refere ferida/trauma, micose interdigital, picada, fissura ou manipulação prévia como porta de entrada"
+          },
+          {
+            "id": "febre",
+            "label": "febre",
+            "text": "refere febre e calafrios quando presentes"
+          },
+          {
+            "id": "linfangite",
+            "label": "linfangite",
+            "text": "refere estrias avermelhadas ascendentes e/ou linfonodos dolorosos quando presentes"
+          },
+          {
+            "id": "comorb",
+            "label": "comorbidades",
+            "text": "refere diabetes, insuficiência venosa/linfedema ou imunossupressão quando aplicável"
+          },
+          {
+            "id": "epis_previos",
+            "label": "epis prévios",
+            "text": "refere episódios prévios semelhantes na mesma região"
+          },
+          {
+            "id": "analgesia",
+            "label": "dor local",
+            "text": "refere dor local de leve a moderada, pior ao toque e deambulação conforme local"
+          }
         ],
         "hmaDefaults": [
           "inicio",
@@ -1871,11 +2077,532 @@
           "porta",
           "analgesia"
         ],
-      "rxGroups": [
-        "analgesia",
-        "aines",
-        "antibioticos"
-      ],
+        "rxGroups": [
+          "analgesia",
+          "aines",
+          "antibioticos"
+        ],
+        "rxDefaults": []
+      }
+    },
+    {
+      "id": "escabiose",
+      "title": "Escabiose",
+      "label": "Escabiose",
+      "defaults": {
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Pele: pápulas/escoriações e crostas em áreas sugestivas (punhos, interdígitos, cintura), conforme exame",
+          "Sem sinais sistêmicos no momento; avaliar sinais de impetiginização/celulite conforme lesões"
+        ],
+        "alarmItems": [
+          {
+            "id": "febre",
+            "label": "febre",
+            "absentLabel": "Sem febre",
+            "presentText": "Com febre"
+          },
+          {
+            "id": "lesoes-extensas",
+            "label": "lesões extensas",
+            "absentLabel": "Sem lesões extensas",
+            "presentText": "Com lesões extensas"
+          },
+          {
+            "id": "sinais-infeccao",
+            "label": "sinais infecção",
+            "absentLabel": "Sem sinais infecção",
+            "presentText": "Com sinais infecção"
+          },
+          {
+            "id": "dor-importante",
+            "label": "dor importante",
+            "absentLabel": "Sem dor importante",
+            "presentText": "Com dor importante"
+          },
+          {
+            "id": "piora-rapida",
+            "label": "piora rápida",
+            "absentLabel": "Sem piora rápida",
+            "presentText": "Com piora rápida"
+          },
+          {
+            "id": "falha-recorrente",
+            "label": "falha recorrente",
+            "absentLabel": "Sem falha recorrente",
+            "presentText": "Com falha recorrente"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "prurido_noturno",
+            "label": "prurido noturno",
+            "text": "refere prurido intenso, pior à noite, com piora progressiva nos últimos dias"
+          },
+          {
+            "id": "lesoes_tipicas",
+            "label": "lesões típicas",
+            "text": "refere pápulas e escoriações em punhos, interdígitos e cintura, conforme distribuição típica"
+          },
+          {
+            "id": "contato_dom",
+            "label": "contato domicílio",
+            "text": "refere conviventes com prurido semelhante ou surgimento de casos no domicílio"
+          },
+          {
+            "id": "coceira_fam",
+            "label": "coceira familiar",
+            "text": "refere mais de um membro da família com sintomas semelhantes"
+          },
+          {
+            "id": "tempo",
+            "label": "dias a semanas",
+            "text": "refere evolução por dias a semanas, com piora contínua"
+          },
+          {
+            "id": "lesoes_gen",
+            "label": "lesões genitais",
+            "text": "refere prurido/lesões em região genital quando aplicável"
+          },
+          {
+            "id": "falha_prev",
+            "label": "falha prévia",
+            "text": "refere tratamento prévio incompleto ou falha por reinfestação quando aplicável"
+          },
+          {
+            "id": "escoriacoes",
+            "label": "escoriações",
+            "text": "refere lesões por coçar e crostas em áreas de maior prurido"
+          }
+        ],
+        "hmaDefaults": [
+          "prurido_noturno",
+          "lesoes_tipicas",
+          "contato_dom",
+          "tempo"
+        ],
+        "rxGroups": [
+          "antihistaminicos",
+          "antibioticos"
+        ],
+        "rxDefaults": []
+      }
+    },
+    {
+      "id": "abscesso_furunculo",
+      "title": "Abscesso cutâneo / Furúnculo",
+      "label": "Abscesso cutâneo / Furúnculo",
+      "defaults": {
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Pele: lesão nodular/placa inflamatória, dolorosa, com flutuação e/ou drenagem conforme quadro",
+          "Avaliar extensão de celulite ao redor e linfangite/linfonodos regionais",
+          "Sem sinais sistêmicos no momento; reavaliar se piora"
+        ],
+        "alarmItems": [
+          {
+            "id": "toxemia",
+            "label": "toxemia",
+            "absentLabel": "Sem toxemia",
+            "presentText": "Com toxemia"
+          },
+          {
+            "id": "hipotensao",
+            "label": "hipotensão",
+            "absentLabel": "Sem hipotensão",
+            "presentText": "Com hipotensão"
+          },
+          {
+            "id": "taquicardia",
+            "label": "taquicardia",
+            "absentLabel": "Sem taquicardia",
+            "presentText": "Com taquicardia"
+          },
+          {
+            "id": "celulite-extensa",
+            "label": "celulite extensa",
+            "absentLabel": "Sem celulite extensa",
+            "presentText": "Com celulite extensa"
+          },
+          {
+            "id": "bolhas-necrose",
+            "label": "bolhas/necrose",
+            "absentLabel": "Sem bolhas/necrose",
+            "presentText": "Com bolhas/necrose"
+          },
+          {
+            "id": "dor-desproporc",
+            "label": "dor desproporc",
+            "absentLabel": "Sem dor desproporc",
+            "presentText": "Com dor desproporc"
+          },
+          {
+            "id": "falha-48-72h",
+            "label": "falha 48-72h",
+            "absentLabel": "Sem falha 48-72h",
+            "presentText": "Com falha 48-72h"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "nodulo_doloroso",
+            "label": "nódulo doloroso",
+            "text": "refere nódulo doloroso em pele, com aumento local progressivo"
+          },
+          {
+            "id": "rubor_calor",
+            "label": "rubor/calor",
+            "text": "refere rubor, calor e edema local ao redor da lesão"
+          },
+          {
+            "id": "drenagem",
+            "label": "drenagem",
+            "text": "refere saída de secreção/pus ou flutuação sugestiva de coleção"
+          },
+          {
+            "id": "trauma",
+            "label": "porta entrada",
+            "text": "refere foliculite, depilação, atrito, pequena lesão ou trauma como porta de entrada"
+          },
+          {
+            "id": "febre",
+            "label": "febre",
+            "text": "refere febre e mal-estar quando presentes"
+          },
+          {
+            "id": "progressao",
+            "label": "progressão",
+            "text": "refere progressão em 24–72 horas com aumento de dor e volume"
+          },
+          {
+            "id": "recorrente",
+            "label": "recorrente",
+            "text": "refere episódios prévios semelhantes (furunculose) quando aplicável"
+          },
+          {
+            "id": "local",
+            "label": "local crítico",
+            "text": "refere localização em face, mão, períneo ou região com maior risco quando aplicável"
+          }
+        ],
+        "hmaDefaults": [
+          "nodulo_doloroso",
+          "rubor_calor",
+          "drenagem",
+          "progressao"
+        ],
+        "rxGroups": [
+          "analgesia",
+          "aines",
+          "antibioticos"
+        ],
+        "rxDefaults": []
+      }
+    },
+    {
+      "id": "rinite_alergica",
+      "title": "Rinite alérgica",
+      "label": "Rinite alérgica",
+      "defaults": {
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Cavidade nasal com congestão e cornetos hipertrofiados, secreção clara quando presente",
+          "Orofaringe com hiperemia leve/gotejamento pós-nasal quando presente",
+          "Ausculta pulmonar sem alterações significativas, salvo sibilos se associado"
+        ],
+        "alarmItems": [
+          {
+            "id": "dispneia",
+            "label": "dispneia",
+            "absentLabel": "Sem dispneia",
+            "presentText": "Com dispneia"
+          },
+          {
+            "id": "sibilancia-intensa",
+            "label": "sibilância intensa",
+            "absentLabel": "Sem sibilância intensa",
+            "presentText": "Com sibilância intensa"
+          },
+          {
+            "id": "sat-baixa",
+            "label": "sat baixa",
+            "absentLabel": "Sem sat baixa",
+            "presentText": "Com sat baixa"
+          },
+          {
+            "id": "dor-facial-intensa",
+            "label": "dor facial intensa",
+            "absentLabel": "Sem dor facial intensa",
+            "presentText": "Com dor facial intensa"
+          },
+          {
+            "id": "febre-alta",
+            "label": "febre alta",
+            "absentLabel": "Sem febre alta",
+            "presentText": "Com febre alta"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "espirros",
+            "label": "espirros",
+            "text": "refere crises de espirros e prurido nasal, com piora em ambientes com poeira/mofo"
+          },
+          {
+            "id": "coriza",
+            "label": "coriza hialina",
+            "text": "refere coriza clara e abundante, com lacrimejamento associado quando presente"
+          },
+          {
+            "id": "obstrucao",
+            "label": "obstrução nasal",
+            "text": "refere congestão/obstrução nasal com piora noturna e ronco"
+          },
+          {
+            "id": "prurido_ocular",
+            "label": "prurido ocular",
+            "text": "refere prurido ocular e hiperemia conjuntival leve quando associado"
+          },
+          {
+            "id": "gatilho",
+            "label": "gatilho ambiente",
+            "text": "refere gatilhos como poeira, mofo, fumaça, perfumes ou mudança climática"
+          },
+          {
+            "id": "recorrente",
+            "label": "recorrente",
+            "text": "refere padrão recorrente/sazonal com sintomas semelhantes prévios"
+          },
+          {
+            "id": "gotejamento",
+            "label": "pós-nasal",
+            "text": "refere gotejamento pós-nasal e pigarro/tosse leve"
+          },
+          {
+            "id": "asma",
+            "label": "sibilância",
+            "text": "refere chiado/dispneia quando há associação com asma"
+          }
+        ],
+        "hmaDefaults": [
+          "espirros",
+          "coriza",
+          "obstrucao",
+          "gatilho"
+        ],
+        "rxGroups": [
+          "lavagem_nasal",
+          "antihistaminicos",
+          "corticoide_nasal",
+          "aines"
+        ],
+        "rxDefaults": []
+      }
+    },
+    {
+      "id": "candidiase_vulvovaginal",
+      "title": "Candidíase vulvovaginal",
+      "label": "Candidíase vulvovaginal",
+      "defaults": {
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Avaliação geral sem sinais sistêmicos",
+          "Exame ginecológico conforme possibilidade/necessidade clínica; orientar retorno se piora"
+        ],
+        "alarmItems": [
+          {
+            "id": "febre",
+            "label": "febre",
+            "absentLabel": "Sem febre",
+            "presentText": "Com febre"
+          },
+          {
+            "id": "dor-pelvica-imp",
+            "label": "dor pélvica imp",
+            "absentLabel": "Sem dor pélvica imp",
+            "presentText": "Com dor pélvica imp"
+          },
+          {
+            "id": "corrimento-fetido",
+            "label": "corrimento fétido",
+            "absentLabel": "Sem corrimento fétido",
+            "presentText": "Com corrimento fétido"
+          },
+          {
+            "id": "sangramento",
+            "label": "sangramento",
+            "absentLabel": "Sem sangramento",
+            "presentText": "Com sangramento"
+          },
+          {
+            "id": "lesoes-ulceradas",
+            "label": "lesões ulceradas",
+            "absentLabel": "Sem lesões ulceradas",
+            "presentText": "Com lesões ulceradas"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "prurido",
+            "label": "prurido",
+            "text": "refere prurido vulvar importante, com desconforto local"
+          },
+          {
+            "id": "corrimento",
+            "label": "corrimento branco",
+            "text": "refere corrimento esbranquiçado e grumoso quando presente"
+          },
+          {
+            "id": "ardor",
+            "label": "ardor local",
+            "text": "refere ardor/irritação local, com piora após higiene/atrito"
+          },
+          {
+            "id": "disuria",
+            "label": "disúria externa",
+            "text": "refere ardor ao urinar por irritação externa quando aplicável"
+          },
+          {
+            "id": "antibiotico",
+            "label": "atb recente",
+            "text": "refere uso recente de antibiótico como fator desencadeante quando aplicável"
+          },
+          {
+            "id": "recorrente",
+            "label": "recorrente",
+            "text": "refere episódios prévios semelhantes, principalmente em períodos de estresse/hormonal"
+          },
+          {
+            "id": "odor",
+            "label": "odor",
+            "text": "refere ausência de odor forte como padrão mais compatível, quando aplicável (avaliado clinicamente)"
+          },
+          {
+            "id": "dor_pelv",
+            "label": "dor pélvica",
+            "text": "refere dor pélvica importante quando presente (atenção a diferencial)"
+          }
+        ],
+        "hmaDefaults": [
+          "prurido",
+          "corrimento",
+          "ardor",
+          "antibiotico"
+        ],
+        "rxGroups": [
+          "analgesia"
+        ],
+        "rxDefaults": []
+      }
+    },
+    {
+      "id": "laringite_disfonia",
+      "title": "Laringite / Disfonia",
+      "label": "Laringite / Disfonia",
+      "defaults": {
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Orofaringe com hiperemia leve, sem exsudato importante, conforme quadro",
+          "Ausculta pulmonar sem alterações significativas",
+          "Sem estridor no momento; reavaliar se piora"
+        ],
+        "alarmItems": [
+          {
+            "id": "dispneia-estridor",
+            "label": "dispneia/estridor",
+            "absentLabel": "Sem dispneia/estridor",
+            "presentText": "Com dispneia/estridor"
+          },
+          {
+            "id": "incapaz-deglut",
+            "label": "incapaz deglut",
+            "absentLabel": "Sem incapaz deglut",
+            "presentText": "Com incapaz deglut"
+          },
+          {
+            "id": "sialorreia",
+            "label": "sialorreia",
+            "absentLabel": "Sem sialorreia",
+            "presentText": "Com sialorreia"
+          },
+          {
+            "id": "toxemia",
+            "label": "toxemia",
+            "absentLabel": "Sem toxemia",
+            "presentText": "Com toxemia"
+          },
+          {
+            "id": "dor-cervical",
+            "label": "dor cervical",
+            "absentLabel": "Sem dor cervical",
+            "presentText": "Com dor cervical"
+          },
+          {
+            "id": "piora-rapida",
+            "label": "piora rápida",
+            "absentLabel": "Sem piora rápida",
+            "presentText": "Com piora rápida"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "rouquidao",
+            "label": "rouquidão",
+            "text": "refere rouquidão/disfonia de início recente, com piora ao falar"
+          },
+          {
+            "id": "ivrs",
+            "label": "ivrs recente",
+            "text": "refere coriza e tosse precedendo o quadro, compatível com infecção viral de vias aéreas"
+          },
+          {
+            "id": "odinofagia",
+            "label": "odinofagia leve",
+            "text": "refere odinofagia leve e irritação de garganta, sem repercussão importante"
+          },
+          {
+            "id": "tosse",
+            "label": "tosse",
+            "text": "refere tosse seca e pigarro frequente, com necessidade de limpar a garganta"
+          },
+          {
+            "id": "abuso_vocal",
+            "label": "abuso vocal",
+            "text": "refere uso excessivo da voz (fala intensa/gritos) como gatilho quando aplicável"
+          },
+          {
+            "id": "refluxo",
+            "label": "refluxo",
+            "text": "refere sintomas de refluxo/azia e piora pós-refeição quando aplicável"
+          },
+          {
+            "id": "febre",
+            "label": "febre",
+            "text": "refere febre quando presente"
+          },
+          {
+            "id": "tempo",
+            "label": "2-5 dias",
+            "text": "refere evolução típica de 2–5 dias, com melhora gradual"
+          }
+        ],
+        "hmaDefaults": [
+          "rouquidao",
+          "ivrs",
+          "tosse",
+          "tempo"
+        ],
+        "rxGroups": [
+          "analgesia",
+          "aines",
+          "antihistaminicos",
+          "antitussigenos"
+        ],
         "rxDefaults": []
       }
     }

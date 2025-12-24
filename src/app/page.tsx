@@ -154,6 +154,7 @@ const ALARM_PRINT_MAP: Record<string, string> = {
   "Cianose": "cianose",
   "Rebaixamento": "rebaixamento do nível de consciência",
   "dor despropor": "dor desproporcional",
+  "dor desproporc": "dor desproporcional",
   "rápida progress": "progressão rápida",
   "falha 48-72h": "falha terapêutica em 48–72 horas",
   "pior cefaleia": "pior cefaleia da vida ou mudança abrupta do padrão",
@@ -164,7 +165,10 @@ const ALARM_PRINT_MAP: Record<string, string> = {
   "papiledema": "papiledema ou sinais de hipertensão intracraniana",
   "gravidez": "gravidez ou puerpério",
   "hipotensão": "hipotensão ou sinais de choque",
-  "taquicardia": "taquicardia ou instabilidade hemodinâmica"
+  "taquicardia": "taquicardia ou instabilidade hemodinâmica",
+  "incapaz deglut": "incapaz de deglutir / recusa via oral",
+  "dispneia/estridor": "dispneia / estridor",
+  "sinais infecção": "sinais de infecção secundária"
 };
 
 function alarmLabelForPrint(input: string) {
@@ -271,6 +275,11 @@ const cidFromKey = (keyRaw: string): string => {
   if (key.includes("conjuntiv")) return "H10.3";
   if (key.includes("pneumon")) return "J18.9";
   if (key.includes("dengue") || key.includes("arbov")) return "A90";
+  if (key.includes("escab")) return "B86";
+  if (key.includes("abscesso") || key.includes("furunc")) return "L02.9";
+  if (key.includes("rinite")) return "J30.4";
+  if (key.includes("candid")) return "B37.3";
+  if (key.includes("laring") || key.includes("disfon")) return "J04.0";
   if (key.includes("tensional")) return "G44.2";
   if (key.includes("enxaqu")) return "G43.9";
   if (key.includes("celulite")) return "L03.9";
