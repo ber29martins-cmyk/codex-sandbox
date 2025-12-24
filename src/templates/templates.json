@@ -1590,6 +1590,10 @@
         ],
         "rxGroups": [
           "analgesia",
+          "aines",
+          "corticoides",
+          "mucoliticos",
+          "lavagem_nasal",
           "antitussigenos",
           "antibioticos"
         ],
@@ -1709,7 +1713,9 @@
         "rxGroups": [
           "analgesia",
           "antiemeticos",
-          "hidratacao_oral"
+          "hidratacao_oral",
+          "antiespasmodicos",
+          "opioides"
         ],
         "rxDefaults": [
           "sro_sais_reidratacao_oral",
