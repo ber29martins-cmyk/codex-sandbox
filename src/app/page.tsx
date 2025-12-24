@@ -113,6 +113,7 @@ const ALARM_PRINT_MAP: Record<string, string> = {
   "Vômitos incoerc": "vômitos incoercíveis",
   "Confusão/rebaix": "confusão mental / rebaixamento",
   "Confusão/sonol": "confusão mental / sonolência importante",
+  "confusão": "confusão mental ou alteração do nível de consciência",
   "Febre/calafrios": "febre / calafrios",
   "Dor flanco/lomb": "dor em flanco / lombalgia",
   "N/V importantes": "náuseas / vômitos importantes",
@@ -154,7 +155,16 @@ const ALARM_PRINT_MAP: Record<string, string> = {
   "Rebaixamento": "rebaixamento do nível de consciência",
   "dor despropor": "dor desproporcional",
   "rápida progress": "progressão rápida",
-  "falha 48-72h": "falha terapêutica em 48–72 horas"
+  "falha 48-72h": "falha terapêutica em 48–72 horas",
+  "pior cefaleia": "pior cefaleia da vida ou mudança abrupta do padrão",
+  "início súbito": "início súbito tipo trovoada",
+  "déficit neuro": "déficit neurológico focal",
+  "febre/mening": "febre ou sinais meníngeos",
+  "trauma": "trauma craniano associado",
+  "papiledema": "papiledema ou sinais de hipertensão intracraniana",
+  "gravidez": "gravidez ou puerpério",
+  "hipotensão": "hipotensão ou sinais de choque",
+  "taquicardia": "taquicardia ou instabilidade hemodinâmica"
 };
 
 function alarmLabelForPrint(input: string) {

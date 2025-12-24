@@ -1871,10 +1871,11 @@
           "porta",
           "analgesia"
         ],
-        "rxGroups": [
-          "analgesia",
-          "antibioticos"
-        ],
+      "rxGroups": [
+        "analgesia",
+        "aines",
+        "antibioticos"
+      ],
         "rxDefaults": []
       }
     }
