@@ -1477,6 +1477,245 @@
         ],
         "rxDefaults": []
       }
+    },
+    {
+      "id": "pneumonia_leve",
+      "label": "Pneumonia leve / suspeita",
+      "title": "Pneumonia leve / suspeita",
+      "defaults": {
+        "qpDefault": "Tosse e febre",
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Pneumonia leve / suspeita",
+        "condutaAlarmes": "",
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Ausculta pulmonar: murmúrio vesicular diminuído e estertores/crepitações em base, conforme quadro",
+          "Sem sinais de esforço respiratório importante no momento (reavaliar se piora)",
+          "Perfusão periférica preservada"
+        ],
+        "alarmItems": [
+          {
+            "id": "dispneia-esforco",
+            "label": "dispneia/esforço",
+            "absentLabel": "Sem dispneia/esforço",
+            "presentText": "Com dispneia/esforço"
+          },
+          {
+            "id": "sat-baixa",
+            "label": "sat baixa",
+            "absentLabel": "Sem sat baixa",
+            "presentText": "Com sat baixa"
+          },
+          {
+            "id": "dor-toracica",
+            "label": "dor torácica",
+            "absentLabel": "Sem dor torácica",
+            "presentText": "Com dor torácica"
+          },
+          {
+            "id": "hemoptise",
+            "label": "hemoptise",
+            "absentLabel": "Sem hemoptise",
+            "presentText": "Com hemoptise"
+          },
+          {
+            "id": "confusao-rebaix",
+            "label": "confusão/rebaix",
+            "absentLabel": "Sem confusão/rebaix",
+            "presentText": "Com confusão/rebaix"
+          },
+          {
+            "id": "hipotensao-choque",
+            "label": "hipotensão/choque",
+            "absentLabel": "Sem hipotensão/choque",
+            "presentText": "Com hipotensão/choque"
+          },
+          {
+            "id": "piora-progressiva",
+            "label": "piora progressiva",
+            "absentLabel": "Sem piora progressiva",
+            "presentText": "Com piora progressiva"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "tosse",
+            "label": "tosse",
+            "text": "refere tosse há dias, seca ou produtiva, com piora progressiva"
+          },
+          {
+            "id": "febre",
+            "label": "febre",
+            "text": "refere febre e calafrios, com mal-estar"
+          },
+          {
+            "id": "dispneia",
+            "label": "dispneia",
+            "text": "refere falta de ar aos esforços e redução da tolerância ao exercício"
+          },
+          {
+            "id": "dor_toracica",
+            "label": "dor torácica",
+            "text": "refere dor torácica ventilatório-dependente/pleurítica, quando presente"
+          },
+          {
+            "id": "escarro",
+            "label": "escarro",
+            "text": "refere expectoração amarelada/esverdeada, quando aplicável"
+          },
+          {
+            "id": "ivrs_previa",
+            "label": "ivrs prévia",
+            "text": "refere quadro viral prévio com evolução para piora respiratória"
+          },
+          {
+            "id": "comorb",
+            "label": "comorbidades",
+            "text": "refere doença pulmonar/cardiopatia/fragilidade quando aplicável"
+          },
+          {
+            "id": "tabagismo",
+            "label": "tabagismo",
+            "text": "refere tabagismo atual ou prévio quando aplicável"
+          }
+        ],
+        "hmaDefaults": [
+          "tosse",
+          "febre",
+          "dispneia",
+          "ivrs_previa"
+        ],
+        "rxGroups": [
+          "analgesia",
+          "antitussigenos",
+          "antibioticos"
+        ],
+        "rxDefaults": []
+      }
+    },
+    {
+      "id": "dengue_arbovirose",
+      "label": "Dengue / arbovirose",
+      "title": "Dengue / arbovirose",
+      "defaults": {
+        "qpDefault": "Febre e mialgia",
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Dengue / arbovirose",
+        "condutaAlarmes": "",
+        "exame": [
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento",
+          "Sem sinais de choque no momento; perfusão periférica preservada",
+          "Abdome sem sinais de irritação peritoneal",
+          "Pele: sem exantema importante no momento (reavaliar conforme evolução)"
+        ],
+        "alarmItems": [
+          {
+            "id": "dor-abdominal-intensa",
+            "label": "dor abdominal intensa",
+            "absentLabel": "Sem dor abdominal intensa",
+            "presentText": "Com dor abdominal intensa"
+          },
+          {
+            "id": "vomitos-persistentes",
+            "label": "vômitos persistentes",
+            "absentLabel": "Sem vômitos persistentes",
+            "presentText": "Com vômitos persistentes"
+          },
+          {
+            "id": "sangramento",
+            "label": "sangramento",
+            "absentLabel": "Sem sangramento",
+            "presentText": "Com sangramento"
+          },
+          {
+            "id": "letargia-rebaix",
+            "label": "letargia/rebaix",
+            "absentLabel": "Sem letargia/rebaix",
+            "presentText": "Com letargia/rebaix"
+          },
+          {
+            "id": "tontura-sincope",
+            "label": "tontura/síncope",
+            "absentLabel": "Sem tontura/síncope",
+            "presentText": "Com tontura/síncope"
+          },
+          {
+            "id": "desidratacao-importante",
+            "label": "desidratação importante",
+            "absentLabel": "Sem desidratação importante",
+            "presentText": "Com desidratação importante"
+          },
+          {
+            "id": "piora-apos-melhora",
+            "label": "piora após melhora",
+            "absentLabel": "Sem piora após melhora",
+            "presentText": "Com piora após melhora"
+          }
+        ],
+        "hmaItems": [
+          {
+            "id": "febre",
+            "label": "febre",
+            "text": "refere febre alta de início agudo, com calafrios"
+          },
+          {
+            "id": "mialgia",
+            "label": "mialgia",
+            "text": "refere mialgia intensa e dor retro-orbitária, com prostração"
+          },
+          {
+            "id": "cefaleia",
+            "label": "cefaleia",
+            "text": "refere cefaleia importante e mal-estar geral"
+          },
+          {
+            "id": "nausea",
+            "label": "náuseas",
+            "text": "refere náuseas e redução de apetite, com possível vômito"
+          },
+          {
+            "id": "exantema",
+            "label": "exantema",
+            "text": "refere exantema e prurido cutâneo quando aplicável"
+          },
+          {
+            "id": "artralgia",
+            "label": "artralgia",
+            "text": "refere artralgia importante, principalmente em arboviroses"
+          },
+          {
+            "id": "sangramento",
+            "label": "sangramento",
+            "text": "refere sangramentos leves (gengiva/epistaxe) quando presentes"
+          },
+          {
+            "id": "hidratacao",
+            "label": "hidratação baixa",
+            "text": "refere baixa ingesta hídrica e sinais de desidratação leve"
+          }
+        ],
+        "hmaDefaults": [
+          "febre",
+          "mialgia",
+          "cefaleia",
+          "nausea"
+        ],
+        "rxGroups": [
+          "analgesia",
+          "antiemeticos",
+          "hidratacao_oral"
+        ],
+        "rxDefaults": [
+          "sro_sais_reidratacao_oral",
+          "ondansetrona_8mg_vonau"
+        ]
+      }
     }
   ]
 }
