@@ -947,6 +947,160 @@
       "title": "Salmeterol 25mcg + fluticasona 125mcg",
       "qty": "1 frasco",
       "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+    },
+    {
+      "id": "sumatriptano_50mg_imigran",
+      "label": "Sumatriptano 50mg (IMIGRAN)",
+      "route": "ORAL",
+      "title": "Sumatriptano 50mg",
+      "brand": "IMIGRAN",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido no início da dor de cabeça, tão logo seja possível.",
+        "Não tomar novamente a medicação em intervalo de 24 horas."
+      ]
+    },
+    {
+      "id": "zolmitriptano_2_5mg_zomig",
+      "label": "Zolmitriptano 2,5mg (ZOMIG)",
+      "route": "ORAL",
+      "title": "Zolmitriptano 2,5mg",
+      "brand": "ZOMIG",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido no início da dor de cabeça, tão logo seja possível.",
+        "Não tomar novamente a medicação em intervalo de 24 horas."
+      ]
+    },
+    {
+      "id": "naratriptano_2_5mg_naramig",
+      "label": "Naratriptano 2,5mg (NARAMIG)",
+      "route": "ORAL",
+      "title": "Naratriptano 2,5mg",
+      "brand": "NARAMIG",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido no início da dor de cabeça, tão logo seja possível.",
+        "Não tomar novamente a medicação em intervalo de 24 horas."
+      ]
+    },
+    {
+      "id": "ergotamina_dipirona_cafeina_cefaliv",
+      "label": "Ergotamina 1mg + dipirona 350mg + cafeína 100mg (CEFALIV)",
+      "route": "ORAL",
+      "title": "Ergotamina 1mg + dipirona 350mg + cafeína 100mg",
+      "brand": "CEFALIV",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido no início da dor de cabeça, tão logo seja possível.",
+        "Se sem melhora, ingerir 1 comprimido a cada 2 horas, até máximo de 6 comprimidos ao dia."
+      ]
+    },
+    {
+      "id": "ergotamina_paracetamol_metoclopramida_cefalium",
+      "label": "Ergotamina 1mg + paracet. 500mg + metoc. 10mg + caf. 75mg (CEFALIUM)",
+      "route": "ORAL",
+      "title": "Ergotamina 1mg + paracetamol 500mg + metoclopramida 10mg + cafeína 75mg",
+      "brand": "CEFALIUM",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido no início da dor de cabeça, tão logo seja possível.",
+        "Se sem melhora, ingerir 1 comprimido a cada 2 horas, até máximo de 6 comprimidos ao dia."
+      ]
+    },
+    {
+      "id": "propranolol_80mg_pronolal",
+      "label": "Propranolol 80mg (PRONOLAL)",
+      "route": "ORAL",
+      "title": "Propranolol 80mg",
+      "brand": "PRONOLAL",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, de 12/12 horas, todos os dias."]
+    },
+    {
+      "id": "atenolol_50mg_atenol",
+      "label": "Atenolol 50mg (ATENOL)",
+      "route": "ORAL",
+      "title": "Atenolol 50mg",
+      "brand": "ATENOL",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, uma vez ao dia, pela manhã, todos os dias."]
+    },
+    {
+      "id": "metoprolol_50mg_selozok",
+      "label": "Metoprolol 50mg (SELOZOK)",
+      "route": "ORAL",
+      "title": "Metoprolol 50mg",
+      "brand": "SELOZOK",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, uma vez ao dia, pela manhã, todos os dias."]
+    },
+    {
+      "id": "amitriptilina_25mg_tryptanol",
+      "label": "Amitriptilina 25mg (TRYPTANOL)",
+      "route": "ORAL",
+      "title": "Amitriptilina 25mg",
+      "brand": "TRYPTANOL",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, 3 vezes ao dia (manhã, meio-dia e noite), no início das principais refeições."]
+    },
+    {
+      "id": "nortriptilina_25mg_pamelor",
+      "label": "Nortriptilina 25mg (PAMELOR)",
+      "route": "ORAL",
+      "title": "Nortriptilina 25mg",
+      "brand": "PAMELOR",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, 3 vezes ao dia (manhã, meio-dia e noite), no início das principais refeições."]
+    },
+    {
+      "id": "pregabalina_75mg_lyrica",
+      "label": "Pregabalina 75mg (LYRICA)",
+      "route": "ORAL",
+      "title": "Pregabalina 75mg",
+      "brand": "LYRICA",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido por dia, à noite, todos os dias."]
+    },
+    {
+      "id": "gabapentina_300mg_gabaneurin",
+      "label": "Gabapentina 300mg (GABANEURIN)",
+      "route": "ORAL",
+      "title": "Gabapentina 300mg",
+      "brand": "GABANEURIN",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, de 8/8 horas, todos os dias."]
+    },
+    {
+      "id": "carbamazepina_200mg_tegretol",
+      "label": "Carbamazepina 200mg (TEGRETOL)",
+      "route": "ORAL",
+      "title": "Carbamazepina 200mg",
+      "brand": "TEGRETOL",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, de 8/8 horas, todos os dias."]
+    },
+    {
+      "id": "acido_valproico_250mg_depakene",
+      "label": "Ácido valpróico 250mg (DEPAKENE)",
+      "route": "ORAL",
+      "title": "Ácido valpróico 250mg",
+      "brand": "DEPAKENE",
+      "qty": "1 caixa",
+      "directions": ["Tomar 1 comprimido, de 8/8 horas, todos os dias."]
+    },
+    {
+      "id": "topiramato_50mg_topamax",
+      "label": "Topiramato 50mg (TOPAMAX)",
+      "route": "ORAL",
+      "title": "Topiramato 50mg",
+      "brand": "TOPAMAX",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, em dose única, à noite, na primeira semana.",
+        "A partir da segunda semana, aumente a dose em 50mg (mais 1 comprimido), dividindo a quantidade total em duas tomadas diárias.",
+        "Continue aumentando a dose semanalmente até atingir um total de 200mg por dia, fazendo o uso de 2 comprimidos de 12/12 horas."
+      ]
     }
   ]
 }

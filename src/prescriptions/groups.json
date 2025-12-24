@@ -201,6 +201,51 @@
       ]
     },
     {
+      "id": "triptanos",
+      "label": "Triptanos",
+      "itemIds": [
+        "sumatriptano_50mg_imigran",
+        "zolmitriptano_2_5mg_zomig",
+        "naratriptano_2_5mg_naramig"
+      ]
+    },
+    {
+      "id": "ergotaminicos",
+      "label": "Ergotamínicos",
+      "itemIds": [
+        "ergotamina_dipirona_cafeina_cefaliv",
+        "ergotamina_paracetamol_metoclopramida_cefalium"
+      ]
+    },
+    {
+      "id": "betabloqueadores",
+      "label": "Betabloqueadores",
+      "itemIds": [
+        "propranolol_80mg_pronolal",
+        "atenolol_50mg_atenol",
+        "metoprolol_50mg_selozok"
+      ]
+    },
+    {
+      "id": "triciclicos",
+      "label": "Tricíclicos",
+      "itemIds": [
+        "amitriptilina_25mg_tryptanol",
+        "nortriptilina_25mg_pamelor"
+      ]
+    },
+    {
+      "id": "anticonvulsivantes",
+      "label": "Anticonvulsivantes",
+      "itemIds": [
+        "pregabalina_75mg_lyrica",
+        "gabapentina_300mg_gabaneurin",
+        "carbamazepina_200mg_tegretol",
+        "acido_valproico_250mg_depakene",
+        "topiramato_50mg_topamax"
+      ]
+    },
+    {
       "id": "hidratacao_oral",
       "label": "Hidratação oral",
       "itemIds": ["sro_sais_reidratacao_oral"]

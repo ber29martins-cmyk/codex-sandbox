@@ -618,6 +618,10 @@ const currentTemplate = useMemo(
           : "";
 
     const exameBase = currentTemplate.defaults.exame ?? [];
+    const dedupedExameBase =
+      vitalsLine && exameBase.length
+        ? exameBase.filter((line, idx) => !(idx === 0 && line.trim().toLowerCase() === vitalsLine.trim().toLowerCase()))
+        : exameBase;
     const exameLivreLinhas = exameLivre
       ? exameLivre
           .split("\n")
@@ -625,7 +629,7 @@ const currentTemplate = useMemo(
           .filter(Boolean)
       : [];
 
-    const exame = [vitalsLine, ...exameBase, ...exameLivreLinhas].filter(Boolean);
+    const exame = [vitalsLine, ...dedupedExameBase, ...exameLivreLinhas].filter(Boolean);
 
     const avaliacao = [hipotese].filter(Boolean);
 

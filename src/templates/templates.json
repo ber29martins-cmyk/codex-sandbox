@@ -1765,7 +1765,9 @@
         ],
         "rxGroups": [
           "analgesia",
-          "antiemeticos"
+          "aines",
+          "antiemeticos",
+          "triptanos"
         ],
         "rxDefaults": []
       }
@@ -1815,7 +1817,12 @@
         "rxGroups": [
           "analgesia",
           "aines",
-          "antiemeticos"
+          "antiemeticos",
+          "triptanos",
+          "ergotaminicos",
+          "betabloqueadores",
+          "triciclicos",
+          "anticonvulsivantes"
         ],
         "rxDefaults": []
       }
