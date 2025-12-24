@@ -1490,7 +1490,6 @@
         "hipotese": "Pneumonia leve / suspeita",
         "condutaAlarmes": "",
         "exame": [
-          "Sinais vitais conforme triagem",
           "BEG, corado, hidratado, afebril no momento",
           "Ausculta pulmonar: murmúrio vesicular diminuído e estertores/crepitações em base, conforme quadro",
           "Sem sinais de esforço respiratório importante no momento (reavaliar se piora)",
@@ -1612,7 +1611,6 @@
         "hipotese": "Dengue / arbovirose",
         "condutaAlarmes": "",
         "exame": [
-          "Sinais vitais conforme triagem",
           "BEG, corado, hidratado, afebril no momento",
           "Sem sinais de choque no momento; perfusão periférica preservada",
           "Abdome sem sinais de irritação peritoneal",
