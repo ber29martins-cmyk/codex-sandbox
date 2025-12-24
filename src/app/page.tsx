@@ -151,7 +151,10 @@ const ALARM_PRINT_MAP: Record<string, string> = {
   "Tórax silenc": "tórax silencioso / redução importante do murmúrio vesicular",
   "Exaustão": "exaustão respiratória iminente",
   "Cianose": "cianose",
-  "Rebaixamento": "rebaixamento do nível de consciência"
+  "Rebaixamento": "rebaixamento do nível de consciência",
+  "dor despropor": "dor desproporcional",
+  "rápida progress": "progressão rápida",
+  "falha 48-72h": "falha terapêutica em 48–72 horas"
 };
 
 function alarmLabelForPrint(input: string) {
@@ -258,6 +261,10 @@ const cidFromKey = (keyRaw: string): string => {
   if (key.includes("conjuntiv")) return "H10.3";
   if (key.includes("pneumon")) return "J18.9";
   if (key.includes("dengue") || key.includes("arbov")) return "A90";
+  if (key.includes("tensional")) return "G44.2";
+  if (key.includes("enxaqu")) return "G43.9";
+  if (key.includes("celulite")) return "L03.9";
+  if (key.includes("erisipel")) return "A46";
 
   if (key.includes("faringo") || key.includes("amigdal")) {
     if (key.includes("bacter") || key.includes("estrept")) return "J03.0";
