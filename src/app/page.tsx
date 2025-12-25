@@ -208,8 +208,8 @@ function buildTemplateDefaults(template: Template): TemplateState {
     alarme: template.defaults.alarme,
     comorb: template.defaults.comorb,
     meds: template.defaults.meds,
-    hipotese: template.defaults.hipotese,
-    condutaAlarmes: template.defaults.condutaAlarmes,
+    hipotese: template.defaults.hipotese ?? (template.label as string) ?? ((template as any).title ?? ""),
+    condutaAlarmes: template.defaults.condutaAlarmes ?? "Retorno imediato se sinais de alarme ou piora do quadro",
     alarmStates: buildDefaultAlarmStates(template),
     rxSelected: template.defaults.rxDefaults ?? [],
     triagem: true,
@@ -231,6 +231,8 @@ import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
 import { INVITE_CODES, isInviteValid } from "../lib/invite";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
+const INITIAL_TEMPLATE = TEMPLATES[0];
+const INITIAL_DEFAULTS = INITIAL_TEMPLATE ? buildTemplateDefaults(INITIAL_TEMPLATE) : null;
 const RX_CATALOG = (rxCatalogData as { items: RxItem[] }).items;
 const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
 const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
@@ -431,8 +433,8 @@ const currentTemplate = useMemo(
     if (d) setAtestadoCid(d);
   }, [templateId]);
 
-  const [hipotese, setHipotese] = useState("Lombalgia");
-  const [condutaAlarmes, setCondutaAlarmes] = useState("Perda de força em MMII, anestesia em sela, retenção urinária/incontinência");
+  const [hipotese, setHipotese] = useState(INITIAL_DEFAULTS?.hipotese ?? (INITIAL_TEMPLATE?.label ?? ""));
+  const [condutaAlarmes, setCondutaAlarmes] = useState(INITIAL_DEFAULTS?.condutaAlarmes ?? "Retorno imediato se sinais de alarme ou piora do quadro");
   useEffect(() => {
     if (!didHydrate.current || isApplyingTemplate.current) return;
 
@@ -636,7 +638,8 @@ const currentTemplate = useMemo(
           ? "Sinais vitais conforme triagem"
           : "";
 
-    const exameBase = currentTemplate.defaults.exame ?? [];
+    const exameRaw = currentTemplate.defaults.exame;
+    const exameBase = Array.isArray(exameRaw) ? exameRaw : exameRaw ? [exameRaw] : [];
     const dedupedExameBase =
       vitalsLine && exameBase.length
         ? exameBase.filter((line, idx) => !(idx === 0 && line.trim().toLowerCase() === vitalsLine.trim().toLowerCase()))

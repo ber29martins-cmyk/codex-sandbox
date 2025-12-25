@@ -2194,12 +2194,12 @@
       "title": "Abscesso cutâneo / Furúnculo",
       "label": "Abscesso cutâneo / Furúnculo",
       "defaults": {
+        "hipotese": "Abscesso / furunculose, sem sinais de celulite",
         "exame": [
           "Sinais vitais conforme triagem",
           "BEG, corado, hidratado, afebril no momento",
           "Pele: lesão nodular/placa inflamatória, dolorosa, com flutuação e/ou drenagem conforme quadro",
-          "Avaliar extensão de celulite ao redor e linfangite/linfonodos regionais",
-          "Sem sinais sistêmicos no momento; reavaliar se piora"
+          "Sem sinais sistêmicos no momento"
         ],
         "alarmItems": [
           {
