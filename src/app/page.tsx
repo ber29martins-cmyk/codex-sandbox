@@ -188,6 +188,14 @@ function formatParagraph(lines: string[]) {
   return parts.join(" ");
 }
 
+function formatList(items: string[]) {
+  if (items.length === 0) return "";
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} e ${items[1]}`;
+  const last = items[items.length - 1];
+  return `${items.slice(0, -1).join(", ")} e ${last}`;
+}
+
 function getTemplateHmaItems(template: Template) {
   if (!Array.isArray(template.defaults.hmaItems)) return [];
   return template.defaults.hmaItems.map((item, idx) => {
@@ -511,6 +519,19 @@ const currentTemplate = useMemo(
   const templateRxGroups = useMemo(() => {
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
   }, [currentTemplate]);
+  const prescribedClasses = useMemo(() => {
+    if (!rxSelected.length) return [];
+    const sel = new Set(rxSelected);
+    const classes: string[] = [];
+    for (const group of templateRxGroups) {
+      if (!group?.itemIds?.length) continue;
+      if (group.itemIds.some((itemId) => sel.has(itemId))) {
+        const label = group.label || group.id;
+        if (label && !classes.includes(label)) classes.push(label);
+      }
+    }
+    return classes;
+  }, [rxSelected, templateRxGroups]);
   const orderedSelectedRxIds = useMemo(() => {
     const selectedSet = new Set(rxSelected);
     const ordered: string[] = [];
@@ -656,11 +677,12 @@ const currentTemplate = useMemo(
     const avaliacao = [hipotese].filter(Boolean);
 
     const conduta = [
+      prescribedClasses.length ? `Prescrevo ${formatList(prescribedClasses)}` : "",
       "Orientado sobre o quadro e conduta",
       `Orientado sinais de alarme: ${condutaAlarmes}`,
       "Retorno imediato se sinais de alarme ou piora do quadro",
       "Paciente esclarecido e de acordo com as orientações"
-    ];
+    ].filter(Boolean);
 
     if (atestadoEmitir) {
       const dias = Number.isFinite(atestadoDias) ? atestadoDias : 1;
@@ -670,7 +692,7 @@ const currentTemplate = useMemo(
     }
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaParagraphs, alarmLines, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId, exameLivre, atestadoEmitir, atestadoDias, atestadoCid]);
+  }, [qpText, hmaParagraphs, alarmLines, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId, exameLivre, atestadoEmitir, atestadoDias, atestadoCid, prescribedClasses]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
