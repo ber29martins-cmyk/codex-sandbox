@@ -2183,6 +2183,8 @@
           "tempo"
         ],
         "rxGroups": [
+          "antiparasitarios",
+          "antiescabiotico_topico",
           "antihistaminicos",
           "antibioticos"
         ],

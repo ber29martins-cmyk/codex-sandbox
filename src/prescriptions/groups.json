@@ -271,6 +271,20 @@
         "dextrana_1mg_ml_hipromelose_3mg_ml_lacrima_plus",
         "cetotifeno_0_25mg_ml_octifen"
       ]
+    },
+    {
+      "id": "antiparasitarios",
+      "label": "Antiparasitários",
+      "itemIds": ["ivermectina_6mg_leverctin"]
+    },
+    {
+      "id": "antiescabiotico_topico",
+      "label": "Antiescabiótico tópico",
+      "itemIds": [
+        "permetrina_5_pct_losao_permenati",
+        "enxofre_5_pct_losao_manipulado",
+        "benzoato_benzila_250mg_ml_emulsao_benzoderm"
+      ]
     }
   ]
 }

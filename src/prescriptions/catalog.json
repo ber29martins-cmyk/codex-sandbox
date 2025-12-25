@@ -1101,6 +1101,54 @@
         "A partir da segunda semana, aumente a dose em 50mg (mais 1 comprimido), dividindo a quantidade total em duas tomadas diárias.",
         "Continue aumentando a dose semanalmente até atingir um total de 200mg por dia, fazendo o uso de 2 comprimidos de 12/12 horas."
       ]
+    },
+    {
+      "id": "ivermectina_6mg_leverctin",
+      "label": "Ivermectina 6mg (LEVERCTIN)",
+      "route": "ORAL",
+      "title": "Ivermectina 6mg",
+      "brand": "LEVERCTIN®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 2 comprimidos, hoje.",
+        "Após 1 semana, tomar novamente mais 2 comprimidos."
+      ]
+    },
+    {
+      "id": "permetrina_5_pct_losao_permenati",
+      "label": "Permetrina 5% loção (PERMENATI)",
+      "route": "TOPICO",
+      "title": "Permetrina 5% loção",
+      "brand": "PERMENATI®",
+      "qty": "1 frasco",
+      "directions": [
+        "Aplicar uma fina camada em todo o corpo, excluindo o rosto, após o banho, durante 2 noites consecutivas.",
+        "Lavar o corpo na manhã seguinte. Repetir o mesmo procedimento após 7 dias."
+      ]
+    },
+    {
+      "id": "enxofre_5_pct_losao_manipulado",
+      "label": "Enxofre 5% loção (MANIPULADO)",
+      "route": "TOPICO",
+      "title": "Enxofre 5% loção",
+      "brand": "MANIPULADO®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Aplicar uma fina camada em todo o corpo, excluindo o rosto, após o banho, durante 3 noites consecutivas.",
+        "Lavar o corpo na manhã seguinte. Repetir o mesmo procedimento após 7 dias."
+      ]
+    },
+    {
+      "id": "benzoato_benzila_250mg_ml_emulsao_benzoderm",
+      "label": "Benzoato de benzila 250mg/mL emulsão (BENZODERM)",
+      "route": "TOPICO",
+      "title": "Benzoato de benzila 250mg/mL emulsão",
+      "brand": "BENZODERM®",
+      "qty": "1 frasco",
+      "directions": [
+        "Aplicar uma fina camada em todo o corpo, excluindo o rosto, após o banho, durante 3 noites consecutivas.",
+        "Lavar o corpo na manhã seguinte. Repetir o mesmo procedimento após 7 dias."
+      ]
     }
   ]
 }
