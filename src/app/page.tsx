@@ -532,6 +532,15 @@ const currentTemplate = useMemo(
     }
     return classes;
   }, [rxSelected, templateRxGroups]);
+  const prescribedClassesDisplay = useMemo(() => {
+    const lower = prescribedClasses.map((c) => (c || "").toLowerCase());
+    if (lower.length === 1) {
+      const only = lower[0];
+      const singular = only.endsWith("s") ? only.replace(/s\b/, "") : only;
+      return [singular];
+    }
+    return lower;
+  }, [prescribedClasses]);
   const orderedSelectedRxIds = useMemo(() => {
     const selectedSet = new Set(rxSelected);
     const ordered: string[] = [];
@@ -677,10 +686,9 @@ const currentTemplate = useMemo(
     const avaliacao = [hipotese].filter(Boolean);
 
     const conduta = [
-      prescribedClasses.length ? `Prescrevo ${formatList(prescribedClasses)}` : "",
+      prescribedClassesDisplay.length ? `Prescrevo ${formatList(prescribedClassesDisplay)}` : "",
       "Orientado sobre o quadro e conduta",
-      `Orientado sinais de alarme: ${condutaAlarmes}`,
-      "Retorno imediato se sinais de alarme ou piora do quadro",
+      "Oriento sinais de alarme e retorno imediato, se necessário.",
       "Paciente esclarecido e de acordo com as orientações"
     ].filter(Boolean);
 
@@ -692,7 +700,7 @@ const currentTemplate = useMemo(
     }
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaParagraphs, alarmLines, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId, exameLivre, atestadoEmitir, atestadoDias, atestadoCid, prescribedClasses]);
+  }, [qpText, hmaParagraphs, alarmLines, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId, exameLivre, atestadoEmitir, atestadoDias, atestadoCid, prescribedClassesDisplay]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
