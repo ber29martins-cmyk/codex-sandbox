@@ -1,14 +1,6 @@
 {
   "groups": [
     {
-      "id": "analgesia",
-      "label": "Analgesia / Antitérmico",
-      "itemIds": [
-        "dipirona20",
-        "ibuprofeno400"
-      ]
-    },
-    {
       "id": "relaxante",
       "label": "Relaxante",
       "itemIds": [

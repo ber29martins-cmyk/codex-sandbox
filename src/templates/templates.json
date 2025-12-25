@@ -1342,7 +1342,7 @@
           "uso_saba"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "broncodilatadores",
           "corticoide_inalatorio",
           "corticoide_nasal",
@@ -1588,7 +1588,7 @@
           "ivrs_previa"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "aines",
           "corticoides",
           "mucoliticos",
@@ -1709,7 +1709,7 @@
           "nausea"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "antiemeticos",
           "hidratacao_oral",
           "antiespasmodicos",
@@ -1831,7 +1831,7 @@
           "tensao_cerv"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "aines",
           "antiemeticos",
           "triptanos"
@@ -1949,7 +1949,7 @@
           "piora_esforco"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "aines",
           "antiemeticos",
           "triptanos",
@@ -2078,7 +2078,7 @@
           "analgesia"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "aines",
           "antibioticos"
         ],
@@ -2296,7 +2296,7 @@
           "progressao"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "aines",
           "antibioticos"
         ],
@@ -2496,7 +2496,7 @@
           "antibiotico"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "antifungico_oral",
           "antifungico_topico"
         ],
@@ -2602,7 +2602,7 @@
           "tempo"
         ],
         "rxGroups": [
-          "analgesia",
+          "analgesicos",
           "aines",
           "antihistaminicos",
           "antitussigenos"

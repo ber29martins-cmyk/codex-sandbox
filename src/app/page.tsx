@@ -541,6 +541,13 @@ const currentTemplate = useMemo(
     }
     return lower;
   }, [prescribedClasses]);
+  const extraOrientations = useMemo(() => {
+    if (templateId !== "escabiose") return [];
+    return [
+      "Orientações gerais para ambiente e roupas: trocar roupa de cama e vestimentas usadas nos últimos dias, lavando em água mais quente quando possível.",
+      "Secar peças ao sol e finalizar com ferro quente para auxiliar na eliminação do agente."
+    ];
+  }, [templateId]);
   const orderedSelectedRxIds = useMemo(() => {
     const selectedSet = new Set(rxSelected);
     const ordered: string[] = [];
@@ -690,7 +697,9 @@ const currentTemplate = useMemo(
       "Orientado sobre o quadro e conduta",
       "Oriento sinais de alarme e retorno imediato, se necessário.",
       "Paciente esclarecido e de acordo com as orientações"
-    ].filter(Boolean);
+    ]
+      .concat(extraOrientations)
+      .filter(Boolean);
 
     if (atestadoEmitir) {
       const dias = Number.isFinite(atestadoDias) ? atestadoDias : 1;
