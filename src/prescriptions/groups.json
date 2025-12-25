@@ -3,67 +3,126 @@
     {
       "id": "analgesia",
       "label": "Analgesia / Antitérmico",
-      "itemIds": ["dipirona20", "ibuprofeno400"]
+      "itemIds": [
+        "dipirona20",
+        "ibuprofeno400"
+      ]
     },
     {
       "id": "relaxante",
       "label": "Relaxante",
-      "itemIds": ["ciclobenzaprina5"]
+      "itemIds": [
+        "ciclobenzaprina5"
+      ]
     },
     {
       "id": "ivassintomatico",
       "label": "IVAS - sintomáticos",
-      "itemIds": ["paracetamol750", "loratadina10", "soroNasal"]
+      "itemIds": [
+        "paracetamol750",
+        "loratadina10",
+        "soroNasal"
+      ]
     },
     {
       "id": "analgesicos",
       "label": "Analgésicos",
-      "itemIds": ["dipirona_500mg_novalgina", "paracetamol_750mg_tylenol"]
+      "itemIds": [
+        "dipirona_500mg_novalgina",
+        "paracetamol_750mg_tylenol"
+      ]
     },
     {
       "id": "aines",
       "label": "AINES",
-      "itemIds": ["ibuprofeno_600mg_alivium", "naproxeno_550mg_flanax", "cetoprofeno_150mg_bi_profenid", "diclofenaco_50mg_voltaren", "etodolaco_500mg_flancox", "cetorolaco_10mg_toragesic_sl", "nimesulida_100mg_nimesulid", "celecoxib_100mg_celebra", "meloxicam_7_5mg_movatec"]
+      "itemIds": [
+        "ibuprofeno_600mg_alivium",
+        "naproxeno_550mg_flanax",
+        "cetoprofeno_150mg_bi_profenid",
+        "diclofenaco_50mg_voltaren",
+        "etodolaco_500mg_flancox",
+        "cetorolaco_10mg_toragesic_sl",
+        "nimesulida_100mg_nimesulid",
+        "celecoxib_100mg_celebra",
+        "meloxicam_7_5mg_movatec"
+      ]
     },
     {
       "id": "antivirais",
       "label": "Antivirais",
-      "itemIds": ["oseltamivir_75mg_tamiflu"]
+      "itemIds": [
+        "oseltamivir_75mg_tamiflu"
+      ]
     },
     {
       "id": "antibioticos",
       "label": "Antibióticos",
-      "itemIds": ["azitromicina_500mg_zitromax", "amoxicilina_500mg_amoxil", "amox_clav_500_125_clavulin", "cefaclor_500mg_ceclor_bd", "cipro_500mg_ciflox", "levofloxacino_500mg_tavanic", "moxifloxacino_400mg_avalox"]
+      "itemIds": [
+        "azitromicina_500mg_zitromax",
+        "amoxicilina_500mg_amoxil",
+        "amox_clav_500_125_clavulin",
+        "cefaclor_500mg_ceclor_bd",
+        "cipro_500mg_ciflox",
+        "levofloxacino_500mg_tavanic",
+        "moxifloxacino_400mg_avalox"
+      ]
     },
     {
       "id": "antihistaminicos",
       "label": "Anti-histamínicos",
-      "itemIds": ["dexclorfeniramina_2mg_polaramine", "loratadina_10mg_claritin", "loratadina_10mg_pseudo_240mg_loranil", "desloratadina_5mg_desalex", "cetirizina_10mg_zyrtec", "fexofenadina_60mg_allegra", "fexofenadina_60mg_pseudo_120mg_allegra"]
+      "itemIds": [
+        "dexclorfeniramina_2mg_polaramine",
+        "loratadina_10mg_claritin",
+        "loratadina_10mg_pseudo_240mg_loranil",
+        "desloratadina_5mg_desalex",
+        "cetirizina_10mg_zyrtec",
+        "fexofenadina_60mg_allegra",
+        "fexofenadina_60mg_pseudo_120mg_allegra"
+      ]
     },
     {
       "id": "corticoides",
       "label": "Corticoides",
-      "itemIds": ["prednisona_20mg_meticorten", "prednisolona_5mg_prelone", "betametasona_2mg_celestone", "dexclorfeniramina_betametasona_koide_d", "dexametasona_4mg_decadron"]
+      "itemIds": [
+        "prednisona_20mg_meticorten",
+        "prednisolona_5mg_prelone",
+        "betametasona_2mg_celestone",
+        "dexclorfeniramina_betametasona_koide_d",
+        "dexametasona_4mg_decadron"
+      ]
     },
     {
       "id": "mucoliticos",
       "label": "Mucolíticos",
-      "itemIds": ["acetilcisteina_200mg_fluimucil", "ambroxol_15mg_5ml_mucosolvan"]
+      "itemIds": [
+        "acetilcisteina_200mg_fluimucil",
+        "ambroxol_15mg_5ml_mucosolvan"
+      ]
     },
     {
       "id": "antitussigenos",
       "label": "Antitussígenos",
-      "itemIds": ["dextrometorfano_2mg_ml_bisoltussin", "clobutinol_doxilamina_hytos_plus", "dropropizina_3mg_ml_vibral"]
+      "itemIds": [
+        "dextrometorfano_2mg_ml_bisoltussin",
+        "clobutinol_doxilamina_hytos_plus",
+        "dropropizina_3mg_ml_vibral"
+      ]
     },
     {
       "id": "descongestionantes_nasal",
       "label": "Descongestionantes nasais",
-      "itemIds": ["nafazolina_0_5mg_ml_neosoro", "nafazolina_1mg_mepiramina_0_2mg_naridrin", "oximetazolina_0_5mg_ml_afrin"]
+      "itemIds": [
+        "nafazolina_0_5mg_ml_neosoro",
+        "nafazolina_1mg_mepiramina_0_2mg_naridrin",
+        "oximetazolina_0_5mg_ml_afrin"
+      ]
     },
     {
       "id": "lavagem_nasal",
       "label": "Lavagem nasal",
-      "itemIds": ["soro_0_9_sorimax"]
+      "itemIds": [
+        "soro_0_9_sorimax"
+      ]
     },
     {
       "id": "antibioticos_oftalmicos",
@@ -111,7 +170,9 @@
     {
       "id": "analgesico_urinario",
       "label": "Analgesia urinária",
-      "itemIds": ["fenazopiridina_200mg_pyridium"]
+      "itemIds": [
+        "fenazopiridina_200mg_pyridium"
+      ]
     },
     {
       "id": "antibioticos_urinarios",
@@ -127,7 +188,9 @@
     {
       "id": "antiespasmodicos",
       "label": "Antiespasmódicos",
-      "itemIds": ["escopolamina_10mg_buscopam"]
+      "itemIds": [
+        "escopolamina_10mg_buscopam"
+      ]
     },
     {
       "id": "ibps",
@@ -153,22 +216,32 @@
     {
       "id": "bloqueadores_h2",
       "label": "Bloqueadores H2",
-      "itemIds": ["cimetidina_400mg_tagamet", "famotidina_20mg_famox"]
+      "itemIds": [
+        "cimetidina_400mg_tagamet",
+        "famotidina_20mg_famox"
+      ]
     },
     {
       "id": "sro",
       "label": "Reidratação oral",
-      "itemIds": ["sro_sais_reidratacao_oral"]
+      "itemIds": [
+        "sro_sais_reidratacao_oral"
+      ]
     },
     {
       "id": "probioticos",
       "label": "Probióticos",
-      "itemIds": ["s_boulardii_200mg_floratil"]
+      "itemIds": [
+        "s_boulardii_200mg_floratil"
+      ]
     },
     {
       "id": "antidiarreicos",
       "label": "Anti-diarreicos",
-      "itemIds": ["loperamida_2mg", "racecadotrila_100mg"]
+      "itemIds": [
+        "loperamida_2mg",
+        "racecadotrila_100mg"
+      ]
     },
     {
       "id": "corticoide_nasal",
@@ -248,7 +321,9 @@
     {
       "id": "hidratacao_oral",
       "label": "Hidratação oral",
-      "itemIds": ["sro_sais_reidratacao_oral"]
+      "itemIds": [
+        "sro_sais_reidratacao_oral"
+      ]
     },
     {
       "id": "oftalmo_antibiotico",
@@ -275,7 +350,9 @@
     {
       "id": "antiparasitarios",
       "label": "Antiparasitários",
-      "itemIds": ["ivermectina_6mg_leverctin"]
+      "itemIds": [
+        "ivermectina_6mg_leverctin"
+      ]
     },
     {
       "id": "antiescabiotico_topico",
@@ -284,6 +361,34 @@
         "permetrina_5_pct_losao_permenati",
         "enxofre_5_pct_losao_manipulado",
         "benzoato_benzila_250mg_ml_emulsao_benzoderm"
+      ]
+    },
+    {
+      "id": "antifungico_oral",
+      "label": "Antifúngico oral",
+      "itemIds": [
+        "nistatina_100000ui_ml_micostalab",
+        "fluconazol_150mg_zoltec",
+        "cetoconazol_200mg_cetoneo",
+        "itraconazol_100mg_traxonol",
+        "terbinafina_250mg_funtyl"
+      ]
+    },
+    {
+      "id": "antifungico_topico",
+      "label": "Antifúngico tópico",
+      "itemIds": [
+        "miconazol_20mg_g_creme_ciconazol",
+        "cetoconazol_20mg_g_creme_cleartop",
+        "terbinafina_10mg_g_creme_micosil",
+        "clotrimazol_100mg_5g_creme_vaginal_lomecan",
+        "butoconazol_20mg_g_creme_femmezil",
+        "fenticonazol_20mg_g_creme_vaginal_fentizol",
+        "nistatina_25000ui_g_creme_vaginal_neo_mistatin",
+        "nistatina_100000ui_g_oxido_zinco_200mg_g_pomada_babyneo",
+        "nistatina_100000ui_5g_metronidazol_500mg_5g_creme_vaginal_flagyl",
+        "nistatina_100000ui_4g_poli_b_35000ui_4g_neomicina_35000ui_4g_tinidazol_150mg_4g_creme_ginec",
+        "triancinolona_1mg_g_nistatina_100000ui_g_creme_oncileg"
       ]
     }
   ]

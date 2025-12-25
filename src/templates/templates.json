@@ -2496,7 +2496,9 @@
           "antibiotico"
         ],
         "rxGroups": [
-          "analgesia"
+          "analgesia",
+          "antifungico_oral",
+          "antifungico_topico"
         ],
         "rxDefaults": []
       }

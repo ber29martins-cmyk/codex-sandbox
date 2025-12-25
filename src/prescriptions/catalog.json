@@ -520,7 +520,9 @@
       "title": "Tobramicina 3mg/mL",
       "brand": "TOBREX®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+      "directions": [
+        "Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."
+      ]
     },
     {
       "id": "tobramicina_3mg_ml_dexametasona_1mg_ml_tobradex",
@@ -529,7 +531,9 @@
       "title": "Tobramicina 3mg/mL + dexametasona 1mg/mL",
       "brand": "TOBRADEX®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+      "directions": [
+        "Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."
+      ]
     },
     {
       "id": "ciprofloxacino_3_5mg_ml_maxiflox",
@@ -538,7 +542,9 @@
       "title": "Ciprofloxacino 3,5mg/mL",
       "brand": "MAXIFLOX®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+      "directions": [
+        "Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."
+      ]
     },
     {
       "id": "ciprofloxacino_3_5mg_ml_dexametasona_1mg_ml_biamotil_d",
@@ -547,7 +553,9 @@
       "title": "Ciprofloxacino 3,5mg/mL + dexametasona 1mg/mL",
       "brand": "BIAMOTIL-D®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+      "directions": [
+        "Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."
+      ]
     },
     {
       "id": "ofloxacino_3mg_ml_oflox",
@@ -556,7 +564,9 @@
       "title": "Ofloxacino 3mg/mL",
       "brand": "OFLOX®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."]
+      "directions": [
+        "Pingar 1 gota no olho afetado, a cada 6 horas, por 7 dias."
+      ]
     },
     {
       "id": "moxifloxacino_5mg_ml_vigamox",
@@ -565,7 +575,9 @@
       "title": "Moxifloxacino 5mg/mL",
       "brand": "VIGAMOX®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota no olho afetado, a cada 8 horas, por 7 dias."]
+      "directions": [
+        "Pingar 1 gota no olho afetado, a cada 8 horas, por 7 dias."
+      ]
     },
     {
       "id": "polimixinaB_6000ui_g_neomicina_5mg_g_dexametasona_1mg_g_maxitrol",
@@ -574,7 +586,9 @@
       "title": "Polimixina B 6.000UI/g + neomicina 5mg/g + dexametasona 1mg/g",
       "brand": "MAXITROL®",
       "qty": "1 bisnaga",
-      "directions": ["Aplicar 1cm da pomada no olho afetado, 4 vezes por dia, por 7 dias."]
+      "directions": [
+        "Aplicar 1cm da pomada no olho afetado, 4 vezes por dia, por 7 dias."
+      ]
     },
     {
       "id": "carmelose_5mg_ml_lacrifilm",
@@ -583,7 +597,9 @@
       "title": "Carmelose sódica 5mg/mL",
       "brand": "LACRIFILM®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota, de 6/6 horas, se vermelhidão, irritação ou ardor nos olhos."]
+      "directions": [
+        "Pingar 1 gota, de 6/6 horas, se vermelhidão, irritação ou ardor nos olhos."
+      ]
     },
     {
       "id": "dextrana_1mg_ml_hipromelose_3mg_ml_lacrima_plus",
@@ -592,7 +608,9 @@
       "title": "Dextrana 1mg/mL + hipromelose 3mg/mL",
       "brand": "LACRIMA PLUS®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota, de 6/6 horas, se vermelhidão, irritação ou ardor nos olhos."]
+      "directions": [
+        "Pingar 1 gota, de 6/6 horas, se vermelhidão, irritação ou ardor nos olhos."
+      ]
     },
     {
       "id": "cetotifeno_0_25mg_ml_octifen",
@@ -601,7 +619,9 @@
       "title": "Cetotifeno 0,25mg/mL",
       "brand": "OCTIFEN®",
       "qty": "1 frasco",
-      "directions": ["Pingar 1 gota, de 12/12 horas, se vermelhidão, irritação ou ardor nos olhos."]
+      "directions": [
+        "Pingar 1 gota, de 12/12 horas, se vermelhidão, irritação ou ardor nos olhos."
+      ]
     },
     {
       "id": "metoclopramida_10mg_plasil",
@@ -610,7 +630,9 @@
       "title": "Metoclopramida 10mg",
       "brand": "PLASIL®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas e vômitos."]
+      "directions": [
+        "Tomar 1 comprimido, até em 8/8h, se náuseas e vômitos."
+      ]
     },
     {
       "id": "domperidona_10mg_motilium",
@@ -619,7 +641,9 @@
       "title": "Domperidona 10mg",
       "brand": "MOTILIUM®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas e vômitos."]
+      "directions": [
+        "Tomar 1 comprimido, até em 8/8h, se náuseas e vômitos."
+      ]
     },
     {
       "id": "ondansetrona_8mg_vonau",
@@ -628,7 +652,9 @@
       "title": "Ondansetrona 8mg",
       "brand": "VONAU®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas ou vômitos."]
+      "directions": [
+        "Tomar 1 comprimido, até em 8/8h, se náuseas ou vômitos."
+      ]
     },
     {
       "id": "bromoprida_10mg_digesan",
@@ -637,7 +663,9 @@
       "title": "Bromoprida 10mg",
       "brand": "DIGESAN®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se náusea ou vômitos."]
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, se náusea ou vômitos."
+      ]
     },
     {
       "id": "dimenidrinato_50mg_piridoxina_10mg_dramin",
@@ -646,7 +674,9 @@
       "title": "Dimenidrinato 50mg + piridoxina 10mg",
       "brand": "DRAMIN®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até em 8/8h, se náuseas ou vômitos. Atenção: pode causar sonolência e hipotensão."]
+      "directions": [
+        "Tomar 1 comprimido, até em 8/8h, se náuseas ou vômitos. Atenção: pode causar sonolência e hipotensão."
+      ]
     },
     {
       "id": "codeina_30mg_codein",
@@ -655,7 +685,9 @@
       "title": "Codeína 30mg",
       "brand": "CODEIN®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."]
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."
+      ]
     },
     {
       "id": "paracetamol_500mg_codeina_30mg_paco",
@@ -664,7 +696,9 @@
       "title": "Paracetamol 500mg + codeína 30mg",
       "brand": "PACO®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."]
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."
+      ]
     },
     {
       "id": "tramadol_50mg_tramal",
@@ -673,7 +707,9 @@
       "title": "Tramadol 50mg",
       "brand": "TRAMAL®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 6/6 horas, se dor intensa e persistente."]
+      "directions": [
+        "Tomar 1 comprimido, até de 6/6 horas, se dor intensa e persistente."
+      ]
     },
     {
       "id": "paracetamol_325mg_tramadol_37_5mg_revange",
@@ -682,7 +718,9 @@
       "title": "Paracetamol 325mg + tramadol 37,5mg",
       "brand": "REVANGE®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."]
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, se dor intensa e persistente."
+      ]
     },
     {
       "id": "fenazopiridina_200mg_pyridium",
@@ -691,7 +729,9 @@
       "title": "Fenazopiridina 200mg",
       "brand": "PYRIDIUM®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor ao urinar, por até 3 dias. Atenção: é normal a urina tornar-se alaranjada ou avermelhada."]
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, se dor ao urinar, por até 3 dias. Atenção: é normal a urina tornar-se alaranjada ou avermelhada."
+      ]
     },
     {
       "id": "nitrofurantoina_100mg_macrodantina",
@@ -700,7 +740,9 @@
       "title": "Nitrofurantoína 100mg",
       "brand": "MACRODANTINA®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, de 6/6 horas, por 7 dias. Sugestão de horários: 6h, 12h, 18h e 24h."]
+      "directions": [
+        "Tomar 1 comprimido, de 6/6 horas, por 7 dias. Sugestão de horários: 6h, 12h, 18h e 24h."
+      ]
     },
     {
       "id": "fosfomicina_3g_monuril",
@@ -709,7 +751,9 @@
       "title": "Fosfomicina 3g",
       "brand": "MONURIL®",
       "qty": "1 envelope",
-      "directions": ["Diluir 1 envelope em 1 copo de água potável. Ingerir preferivelmente antes de deitar-se, após ter esvaziado a bexiga."]
+      "directions": [
+        "Diluir 1 envelope em 1 copo de água potável. Ingerir preferivelmente antes de deitar-se, após ter esvaziado a bexiga."
+      ]
     },
     {
       "id": "escopolamina_10mg_buscopam",
@@ -718,7 +762,9 @@
       "title": "Escopolamina 10mg",
       "brand": "BUSCOPAM®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 8/8 horas, se dor abdominal."]
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, se dor abdominal."
+      ]
     },
     {
       "id": "omeprazol_20mg_gaspiren",
@@ -727,7 +773,9 @@
       "title": "Omeprazol 20mg",
       "brand": "GASPIREN®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+      "directions": [
+        "Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."
+      ]
     },
     {
       "id": "lansoprazol_15mg_prazol",
@@ -736,7 +784,9 @@
       "title": "Lansoprazol 15mg",
       "brand": "PRAZOL®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+      "directions": [
+        "Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."
+      ]
     },
     {
       "id": "pantoprazol_40mg_pantocal",
@@ -745,7 +795,9 @@
       "title": "Pantoprazol 40mg",
       "brand": "PANTOCAL®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+      "directions": [
+        "Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."
+      ]
     },
     {
       "id": "rabeprazol_10mg_pariet",
@@ -754,7 +806,9 @@
       "title": "Rabeprazol 10mg",
       "brand": "PARIET®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+      "directions": [
+        "Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."
+      ]
     },
     {
       "id": "esomeprazol_20mg_nexium",
@@ -763,7 +817,9 @@
       "title": "Esomeprazol 20mg",
       "brand": "NEXIUM®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."]
+      "directions": [
+        "Tomar 1 comprimido por dia, em jejum, antes da primeira refeição do dia."
+      ]
     },
     {
       "id": "vonoprazana_10mg_inzelm",
@@ -772,7 +828,9 @@
       "title": "Vonoprazana 10mg",
       "brand": "INZELM®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido por dia, pela manhã."]
+      "directions": [
+        "Tomar 1 comprimido por dia, pela manhã."
+      ]
     },
     {
       "id": "alginato_100mg_ml_bic_20mg_ml_lufta_gastro_pro",
@@ -781,7 +839,9 @@
       "title": "Alginato de sódio 100mg/mL + bicarbonato 20mg/mL",
       "brand": "LUFTA GASTRO PRO®",
       "qty": "1 frasco",
-      "directions": ["Tomar 5mL após as principais refeições do dia e antes de dormir."]
+      "directions": [
+        "Tomar 5mL após as principais refeições do dia e antes de dormir."
+      ]
     },
     {
       "id": "hidroxido_aluminio_230mg_pepsamar",
@@ -790,7 +850,9 @@
       "title": "Hidróxido de alumínio 230mg",
       "brand": "PEPSAMAR®",
       "qty": "1 caixa",
-      "directions": ["Mastigar e engolir 1 comprimido, 1 hora após as refeições e ao deitar."]
+      "directions": [
+        "Mastigar e engolir 1 comprimido, 1 hora após as refeições e ao deitar."
+      ]
     },
     {
       "id": "hidroxido_magnesio_1200mg_15ml_phillips",
@@ -799,7 +861,9 @@
       "title": "Hidróxido de magnésio 1.200mg/15 mL",
       "brand": "LEITE DE MAGNÉSIA DE PHILLIPS®",
       "qty": "1 frasco",
-      "directions": ["Tomar 3 colheres de sopa, uma vez ao dia, por 3 dias, se constipação intestinal."]
+      "directions": [
+        "Tomar 3 colheres de sopa, uma vez ao dia, por 3 dias, se constipação intestinal."
+      ]
     },
     {
       "id": "cimetidina_400mg_tagamet",
@@ -808,7 +872,9 @@
       "title": "Cimetidina 400mg",
       "brand": "TAGAMET®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido pela manhã, em jejum. Tomar mais 1 comprimido antes do jantar."]
+      "directions": [
+        "Tomar 1 comprimido pela manhã, em jejum. Tomar mais 1 comprimido antes do jantar."
+      ]
     },
     {
       "id": "famotidina_20mg_famox",
@@ -817,7 +883,9 @@
       "title": "Famotidina 20mg",
       "brand": "FAMOX®",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido pela manhã, em jejum. Tomar mais 1 comprimido antes do jantar."]
+      "directions": [
+        "Tomar 1 comprimido pela manhã, em jejum. Tomar mais 1 comprimido antes do jantar."
+      ]
     },
     {
       "id": "sro_sais_reidratacao_oral",
@@ -826,7 +894,10 @@
       "title": "Sais de reidratação oral (SRO)",
       "brand": "",
       "qty": "1 caixa (sachês)",
-      "directions": ["Diluir 1 envelope conforme instruções da embalagem.", "Ofertar em pequenos volumes e repetidamente após cada episódio de diarreia/vômito."]
+      "directions": [
+        "Diluir 1 envelope conforme instruções da embalagem.",
+        "Ofertar em pequenos volumes e repetidamente após cada episódio de diarreia/vômito."
+      ]
     },
     {
       "id": "s_boulardii_200mg_floratil",
@@ -834,7 +905,9 @@
       "route": "ORAL",
       "title": "S. boulardii 200mg",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 cápsula, de 12/12 horas, por 3 dias"]
+      "directions": [
+        "Tomar 1 cápsula, de 12/12 horas, por 3 dias"
+      ]
     },
     {
       "id": "loperamida_2mg",
@@ -842,7 +915,10 @@
       "route": "ORAL",
       "title": "Loperamida 2mg",
       "qty": "1 caixa",
-      "directions": ["Tomar 2 comprimidos agora e 1 comprimido após cada evacuação", "Máximo de 8 comprimidos por dia"]
+      "directions": [
+        "Tomar 2 comprimidos agora e 1 comprimido após cada evacuação",
+        "Máximo de 8 comprimidos por dia"
+      ]
     },
     {
       "id": "racecadotrila_100mg",
@@ -850,7 +926,9 @@
       "route": "ORAL",
       "title": "Racecadotrila 100mg",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, até de 8/8 horas, por até 7 dias"]
+      "directions": [
+        "Tomar 1 comprimido, até de 8/8 horas, por até 7 dias"
+      ]
     },
     {
       "id": "mometasona_nasal_50mcg_nasonex",
@@ -858,7 +936,9 @@
       "route": "INALATORIO",
       "title": "Mometasona nasal 50mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
+      "directions": [
+        "Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"
+      ]
     },
     {
       "id": "ciclesonida_nasal_50mcg_omnaris",
@@ -866,7 +946,9 @@
       "route": "INALATORIO",
       "title": "Ciclesonida nasal 50mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
+      "directions": [
+        "Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"
+      ]
     },
     {
       "id": "budesonida_nasal_32mcg_busonid",
@@ -874,7 +956,9 @@
       "route": "INALATORIO",
       "title": "Budesonida 32mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"]
+      "directions": [
+        "Aplicar 2 jatos em cada narina, até de 24/24 horas, se congestão nasal"
+      ]
     },
     {
       "id": "budesonida_inalatoria_50mcg_busonid",
@@ -882,7 +966,9 @@
       "route": "INALATORIO",
       "title": "Budesonida 50mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "beclometasona_aerossol_250mcg_clenil",
@@ -890,7 +976,9 @@
       "route": "INALATORIO",
       "title": "Beclometasona aerossol 250mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "fluticasona_250mcg_flixotide",
@@ -898,7 +986,9 @@
       "route": "INALATORIO",
       "title": "Fluticasona 250mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 1 jato, até de 12/12 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 1 jato, até de 12/12 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "salbutamol_100mcg_aerolin",
@@ -906,7 +996,9 @@
       "route": "INALATORIO",
       "title": "Salbutamol 100mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos, até de 6/6 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 2 jatos, até de 6/6 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "fenoterol_100mcg_berotec",
@@ -914,7 +1006,9 @@
       "route": "INALATORIO",
       "title": "Fenoterol 100mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos, até de 6/6 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 2 jatos, até de 6/6 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "formoterol_12mcg_foradil",
@@ -922,7 +1016,9 @@
       "route": "INALATORIO",
       "title": "Formoterol 12mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 1 jato, até de 12/12 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 1 jato, até de 12/12 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "formoterol_12mcg_budesonida_400mcg_alenia",
@@ -930,7 +1026,9 @@
       "route": "INALATORIO",
       "title": "Formoterol 12mcg + budesonida 400mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 1 jato, até de 24/24 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 1 jato, até de 24/24 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "salmeterol_25mcg_serevent",
@@ -938,7 +1036,9 @@
       "route": "INALATORIO",
       "title": "Salmeterol 25mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "salmeterol_25mcg_fluticasona_125mcg_seretide",
@@ -946,7 +1046,9 @@
       "route": "INALATORIO",
       "title": "Salmeterol 25mcg + fluticasona 125mcg",
       "qty": "1 frasco",
-      "directions": ["Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."]
+      "directions": [
+        "Aplicar 2 jatos, até de 12/12 horas, se cansaço, tosse ou chieira."
+      ]
     },
     {
       "id": "sumatriptano_50mg_imigran",
@@ -1015,7 +1117,9 @@
       "title": "Propranolol 80mg",
       "brand": "PRONOLAL",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, de 12/12 horas, todos os dias."]
+      "directions": [
+        "Tomar 1 comprimido, de 12/12 horas, todos os dias."
+      ]
     },
     {
       "id": "atenolol_50mg_atenol",
@@ -1024,7 +1128,9 @@
       "title": "Atenolol 50mg",
       "brand": "ATENOL",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, uma vez ao dia, pela manhã, todos os dias."]
+      "directions": [
+        "Tomar 1 comprimido, uma vez ao dia, pela manhã, todos os dias."
+      ]
     },
     {
       "id": "metoprolol_50mg_selozok",
@@ -1033,7 +1139,9 @@
       "title": "Metoprolol 50mg",
       "brand": "SELOZOK",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, uma vez ao dia, pela manhã, todos os dias."]
+      "directions": [
+        "Tomar 1 comprimido, uma vez ao dia, pela manhã, todos os dias."
+      ]
     },
     {
       "id": "amitriptilina_25mg_tryptanol",
@@ -1042,7 +1150,9 @@
       "title": "Amitriptilina 25mg",
       "brand": "TRYPTANOL",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, 3 vezes ao dia (manhã, meio-dia e noite), no início das principais refeições."]
+      "directions": [
+        "Tomar 1 comprimido, 3 vezes ao dia (manhã, meio-dia e noite), no início das principais refeições."
+      ]
     },
     {
       "id": "nortriptilina_25mg_pamelor",
@@ -1051,7 +1161,9 @@
       "title": "Nortriptilina 25mg",
       "brand": "PAMELOR",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, 3 vezes ao dia (manhã, meio-dia e noite), no início das principais refeições."]
+      "directions": [
+        "Tomar 1 comprimido, 3 vezes ao dia (manhã, meio-dia e noite), no início das principais refeições."
+      ]
     },
     {
       "id": "pregabalina_75mg_lyrica",
@@ -1060,7 +1172,9 @@
       "title": "Pregabalina 75mg",
       "brand": "LYRICA",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido por dia, à noite, todos os dias."]
+      "directions": [
+        "Tomar 1 comprimido por dia, à noite, todos os dias."
+      ]
     },
     {
       "id": "gabapentina_300mg_gabaneurin",
@@ -1069,7 +1183,9 @@
       "title": "Gabapentina 300mg",
       "brand": "GABANEURIN",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, de 8/8 horas, todos os dias."]
+      "directions": [
+        "Tomar 1 comprimido, de 8/8 horas, todos os dias."
+      ]
     },
     {
       "id": "carbamazepina_200mg_tegretol",
@@ -1078,7 +1194,9 @@
       "title": "Carbamazepina 200mg",
       "brand": "TEGRETOL",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, de 8/8 horas, todos os dias."]
+      "directions": [
+        "Tomar 1 comprimido, de 8/8 horas, todos os dias."
+      ]
     },
     {
       "id": "acido_valproico_250mg_depakene",
@@ -1087,7 +1205,9 @@
       "title": "Ácido valpróico 250mg",
       "brand": "DEPAKENE",
       "qty": "1 caixa",
-      "directions": ["Tomar 1 comprimido, de 8/8 horas, todos os dias."]
+      "directions": [
+        "Tomar 1 comprimido, de 8/8 horas, todos os dias."
+      ]
     },
     {
       "id": "topiramato_50mg_topamax",
@@ -1148,6 +1268,186 @@
       "directions": [
         "Aplicar uma fina camada em todo o corpo, excluindo o rosto, após o banho, durante 3 noites consecutivas.",
         "Lavar o corpo na manhã seguinte. Repetir o mesmo procedimento após 7 dias."
+      ]
+    },
+    {
+      "id": "nistatina_100000ui_ml_micostalab",
+      "label": "Nistatina 100000UI/mL (MICOSTALAB)",
+      "route": "ORAL",
+      "title": "Nistatina 100.000UI/mL",
+      "brand": "MICOSTALAB®",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar 4mL, de 6/6 horas.",
+        "Bochechar e manter na boca por alguns minutos antes de engolir.",
+        "Continuar por 48 horas após o desaparecimento das lesões."
+      ]
+    },
+    {
+      "id": "fluconazol_150mg_zoltec",
+      "label": "Fluconazol 150mg (ZOLTEC)",
+      "route": "ORAL",
+      "title": "Fluconazol 150mg",
+      "brand": "ZOLTEC®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 único comprimido inicialmente.",
+        "Após uma semana, tomar mais 1 comprimido."
+      ]
+    },
+    {
+      "id": "cetoconazol_200mg_cetoneo",
+      "label": "Cetoconazol 200mg (CETONEO)",
+      "route": "ORAL",
+      "title": "Cetoconazol 200mg",
+      "brand": "CETONEO®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, uma única vez por dia, junto a uma refeição, por 2 semanas."
+      ]
+    },
+    {
+      "id": "itraconazol_100mg_traxonol",
+      "label": "Itraconazol 100mg (TRAXONOL)",
+      "route": "ORAL",
+      "title": "Itraconazol 100mg",
+      "brand": "TRAXONOL®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, uma única vez por dia, junto a uma refeição, por 2 semanas."
+      ]
+    },
+    {
+      "id": "terbinafina_250mg_funtyl",
+      "label": "Terbinafina 250mg (FUNTYL)",
+      "route": "ORAL",
+      "title": "Terbinafina 250mg",
+      "brand": "FUNTYL®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido, uma única vez por dia, junto a uma refeição, por 2 semanas."
+      ]
+    },
+    {
+      "id": "miconazol_20mg_g_creme_ciconazol",
+      "label": "Miconazol 20mg/g creme (CICONAZOL)",
+      "route": "TOPICO",
+      "title": "Miconazol 20mg/g creme",
+      "brand": "CICONAZOL®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Aplicar uma camada fina sobre a área afetada, 2 vezes ao dia, por 2 semanas."
+      ]
+    },
+    {
+      "id": "cetoconazol_20mg_g_creme_cleartop",
+      "label": "Cetoconazol 20mg/g creme (CLEARTOP)",
+      "route": "TOPICO",
+      "title": "Cetoconazol 20mg/g creme",
+      "brand": "CLEARTOP®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Aplicar uma camada fina sobre a área afetada, 1 vez ao dia.",
+        "Manter o tratamento por 3 dias após o desaparecimento das lesões."
+      ]
+    },
+    {
+      "id": "terbinafina_10mg_g_creme_micosil",
+      "label": "Terbinafina 10mg/g creme (MICOSIL)",
+      "route": "TOPICO",
+      "title": "Terbinafina 10mg/g creme",
+      "brand": "MICOSIL®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Aplicar uma camada fina sobre a área afetada, 1 vez ao dia, por 10 dias."
+      ]
+    },
+    {
+      "id": "clotrimazol_100mg_5g_creme_vaginal_lomecan",
+      "label": "Clotrimazol 100mg/5g creme vaginal (LOMECAN)",
+      "route": "TOPICO",
+      "title": "Clotrimazol 100mg/5g creme vaginal",
+      "brand": "LOMECAN®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Fazer 1 aplicação por dia, por 3 dias."
+      ]
+    },
+    {
+      "id": "butoconazol_20mg_g_creme_femmezil",
+      "label": "Butoconazol 20mg/g creme vaginal (FEMMEZIL)",
+      "route": "TOPICO",
+      "title": "Butoconazol 20mg/g creme vaginal",
+      "brand": "FEMMEZIL®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Fazer 1 aplicação única."
+      ]
+    },
+    {
+      "id": "fenticonazol_20mg_g_creme_vaginal_fentizol",
+      "label": "Fenticonazol 20mg/g creme vaginal (FENTIZOL)",
+      "route": "TOPICO",
+      "title": "Fenticonazol 20mg/g creme vaginal",
+      "brand": "FENTIZOL®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Fazer 1 aplicação por dia, por 7 dias."
+      ]
+    },
+    {
+      "id": "nistatina_25000ui_g_creme_vaginal_neo_mistatin",
+      "label": "Nistatina 25000UI/1g creme vaginal (NEO MISTATIN)",
+      "route": "TOPICO",
+      "title": "Nistatina 25000UI/1g creme vaginal",
+      "brand": "NEO MISTATIN®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Fazer 1 aplicação por dia, por 14 dias."
+      ]
+    },
+    {
+      "id": "nistatina_100000ui_g_oxido_zinco_200mg_g_pomada_babyneo",
+      "label": "Nistatina 100000UI/g + óxido de zinco 200mg/g pomada (BABYNEO)",
+      "route": "TOPICO",
+      "title": "Nistatina 100000UI/g + óxido de zinco 200mg/g pomada",
+      "brand": "BABYNEO®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Aplicar uma camada fina sobre a área afetada, 2 vezes ao dia, por 10 dias."
+      ]
+    },
+    {
+      "id": "nistatina_100000ui_5g_metronidazol_500mg_5g_creme_vaginal_flagyl",
+      "label": "Nistatina 100000UI/5g + metronidazol 500mg/5g creme vaginal (FLAGYL)",
+      "route": "TOPICO",
+      "title": "Nistatina 100000UI/5g + metronidazol 500mg/5g creme vaginal",
+      "brand": "FLAGYL®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Fazer 1 aplicação por dia, por 10 dias."
+      ]
+    },
+    {
+      "id": "nistatina_100000ui_4g_poli_b_35000ui_4g_neomicina_35000ui_4g_tinidazol_150mg_4g_creme_ginec",
+      "label": "Nistatina + polimixina B + neomicina + tinidazol (GINEC)",
+      "route": "TOPICO",
+      "title": "Nistatina 100000UI/4g + polimixina B 35000UI/4g + neomicina 35000UI/4g + tinidazol 150mg/4g creme vaginal",
+      "brand": "GINEC®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Fazer 1 aplicação por dia, por 12 dias."
+      ]
+    },
+    {
+      "id": "triancinolona_1mg_g_nistatina_100000ui_g_creme_oncileg",
+      "label": "Triancinolona 1mg/g + nistatina 100000UI/g creme (ONCILEG)",
+      "route": "TOPICO",
+      "title": "Triancinolona 1mg/g + nistatina 100000UI/g creme",
+      "brand": "ONCILEG®",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Aplicar uma camada fina sobre a área afetada, 2 vezes ao dia, por 7 dias."
       ]
     }
   ]
