@@ -238,7 +238,6 @@ function buildTemplateDefaults(template: Template): TemplateState {
 import templatesData from "../templates/templates.json";
 import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
-import { INVITE_CODES, isInviteValid } from "../lib/invite";
 import { isCodeValid } from "../beta/access";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
@@ -383,7 +382,6 @@ export default function Page() {
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
   const rxKitsRef = useRef<Record<string, string[]>>({});
-  const inviteChecked = useRef(false);
   const feedbackUrl = FEEDBACK_URL;
 
   useEffect(() => {
@@ -424,23 +422,13 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (inviteChecked.current) return;
     if (typeof window === "undefined") return;
     const ack = localStorage.getItem(PRIVACY_KEY);
     if (ack === "1") {
       setPrivacyAck(true);
       setPrivacyCheckbox(true);
     }
-
-    const code = localStorage.getItem("invite_code");
-    if (!isInviteValid(code)) {
-      if (pathname !== "/beta") {
-        router.replace("/beta");
-      }
-      return;
-    }
-    inviteChecked.current = true;
-  }, [router, pathname]);
+  }, []);
 
   useEffect(() => {
     if (!currentTemplate || !didHydrate.current) return;
