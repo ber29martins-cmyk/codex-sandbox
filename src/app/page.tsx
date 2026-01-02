@@ -709,7 +709,28 @@ const currentTemplate = useMemo(
     }
 
     return { anamnese, exame, hipotese: avaliacao, conduta };
-  }, [qpText, hmaParagraphs, alarmLines, comorb, meds, alergiaNega, triagem, pa, fc, sat, hipotese, condutaAlarmes, currentTemplate, templateId, exameLivre, atestadoEmitir, atestadoDias, atestadoCid, prescribedClassesDisplay]);
+  }, [
+    qpText,
+    hmaParagraphs,
+    alarmLines,
+    comorb,
+    comorbSelected,
+    meds,
+    alergiaNega,
+    triagem,
+    pa,
+    fc,
+    sat,
+    hipotese,
+    condutaAlarmes,
+    currentTemplate,
+    templateId,
+    exameLivre,
+    atestadoEmitir,
+    atestadoDias,
+    atestadoCid,
+    prescribedClassesDisplay
+  ]);
 
   function formatBlock(key: BlockKey) {
     return blocks[key].join("\n");
