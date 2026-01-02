@@ -910,12 +910,27 @@ const currentTemplate = useMemo(
     });
   }
 
-  const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}\n\nobservação: documento gerado sem dados identificáveis do paciente.`;
+  const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
   const allText = includeRx && rxText ? `${baseText}\n\nReceituário:\n${rxText}` : baseText;
 
   return (
-    <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
-      <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>MVP Prontuário (blocos)</h1>
+    <>
+      <div
+        className="no-print"
+        style={{
+          background: "#fff8e1",
+          border: "1px solid #facc15",
+          color: "#92400e",
+          padding: "8px 12px",
+          marginBottom: 12,
+          borderRadius: 8,
+          fontSize: 13
+        }}
+      >
+        não insira dados identificáveis do paciente (nome, cpf, endereço, telefone). use iniciais/idade.
+      </div>
+      <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
+        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>MVP Prontuário (blocos)</h1>
       <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>Templates carregados: {TEMPLATES.length}</div>
       {feedbackUrl && (
         <div className="no-print" style={{ marginBottom: 12 }}>
@@ -924,7 +939,6 @@ const currentTemplate = useMemo(
           </a>
         </div>
       )}
-
       <div className="no-print" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
         <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Entrada rápida</h2>
@@ -1159,11 +1173,14 @@ const currentTemplate = useMemo(
 
       <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
         <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Saída (copiar/colar)</h2>
+        <div className="no-print" style={{ fontSize: 12, color: "#4b5563", marginBottom: 8 }}>
+          observação: documento gerado sem dados identificáveis do paciente.
+        </div>
 
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
           <button onClick={() => copy(formatBlock("anamnese"))}>Copiar anamnese</button>
-            <button onClick={() => copy(formatBlock("exame"))}>Copiar exame</button>
-            <button onClick={() => copy(formatBlock("hipotese"))}>Copiar hipótese</button>
+          <button onClick={() => copy(formatBlock("exame"))}>Copiar exame</button>
+          <button onClick={() => copy(formatBlock("hipotese"))}>Copiar hipótese</button>
             <button onClick={() => copy(formatBlock("conduta"))}>Copiar conduta</button>
             <button onClick={() => copy(allText)}>Copiar tudo</button>
             <button type="button" onClick={handlePrint}>Imprimir</button>
@@ -1369,5 +1386,57 @@ const currentTemplate = useMemo(
         }
       `}</style>
     </main>
+      {!privacyAck && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.4)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000
+          }}
+        >
+          <div
+            style={{
+              background: "#fff",
+              padding: 24,
+              borderRadius: 12,
+              width: "min(480px, 90%)",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
+            }}
+          >
+            <h3 style={{ marginTop: 0, marginBottom: 8, fontSize: 18 }}>aviso importante</h3>
+            <p style={{ marginTop: 0, marginBottom: 12, color: "#444", lineHeight: 1.4 }}>
+              este site não deve ser usado para inserir dados identificáveis do paciente. utilize apenas iniciais, idade e dados não sensíveis.
+            </p>
+            <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+              <input
+                type="checkbox"
+                checked={privacyCheckbox}
+                onChange={(e) => setPrivacyCheckbox(e.target.checked)}
+              />
+              li e entendi
+            </label>
+            <button
+              type="button"
+              onClick={handlePrivacyContinue}
+              disabled={!privacyCheckbox}
+              style={{
+                padding: "10px 14px",
+                borderRadius: 8,
+                border: "1px solid #2563eb",
+                background: privacyCheckbox ? "#2563eb" : "#93c5fd",
+                color: "#fff",
+                cursor: privacyCheckbox ? "pointer" : "not-allowed"
+              }}
+            >
+              continuar
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
