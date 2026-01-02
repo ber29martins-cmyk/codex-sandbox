@@ -1004,7 +1004,7 @@ function handlePrivacyContinue() {
           fontSize: 13
         }}
       >
-        não insira dados identificáveis do paciente (nome, cpf, endereço, telefone). use iniciais/idade.
+        não insira dados identificáveis do paciente. revise e confirme as informações (responsabilidade médica).
       </div>
       <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
         <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>MVP Prontuário (blocos)</h1>
@@ -1487,6 +1487,7 @@ function handlePrivacyContinue() {
             <h3 style={{ marginTop: 0, marginBottom: 8, fontSize: 18 }}>aviso importante</h3>
             <p style={{ marginTop: 0, marginBottom: 12, color: "#444", lineHeight: 1.4 }}>
               este site não deve ser usado para inserir dados identificáveis do paciente. utilize apenas iniciais, idade e dados não sensíveis.
+              a revisão e validação das informações são de responsabilidade do profissional médico.
             </p>
             <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
               <input
