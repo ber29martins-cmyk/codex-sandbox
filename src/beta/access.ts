@@ -5,26 +5,29 @@ export type BetaCode = {
   revoked?: boolean;
 };
 
+const now = new Date();
+const in14Days = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString();
+
 export const BETA_CODES: BetaCode[] = [
   {
-    code: "PLANTAO-OWNER-2025",
+    code: "PLANTAO-OWNER-2027",
     label: "Owner",
-    expiresAt: "2025-12-31T23:59:59Z"
+    expiresAt: "2027-12-31T23:59:59Z"
   },
   {
-    code: "PLANTAO-BETA-2024",
+    code: "PLANTAO-BETA-2026",
     label: "Convite beta",
-    expiresAt: "2025-02-28T23:59:59Z"
+    expiresAt: in14Days
   },
   {
-    code: "PLANTAO-TEST-2023",
+    code: "PLANTAO-TEST-2024",
     label: "Expirado",
-    expiresAt: "2023-12-31T23:59:59Z"
+    expiresAt: "2024-12-31T23:59:59Z"
   },
   {
-    code: "PLANTAO-REVOG-2024",
+    code: "PLANTAO-REVOG-2026",
     label: "Revogado",
-    expiresAt: "2025-02-28T23:59:59Z",
+    expiresAt: "2026-12-31T23:59:59Z",
     revoked: true
   }
 ];
