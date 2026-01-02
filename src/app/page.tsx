@@ -64,6 +64,7 @@ const HMA_SELECTED_PREFIX = "mvp:hmaSelected:";
 const HMA_FREE_PREFIX = "mvp:hmaFree:";
 const RX_ROUTE_ORDER = ["ORAL", "PARENTERAL", "TOPICO", "OFTALMICO", "INALATORIO"];
 const RX_KIT_KEY = "codex-rx-kits-v1";
+const PRIVACY_KEY = "privacy_ack_v1";
 
 function buildDefaultAlarmStates(template: Template): AlarmStateMap {
   const items = template.defaults.alarmItems ?? [];
@@ -344,6 +345,8 @@ const currentTemplate = useMemo(
   const [sat, setSat] = useState("");
   const [includeRx, setIncludeRx] = useState(false);
   const [comorbSelected, setComorbSelected] = useState<string[]>([]);
+  const [privacyAck, setPrivacyAck] = useState(false);
+  const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
   const didHydrate = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
@@ -375,6 +378,12 @@ const currentTemplate = useMemo(
   useEffect(() => {
     if (inviteChecked.current) return;
     if (typeof window === "undefined") return;
+    const ack = localStorage.getItem(PRIVACY_KEY);
+    if (ack === "1") {
+      setPrivacyAck(true);
+      setPrivacyCheckbox(true);
+    }
+
     const code = localStorage.getItem("invite_code");
     if (!isInviteValid(code)) {
       if (pathname !== "/beta") {
@@ -740,6 +749,15 @@ const currentTemplate = useMemo(
     await navigator.clipboard.writeText(text);
   }
 
+  function handlePrivacyContinue() {
+    setPrivacyAck(true);
+    try {
+      localStorage.setItem(PRIVACY_KEY, "1");
+    } catch (err) {
+      console.error("Erro ao salvar aviso de privacidade", err);
+    }
+  }
+
   function handleRestoreTemplateDefaults() {
     if (!currentTemplate) return;
 
@@ -892,7 +910,7 @@ const currentTemplate = useMemo(
     });
   }
 
-  const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
+  const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}\n\nobservação: documento gerado sem dados identificáveis do paciente.`;
   const allText = includeRx && rxText ? `${baseText}\n\nReceituário:\n${rxText}` : baseText;
 
   return (
