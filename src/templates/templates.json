@@ -1492,7 +1492,7 @@
         "exame": [
           "BEG, corado, hidratado, afebril no momento",
           "Ausculta pulmonar: murmúrio vesicular diminuído e estertores/crepitações em base, conforme quadro",
-          "Sem sinais de esforço respiratório importante no momento (reavaliar se piora)",
+          "Sem sinais de esforço respiratório importante no momento",
           "Perfusão periférica preservada"
         ],
         "alarmItems": [
@@ -1614,7 +1614,7 @@
           "BEG, corado, hidratado, afebril no momento",
           "Sem sinais de choque no momento; perfusão periférica preservada",
           "Abdome sem sinais de irritação peritoneal",
-          "Pele: sem exantema importante no momento (reavaliar conforme evolução)"
+          "Pele: sem exantema importante observado no momento"
         ],
         "alarmItems": [
           {
@@ -1977,7 +1977,7 @@
           "BEG, corado, hidratado, afebril no momento",
           "Pele: placa eritematosa, quente e dolorosa, com edema, limites conforme quadro",
           "Sem crepitação; sem bolhas/necrose no momento",
-          "Avaliar linfangite/linfonodos regionais conforme localização"
+          "Sem linfangite ou linfonodos regionais palpáveis"
         ],
         "alarmItems": [
           {
@@ -2094,7 +2094,7 @@
           "Sinais vitais conforme triagem",
           "BEG, corado, hidratado, afebril no momento",
           "Pele: pápulas/escoriações e crostas em áreas sugestivas (punhos, interdígitos, cintura), conforme exame",
-          "Sem sinais sistêmicos no momento; avaliar sinais de impetiginização/celulite conforme lesões"
+          "Sem sinais sistêmicos no momento; sem impetiginização evidente ou celulite associada às lesões"
         ],
         "alarmItems": [
           {
@@ -2513,7 +2513,7 @@
           "BEG, corado, hidratado, afebril no momento",
           "Orofaringe com hiperemia leve, sem exsudato importante, conforme quadro",
           "Ausculta pulmonar sem alterações significativas",
-          "Sem estridor no momento; reavaliar se piora"
+          "Sem estridor no momento"
         ],
         "alarmItems": [
           {
