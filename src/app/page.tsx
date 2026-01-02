@@ -239,6 +239,7 @@ import templatesData from "../templates/templates.json";
 import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
 import { INVITE_CODES, isInviteValid } from "../lib/invite";
+import { isCodeValid } from "../beta/access";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
 const INITIAL_DEFAULTS = INITIAL_TEMPLATE ? buildTemplateDefaults(INITIAL_TEMPLATE) : null;
@@ -321,10 +322,36 @@ export default function Page() {
     const [templateId, setTemplateId] = useState<string>(TEMPLATES[0]?.id ?? "lombalgia");
   const router = useRouter();
   const pathname = usePathname();
-const currentTemplate = useMemo(
-  () => TEMPLATES.find((t) => t.id === templateId) ?? TEMPLATES[0],
-  [templateId]
-);
+  const currentTemplate = useMemo(
+    () => TEMPLATES.find((t) => t.id === templateId) ?? TEMPLATES[0],
+    [templateId]
+  );
+
+  const validateBeta = async (code: string) => {
+    setBetaError("");
+    setBetaLoading(true);
+    try {
+      const res = await fetch("/api/beta/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code })
+      });
+      const json = await res.json();
+      if (json.ok) {
+        setBetaOk(true);
+        setBetaLabel(json.label);
+        localStorage.setItem("beta_access_v1", JSON.stringify({ code, ts: Date.now() }));
+      } else {
+        setBetaError(json.reason || "invalid");
+        setBetaOk(false);
+      }
+    } catch (err) {
+      setBetaError("invalid");
+      setBetaOk(false);
+    } finally {
+      setBetaLoading(false);
+    }
+  };
   const [qpText, setQpText] = useState("");
   const [alarme, setAlarme] = useState("Nega perda de força, anestesia em sela e alteração esfincteriana");
   const [comorb, setComorb] = useState("DM NIR, HAS");
@@ -347,6 +374,11 @@ const currentTemplate = useMemo(
   const [comorbSelected, setComorbSelected] = useState<string[]>([]);
   const [privacyAck, setPrivacyAck] = useState(false);
   const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
+  const [betaOk, setBetaOk] = useState(false);
+  const [betaLabel, setBetaLabel] = useState<string>("");
+  const [betaInput, setBetaInput] = useState("");
+  const [betaError, setBetaError] = useState<string>("");
+  const [betaLoading, setBetaLoading] = useState(false);
   const didHydrate = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
@@ -358,6 +390,22 @@ const currentTemplate = useMemo(
     if (typeof window === "undefined") return;
 
     try {
+      const storedBeta = localStorage.getItem("beta_access_v1");
+      if (storedBeta) {
+        try {
+          const parsed = JSON.parse(storedBeta);
+          const res = isCodeValid(parsed.code || "");
+          if (res.ok) {
+            setBetaOk(true);
+            setBetaLabel(res.label);
+          } else {
+            localStorage.removeItem("beta_access_v1");
+          }
+        } catch (_) {
+          localStorage.removeItem("beta_access_v1");
+        }
+      }
+
       const raw = localStorage.getItem(STORAGE_KEY);
       const parsed = raw ? (JSON.parse(raw) as { templateId?: string; templates?: Record<string, TemplateState>; rxKits?: Record<string, string[]> }) : {};
       savedTemplatesRef.current = parsed.templates ?? {};
@@ -749,13 +797,54 @@ const currentTemplate = useMemo(
     await navigator.clipboard.writeText(text);
   }
 
-  function handlePrivacyContinue() {
-    setPrivacyAck(true);
-    try {
-      localStorage.setItem(PRIVACY_KEY, "1");
-    } catch (err) {
-      console.error("Erro ao salvar aviso de privacidade", err);
-    }
+function handlePrivacyContinue() {
+  setPrivacyAck(true);
+  try {
+    localStorage.setItem(PRIVACY_KEY, "1");
+  } catch (err) {
+    console.error("Erro ao salvar aviso de privacidade", err);
+  }
+}
+
+  if (!betaOk) {
+    return (
+      <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
+        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>acesso beta</h1>
+        <p style={{ marginBottom: 12, color: "#444" }}>Insira seu código de acesso para continuar.</p>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 12 }}>
+          <input
+            value={betaInput}
+            onChange={(e) => setBetaInput(e.target.value)}
+            placeholder="PLANTAO-XXXX-YYYY"
+            style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
+          />
+          <button
+            type="button"
+            onClick={() => validateBeta(betaInput)}
+            disabled={betaLoading}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 8,
+              border: "1px solid #2563eb",
+              background: betaLoading ? "#93c5fd" : "#2563eb",
+              color: "#fff",
+              cursor: betaLoading ? "not-allowed" : "pointer"
+            }}
+          >
+            {betaLoading ? "Validando..." : "Entrar"}
+          </button>
+        </div>
+        {betaError && (
+          <div style={{ color: "#b91c1c", fontSize: 13, marginTop: 4 }}>
+            {betaError === "expired"
+              ? "Código expirado."
+              : betaError === "revoked"
+                ? "Código revogado."
+                : "Código inválido."}
+          </div>
+        )}
+      </main>
+    );
   }
 
   function handleRestoreTemplateDefaults() {
