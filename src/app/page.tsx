@@ -506,7 +506,7 @@ const currentTemplate = useMemo(
         if (lbl) ausentes.push(lbl);
       }
       if (status === "presente") {
-        const lbl = alarmLabelForPrint(item.label || item.presentText || "");
+        const lbl = alarmLabelForPrint(item.presentText || item.label || "");
         if (lbl) presentes.push(lbl);
       }
     }
@@ -658,7 +658,7 @@ const currentTemplate = useMemo(
       ...(hmaParagraphs.slice(1).length ? ["", ...hmaParagraphs.slice(1)] : []),
       ...alarmLines,
       (() => {
-        const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.abbr);
+        const selectedAbbrs = COMORB_OPTIONS.filter((c) => comorbSelected.includes(c.id)).map((c) => c.label);
         const manual = comorb ? [comorb] : [];
         const combined = [...selectedAbbrs, ...manual].filter(Boolean);
         if (!combined.length) return "Nega comorbidades relevantes";
