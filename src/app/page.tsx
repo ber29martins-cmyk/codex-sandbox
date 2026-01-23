@@ -65,6 +65,8 @@ const HMA_FREE_PREFIX = "mvp:hmaFree:";
 const RX_ROUTE_ORDER = ["ORAL", "PARENTERAL", "TOPICO", "OFTALMICO", "INALATORIO"];
 const RX_KIT_KEY = "codex-rx-kits-v1";
 const PRIVACY_KEY = "privacy_ack_v1";
+const BETA_STORAGE_KEY = "beta_access_v2";
+const LEGACY_BETA_STORAGE_KEY = "beta_access_v1";
 
 function buildDefaultAlarmStates(template: Template): AlarmStateMap {
   const items = template.defaults.alarmItems ?? [];
@@ -238,7 +240,6 @@ function buildTemplateDefaults(template: Template): TemplateState {
 import templatesData from "../templates/templates.json";
 import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
-import { isCodeValid } from "../beta/access";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
 const INITIAL_DEFAULTS = INITIAL_TEMPLATE ? buildTemplateDefaults(INITIAL_TEMPLATE) : null;
@@ -326,21 +327,33 @@ export default function Page() {
     [templateId]
   );
 
-  const validateBeta = async (code: string) => {
+  const validateBeta = async () => {
+    const code = betaInput.trim();
+    const email = betaEmail.trim().toLowerCase();
+    if (!code) {
+      setBetaError("invalid");
+      return;
+    }
+    if (!email) {
+      setBetaError("invalid_email");
+      return;
+    }
+
     setBetaError("");
     setBetaLoading(true);
     try {
-      const res = await fetch("/api/beta/validate", {
+      const res = await fetch("/api/beta/activate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code })
+        body: JSON.stringify({ code, email })
       });
       const json = await res.json();
-      if (json.ok) {
+      if (res.ok && json.ok) {
         setBetaOk(true);
         setBetaLabel(json.label);
-        localStorage.setItem("beta_access_v1", JSON.stringify({ code, ts: Date.now() }));
+        localStorage.setItem(BETA_STORAGE_KEY, JSON.stringify({ code, emailHash: json.emailHash, ts: Date.now() }));
       } else {
+        localStorage.removeItem(BETA_STORAGE_KEY);
         setBetaError(json.reason || "invalid");
         setBetaOk(false);
       }
@@ -376,8 +389,10 @@ export default function Page() {
   const [betaOk, setBetaOk] = useState(false);
   const [betaLabel, setBetaLabel] = useState<string>("");
   const [betaInput, setBetaInput] = useState("");
+  const [betaEmail, setBetaEmail] = useState("");
   const [betaError, setBetaError] = useState<string>("");
   const [betaLoading, setBetaLoading] = useState(false);
+  const [betaHydrating, setBetaHydrating] = useState(true);
   const didHydrate = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
@@ -387,38 +402,74 @@ export default function Page() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    try {
-      const storedBeta = localStorage.getItem("beta_access_v1");
-      if (storedBeta) {
-        try {
-          const parsed = JSON.parse(storedBeta);
-          const res = isCodeValid(parsed.code || "");
-          if (res.ok) {
-            setBetaOk(true);
-            setBetaLabel(res.label);
-          } else {
-            localStorage.removeItem("beta_access_v1");
+    let cancelled = false;
+
+    const hydrate = async () => {
+      setBetaHydrating(true);
+      try {
+        const legacyBeta = localStorage.getItem(LEGACY_BETA_STORAGE_KEY);
+        if (legacyBeta) {
+          localStorage.removeItem(LEGACY_BETA_STORAGE_KEY);
+        }
+
+        const storedBeta = localStorage.getItem(BETA_STORAGE_KEY);
+        if (storedBeta) {
+          try {
+            const parsed = JSON.parse(storedBeta) as { code?: string; emailHash?: string };
+            if (parsed?.code && parsed?.emailHash) {
+              const res = await fetch("/api/beta/validate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code: parsed.code, emailHash: parsed.emailHash })
+              });
+              const json = await res.json();
+              if (cancelled) return;
+              if (res.ok && json.ok) {
+                setBetaOk(true);
+                setBetaLabel(json.label);
+              } else {
+                localStorage.removeItem(BETA_STORAGE_KEY);
+                setBetaOk(false);
+                setBetaError(json.reason || "invalid");
+              }
+            } else {
+              localStorage.removeItem(BETA_STORAGE_KEY);
+            }
+          } catch (err) {
+            if (!cancelled) {
+              localStorage.removeItem(BETA_STORAGE_KEY);
+              setBetaError("invalid");
+            }
           }
-        } catch (_) {
-          localStorage.removeItem("beta_access_v1");
+        }
+
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const parsed = raw
+          ? (JSON.parse(raw) as { templateId?: string; templates?: Record<string, TemplateState>; rxKits?: Record<string, string[]> })
+          : {};
+        savedTemplatesRef.current = parsed.templates ?? {};
+        rxKitsRef.current = parsed.rxKits ?? {};
+
+        const storedTemplateId =
+          parsed.templateId && TEMPLATES.some((t) => t.id === parsed.templateId) ? parsed.templateId : TEMPLATES[0]?.id;
+        if (storedTemplateId) {
+          setTemplateId(storedTemplateId);
+        }
+      } catch (err) {
+        console.error("Falha ao carregar estado local:", err);
+      } finally {
+        if (!cancelled) {
+          didHydrate.current = true;
+          setBetaHydrating(false);
         }
       }
+    };
 
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const parsed = raw ? (JSON.parse(raw) as { templateId?: string; templates?: Record<string, TemplateState>; rxKits?: Record<string, string[]> }) : {};
-      savedTemplatesRef.current = parsed.templates ?? {};
-      rxKitsRef.current = parsed.rxKits ?? {};
+    hydrate();
 
-      const storedTemplateId =
-        parsed.templateId && TEMPLATES.some((t) => t.id === parsed.templateId) ? parsed.templateId : TEMPLATES[0]?.id;
-      if (storedTemplateId) {
-        setTemplateId(storedTemplateId);
-      }
-    } catch (err) {
-      console.error("Falha ao carregar estado local:", err);
-    } finally {
-      didHydrate.current = true;
-    }
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -795,40 +846,64 @@ function handlePrivacyContinue() {
 }
 
   if (!betaOk) {
+    const betaBusy = betaLoading || betaHydrating;
     return (
       <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
         <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>acesso beta</h1>
-        <p style={{ marginBottom: 12, color: "#444" }}>Insira seu código de acesso para continuar.</p>
+        <p style={{ marginBottom: 12, color: "#444" }}>
+          Insira seu código de acesso e o e-mail usado na ativação para continuar.
+        </p>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 12 }}>
-          <input
-            value={betaInput}
-            onChange={(e) => setBetaInput(e.target.value)}
-            placeholder="PLANTAO-XXXX-YYYY"
-            style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
-          />
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <input
+              value={betaInput}
+              onChange={(e) => setBetaInput(e.target.value)}
+              placeholder="PLANTAO-XXXX-YYYY"
+              disabled={betaBusy}
+              style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
+            />
+            <input
+              value={betaEmail}
+              onChange={(e) => setBetaEmail(e.target.value)}
+              placeholder="email@exemplo.com"
+              disabled={betaBusy}
+              style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
+            />
+          </div>
           <button
             type="button"
-            onClick={() => validateBeta(betaInput)}
-            disabled={betaLoading}
+            onClick={validateBeta}
+            disabled={betaBusy}
             style={{
               padding: "8px 12px",
               borderRadius: 8,
               border: "1px solid #2563eb",
-              background: betaLoading ? "#93c5fd" : "#2563eb",
+              background: betaBusy ? "#93c5fd" : "#2563eb",
               color: "#fff",
-              cursor: betaLoading ? "not-allowed" : "pointer"
+              cursor: betaBusy ? "not-allowed" : "pointer"
             }}
           >
-            {betaLoading ? "Validando..." : "Entrar"}
+            {betaBusy ? "Validando..." : "Entrar"}
           </button>
         </div>
+        {betaHydrating && !betaError && (
+          <div style={{ color: "#4b5563", fontSize: 13, marginTop: 4 }}>Validando acesso salvo...</div>
+        )}
         {betaError && (
           <div style={{ color: "#b91c1c", fontSize: 13, marginTop: 4 }}>
             {betaError === "expired"
               ? "Código expirado."
               : betaError === "revoked"
                 ? "Código revogado."
-                : "Código inválido."}
+                : betaError === "invalid_email"
+                  ? "Informe um e-mail válido."
+                  : betaError === "bound_to_other_email"
+                    ? "Este código já foi ativado com outro e-mail."
+                    : betaError === "not_activated"
+                      ? "Ative o código com seu e-mail para continuar."
+                      : betaError === "kv_not_configured"
+                        ? "Serviço de acesso indisponível no momento."
+                        : "Não foi possível validar o acesso."}
           </div>
         )}
       </main>
