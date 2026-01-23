@@ -1,7 +1,9 @@
 import { kv } from "@vercel/kv";
 import { NextResponse } from "next/server";
-import { isCodeValid } from "@/beta/access";
-import { betaBindingKey, BetaBinding, isKvConfigured } from "@/lib/betaBinding";
+import { isCodeValid } from "../../../../beta/access";
+import { betaBindingKey, BetaBinding, isKvConfigured } from "../../../../lib/betaBinding";
+
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   if (!isKvConfigured()) {
