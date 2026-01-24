@@ -927,13 +927,29 @@ function handlePrivacyContinue() {
   if (!betaOk) {
     const betaBusy = betaLoading || betaHydrating;
     return (
-      <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
-        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8 }}>acesso beta</h1>
-        <p style={{ marginBottom: 12, color: "#444" }}>
-          Insira seu código de acesso e o e-mail usado na ativação para continuar.
-        </p>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 12 }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <main style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 16px", fontFamily: "ui-sans-serif, system-ui" }}>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 420,
+            background: "#ffffff",
+            border: "1px solid #e5e7eb",
+            borderRadius: 12,
+            boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+            padding: 20,
+            display: "flex",
+            flexDirection: "column",
+            gap: 14
+          }}
+        >
+          <div>
+            <h1 style={{ fontSize: 24, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>Acesso ao beta</h1>
+            <div style={{ fontSize: 14, color: "#475569", marginBottom: 6 }}>
+              Gere evolução + prescrição em segundos com templates de plantão
+            </div>
+            <div style={{ fontSize: 13, color: "#6b7280" }}>Insira seu código e e-mail para liberar o acesso</div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <input
               value={betaInput}
               onChange={(e) => setBetaInput(e.target.value)}
@@ -962,15 +978,17 @@ function handlePrivacyContinue() {
             onClick={validateBeta}
             disabled={betaBusy}
             style={{
-              padding: "8px 12px",
+              padding: "10px 12px",
               borderRadius: 8,
               border: "1px solid #2563eb",
               background: betaBusy ? "#93c5fd" : "#2563eb",
               color: "#fff",
+              fontWeight: 600,
+              fontSize: 15,
               cursor: betaBusy ? "not-allowed" : "pointer"
             }}
           >
-            {betaBusy ? "Validando..." : "Entrar"}
+            {betaBusy ? "Validando..." : "Entrar no beta"}
           </button>
           {(isAdminMode || (betaLabel && betaLabel.toLowerCase() === "owner")) && (
             <button
@@ -978,44 +996,45 @@ function handlePrivacyContinue() {
               onClick={handleCopyInviteLink}
               disabled={betaBusy}
               style={{
-                padding: "6px 10px",
-                borderRadius: 6,
+                padding: "8px 10px",
+                borderRadius: 8,
                 border: "1px solid #d1d5db",
                 background: "#fff",
                 color: "#2563eb",
                 fontSize: 13,
+                fontWeight: 600,
                 cursor: betaBusy ? "not-allowed" : "pointer"
               }}
             >
               copiar link de convite
             </button>
           )}
+          {betaHydrating && !betaError && (
+            <div style={{ color: "#4b5563", fontSize: 13 }}>Validando acesso salvo...</div>
+          )}
+          {betaToast && (
+            <div style={{ color: "#15803d", fontSize: 13 }}>
+              {betaToast}
+            </div>
+          )}
+          {betaError && (
+            <div style={{ color: "#b91c1c", fontSize: 13 }}>
+              {betaError === "expired"
+                ? "Código expirado."
+                : betaError === "revoked"
+                  ? "Código revogado."
+                  : betaError === "invalid_email"
+                    ? "Informe um e-mail válido."
+                    : betaError === "bound_to_other_email"
+                      ? "Este código já foi ativado com outro e-mail."
+                      : betaError === "not_activated"
+                        ? "Ative o código com seu e-mail para continuar."
+                        : betaError === "kv_not_configured"
+                          ? "Serviço de acesso indisponível no momento."
+                          : "Não foi possível validar o acesso."}
+            </div>
+          )}
         </div>
-        {betaHydrating && !betaError && (
-          <div style={{ color: "#4b5563", fontSize: 13, marginTop: 4 }}>Validando acesso salvo...</div>
-        )}
-        {betaToast && (
-          <div style={{ color: "#15803d", fontSize: 13, marginTop: 4 }}>
-            {betaToast}
-          </div>
-        )}
-        {betaError && (
-          <div style={{ color: "#b91c1c", fontSize: 13, marginTop: 4 }}>
-            {betaError === "expired"
-              ? "Código expirado."
-              : betaError === "revoked"
-                ? "Código revogado."
-                : betaError === "invalid_email"
-                  ? "Informe um e-mail válido."
-                  : betaError === "bound_to_other_email"
-                    ? "Este código já foi ativado com outro e-mail."
-                    : betaError === "not_activated"
-                      ? "Ative o código com seu e-mail para continuar."
-                      : betaError === "kv_not_configured"
-                        ? "Serviço de acesso indisponível no momento."
-                        : "Não foi possível validar o acesso."}
-          </div>
-        )}
       </main>
     );
   }
