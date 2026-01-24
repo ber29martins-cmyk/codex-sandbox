@@ -945,7 +945,7 @@ function handlePrivacyContinue() {
           <div>
             <h1 style={{ fontSize: 24, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>Acesso ao beta</h1>
             <div style={{ fontSize: 14, color: "#475569", marginBottom: 6 }}>
-              Gere evolução + prescrição em segundos com templates de plantão
+              Gere evolução + prescrição em segundos
             </div>
             <div style={{ fontSize: 13, color: "#6b7280" }}>Insira seu código e e-mail para liberar o acesso</div>
           </div>
@@ -1227,7 +1227,7 @@ function handlePrivacyContinue() {
           </div>
           <div style={{ fontSize: 14, color: "#475569" }}>Escolha a queixa, marque os chips e gere a evolução em segundos</div>
         </div>
-        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>MVP Prontuário (blocos)</h1>
+        <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>Assistente de evolução</h1>
       <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>Templates carregados: {TEMPLATES.length}</div>
       {feedbackUrl && (
         <div className="no-print" style={{ marginBottom: 12 }}>
