@@ -1552,8 +1552,47 @@ function handlePrivacyContinue() {
         </section>
       </div>
 
-      <section className="no-print" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, marginBottom: 16 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Receituário</h2>
+      <section
+        className="no-print"
+        style={{
+          border: "1px solid #cbd5e1",
+          borderRadius: 12,
+          padding: 20,
+          marginBottom: 16,
+          boxShadow: "0 10px 28px rgba(15, 23, 42, 0.08)",
+          background: "#fff",
+          breakInside: "avoid"
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 10 }}>
+          <h2 style={{ fontSize: 18, fontWeight: 600, margin: 0 }}>Receituário</h2>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <span
+              style={{
+                padding: "4px 8px",
+                borderRadius: 12,
+                background: "#e0f2fe",
+                color: "#0369a1",
+                fontSize: 12,
+                fontWeight: 600
+              }}
+            >
+              copiar
+            </span>
+            <span
+              style={{
+                padding: "4px 8px",
+                borderRadius: 12,
+                background: "#eef2ff",
+                color: "#4338ca",
+                fontSize: 12,
+                fontWeight: 600
+              }}
+            >
+              imprimir
+            </span>
+          </div>
+        </div>
         {templateRxGroups.length === 0 ? (
           <p style={{ margin: "4px 0 0", color: "#666" }}>Receituário não configurado para esta queixa.</p>
         ) : (
@@ -1637,11 +1676,11 @@ function handlePrivacyContinue() {
                               <span style={{ flex: 1, borderBottom: "1px dotted #9ca3af" }} />
                               <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
                             </div>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13 }}>
-                              {item.directions.map((dir, dirIdx) => (
-                                <span key={dirIdx}>{dir}</span>
-                              ))}
-                            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 14 }}>
+              {item.directions.map((dir, dirIdx) => (
+                <span key={dirIdx}>{dir}</span>
+              ))}
+            </div>
                           </div>
                         );
                       })}
@@ -1670,12 +1709,12 @@ function handlePrivacyContinue() {
           <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{formatBlock("conduta")}</pre>
         </div>
         {includeRx && rxText && (
-          <div className="print-doc print-rx" style={{ marginBottom: 16, paddingTop: 8 }}>
-            <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receituário</h3>
+          <div className="print-doc print-rx" style={{ marginBottom: 16, paddingTop: 8, breakInside: "avoid" }}>
+            <h3 style={{ margin: "0 0 8px", fontSize: 15 }}>Receituário</h3>
             {groupedRx.map((group) => (
-              <div key={group.route} style={{ marginBottom: 10 }}>
-                <div style={{ fontWeight: 700, marginBottom: 4 }}>USO {group.route}:</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <div key={group.route} style={{ marginBottom: 14 }}>
+                <div style={{ fontWeight: 700, marginBottom: 6 }}>USO {group.route}:</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 14, lineHeight: 1.6 }}>
                   {group.items.map((item, idx) => {
                     const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
                     return (
@@ -1685,7 +1724,7 @@ function handlePrivacyContinue() {
                           <span style={{ flex: 1, borderBottom: "1px dotted #9ca3af" }} />
                           <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
                         </div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16 }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 3, paddingLeft: 16 }}>
                           {item.directions.map((dir, dirIdx) => (
                             <span key={dirIdx}>{dir}</span>
                           ))}
