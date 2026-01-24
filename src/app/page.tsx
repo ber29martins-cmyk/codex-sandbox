@@ -352,6 +352,11 @@ export default function Page() {
         setBetaOk(true);
         setBetaLabel(json.label);
         localStorage.setItem(BETA_STORAGE_KEY, JSON.stringify({ code, emailHash: json.emailHash, ts: Date.now() }));
+        const cleanName = betaNameInput.trim();
+        if (cleanName) {
+          localStorage.setItem("beta_display_name", cleanName);
+          setBetaDisplayName(cleanName);
+        }
       } else {
         localStorage.removeItem(BETA_STORAGE_KEY);
         setBetaError(json.reason || "invalid");
@@ -390,6 +395,8 @@ export default function Page() {
   const [betaLabel, setBetaLabel] = useState<string>("");
   const [betaInput, setBetaInput] = useState("");
   const [betaEmail, setBetaEmail] = useState("");
+  const [betaNameInput, setBetaNameInput] = useState("");
+  const [betaDisplayName, setBetaDisplayName] = useState("");
   const [betaError, setBetaError] = useState<string>("");
   const [betaLoading, setBetaLoading] = useState(false);
   const [betaHydrating, setBetaHydrating] = useState(true);
@@ -480,6 +487,11 @@ export default function Page() {
           parsed.templateId && TEMPLATES.some((t) => t.id === parsed.templateId) ? parsed.templateId : TEMPLATES[0]?.id;
         if (storedTemplateId) {
           setTemplateId(storedTemplateId);
+        }
+
+        const savedName = localStorage.getItem("beta_display_name");
+        if (savedName) {
+          setBetaDisplayName(savedName);
         }
       } catch (err) {
         console.error("Falha ao carregar estado local:", err);
@@ -937,6 +949,13 @@ function handlePrivacyContinue() {
               ref={emailInputRef}
               style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
             />
+            <input
+              value={betaNameInput}
+              onChange={(e) => setBetaNameInput(e.target.value)}
+              placeholder="Seu nome (opcional)"
+              disabled={betaBusy}
+              style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
+            />
           </div>
           <button
             type="button"
@@ -1173,6 +1192,22 @@ function handlePrivacyContinue() {
         não insira dados identificáveis do paciente. revise e confirme as informações (responsabilidade médica).
       </div>
       <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto 16px",
+            padding: "16px 20px",
+            borderRadius: 12,
+            border: "1px solid #e5e7eb",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.04)",
+            background: "#ffffff"
+          }}
+        >
+          <div style={{ fontSize: 18, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>
+            {betaDisplayName ? `Olá, Dr(a). ${betaDisplayName}` : "Olá"}
+          </div>
+          <div style={{ fontSize: 14, color: "#475569" }}>Escolha a queixa, marque os chips e gere a evolução em segundos</div>
+        </div>
         <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>MVP Prontuário (blocos)</h1>
       <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>Templates carregados: {TEMPLATES.length}</div>
       {feedbackUrl && (
