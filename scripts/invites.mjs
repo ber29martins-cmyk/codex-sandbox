@@ -2,6 +2,11 @@
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 const ADMIN_KEY = process.env.ADMIN_KEY || "";
 
+const HARD_CODED = [
+  { code: "PLANTAO-OWNER-2027", label: "Owner" },
+  { code: "ANTAO-OWNER-2027", label: "Owner (deprecated, remove after 2026-02-01)" }
+];
+
 function usage() {
   console.log(`Usage:
   node scripts/invites.mjs create <label> <days>
@@ -55,8 +60,10 @@ async function create(label, days) {
 async function list() {
   const data = await request("/api/admin/invites/list");
   const invites = Array.isArray(data.invites) ? data.invites : [];
+  console.log("HARD-CODED:");
+  console.table(HARD_CODED);
   if (!invites.length) {
-    console.log("No invites found.");
+    console.log("No KV invites found.");
     return;
   }
   console.table(
