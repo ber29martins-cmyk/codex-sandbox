@@ -393,14 +393,39 @@ export default function Page() {
   const [betaError, setBetaError] = useState<string>("");
   const [betaLoading, setBetaLoading] = useState(false);
   const [betaHydrating, setBetaHydrating] = useState(true);
+  const [betaToast, setBetaToast] = useState("");
+  const [isAdminMode, setIsAdminMode] = useState(false);
   const didHydrate = useRef(false);
+  const urlPrefillDone = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
   const rxKitsRef = useRef<Record<string, string[]>>({});
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
   const feedbackUrl = FEEDBACK_URL;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    if (!urlPrefillDone.current) {
+      const url = new URL(window.location.href);
+      const codeFromUrl = url.searchParams.get("code") ?? "";
+      const emailFromUrl = url.searchParams.get("email") ?? "";
+      const adminFromUrl = url.searchParams.get("admin") ?? "";
+
+      if (codeFromUrl && !betaInput) {
+        setBetaInput(codeFromUrl);
+      }
+      if (emailFromUrl && !betaEmail) {
+        setBetaEmail(emailFromUrl);
+      }
+      if (codeFromUrl && !emailFromUrl && emailInputRef.current) {
+        emailInputRef.current.focus();
+      }
+      if (adminFromUrl) {
+        setIsAdminMode(adminFromUrl === "1" || adminFromUrl.toLowerCase() === "true");
+      }
+      urlPrefillDone.current = true;
+    }
 
     let cancelled = false;
 
@@ -479,6 +504,12 @@ export default function Page() {
       setPrivacyAck(true);
       setPrivacyCheckbox(true);
     }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      clearBetaToast();
+    };
   }, []);
 
   useEffect(() => {
@@ -836,6 +867,32 @@ export default function Page() {
     await navigator.clipboard.writeText(text);
   }
 
+  const clearBetaToast = () => {
+    if (betaToastTimeout.current) {
+      clearTimeout(betaToastTimeout.current);
+      betaToastTimeout.current = undefined;
+    }
+  };
+
+  const betaToastTimeout = useRef<number | undefined>(undefined);
+
+  async function handleCopyInviteLink() {
+    const cleanCode = betaInput.trim();
+    if (!cleanCode) {
+      setBetaError("invalid");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(`${window.location.origin}/?code=${encodeURIComponent(cleanCode)}`);
+      clearBetaToast();
+      setBetaToast("copiado");
+      betaToastTimeout.current = window.setTimeout(() => setBetaToast(""), 2000);
+    } catch (err) {
+      console.error("Erro ao copiar link de convite", err);
+      setBetaError("invalid");
+    }
+  }
+
 function handlePrivacyContinue() {
   setPrivacyAck(true);
   try {
@@ -867,6 +924,7 @@ function handlePrivacyContinue() {
               onChange={(e) => setBetaEmail(e.target.value)}
               placeholder="email@exemplo.com"
               disabled={betaBusy}
+              ref={emailInputRef}
               style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
             />
           </div>
@@ -885,9 +943,32 @@ function handlePrivacyContinue() {
           >
             {betaBusy ? "Validando..." : "Entrar"}
           </button>
+          {(isAdminMode || (betaLabel && betaLabel.toLowerCase() === "owner")) && (
+            <button
+              type="button"
+              onClick={handleCopyInviteLink}
+              disabled={betaBusy}
+              style={{
+                padding: "6px 10px",
+                borderRadius: 6,
+                border: "1px solid #d1d5db",
+                background: "#fff",
+                color: "#2563eb",
+                fontSize: 13,
+                cursor: betaBusy ? "not-allowed" : "pointer"
+              }}
+            >
+              copiar link de convite
+            </button>
+          )}
         </div>
         {betaHydrating && !betaError && (
           <div style={{ color: "#4b5563", fontSize: 13, marginTop: 4 }}>Validando acesso salvo...</div>
+        )}
+        {betaToast && (
+          <div style={{ color: "#15803d", fontSize: 13, marginTop: 4 }}>
+            {betaToast}
+          </div>
         )}
         {betaError && (
           <div style={{ color: "#b91c1c", fontSize: 13, marginTop: 4 }}>
