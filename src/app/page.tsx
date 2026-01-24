@@ -357,6 +357,13 @@ export default function Page() {
           localStorage.setItem("beta_display_name", cleanName);
           setBetaDisplayName(cleanName);
         }
+        if (rememberDevice) {
+          localStorage.setItem("beta_remember_ok", "1");
+          localStorage.setItem("beta_remember_until", String(Date.now() + 24 * 60 * 60 * 1000));
+        } else {
+          localStorage.removeItem("beta_remember_ok");
+          localStorage.removeItem("beta_remember_until");
+        }
       } else {
         localStorage.removeItem(BETA_STORAGE_KEY);
         setBetaError(json.reason || "invalid");
@@ -397,6 +404,7 @@ export default function Page() {
   const [betaEmail, setBetaEmail] = useState("");
   const [betaNameInput, setBetaNameInput] = useState("");
   const [betaDisplayName, setBetaDisplayName] = useState("");
+  const [rememberDevice, setRememberDevice] = useState(false);
   const [betaError, setBetaError] = useState<string>("");
   const [betaLoading, setBetaLoading] = useState(false);
   const [betaHydrating, setBetaHydrating] = useState(true);
@@ -474,6 +482,20 @@ export default function Page() {
               setBetaError("invalid");
             }
           }
+        }
+
+        try {
+          const rememberOk = localStorage.getItem("beta_remember_ok") === "1";
+          const rememberUntilRaw = localStorage.getItem("beta_remember_until");
+          const rememberUntil = rememberUntilRaw ? Number(rememberUntilRaw) : 0;
+          if (rememberOk && rememberUntil > Date.now()) {
+            setBetaOk(true);
+          } else if (rememberUntilRaw) {
+            localStorage.removeItem("beta_remember_ok");
+            localStorage.removeItem("beta_remember_until");
+          }
+        } catch (err) {
+          console.error("Falha ao ler remember device", err);
         }
 
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -972,6 +994,16 @@ function handlePrivacyContinue() {
               disabled={betaBusy}
               style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
             />
+            <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#1f2937" }}>
+              <input
+                type="checkbox"
+                checked={rememberDevice}
+                onChange={(e) => setRememberDevice(e.target.checked)}
+                disabled={betaBusy}
+              />
+              lembrar neste dispositivo (24h)
+            </label>
+            <div style={{ fontSize: 12, color: "#6b7280" }}>use esta opção apenas em dispositivo pessoal</div>
           </div>
           <button
             type="button"
@@ -1016,6 +1048,30 @@ function handlePrivacyContinue() {
             <div style={{ color: "#15803d", fontSize: 13 }}>
               {betaToast}
             </div>
+          )}
+          {betaOk && (
+            <button
+              type="button"
+              onClick={() => {
+                setBetaOk(false);
+                setBetaLabel("");
+                localStorage.removeItem(BETA_STORAGE_KEY);
+                localStorage.removeItem("beta_remember_ok");
+                localStorage.removeItem("beta_remember_until");
+              }}
+              style={{
+                padding: "8px 10px",
+                borderRadius: 8,
+                border: "1px solid #d1d5db",
+                background: "#fff",
+                color: "#b91c1c",
+                fontSize: 13,
+                fontWeight: 600,
+                cursor: "pointer"
+              }}
+            >
+              sair
+            </button>
           )}
           {betaError && (
             <div style={{ color: "#b91c1c", fontSize: 13 }}>
@@ -1085,6 +1141,8 @@ function handlePrivacyContinue() {
 
     savedTemplatesRef.current = {};
     rxKitsRef.current = {};
+    setBetaOk(false);
+    setBetaLabel("");
 
     if (typeof window !== "undefined") {
       try {
@@ -1094,6 +1152,9 @@ function handlePrivacyContinue() {
             localStorage.removeItem(key);
           }
         }
+        localStorage.removeItem(BETA_STORAGE_KEY);
+        localStorage.removeItem("beta_remember_ok");
+        localStorage.removeItem("beta_remember_until");
       } catch (err) {
         console.error("Erro limpando storage", err);
       }
