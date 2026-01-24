@@ -19,6 +19,12 @@ export const BETA_CODES: BetaCode[] = [
     code: "PLANTAO-OWNER-2027",
     label: "Owner",
     expiresAt: "2027-12-31T23:59:59Z"
+  },
+  {
+    code: "ANTAO-OWNER-2027",
+    label: "Owner",
+    expiresAt: "2027-12-31T23:59:59Z",
+    // deprecated, remove after 2026-02-01
   }
 ];
 
