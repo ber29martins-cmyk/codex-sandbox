@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     const code = typeof body?.code === "string" ? body.code.trim() : "";
     const emailHash = typeof body?.emailHash === "string" ? body.emailHash.trim() : "";
-    const validation = isCodeValid(code);
+    const validation = await isCodeValid(code);
     if (!validation.ok) return NextResponse.json(validation, { status: 400 });
     if (!emailHash) return NextResponse.json({ ok: false, reason: "invalid" }, { status: 400 });
 
