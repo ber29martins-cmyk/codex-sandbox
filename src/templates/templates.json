@@ -289,7 +289,7 @@
           {
             "id": "refere-historia-de-gastritedrge-uso-recente-de-aine-ou-tabagismo-quando-aplicavel",
             "label": "História gastrite",
-            "text": "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo quando aplicável"
+            "text": "Refere história de gastrite/DRGE, uso recente de AINE ou tabagismo."
           }
         ],
         "hmaDefaults": [
@@ -748,7 +748,7 @@
           {
             "id": "contato-surto",
             "label": "contato/surto",
-            "text": "Refere contato com sintomáticos e/ou surto local quando aplicável"
+            "text": "Refere contato com sintomáticos e surto local conhecido."
           },
           {
             "id": "sem-vacina-recente",
@@ -836,7 +836,7 @@
           {
             "id": "quando-lombociatalgia-refere-irradiacao-para-gluteo-e-face-posteriorlateral-de-coxaperna-por-vezes-com-parestesia-associada",
             "label": "Irradiação/perna",
-            "text": "Quando lombociatalgia, refere irradiação para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada"
+            "text": "Refere irradiação lombociática para glúteo e face posterior/lateral de coxa/perna, por vezes com parestesia associada."
           },
           {
             "id": "piora-apos-esforco-ou-levantar-peso",
@@ -1201,12 +1201,12 @@
           {
             "id": "dor_dentaria",
             "label": "Dor dentária",
-            "text": "Refere dor em arcada dentária superior quando aplicável"
+            "text": "Refere dor em arcada dentária superior."
           },
           {
             "id": "febre",
             "label": "Febre",
-            "text": "Refere febre associada, quando presente"
+            "text": "Refere febre associada ao quadro respiratório."
           }
         ],
         "hmaDefaults": [
@@ -1332,7 +1332,7 @@
           {
             "id": "historico",
             "label": "asma prévia",
-            "text": "refere diagnóstico prévio de asma e episódios semelhantes, com uso habitual de medicações de controle quando aplicável"
+            "text": "refere diagnóstico prévio de asma e episódios semelhantes, com uso habitual de medicações de controle."
           }
         ],
         "hmaDefaults": [
@@ -1444,7 +1444,7 @@
           {
             "id": "lente",
             "label": "lente contato",
-            "text": "refere uso de lente de contato quando aplicável"
+            "text": "refere uso de lente de contato."
           },
           {
             "id": "ivrs",
@@ -1558,12 +1558,12 @@
           {
             "id": "dor_toracica",
             "label": "dor torácica",
-            "text": "refere dor torácica ventilatório-dependente/pleurítica, quando presente"
+            "text": "refere dor torácica ventilatório-dependente/pleurítica."
           },
           {
             "id": "escarro",
             "label": "escarro",
-            "text": "refere expectoração amarelada/esverdeada, quando aplicável"
+            "text": "refere expectoração amarelada/esverdeada."
           },
           {
             "id": "ivrs_previa",
@@ -1573,12 +1573,12 @@
           {
             "id": "comorb",
             "label": "comorbidades",
-            "text": "refere doença pulmonar/cardiopatia/fragilidade quando aplicável"
+            "text": "refere doença pulmonar, cardiopatia ou fragilidade associada."
           },
           {
             "id": "tabagismo",
             "label": "tabagismo",
-            "text": "refere tabagismo atual ou prévio quando aplicável"
+            "text": "refere tabagismo atual ou prévio."
           }
         ],
         "hmaDefaults": [
@@ -1684,7 +1684,7 @@
           {
             "id": "exantema",
             "label": "exantema",
-            "text": "refere exantema e prurido cutâneo quando aplicável"
+            "text": "refere exantema com prurido cutâneo."
           },
           {
             "id": "artralgia",
@@ -1694,7 +1694,7 @@
           {
             "id": "sangramento",
             "label": "sangramento",
-            "text": "refere sangramentos leves (gengiva/epistaxe) quando presentes"
+            "text": "refere sangramentos leves (gengiva/epistaxe)."
           },
           {
             "id": "hidratacao",
@@ -1924,7 +1924,7 @@
           {
             "id": "aura",
             "label": "aura",
-            "text": "refere aura visual/sensorial quando aplicável, precedendo a dor"
+            "text": "refere aura visual ou sensorial precedendo a dor."
           },
           {
             "id": "gatilhos",
@@ -2048,17 +2048,17 @@
           {
             "id": "febre",
             "label": "febre",
-            "text": "refere febre e calafrios quando presentes"
+            "text": "refere febre e calafrios."
           },
           {
             "id": "linfangite",
             "label": "linfangite",
-            "text": "refere estrias avermelhadas ascendentes e/ou linfonodos dolorosos quando presentes"
+            "text": "refere estrias avermelhadas ascendentes e linfonodos dolorosos."
           },
           {
             "id": "comorb",
             "label": "comorbidades",
-            "text": "refere diabetes, insuficiência venosa/linfedema ou imunossupressão quando aplicável"
+            "text": "refere diabetes, insuficiência venosa/linfedema ou imunossupressão."
           },
           {
             "id": "epis_previos",
@@ -2163,12 +2163,12 @@
           {
             "id": "lesoes_gen",
             "label": "lesões genitais",
-            "text": "refere prurido/lesões em região genital quando aplicável"
+            "text": "refere prurido e lesões em região genital."
           },
           {
             "id": "falha_prev",
             "label": "falha prévia",
-            "text": "refere tratamento prévio incompleto ou falha por reinfestação quando aplicável"
+            "text": "refere tratamento prévio incompleto ou falha por reinfestação."
           },
           {
             "id": "escoriacoes",
@@ -2271,7 +2271,7 @@
           {
             "id": "febre",
             "label": "febre",
-            "text": "refere febre e mal-estar quando presentes"
+            "text": "refere febre e mal-estar."
           },
           {
             "id": "progressao",
@@ -2281,12 +2281,12 @@
           {
             "id": "recorrente",
             "label": "recorrente",
-            "text": "refere episódios prévios semelhantes (furunculose) quando aplicável"
+            "text": "refere episódios prévios semelhantes (furunculose)."
           },
           {
             "id": "local",
             "label": "local crítico",
-            "text": "refere localização em face, mão, períneo ou região com maior risco quando aplicável"
+            "text": "refere localização em face, mão, períneo ou outra região crítica."
           }
         ],
         "hmaDefaults": [
@@ -2356,7 +2356,7 @@
           {
             "id": "coriza",
             "label": "coriza hialina",
-            "text": "refere coriza clara e abundante, com lacrimejamento associado quando presente"
+            "text": "refere coriza clara e abundante, com lacrimejamento associado."
           },
           {
             "id": "obstrucao",
@@ -2366,7 +2366,7 @@
           {
             "id": "prurido_ocular",
             "label": "prurido ocular",
-            "text": "refere prurido ocular e hiperemia conjuntival leve quando associado"
+            "text": "refere prurido ocular e hiperemia conjuntival leve."
           },
           {
             "id": "gatilho",
@@ -2386,7 +2386,7 @@
           {
             "id": "asma",
             "label": "sibilância",
-            "text": "refere chiado/dispneia quando há associação com asma"
+            "text": "refere chiado ou dispneia em associação com asma."
           }
         ],
         "hmaDefaults": [
@@ -2456,7 +2456,7 @@
           {
             "id": "corrimento",
             "label": "corrimento branco",
-            "text": "refere corrimento esbranquiçado e grumoso quando presente"
+            "text": "refere corrimento esbranquiçado e grumoso."
           },
           {
             "id": "ardor",
@@ -2466,12 +2466,12 @@
           {
             "id": "disuria",
             "label": "disúria externa",
-            "text": "refere ardor ao urinar por irritação externa quando aplicável"
+            "text": "refere ardor ao urinar por irritação externa."
           },
           {
             "id": "antibiotico",
             "label": "atb recente",
-            "text": "refere uso recente de antibiótico como fator desencadeante quando aplicável"
+            "text": "refere uso recente de antibiótico como fator desencadeante."
           },
           {
             "id": "recorrente",
@@ -2481,12 +2481,12 @@
           {
             "id": "odor",
             "label": "odor",
-            "text": "refere ausência de odor forte como padrão mais compatível, quando aplicável (avaliado clinicamente)"
+            "text": "refere ausência de odor forte como padrão mais compatível (avaliado clinicamente)."
           },
           {
             "id": "dor_pelv",
             "label": "dor pélvica",
-            "text": "refere dor pélvica importante quando presente (atenção a diferencial)"
+            "text": "refere dor pélvica importante (atenção a diferencial)."
           }
         ],
         "hmaDefaults": [
@@ -2577,17 +2577,17 @@
           {
             "id": "abuso_vocal",
             "label": "abuso vocal",
-            "text": "refere uso excessivo da voz (fala intensa/gritos) como gatilho quando aplicável"
+            "text": "refere uso excessivo da voz (fala intensa/gritos) como gatilho."
           },
           {
             "id": "refluxo",
             "label": "refluxo",
-            "text": "refere sintomas de refluxo/azia e piora pós-refeição quando aplicável"
+            "text": "refere sintomas de refluxo/azia com piora pós-refeição."
           },
           {
             "id": "febre",
             "label": "febre",
-            "text": "refere febre quando presente"
+            "text": "refere febre associada."
           },
           {
             "id": "tempo",
