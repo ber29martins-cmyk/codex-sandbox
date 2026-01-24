@@ -30,6 +30,8 @@ type TemplateState = {
   alarme: string;
   comorb: string;
   meds: string;
+  alergiaNega: boolean;
+  alergiaTexto: string;
   hipotese: string;
   condutaAlarmes: string;
   alarmStates: AlarmStateMap;
@@ -219,6 +221,8 @@ function buildTemplateDefaults(template: Template): TemplateState {
     alarme: template.defaults.alarme,
     comorb: template.defaults.comorb,
     meds: template.defaults.meds,
+    alergiaNega: true,
+    alergiaTexto: "",
     hipotese: template.defaults.hipotese ?? (template.label as string) ?? ((template as any).title ?? ""),
     condutaAlarmes: template.defaults.condutaAlarmes ?? "Retorno imediato se sinais de alarme ou piora do quadro",
     alarmStates: buildDefaultAlarmStates(template),
@@ -381,6 +385,7 @@ export default function Page() {
   const [comorb, setComorb] = useState("DM NIR, HAS");
   const [meds, setMeds] = useState("Metformina 500mg 1-0-1 + Losartana 50mg 1-0-1");
   const [alergiaNega, setAlergiaNega] = useState(true);
+  const [alergiaTexto, setAlergiaTexto] = useState("");
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
   const [rxSelected, setRxSelected] = useState<string[]>([]);
   const [hmaSelected, setHmaSelected] = useState<string[]>([]);
@@ -601,6 +606,8 @@ export default function Page() {
     setAtestadoDias(templateState.atestadoDias ?? 1);
     setAtestadoCid(templateState.atestadoCid ?? "");
     setExameLivre(templateState.exameLivre ?? "");
+    setAlergiaNega(templateState.alergiaNega ?? true);
+    setAlergiaTexto(templateState.alergiaTexto ?? "");
     const kit = rxKitsRef.current[templateId];
     setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
     isApplyingTemplate.current = false;
@@ -622,6 +629,8 @@ export default function Page() {
       alarme,
       comorb,
       meds,
+      alergiaNega,
+      alergiaTexto,
       hipotese,
       condutaAlarmes,
       alarmStates,
@@ -649,7 +658,28 @@ export default function Page() {
         })
       );
     }
-  }, [templateId, qpText, alarme, comorb, meds, hipotese, condutaAlarmes, alarmStates, rxSelected, triagem, pa, fc, sat, comorbSelected, atestadoEmitir, atestadoDias, atestadoCid, exameLivre]);
+  }, [
+    templateId,
+    qpText,
+    alarme,
+    comorb,
+    meds,
+    alergiaNega,
+    alergiaTexto,
+    hipotese,
+    condutaAlarmes,
+    alarmStates,
+    rxSelected,
+    triagem,
+    pa,
+    fc,
+    sat,
+    comorbSelected,
+    atestadoEmitir,
+    atestadoDias,
+    atestadoCid,
+    exameLivre
+  ]);
 
   useEffect(() => {
     if (!didHydrate.current || isApplyingTemplate.current) return;
@@ -836,7 +866,7 @@ export default function Page() {
         return `Comorbidades: ${combined.join(", ")}`;
       })(),
       meds ? `Medicações de uso contínuo: ${meds}` : "",
-      alergiaNega ? "Nega alergias" : ""
+      alergiaNega ? "Nega alergias" : alergiaTexto ? `Alergias: ${alergiaTexto}` : "Relata alergias (especificar)."
     ].filter(Boolean);
 
     const vitalsLine =
@@ -1107,6 +1137,8 @@ function handlePrivacyContinue() {
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
+    setAlergiaNega(defaults.alergiaNega);
+    setAlergiaTexto(defaults.alergiaTexto);
     setHipotese(defaults.hipotese);
     setCondutaAlarmes(defaults.condutaAlarmes);
     setAtestadoEmitir(defaults.atestadoEmitir ?? true);
@@ -1172,6 +1204,8 @@ function handlePrivacyContinue() {
     setAlarme(defaults.alarme);
     setComorb(defaults.comorb);
     setMeds(defaults.meds);
+    setAlergiaNega(defaults.alergiaNega);
+    setAlergiaTexto(defaults.alergiaTexto);
     setHipotese(defaults.hipotese);
     setCondutaAlarmes(defaults.condutaAlarmes);
     setAtestadoEmitir(defaults.atestadoEmitir ?? true);
@@ -1495,6 +1529,18 @@ function handlePrivacyContinue() {
             <input type="checkbox" checked={alergiaNega} onChange={(e) => setAlergiaNega(e.target.checked)} />
             Nega alergias
           </label>
+          {!alergiaNega && (
+            <label style={{ display: "block", marginTop: 6 }}>
+              Alergias (descreva)
+              <br />
+              <input
+                value={alergiaTexto}
+                onChange={(e) => setAlergiaTexto(e.target.value)}
+                placeholder="ex.: dipirona → rash"
+                style={{ width: "100%" }}
+              />
+            </label>
+          )}
 
           <hr style={{ margin: "16px 0" }} />
 
