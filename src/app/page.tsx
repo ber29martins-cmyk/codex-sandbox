@@ -397,6 +397,7 @@ export default function Page() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const didHydrate = useRef(false);
   const urlPrefillDone = useRef(false);
+  const autoActivateTried = useRef(false);
   const isApplyingTemplate = useRef(false);
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
   const rxKitsRef = useRef<Record<string, string[]>>({});
@@ -511,6 +512,15 @@ export default function Page() {
       clearBetaToast();
     };
   }, []);
+
+  useEffect(() => {
+    if (betaOk || betaLoading || betaHydrating) return;
+    if (!betaInput.trim() || !betaEmail.trim()) return;
+    if (autoActivateTried.current) return;
+
+    autoActivateTried.current = true;
+    validateBeta();
+  }, [betaOk, betaLoading, betaHydrating, betaInput, betaEmail]);
 
   useEffect(() => {
     if (!currentTemplate || !didHydrate.current) return;
