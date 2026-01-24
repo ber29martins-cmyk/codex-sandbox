@@ -1566,32 +1566,6 @@ function handlePrivacyContinue() {
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 10 }}>
           <h2 style={{ fontSize: 18, fontWeight: 600, margin: 0 }}>Receituário</h2>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span
-              style={{
-                padding: "4px 8px",
-                borderRadius: 12,
-                background: "#e0f2fe",
-                color: "#0369a1",
-                fontSize: 12,
-                fontWeight: 600
-              }}
-            >
-              copiar
-            </span>
-            <span
-              style={{
-                padding: "4px 8px",
-                borderRadius: 12,
-                background: "#eef2ff",
-                color: "#4338ca",
-                fontSize: 12,
-                fontWeight: 600
-              }}
-            >
-              imprimir
-            </span>
-          </div>
         </div>
         {templateRxGroups.length === 0 ? (
           <p style={{ margin: "4px 0 0", color: "#666" }}>Receituário não configurado para esta queixa.</p>
