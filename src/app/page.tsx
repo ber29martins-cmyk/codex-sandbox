@@ -873,7 +873,7 @@ export default function Page() {
       !triagem && (pa || fc || sat)
         ? `PA ${pa || "___"} FC ${fc || "___"} Sat ${sat || "___"}`
         : triagem
-          ? "Sinais vitais conforme triagem"
+          ? "BEG, hidratado, corado, anictérico, acianótico, afebril. Ativo e reativo."
           : "";
 
     const exameRaw = currentTemplate.defaults.exame;
@@ -1554,6 +1554,11 @@ function handlePrivacyContinue() {
               <label>PA<br /><input value={pa} onChange={(e) => setPa(e.target.value)} /></label>
               <label>FC<br /><input value={fc} onChange={(e) => setFc(e.target.value)} /></label>
               <label>Sat<br /><input value={sat} onChange={(e) => setSat(e.target.value)} /></label>
+            </div>
+          )}
+          {triagem && (
+            <div style={{ marginTop: 8, fontSize: 13, color: "#475569" }}>
+              BEG, hidratado, corado, anictérico, acianótico, afebril. Ativo e reativo.
             </div>
           )}
 
