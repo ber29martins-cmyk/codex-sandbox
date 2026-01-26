@@ -40,6 +40,7 @@ type TemplateState = {
   pa: string;
   fc: string;
   sat: string;
+  tax: string;
   comorbSelected: string[];
   atestadoEmitir?: boolean;
   atestadoDias?: number;
@@ -231,6 +232,7 @@ function buildTemplateDefaults(template: Template): TemplateState {
     pa: "",
     fc: "",
     sat: "",
+    tax: "",
     comorbSelected: [],
     atestadoEmitir: true,
     atestadoDias: 1,
@@ -399,6 +401,7 @@ export default function Page() {
   const [pa, setPa] = useState("");
   const [fc, setFc] = useState("");
   const [sat, setSat] = useState("");
+  const [tax, setTax] = useState("");
   const [includeRx, setIncludeRx] = useState(false);
   const [comorbSelected, setComorbSelected] = useState<string[]>([]);
   const [privacyAck, setPrivacyAck] = useState(false);
@@ -601,6 +604,7 @@ export default function Page() {
     setPa(templateState.pa ?? "");
     setFc(templateState.fc ?? "");
     setSat(templateState.sat ?? "");
+    setTax(templateState.tax ?? "");
     setComorbSelected(templateState.comorbSelected ?? []);
     setAtestadoEmitir(templateState.atestadoEmitir ?? true);
     setAtestadoDias(templateState.atestadoDias ?? 1);
@@ -638,10 +642,11 @@ export default function Page() {
       triagem,
       pa,
       fc,
-      sat,
-      comorbSelected,
-      atestadoEmitir,
-      atestadoDias,
+    sat,
+    tax,
+    comorbSelected,
+    atestadoEmitir,
+    atestadoDias,
       atestadoCid,
       exameLivre
     };
@@ -674,6 +679,7 @@ export default function Page() {
     pa,
     fc,
     sat,
+    tax,
     comorbSelected,
     atestadoEmitir,
     atestadoDias,
@@ -869,12 +875,9 @@ export default function Page() {
       alergiaNega ? "Nega alergias" : alergiaTexto ? `Alergias: ${alergiaTexto}` : "Relata alergias (especificar)."
     ].filter(Boolean);
 
-    const vitalsLine =
-      !triagem && (pa || fc || sat)
-        ? `PA ${pa || "___"} FC ${fc || "___"} Sat ${sat || "___"}`
-        : triagem
-          ? "BEG, hidratado, corado, anictérico, acianótico, afebril. Ativo e reativo."
-          : "";
+  const vitalsLine = !triagem && (pa || fc || sat || tax)
+    ? `PA ${pa || "___"} mmHg | FC ${fc || "___"} bpm | SatO2 ${sat || "___"}%${tax ? ` | Tax ${tax} °C` : ""}`
+    : "";
 
     const exameRaw = currentTemplate.defaults.exame;
     const exameBase = Array.isArray(exameRaw) ? exameRaw : exameRaw ? [exameRaw] : [];
@@ -1724,7 +1727,7 @@ function handlePrivacyContinue() {
         Alarmes carregados dos templates: clique nos chips para alternar entre Não avaliado, Nega e Presente.
       </p>
       <section className="print-area" style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, background: "#fff", marginTop: 16 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12 }}>Documentos gerados</h2>
+          <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12 }}>Documentos gerados</h2>
         <div className="print-doc" style={{ marginBottom: 16 }}>
           <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Prontuário / Admissão</h3>
           <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{allText}</pre>
