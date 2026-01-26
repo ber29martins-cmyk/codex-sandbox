@@ -854,7 +854,7 @@ export default function Page() {
 
   const blocks = useMemo(() => {
     const anamnese = [
-      `QP: ${currentTemplate.label}`,
+      qpText ? `QP: ${qpText}` : currentTemplate.label ? `QP: ${currentTemplate.label}` : "QP: __",
       hmaParagraphs.length ? `HMA: ${hmaParagraphs[0]}` : "",
       ...(hmaParagraphs.slice(1).length ? ["", ...hmaParagraphs.slice(1)] : []),
       ...alarmLines,
