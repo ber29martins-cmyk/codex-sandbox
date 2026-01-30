@@ -347,6 +347,18 @@
       ]
     },
     {
+      "id": "bilastina_20mg_bilaxten",
+      "label": "Bilastina 20mg",
+      "route": "ORAL",
+      "title": "Bilastina 20mg",
+      "brand": "BILAXTEN®",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido VO 1x/dia",
+        "Usar por 7 dias"
+      ]
+    },
+    {
       "id": "fexofenadina_60mg_pseudo_120mg_allegra",
       "label": "Fexofenadina 60mg + pseudoefedrina 120mg",
       "route": "ORAL",
