@@ -1738,18 +1738,17 @@ function handlePrivacyContinue() {
         Alarmes carregados dos templates: clique nos chips para alternar entre Não avaliado, Nega e Presente.
       </p>
       <section className="print-area" style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, background: "#fff", marginTop: 16 }}>
-          <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 12 }}>Documentos gerados</h2>
         <div className="print-doc" style={{ marginBottom: 16 }}>
-          <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Prontuário / Admissão</h3>
+          <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>EVOLUÇÃO</h3>
           <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{allText}</pre>
         </div>
         <div className="print-doc" style={{ marginBottom: 16 }}>
-          <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>Receita / Conduta</h3>
+          <h3 style={{ margin: "0 0 6px", fontSize: 14 }}>CONDUTA</h3>
           <pre style={{ whiteSpace: "pre-wrap", margin: 0, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 13, lineHeight: 1.45 }}>{formatBlock("conduta")}</pre>
         </div>
         {includeRx && rxText && (
           <div className="print-doc print-rx" style={{ marginBottom: 16, paddingTop: 8, breakInside: "avoid" }}>
-            <h3 style={{ margin: "0 0 8px", fontSize: 15 }}>Receituário</h3>
+            <h3 style={{ margin: "0 0 8px", fontSize: 15 }}>RECEITUÁRIO</h3>
             {groupedRx.map((group) => (
               <div key={group.route} style={{ marginBottom: 14 }}>
                 <div style={{ fontWeight: 700, marginBottom: 6 }}>USO {group.route}:</div>
