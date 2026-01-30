@@ -1234,12 +1234,23 @@ function handlePrivacyContinue() {
     if (!rxText) return;
     const prev = includeRx;
     setIncludeRx(true);
-    setTimeout(() => {
-      window.print();
+    if (typeof window === "undefined") return;
+
+    const body = window.document.body;
+    const cleanup = () => {
+      body.classList.remove("print-rx-only");
       if (!prev) {
         setIncludeRx(false);
       }
-    }, 100);
+      window.removeEventListener("afterprint", cleanup);
+    };
+
+    body.classList.add("print-rx-only");
+    window.addEventListener("afterprint", cleanup);
+    setTimeout(() => {
+      window.print();
+      setTimeout(cleanup, 50);
+    }, 120);
   }
 
   function handleToggleRx(id: string) {
@@ -1792,6 +1803,14 @@ function handlePrivacyContinue() {
           .print-doc {
             page-break-inside: avoid;
             margin-bottom: 14mm;
+          }
+
+          .print-rx-only .print-doc {
+            display: none !important;
+          }
+
+          .print-rx-only .print-doc.print-rx {
+            display: block !important;
           }
 
           .print-doc h3 {
