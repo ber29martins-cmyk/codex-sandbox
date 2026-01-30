@@ -886,6 +886,14 @@ export default function Page() {
       vitalsLine && exameBase.length
         ? exameBase.filter((line, idx) => !(idx === 0 && line.trim().toLowerCase() === vitalsLine.trim().toLowerCase()))
         : exameBase;
+    const extraExame: string[] = [];
+    if (hmaSelected.includes("picada-inseto")) {
+      extraExame.push("Pele: estigmas de picada/lesões compatíveis com estrófulo em áreas expostas.");
+    }
+    if (hmaSelected.includes("angioedema")) {
+      extraExame.push("Edema visível em lábios/pálpebras compatível com angioedema.");
+    }
+
     const exameLivreLinhas = exameLivre
       ? exameLivre
           .split("\n")
@@ -893,7 +901,7 @@ export default function Page() {
           .filter(Boolean)
       : [];
 
-    const exame = [vitalsLine, ...dedupedExameBase, ...exameLivreLinhas].filter(Boolean);
+    const exame = [vitalsLine, ...dedupedExameBase, ...extraExame, ...exameLivreLinhas].filter(Boolean);
 
     const avaliacao = [hipotese].filter(Boolean);
 
@@ -926,6 +934,8 @@ export default function Page() {
     pa,
     fc,
     sat,
+    tax,
+    hmaSelected,
     hipotese,
     condutaAlarmes,
     currentTemplate,

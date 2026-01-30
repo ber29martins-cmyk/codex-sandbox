@@ -121,11 +121,11 @@
         "hipotese": "Urticária aguda",
         "condutaAlarmes": "Retorno imediato se sinais de anafilaxia ou piora importante",
         "exame": [
-          "sinais vitais conforme triagem",
-          "beg, corado, hidratado, afebril no momento, ativo e reativo",
-          "pele: placas urticariformes eritemato-edematosas, pruriginosas, sem sinais de infecção secundária",
-          "orofaringe: sem sinais de edema importante",
-          "ausculta pulmonar: sem sibilos, sem esforço respiratório"
+          "Sinais vitais conforme triagem",
+          "BEG, corado, hidratado, afebril no momento, ativo e reativo",
+          "Pele: placas urticariformes eritemato-edematosas, pruriginosas, sem sinais de infecção secundária",
+          "Orofaringe: sem sinais de edema importante",
+          "Ausculta pulmonar: sem sibilos, sem esforço respiratório"
         ],
         "alarmItems": [
           { "id": "dispneia", "label": "dispneia", "presentText": "dispneia ou esforço respiratório", "absentLabel": "Sem dispneia" },
@@ -133,8 +133,7 @@
           { "id": "edema-glote", "label": "edema orof.", "presentText": "edema de língua/orofaringe, disfagia importante ou sialorreia", "absentLabel": "Sem edema orofaríngeo" },
           { "id": "sintomas-sistemicos", "label": "sistêmicos", "presentText": "sintomas sistêmicos relevantes (mal-estar intenso, prostração importante)", "absentLabel": "Sem sintomas sistêmicos relevantes" },
           { "id": "sincope-hipotensao", "label": "síncope/hipot.", "presentText": "síncope, hipotensão ou sinais de choque", "absentLabel": "Sem síncope ou hipotensão" },
-          { "id": "vomitos", "label": "vômitos", "presentText": "vômitos persistentes ou dor abdominal intensa", "absentLabel": "Sem vômitos persistentes/dor abdominal intensa" },
-          { "id": "lesao-mucosa", "label": "mucosa", "presentText": "lesões de mucosa, lesões bolhosas ou dor cutânea desproporcional", "absentLabel": "Sem lesões de mucosa/bolhosas" }
+          { "id": "vomitos", "label": "vômitos", "presentText": "vômitos persistentes ou dor abdominal intensa", "absentLabel": "Sem vômitos persistentes/dor abdominal intensa" }
         ],
         "hmaItems": [
           { "id": "inicio-agudo", "label": "início agudo", "text": "quadro de início agudo com lesões urticariformes pruriginosas" },
@@ -157,7 +156,7 @@
         ],
         "condutaAlarmes": "Retorno imediato se dispneia, estridor, edema importante, síncope ou choque.",
         "exameLivre": "",
-        "rxGroups": ["antihistaminicos", "corticoide_oral"],
+        "rxGroups": ["antihistaminicos", "corticoides", "corticoide_nasal"],
         "rxDefaults": ["loratadina_10mg_claritin", "prednisona_20mg_meticorten"]
       }
     },
