@@ -108,6 +108,57 @@
           "acetilcisteina_200mg_fluimucil",
           "dextrometorfano_2mg_ml_bisoltussin"
         ]
+    }
+  },
+    {
+      "id": "urticaria",
+      "label": "Urticária aguda",
+      "defaults": {
+        "qpDefault": "Placas pruriginosas",
+        "alarme": "",
+        "comorb": "",
+        "meds": "",
+        "hipotese": "Urticária aguda",
+        "condutaAlarmes": "Retorno imediato se sinais de anafilaxia ou piora importante",
+        "exame": [
+          "sinais vitais conforme triagem",
+          "beg, corado, hidratado, afebril no momento, ativo e reativo",
+          "pele: placas urticariformes eritemato-edematosas, pruriginosas, sem sinais de infecção secundária",
+          "orofaringe: sem sinais de edema importante",
+          "ausculta pulmonar: sem sibilos, sem esforço respiratório"
+        ],
+        "alarmItems": [
+          { "id": "dispneia", "label": "dispneia", "presentText": "dispneia ou esforço respiratório", "absentLabel": "Sem dispneia" },
+          { "id": "estridor", "label": "estridor", "presentText": "estridor/rouquidão progressiva", "absentLabel": "Sem estridor" },
+          { "id": "edema-glote", "label": "edema orof.", "presentText": "edema de língua/orofaringe, disfagia importante ou sialorreia", "absentLabel": "Sem edema orofaríngeo" },
+          { "id": "sintomas-sistemicos", "label": "sistêmicos", "presentText": "sintomas sistêmicos relevantes (mal-estar intenso, prostração importante)", "absentLabel": "Sem sintomas sistêmicos relevantes" },
+          { "id": "sincope-hipotensao", "label": "síncope/hipot.", "presentText": "síncope, hipotensão ou sinais de choque", "absentLabel": "Sem síncope ou hipotensão" },
+          { "id": "vomitos", "label": "vômitos", "presentText": "vômitos persistentes ou dor abdominal intensa", "absentLabel": "Sem vômitos persistentes/dor abdominal intensa" },
+          { "id": "lesao-mucosa", "label": "mucosa", "presentText": "lesões de mucosa, lesões bolhosas ou dor cutânea desproporcional", "absentLabel": "Sem lesões de mucosa/bolhosas" }
+        ],
+        "hmaItems": [
+          { "id": "inicio-agudo", "label": "início agudo", "text": "quadro de início agudo com lesões urticariformes pruriginosas" },
+          { "id": "prurido", "label": "prurido", "text": "prurido intenso associado às lesões" },
+          { "id": "migratoria", "label": "migratória", "text": "lesões migratórias, variando de local ao longo das horas" },
+          { "id": "gatilho-alimento", "label": "alimento", "text": "possível gatilho alimentar nas últimas horas" },
+          { "id": "gatilho-medicacao", "label": "medicação", "text": "uso recente de medicação com possível relação temporal" },
+          { "id": "picada-inseto", "label": "picada", "text": "história de picada de inseto/exposição ambiental recente" },
+          { "id": "infeccao-recente", "label": "infecção rec.", "text": "história recente de quadro viral/infeccioso como possível gatilho" },
+          { "id": "angioedema", "label": "angioedema", "text": "edema em lábios/pálpebras associado, quando presente" }
+        ],
+        "hmaDefaults": ["inicio-agudo", "prurido", "migratoria"],
+        "comorb": "",
+        "meds": "",
+        "comorbItems": [
+          { "id": "asma", "label": "asma" },
+          { "id": "rinite", "label": "rinite" },
+          { "id": "atopia", "label": "atopia" },
+          { "id": "alergia-medic", "label": "alergia med." }
+        ],
+        "condutaAlarmes": "Retorno imediato se dispneia, estridor, edema importante, síncope ou choque.",
+        "exameLivre": "",
+        "rxGroups": ["antihistaminicos", "corticoide_oral"],
+        "rxDefaults": ["loratadina_10mg_claritin", "prednisona_20mg_meticorten"]
       }
     },
     {

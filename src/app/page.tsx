@@ -320,6 +320,7 @@ const getTemplateAutoCid = (templateId: string): string => {
     (t: any) => t?.id === templateId || t?.templateId === templateId || t?.slug === templateId || t?.title === templateId || t?.name === templateId
   );
   const key = `${tpl?.id ?? ""} ${tpl?.title ?? ""} ${tpl?.name ?? ""}`;
+  if (key.toLowerCase().includes("urtic")) return "L50.9";
   return cidFromKey(key);
 };
 
