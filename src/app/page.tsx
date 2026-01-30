@@ -1789,21 +1789,25 @@ function handlePrivacyContinue() {
           button,
           input,
           select,
-          textarea {
-            display: none !important;
-          }
+        textarea {
+          display: none !important;
+        }
 
-          .print-area {
-            display: block !important;
-            padding: 16mm !important;
-            border: none !important;
-            box-shadow: none !important;
-          }
+        .print-area {
+          display: block !important;
+          padding: 16mm !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
 
-          .print-doc {
-            page-break-inside: avoid;
-            margin-bottom: 14mm;
-          }
+        main > :not(.print-area) {
+          display: none !important;
+        }
+
+        .print-doc {
+          page-break-inside: avoid;
+          margin-bottom: 14mm;
+        }
 
           .print-rx-only .print-doc {
             display: none !important;
