@@ -418,6 +418,54 @@
       ]
     },
     {
+      "id": "paracetamol_ped",
+      "label": "paracetamol (ped)",
+      "route": "ORAL",
+      "title": "ANTITÉRMICO (PED)",
+      "qty": "1 frasco",
+      "directions": [
+        "tomar conforme peso (calculado no sistema)"
+      ],
+      "peds": {
+        "mgKg": { "min": 10, "max": 15 },
+        "intervalHours": { "min": 4, "max": 6 },
+        "maxPerDayMgKg": 75,
+        "maxDosesPerDay": 5,
+        "formulations": [
+          { "label": "gota 200mg/mL", "mgPerMl": 200 },
+          { "label": "susp 160mg/5mL", "mgPer5ml": 160 }
+        ],
+        "notes": [
+          "considerar todas as fontes de paracetamol no dia"
+        ]
+      }
+    },
+    {
+      "id": "ibuprofeno_ped",
+      "label": "ibuprofeno (ped)",
+      "route": "ORAL",
+      "title": "ANTITÉRMICO (PED)",
+      "qty": "1 frasco",
+      "directions": [
+        "tomar conforme peso (calculado no sistema)"
+      ],
+      "peds": {
+        "minAgeMonths": 6,
+        "mgKg": { "min": 5, "max": 10 },
+        "intervalHours": { "min": 6, "max": 8 },
+        "maxPerDayMgKg": 40,
+        "maxDosesPerDay": 4,
+        "formulations": [
+          { "label": "susp 100mg/5mL", "mgPer5ml": 100 },
+          { "label": "gota 50mg/1,25mL", "mgPerMl": 40 }
+        ],
+        "notes": [
+          "preferir com alimentação",
+          "cautela em desidratação/doença renal"
+        ]
+      }
+    },
+    {
       "id": "prednisona_20mg_meticorten",
       "label": "Prednisona 20mg",
       "route": "ORAL",

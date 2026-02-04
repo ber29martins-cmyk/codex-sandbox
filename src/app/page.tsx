@@ -48,7 +48,25 @@ type TemplateState = {
   exameLivre?: string;
 };
 type AlarmItem = { id: string; label: string; absentLabel: string; presentText: string };
-type RxItem = { id: string; label: string; route: string; title: string; brand?: string; qty: string; directions: string[] };
+type RxItem = {
+  id: string;
+  label: string;
+  route: string;
+  title: string;
+  brand?: string;
+  qty: string;
+  directions: string[];
+  peds?: {
+    minAgeMonths?: number;
+    mgKg?: { min: number; max: number };
+    intervalHours?: { min: number; max: number };
+    maxPerDoseMg?: number;
+    maxPerDayMgKg?: number;
+    maxDosesPerDay?: number;
+    notes?: string[];
+    formulations?: Array<{ label: string; mgPerMl?: number; mgPer5ml?: number }>;
+  };
+};
 type RxGroup = { id: string; label: string; itemIds: string[] };
 
 const ALARM_STATUS_ORDER: AlarmStatus[] = ["unknown", "nega", "presente"];
@@ -252,7 +270,7 @@ const INITIAL_TEMPLATE = TEMPLATES[0];
 const INITIAL_DEFAULTS = INITIAL_TEMPLATE ? buildTemplateDefaults(INITIAL_TEMPLATE) : null;
 const RX_CATALOG = (rxCatalogData as { items: RxItem[] }).items;
 const RX_GROUPS = (rxGroupsData as { groups: RxGroup[] }).groups;
-const RX_CATALOG_MAP: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
+const RX_CATALOG_MAP_BASE: Record<string, RxItem> = Object.fromEntries(RX_CATALOG.map((item) => [item.id, item]));
 const RX_GROUP_MAP: Record<string, RxGroup> = Object.fromEntries(RX_GROUPS.map((group) => [group.id, group]));
 const FEEDBACK_URL = process.env.NEXT_PUBLIC_FEEDBACK_URL;
 const COMORB_OPTIONS = [
@@ -431,6 +449,11 @@ export default function Page() {
   const rxKitsRef = useRef<Record<string, string[]>>({});
   const emailInputRef = useRef<HTMLInputElement | null>(null);
   const feedbackUrl = FEEDBACK_URL;
+  const catalogForProfile = useMemo(
+    () => RX_CATALOG.filter((item) => (profile === "pediatria" ? true : !item.peds)),
+    [profile]
+  );
+  const catalogMap = useMemo(() => Object.fromEntries(catalogForProfile.map((item) => [item.id, item])), [catalogForProfile]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -808,7 +831,7 @@ export default function Page() {
   const groupedRx = useMemo(() => {
     const byRoute: Record<string, RxItem[]> = {};
     for (const id of orderedSelectedRxIds) {
-      const item = RX_CATALOG_MAP[id];
+      const item = catalogMap[id];
       if (!item) continue;
       const route = (item.route || "OUTROS").toUpperCase();
       if (!byRoute[route]) byRoute[route] = [];
@@ -821,13 +844,13 @@ export default function Page() {
     return Object.entries(byRoute)
       .sort(([a], [b]) => orderIndex(a) - orderIndex(b) || a.localeCompare(b, "pt"))
       .map(([route, items]) => ({ route, items }));
-  }, [orderedSelectedRxIds]);
+  }, [orderedSelectedRxIds, catalogMap]);
   const rxText = useMemo(() => {
     if (!orderedSelectedRxIds.length) return "";
     const byRoute: Record<string, RxItem[]> = {};
 
     for (const id of orderedSelectedRxIds) {
-      const item = RX_CATALOG_MAP[id];
+      const item = catalogMap[id];
       if (!item) continue;
       const route = (item.route || "OUTROS").toUpperCase();
       if (!byRoute[route]) byRoute[route] = [];
@@ -860,7 +883,7 @@ export default function Page() {
       });
 
     return routeBlocks.join("\n\n").trim();
-  }, [orderedSelectedRxIds]);
+  }, [orderedSelectedRxIds, catalogMap]);
   
   const hmaParagraphs = useMemo(() => {
     const items = getTemplateHmaItems(currentTemplate);
@@ -1720,7 +1743,8 @@ function handlePrivacyContinue() {
                 <div style={{ fontWeight: 500, marginBottom: 6 }}>{group.label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {group.itemIds.map((itemId) => {
-                    const item = RX_CATALOG_MAP[itemId];
+                    const item = catalogMap[itemId];
+                    if (!item) return null;
                     const label = item?.label ?? itemId;
                     const route = item?.route ? `(${item.route})` : "";
                     const checked = rxSelected.includes(itemId);
