@@ -345,13 +345,10 @@ const getTemplateAutoCid = (templateId: string): string => {
 
 
 export default function Page() {
-    const [templateId, setTemplateId] = useState<string>(TEMPLATES[0]?.id ?? "lombalgia");
+  const [templateId, setTemplateId] = useState<string>(TEMPLATES[0]?.id ?? "lombalgia");
   const router = useRouter();
   const pathname = usePathname();
-  const currentTemplate = useMemo(
-    () => TEMPLATES.find((t) => t.id === templateId) ?? TEMPLATES[0],
-    [templateId]
-  );
+  const feedbackUrl = FEEDBACK_URL;
 
   const validateBeta = async () => {
     const code = betaInput.trim();
@@ -441,6 +438,19 @@ export default function Page() {
   const [profile, setProfile] = useState<"adulto" | "pediatria">("adulto");
   const [patientAge, setPatientAge] = useState<string>("");
   const [patientWeight, setPatientWeight] = useState<string>("");
+  const availableTemplates = useMemo(() => {
+    if (profile === "pediatria") {
+      return TEMPLATES.filter((t) => {
+        const label = (t as any)?.title ?? t.label ?? "";
+        return (t.id ?? "").toLowerCase().startsWith("ped_") || label.toLowerCase().includes("pedi");
+      });
+    }
+    return TEMPLATES;
+  }, [profile]);
+  const currentTemplate = useMemo(() => {
+    const match = availableTemplates.find((t) => t.id === templateId);
+    return match ?? availableTemplates[0] ?? null;
+  }, [templateId, availableTemplates]);
   const didHydrate = useRef(false);
   const urlPrefillDone = useRef(false);
   const autoActivateTried = useRef(false);
@@ -448,7 +458,6 @@ export default function Page() {
   const savedTemplatesRef = useRef<Record<string, Partial<TemplateState>>>({});
   const rxKitsRef = useRef<Record<string, string[]>>({});
   const emailInputRef = useRef<HTMLInputElement | null>(null);
-  const feedbackUrl = FEEDBACK_URL;
   const catalogForProfile = useMemo(
     () => RX_CATALOG.filter((item) => (profile === "pediatria" ? true : !item.peds)),
     [profile]
@@ -596,6 +605,16 @@ export default function Page() {
       console.error("Erro ao salvar perfil do paciente", err);
     }
   }, [profile, patientAge, patientWeight]);
+
+  useEffect(() => {
+    if (!availableTemplates.length) {
+      setTemplateId("");
+      return;
+    }
+    if (!availableTemplates.some((t) => t.id === templateId)) {
+      setTemplateId(availableTemplates[0].id);
+    }
+  }, [availableTemplates, templateId]);
 
   useEffect(() => {
     return () => {
@@ -746,9 +765,10 @@ export default function Page() {
     }
   }, [hmaSelected, hmaFreeText, templateId]);
 
-  const alarmCount = (currentTemplate.defaults.alarmItems ?? []).length;
+  const alarmCount = currentTemplate ? (currentTemplate.defaults.alarmItems ?? []).length : 0;
   const hasAlarmItems = alarmCount > 0;
   const alarmLines = useMemo(() => {
+    if (!currentTemplate) return [];
     const items = currentTemplate.defaults.alarmItems ?? [];
     if (!items.length) return [];
 
@@ -772,6 +792,7 @@ export default function Page() {
     return lines;
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
+    if (!currentTemplate) return [];
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
   }, [currentTemplate]);
   const prescribedClasses = useMemo(() => {
@@ -808,13 +829,15 @@ export default function Page() {
     const ordered: string[] = [];
     const seen = new Set<string>();
 
-    for (const groupId of currentTemplate.defaults.rxGroups ?? []) {
-      const group = RX_GROUP_MAP[groupId];
-      if (!group?.itemIds) continue;
-      for (const itemId of group.itemIds) {
-        if (selectedSet.has(itemId) && !seen.has(itemId)) {
-          ordered.push(itemId);
-          seen.add(itemId);
+    if (currentTemplate) {
+      for (const groupId of currentTemplate.defaults.rxGroups ?? []) {
+        const group = RX_GROUP_MAP[groupId];
+        if (!group?.itemIds) continue;
+        for (const itemId of group.itemIds) {
+          if (selectedSet.has(itemId) && !seen.has(itemId)) {
+            ordered.push(itemId);
+            seen.add(itemId);
+          }
         }
       }
     }
@@ -886,6 +909,7 @@ export default function Page() {
   }, [orderedSelectedRxIds, catalogMap]);
   
   const hmaParagraphs = useMemo(() => {
+    if (!currentTemplate) return [];
     const items = getTemplateHmaItems(currentTemplate);
     const selectedSet = new Set(hmaSelected);
     const selectedTexts = items.filter((it) => selectedSet.has(it.id)).map((it) => it.text).filter(Boolean);
@@ -907,8 +931,12 @@ export default function Page() {
   }, [hmaSelected, hmaFreeText, currentTemplate]);
 
   const blocks = useMemo(() => {
+    if (!currentTemplate) {
+      return { anamnese: [], exame: [], hipotese: [], conduta: [] };
+    }
+    const templateLabel = currentTemplate.label ?? (currentTemplate as any).title ?? "";
     const anamnese = [
-      qpText ? `QP: ${qpText}` : currentTemplate.label ? `QP: ${currentTemplate.label}` : "QP: __",
+      qpText ? `QP: ${qpText}` : templateLabel ? `QP: ${templateLabel}` : "QP: __",
       hmaParagraphs.length ? `HMA: ${hmaParagraphs[0]}` : "",
       ...(hmaParagraphs.slice(1).length ? ["", ...hmaParagraphs.slice(1)] : []),
       ...alarmLines,
@@ -927,7 +955,7 @@ export default function Page() {
     ? `PA ${pa || "___"} mmHg | FC ${fc || "___"} bpm | SatO2 ${sat || "___"}%${tax ? ` | Tax ${tax} °C` : ""}`
     : "";
 
-    const exameRaw = currentTemplate.defaults.exame;
+    const exameRaw = currentTemplate.defaults.exame ?? [];
     const exameBase = Array.isArray(exameRaw) ? exameRaw : exameRaw ? [exameRaw] : [];
     const dedupedExameBase =
       vitalsLine && exameBase.length
@@ -1358,6 +1386,8 @@ function handlePrivacyContinue() {
     });
   }
 
+  const hmaItems = currentTemplate ? getTemplateHmaItems(currentTemplate) : [];
+  const alarmItems = currentTemplate?.defaults.alarmItems ?? [];
   const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
   const allText = includeRx && rxText ? `${baseText}\n\nReceituário:\n${rxText}` : baseText;
 
@@ -1416,30 +1446,34 @@ function handlePrivacyContinue() {
                 Pediatria
               </label>
             </div>
-            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <label style={{ fontSize: 13, color: "#0f172a" }}>
-                Idade
-                <input
-                  value={patientAge}
-                  onChange={(e) => setPatientAge(e.target.value)}
-                  placeholder="anos"
-                  style={{ marginLeft: 6, padding: "6px 8px", border: "1px solid #d1d5db", borderRadius: 6, width: 80 }}
-                />
-              </label>
-              <label style={{ fontSize: 13, color: "#0f172a" }}>
-                Peso
-                <input
-                  value={patientWeight}
-                  onChange={(e) => setPatientWeight(e.target.value)}
-                  placeholder="kg"
-                  style={{ marginLeft: 6, padding: "6px 8px", border: "1px solid #d1d5db", borderRadius: 6, width: 90 }}
-                />
-              </label>
-            </div>
+            {profile === "pediatria" && (
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <label style={{ fontSize: 13, color: "#0f172a" }}>
+                  Idade
+                  <input
+                    value={patientAge}
+                    onChange={(e) => setPatientAge(e.target.value)}
+                    placeholder="anos"
+                    style={{ marginLeft: 6, padding: "6px 8px", border: "1px solid #d1d5db", borderRadius: 6, width: 80 }}
+                  />
+                </label>
+                <label style={{ fontSize: 13, color: "#0f172a" }}>
+                  Peso
+                  <input
+                    value={patientWeight}
+                    onChange={(e) => setPatientWeight(e.target.value)}
+                    placeholder="kg"
+                    style={{ marginLeft: 6, padding: "6px 8px", border: "1px solid #d1d5db", borderRadius: 6, width: 90 }}
+                  />
+                </label>
+              </div>
+            )}
           </div>
         </div>
         <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>Assistente de evolução</h1>
-      <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>Templates carregados: {TEMPLATES.length}</div>
+      <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>
+        Templates carregados: {availableTemplates.length || 0} {profile === "pediatria" && !availableTemplates.length ? "(pediátrico em construção)" : ""}
+      </div>
       {feedbackUrl && (
         <div className="no-print" style={{ marginBottom: 12 }}>
           <a href={feedbackUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 8, border: "1px solid #d1d5db", textDecoration: "none", color: "#111827", background: "#fff" }}>
@@ -1450,31 +1484,37 @@ function handlePrivacyContinue() {
       <div className="no-print" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
         <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Entrada rápida</h2>
-<label>
-  Queixa
-  <br />
-  <select
-    value={templateId}
-    onChange={(e) => {
-      const nextId = e.target.value;
-      setTemplateId(nextId);
-      const d = getTemplateAutoCid(nextId);
-      if (d) setAtestadoCid(d);
-    }}
-    style={{ width: "100%" }}
-  >
-    {TEMPLATES.map((t) => (
-      <option key={t.id} value={t.id}>
-        {t.label}
-      </option>
-    ))}
-  </select>
-</label>
-<br />
-<br />
+          <label>
+            Queixa
+            <br />
+            {availableTemplates.length ? (
+              <select
+                value={templateId}
+                onChange={(e) => {
+                  const nextId = e.target.value;
+                  setTemplateId(nextId);
+                  const d = getTemplateAutoCid(nextId);
+                  if (d) setAtestadoCid(d);
+                }}
+                style={{ width: "100%" }}
+              >
+                {availableTemplates.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.label}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <div style={{ fontSize: 13, color: "#6b7280", padding: "8px 0" }}>Templates pediátricos em construção</div>
+            )}
+          </label>
+          <br />
+          <br />
 
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
-            <button type="button" onClick={handleRestoreTemplateDefaults}>Restaurar padrão do template</button>
+            <button type="button" onClick={handleRestoreTemplateDefaults} disabled={!currentTemplate}>
+              Restaurar padrão do template
+            </button>
             <button type="button" onClick={handleResetApp}>Resetar app (limpar dados locais)</button>
           </div>
 
@@ -1483,10 +1523,10 @@ function handlePrivacyContinue() {
             <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 14 }}>
               HMA (chips) <span style={{ color: "#6b7280", fontWeight: 400 }}>(Selecionados: {hmaSelected.length})</span>
             </div>
-            {getTemplateHmaItems(currentTemplate).length ? (
+            {hmaItems.length ? (
               <>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {getTemplateHmaItems(currentTemplate).map((opt) => {
+                  {hmaItems.map((opt) => {
                     const active = hmaSelected.includes(opt.id);
                     return (
                       <button
@@ -1520,7 +1560,9 @@ function handlePrivacyContinue() {
                   </button>
                   <button
                     type="button"
+                    disabled={!currentTemplate}
                     onClick={() => {
+                      if (!currentTemplate) return;
                       setHmaSelected(getTemplateHmaDefaults(currentTemplate));
                       setHmaFreeText("");
                       setHmaFreeOpen(false);
@@ -1563,7 +1605,7 @@ function handlePrivacyContinue() {
                 Sinais de alarme <span style={{ color: "#6b7280", fontWeight: 400 }}>(Alarmes: {alarmCount})</span>
               </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {currentTemplate.defaults.alarmItems?.map((item) => {
+              {alarmItems?.map((item) => {
                   const status = alarmStates[item.id] ?? "unknown";
                   const statusLabel = ALARM_STATUS_LABELS[status];
 
