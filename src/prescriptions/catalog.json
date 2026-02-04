@@ -371,52 +371,52 @@
     },
     {
       "id": "combo_sumatriptano_naproxeno",
-      "label": "sumatriptano + naproxeno",
+      "label": "Sumatriptano + naproxeno (SUMAXPRO)",
       "route": "ORAL",
-      "title": "ENXAQUECA (COMBO)",
-      "brand": "IMIGRAN + (AINE)",
+      "title": "Sumatriptano + naproxeno",
+      "brand": "SUMAXPRO",
       "qty": "1 caixa",
       "directions": [
-        "tomar os dois juntos no início da crise",
-        "preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/a ine",
-        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar os dois juntos no início da crise",
+        "Preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/AINE",
+        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
       ]
     },
     {
       "id": "combo_zolmitriptano_naproxeno",
-      "label": "zolmitriptano + naproxeno",
+      "label": "Zolmitriptano + naproxeno",
       "route": "ORAL",
-      "title": "ENXAQUECA (COMBO)",
-      "brand": "ZOMIG + (AINE)",
+      "title": "Zolmitriptano + naproxeno",
+      "brand": "ZOMIG + naproxeno",
       "qty": "1 caixa",
       "directions": [
-        "tomar os dois juntos no início da crise",
-        "preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/a ine",
-        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar os dois juntos no início da crise",
+        "Preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/AINE",
+        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
       ]
     },
     {
       "id": "combo_naratriptano_naproxeno",
-      "label": "naratriptano + naproxeno",
+      "label": "Naratriptano + naproxeno",
       "route": "ORAL",
-      "title": "ENXAQUECA (COMBO)",
-      "brand": "NARAMIG + (AINE)",
+      "title": "Naratriptano + naproxeno",
+      "brand": "NARAMIG + naproxeno",
       "qty": "1 caixa",
       "directions": [
-        "tomar os dois juntos no início da crise",
-        "preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/a ine",
-        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar os dois juntos no início da crise",
+        "Preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/AINE",
+        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
       ]
     },
     {
       "id": "combo_paracetamol_aas_cafeina",
-      "label": "paracet + aas + cafeína",
+      "label": "Paracetamol + AAS + cafeína",
       "route": "ORAL",
-      "title": "CEFALEIA/ENXAQUECA (COMBO)",
+      "title": "Paracetamol + AAS + cafeína",
       "qty": "1 caixa",
       "directions": [
-        "tomar no início da dor",
-        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar no início da dor",
+        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
       ]
     },
     {

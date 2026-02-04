@@ -8,16 +8,6 @@
       ]
     },
     {
-      "id": "enxaqueca_combos",
-      "label": "combos enxaqueca",
-      "itemIds": [
-        "combo_sumatriptano_naproxeno",
-        "combo_zolmitriptano_naproxeno",
-        "combo_naratriptano_naproxeno",
-        "combo_paracetamol_aas_cafeina"
-      ]
-    },
-    {
       "id": "ivassintomatico",
       "label": "IVAS - sintomáticos",
       "itemIds": [
@@ -282,7 +272,11 @@
       "itemIds": [
         "sumatriptano_50mg_imigran",
         "zolmitriptano_2_5mg_zomig",
-        "naratriptano_2_5mg_naramig"
+        "naratriptano_2_5mg_naramig",
+        "combo_sumatriptano_naproxeno",
+        "combo_zolmitriptano_naproxeno",
+        "combo_naratriptano_naproxeno",
+        "combo_paracetamol_aas_cafeina"
       ]
     },
     {
