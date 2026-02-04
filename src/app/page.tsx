@@ -70,6 +70,7 @@ const RX_KIT_KEY = "codex-rx-kits-v1";
 const PRIVACY_KEY = "privacy_ack_v1";
 const BETA_STORAGE_KEY = "beta_access_v2";
 const LEGACY_BETA_STORAGE_KEY = "beta_access_v1";
+const PROFILE_STORAGE_KEY = "patient_profile_v1";
 
 function buildDefaultAlarmStates(template: Template): AlarmStateMap {
   const items = template.defaults.alarmItems ?? [];
@@ -419,6 +420,9 @@ export default function Page() {
   const [betaHydrating, setBetaHydrating] = useState(true);
   const [betaToast, setBetaToast] = useState("");
   const [isAdminMode, setIsAdminMode] = useState(false);
+  const [profile, setProfile] = useState<"adulto" | "pediatria">("adulto");
+  const [patientAge, setPatientAge] = useState<string>("");
+  const [patientWeight, setPatientWeight] = useState<string>("");
   const didHydrate = useRef(false);
   const urlPrefillDone = useRef(false);
   const autoActivateTried = useRef(false);
@@ -524,6 +528,15 @@ export default function Page() {
         if (savedName) {
           setBetaDisplayName(savedName);
         }
+
+        const storedProfile = localStorage.getItem(PROFILE_STORAGE_KEY);
+        if (storedProfile === "pediatria" || storedProfile === "adulto") {
+          setProfile(storedProfile);
+        }
+        const storedAge = localStorage.getItem("patient_age");
+        const storedWeight = localStorage.getItem("patient_weight");
+        if (storedAge) setPatientAge(storedAge);
+        if (storedWeight) setPatientWeight(storedWeight);
       } catch (err) {
         console.error("Falha ao carregar estado local:", err);
       } finally {
@@ -549,6 +562,17 @@ export default function Page() {
       setPrivacyCheckbox(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      localStorage.setItem(PROFILE_STORAGE_KEY, profile);
+      localStorage.setItem("patient_age", patientAge);
+      localStorage.setItem("patient_weight", patientWeight);
+    } catch (err) {
+      console.error("Erro ao salvar perfil do paciente", err);
+    }
+  }, [profile, patientAge, patientWeight]);
 
   useEffect(() => {
     return () => {
@@ -643,11 +667,11 @@ export default function Page() {
       triagem,
       pa,
       fc,
-    sat,
-    tax,
-    comorbSelected,
-    atestadoEmitir,
-    atestadoDias,
+      sat,
+      tax,
+      comorbSelected,
+      atestadoEmitir,
+      atestadoDias,
       atestadoCid,
       exameLivre
     };
@@ -1346,6 +1370,50 @@ function handlePrivacyContinue() {
             {betaDisplayName ? `Olá, Dr(a). ${betaDisplayName}` : "Olá"}
           </div>
           <div style={{ fontSize: 14, color: "#475569" }}>Escolha a queixa, marque os chips e gere a evolução em segundos</div>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginTop: 10 }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 14, color: "#0f172a" }}>
+                <input
+                  type="radio"
+                  name="profile"
+                  value="adulto"
+                  checked={profile === "adulto"}
+                  onChange={() => setProfile("adulto")}
+                />
+                Adulto
+              </label>
+              <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 14, color: "#0f172a" }}>
+                <input
+                  type="radio"
+                  name="profile"
+                  value="pediatria"
+                  checked={profile === "pediatria"}
+                  onChange={() => setProfile("pediatria")}
+                />
+                Pediatria
+              </label>
+            </div>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <label style={{ fontSize: 13, color: "#0f172a" }}>
+                Idade
+                <input
+                  value={patientAge}
+                  onChange={(e) => setPatientAge(e.target.value)}
+                  placeholder="anos"
+                  style={{ marginLeft: 6, padding: "6px 8px", border: "1px solid #d1d5db", borderRadius: 6, width: 80 }}
+                />
+              </label>
+              <label style={{ fontSize: 13, color: "#0f172a" }}>
+                Peso
+                <input
+                  value={patientWeight}
+                  onChange={(e) => setPatientWeight(e.target.value)}
+                  placeholder="kg"
+                  style={{ marginLeft: 6, padding: "6px 8px", border: "1px solid #d1d5db", borderRadius: 6, width: 90 }}
+                />
+              </label>
+            </div>
+          </div>
         </div>
         <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>Assistente de evolução</h1>
       <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>Templates carregados: {TEMPLATES.length}</div>
