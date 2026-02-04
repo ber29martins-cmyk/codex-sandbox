@@ -370,6 +370,56 @@
       ]
     },
     {
+      "id": "combo_sumatriptano_naproxeno",
+      "label": "sumatriptano + naproxeno",
+      "route": "ORAL",
+      "title": "ENXAQUECA (COMBO)",
+      "brand": "IMIGRAN + (AINE)",
+      "qty": "1 caixa",
+      "directions": [
+        "tomar os dois juntos no início da crise",
+        "preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/a ine",
+        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+      ]
+    },
+    {
+      "id": "combo_zolmitriptano_naproxeno",
+      "label": "zolmitriptano + naproxeno",
+      "route": "ORAL",
+      "title": "ENXAQUECA (COMBO)",
+      "brand": "ZOMIG + (AINE)",
+      "qty": "1 caixa",
+      "directions": [
+        "tomar os dois juntos no início da crise",
+        "preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/a ine",
+        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+      ]
+    },
+    {
+      "id": "combo_naratriptano_naproxeno",
+      "label": "naratriptano + naproxeno",
+      "route": "ORAL",
+      "title": "ENXAQUECA (COMBO)",
+      "brand": "NARAMIG + (AINE)",
+      "qty": "1 caixa",
+      "directions": [
+        "tomar os dois juntos no início da crise",
+        "preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/a ine",
+        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+      ]
+    },
+    {
+      "id": "combo_paracetamol_aas_cafeina",
+      "label": "paracet + aas + cafeína",
+      "route": "ORAL",
+      "title": "CEFALEIA/ENXAQUECA (COMBO)",
+      "qty": "1 caixa",
+      "directions": [
+        "tomar no início da dor",
+        "evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+      ]
+    },
+    {
       "id": "prednisona_20mg_meticorten",
       "label": "Prednisona 20mg",
       "route": "ORAL",
