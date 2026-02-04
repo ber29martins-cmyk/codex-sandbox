@@ -371,52 +371,50 @@
     },
     {
       "id": "combo_sumatriptano_naproxeno",
-      "label": "Sumatriptano + naproxeno (SUMAXPRO)",
+      "label": "Sumatriptano 50mg + naproxeno 500mg (SUMAXPRO)",
       "route": "ORAL",
-      "title": "Sumatriptano + naproxeno",
+      "title": "Sumatriptano 50mg + naproxeno 500mg",
       "brand": "SUMAXPRO",
       "qty": "1 caixa",
       "directions": [
-        "Tomar os dois juntos no início da crise",
-        "Preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/AINE",
-        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar 1 comprimido no início da dor de cabeça, tão logo seja possível",
+        "Não tomar novamente a medicação em intervalo de 24 horas"
       ]
     },
     {
       "id": "combo_zolmitriptano_naproxeno",
-      "label": "Zolmitriptano + naproxeno",
+      "label": "Zolmitriptano 2,5mg (ZOMIG) + naproxeno 500mg (FLANAX)",
       "route": "ORAL",
-      "title": "Zolmitriptano + naproxeno",
-      "brand": "ZOMIG + naproxeno",
+      "title": "Zolmitriptano 2,5mg + naproxeno 500mg",
+      "brand": "ZOMIG + FLANAX",
       "qty": "1 caixa",
       "directions": [
-        "Tomar os dois juntos no início da crise",
-        "Preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/AINE",
-        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar 1 comprimido de cada no início da dor de cabeça, tão logo seja possível",
+        "Não tomar novamente a medicação em intervalo de 24 horas"
       ]
     },
     {
       "id": "combo_naratriptano_naproxeno",
-      "label": "Naratriptano + naproxeno",
+      "label": "Naratriptano 2,5mg (NARAMIG) + naproxeno 500mg (FLANAX)",
       "route": "ORAL",
-      "title": "Naratriptano + naproxeno",
-      "brand": "NARAMIG + naproxeno",
+      "title": "Naratriptano 2,5mg + naproxeno 500mg",
+      "brand": "NARAMIG + FLANAX",
       "qty": "1 caixa",
       "directions": [
-        "Tomar os dois juntos no início da crise",
-        "Preferir uso precoce; repetir apenas conforme prescrição habitual do triptano/AINE",
-        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar 1 comprimido de cada no início da dor de cabeça, tão logo seja possível",
+        "Não tomar novamente a medicação em intervalo de 24 horas"
       ]
     },
     {
       "id": "combo_paracetamol_aas_cafeina",
-      "label": "Paracetamol + AAS + cafeína",
+      "label": "Paracetamol + AAS + cafeína (DORIL ENXAQUECA)",
       "route": "ORAL",
       "title": "Paracetamol + AAS + cafeína",
+      "brand": "DORIL ENXAQUECA",
       "qty": "1 caixa",
       "directions": [
-        "Tomar no início da dor",
-        "Evitar uso frequente (risco de cefaleia por uso excessivo de medicação)"
+        "Tomar 2 comprimidos no início da dor de cabeça, tão logo seja possível",
+        "Não tomar novamente a medicação em intervalo de 24 horas"
       ]
     },
     {
