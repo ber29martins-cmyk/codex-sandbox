@@ -201,6 +201,19 @@ const ALARM_PRINT_MAP: Record<string, string> = {
   "sinais infecção": "sinais de infecção secundária"
 };
 
+function parseAgeMonths(ageRaw: string): { months: number | null; display: string } {
+  const raw = ageRaw.trim();
+  if (!raw) return { months: null, display: "" };
+  const lower = raw.toLowerCase();
+  const isMonths = lower.includes("mes") || (lower.includes("m") && !lower.includes("ano"));
+  const numMatch = raw.match(/[0-9]+([.,][0-9]+)?/);
+  const num = numMatch ? Number(numMatch[0].replace(",", ".")) : NaN;
+  if (!Number.isFinite(num)) return { months: null, display: raw };
+  const months = isMonths ? num : num * 12;
+  const display = isMonths ? `${num}${raw.includes(" ") ? "" : " meses"}`.trim() : `${num} anos`;
+  return { months, display };
+}
+
 function alarmLabelForPrint(input: string) {
   const cleaned = cleanAlarmLabel(input).trim();
   const expanded = ALARM_PRINT_MAP[cleaned] ?? ALARM_PRINT_MAP[cleaned.toLowerCase()] ?? cleaned;
@@ -960,6 +973,28 @@ export default function Page() {
   }, [hmaStates, hmaFreeText, currentTemplate]);
   const hmaPresentCount = useMemo(() => Object.values(hmaStates).filter((s) => s === "presente").length, [hmaStates]);
   const hmaNegCount = useMemo(() => Object.values(hmaStates).filter((s) => s === "nega").length, [hmaStates]);
+  const pediatricIntro = useMemo(() => {
+    if (profile !== "pediatria") return "";
+    if (!currentTemplate) return "";
+    const ageParsed = parseAgeMonths(patientAge);
+    const months = ageParsed.months;
+    let faixa = "paciente";
+    if (months !== null) {
+      if (months < 1) faixa = "recém-nascido";
+      else if (months < 24) faixa = "lactente";
+      else if (months < 144) faixa = "escolar";
+      else faixa = "adolescente";
+    }
+    const agePart = ageParsed.display ? `${ageParsed.display}` : "";
+    const weightClean = patientWeight.trim();
+    const weightPart = weightClean ? (/\bkg\b/i.test(weightClean) ? weightClean : `${weightClean} kg`) : "";
+    const qpDisplay = qpText.trim() || currentTemplate.label || "queixa principal";
+    const pieces = [`Paciente ${faixa}`];
+    if (agePart) pieces.push(agePart);
+    if (weightPart) pieces.push(weightPart);
+    const prefix = pieces.join(", ");
+    return `${prefix}, trazido por mãe/pai/familiar, que relata ${qpDisplay}`;
+  }, [profile, patientAge, patientWeight, qpText, currentTemplate]);
 
   const blocks = useMemo(() => {
     if (!currentTemplate) {
@@ -967,7 +1002,7 @@ export default function Page() {
     }
     const templateLabel = currentTemplate.label ?? (currentTemplate as any).title ?? "";
     const anamnese = [
-      qpText ? `QP: ${qpText}` : templateLabel ? `QP: ${templateLabel}` : "QP: __",
+      pediatricIntro ? pediatricIntro : qpText ? `QP: ${qpText}` : templateLabel ? `QP: ${templateLabel}` : "QP: __",
       hmaParagraphs.length ? `HMA: ${hmaParagraphs[0]}` : "",
       ...(hmaParagraphs.slice(1).length ? ["", ...hmaParagraphs.slice(1)] : []),
       ...alarmLines,
