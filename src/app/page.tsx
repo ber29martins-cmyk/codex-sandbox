@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 type BlockKey = "anamnese" | "exame" | "hipotese" | "conduta";
 type AlarmStatus = "unknown" | "nega" | "presente";
 type AlarmStateMap = Record<string, AlarmStatus>;
+type HmaStateMap = Record<string, AlarmStatus>;
 type Template = {
   id: string;
   label: string;
@@ -117,6 +118,10 @@ function shortenLabel(text: string, maxLen = 42) {
   return `${clean.slice(0, maxLen - 1).trim()}…`;
 }
 
+function normalizeHmaLabel(label: string) {
+  return label.replace(/^(nega|sem|não|ausência de)\s+/i, "").trim();
+}
+
 function cleanAlarmLabel(s: string) {
   return s.replace(/^(sem|nega)\s+/i, "").replace(/^não\s+apresenta\s+/i, "").trim();
 }
@@ -224,15 +229,22 @@ function formatList(items: string[]) {
 function getTemplateHmaItems(template: Template) {
   if (!Array.isArray(template.defaults.hmaItems)) return [];
   return template.defaults.hmaItems.map((item, idx) => {
-    const label = item.label && item.label.trim().length ? item.label : shortenLabel(item.text || `HMA ${idx + 1}`);
+    const rawLabel = item.label && item.label.trim().length ? item.label : shortenLabel(item.text || `HMA ${idx + 1}`);
+    const label = normalizeHmaLabel(rawLabel);
     return { ...item, label };
   });
 }
 
-function getTemplateHmaDefaults(template: Template) {
+function getTemplateHmaDefaultStates(template: Template): HmaStateMap {
   const defaults = Array.isArray(template.defaults.hmaDefaults) ? template.defaults.hmaDefaults : [];
-  if (defaults.length) return defaults;
-  return getTemplateHmaItems(template).map((item) => item.id);
+  const defaultSet = new Set(defaults);
+  const items = getTemplateHmaItems(template);
+  const states: HmaStateMap = {};
+  const hasDefaults = defaultSet.size > 0;
+  for (const item of items) {
+    states[item.id] = hasDefaults ? (defaultSet.has(item.id) ? "presente" : "unknown") : "presente";
+  }
+  return states;
 }
 
 function buildTemplateDefaults(template: Template): TemplateState {
@@ -407,7 +419,7 @@ export default function Page() {
   const [alergiaTexto, setAlergiaTexto] = useState("");
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
   const [rxSelected, setRxSelected] = useState<string[]>([]);
-  const [hmaSelected, setHmaSelected] = useState<string[]>([]);
+  const [hmaStates, setHmaStates] = useState<HmaStateMap>({});
   const [hmaFreeText, setHmaFreeText] = useState("");
   const [hmaFreeOpen, setHmaFreeOpen] = useState(false);
   const [atestadoEmitir, setAtestadoEmitir] = useState(true);
@@ -638,14 +650,24 @@ export default function Page() {
 
     isApplyingTemplate.current = true;
     setQpText(templateState.qpText ?? "");
-    let selectedFromStorage: string[] | undefined;
+    let selectedFromStorage: HmaStateMap | undefined;
     let freeFromStorage = "";
     if (typeof window !== "undefined") {
       try {
         const storedSelected = localStorage.getItem(`${HMA_SELECTED_PREFIX}${templateId}`);
         if (storedSelected) {
           const parsed = JSON.parse(storedSelected);
-          if (Array.isArray(parsed)) selectedFromStorage = parsed.filter((v) => typeof v === "string");
+          if (Array.isArray(parsed)) {
+            selectedFromStorage = {};
+            parsed.filter((v: unknown) => typeof v === "string").forEach((id: string) => (selectedFromStorage![id] = "presente"));
+          } else if (parsed && typeof parsed === "object") {
+            const map: HmaStateMap = {};
+            Object.entries(parsed as Record<string, string>).forEach(([key, val]) => {
+              const v = val === "presente" || val === "nega" || val === "unknown" ? val : "unknown";
+              map[key] = v;
+            });
+            selectedFromStorage = map;
+          }
         }
         const storedFree = localStorage.getItem(`${HMA_FREE_PREFIX}${templateId}`);
         if (typeof storedFree === "string") {
@@ -655,8 +677,9 @@ export default function Page() {
         console.error("Erro ao carregar HMA do storage", err);
       }
     }
-    const defaultsHma = getTemplateHmaDefaults(currentTemplate);
-    setHmaSelected((selectedFromStorage && selectedFromStorage.length ? selectedFromStorage : defaultsHma).filter(Boolean));
+    const defaultsHma = getTemplateHmaDefaultStates(currentTemplate);
+    const mergedHmaStates = selectedFromStorage && Object.keys(selectedFromStorage).length ? selectedFromStorage : defaultsHma;
+    setHmaStates(mergedHmaStates);
     setHmaFreeText(freeFromStorage || "");
     setHmaFreeOpen(Boolean(freeFromStorage && freeFromStorage.trim().length));
     setAlarme(templateState.alarme);
@@ -758,12 +781,12 @@ export default function Page() {
     if (!didHydrate.current || isApplyingTemplate.current) return;
     if (typeof window === "undefined") return;
     try {
-      localStorage.setItem(`${HMA_SELECTED_PREFIX}${templateId}`, JSON.stringify(hmaSelected));
-      localStorage.setItem(`${HMA_FREE_PREFIX}${templateId}`, hmaFreeText);
-    } catch (err) {
-      console.error("Erro ao salvar HMA", err);
-    }
-  }, [hmaSelected, hmaFreeText, templateId]);
+    localStorage.setItem(`${HMA_SELECTED_PREFIX}${templateId}`, JSON.stringify(hmaStates));
+    localStorage.setItem(`${HMA_FREE_PREFIX}${templateId}`, hmaFreeText);
+  } catch (err) {
+    console.error("Erro ao salvar HMA", err);
+  }
+  }, [hmaStates, hmaFreeText, templateId]);
 
   const alarmCount = currentTemplate ? (currentTemplate.defaults.alarmItems ?? []).length : 0;
   const hasAlarmItems = alarmCount > 0;
@@ -911,9 +934,14 @@ export default function Page() {
   const hmaParagraphs = useMemo(() => {
     if (!currentTemplate) return [];
     const items = getTemplateHmaItems(currentTemplate);
-    const selectedSet = new Set(hmaSelected);
-    const selectedTexts = items.filter((it) => selectedSet.has(it.id)).map((it) => it.text).filter(Boolean);
-    const mainParagraph = formatParagraph(selectedTexts);
+    const presentTexts = items
+      .filter((it) => hmaStates[it.id] === "presente")
+      .map((it) => it.text || it.label)
+      .filter(Boolean);
+    const negLabels = items
+      .filter((it) => hmaStates[it.id] === "nega")
+      .map((it) => (it.label || "").trim().toLowerCase())
+      .filter(Boolean);
 
     const freeParagraph = hmaFreeText
       ? formatParagraph(
@@ -925,10 +953,13 @@ export default function Page() {
       : "";
 
     const paragraphs = [];
-    if (mainParagraph) paragraphs.push(mainParagraph);
+    if (presentTexts.length) paragraphs.push(formatParagraph(presentTexts));
+    if (negLabels.length) paragraphs.push(formatParagraph([`Nega ${formatList(negLabels)}`]));
     if (freeParagraph) paragraphs.push(freeParagraph);
     return paragraphs;
-  }, [hmaSelected, hmaFreeText, currentTemplate]);
+  }, [hmaStates, hmaFreeText, currentTemplate]);
+  const hmaPresentCount = useMemo(() => Object.values(hmaStates).filter((s) => s === "presente").length, [hmaStates]);
+  const hmaNegCount = useMemo(() => Object.values(hmaStates).filter((s) => s === "nega").length, [hmaStates]);
 
   const blocks = useMemo(() => {
     if (!currentTemplate) {
@@ -962,10 +993,10 @@ export default function Page() {
         ? exameBase.filter((line, idx) => !(idx === 0 && line.trim().toLowerCase() === vitalsLine.trim().toLowerCase()))
         : exameBase;
     const extraExame: string[] = [];
-    if (hmaSelected.includes("picada-inseto")) {
+    if (hmaStates["picada-inseto"] === "presente") {
       extraExame.push("Pele: estigmas de picada/lesões compatíveis com estrófulo em áreas expostas.");
     }
-    if (hmaSelected.includes("angioedema")) {
+    if (hmaStates["angioedema"] === "presente") {
       extraExame.push("Edema visível em lábios/pálpebras compatível com angioedema.");
     }
 
@@ -1010,7 +1041,7 @@ export default function Page() {
     fc,
     sat,
     tax,
-    hmaSelected,
+    hmaStates,
     hipotese,
     condutaAlarmes,
     currentTemplate,
@@ -1220,7 +1251,7 @@ function handlePrivacyContinue() {
     const defaults = buildTemplateDefaults(currentTemplate);
     isApplyingTemplate.current = true;
     setQpText(defaults.qpText);
-    setHmaSelected(getTemplateHmaDefaults(currentTemplate));
+    setHmaStates(getTemplateHmaDefaultStates(currentTemplate));
     setHmaFreeText("");
     setHmaFreeOpen(false);
     setAlarme(defaults.alarme);
@@ -1287,7 +1318,7 @@ function handlePrivacyContinue() {
     isApplyingTemplate.current = true;
     setTemplateId(firstTemplate.id);
     setQpText(defaults.qpText);
-    setHmaSelected(getTemplateHmaDefaults(firstTemplate));
+    setHmaStates(getTemplateHmaDefaultStates(firstTemplate));
     setHmaFreeText("");
     setHmaFreeOpen(false);
     setAlarme(defaults.alarme);
@@ -1378,11 +1409,10 @@ function handlePrivacyContinue() {
   }
 
   function handleToggleHmaChip(opt: string) {
-    setHmaSelected((prev) => {
-      if (prev.includes(opt)) {
-        return prev.filter((line) => line !== opt);
-      }
-      return [...prev, opt];
+    setHmaStates((prev) => {
+      const current = prev[opt] ?? "unknown";
+      const next = ALARM_STATUS_ORDER[(ALARM_STATUS_ORDER.indexOf(current) + 1) % ALARM_STATUS_ORDER.length];
+      return { ...prev, [opt]: next };
     });
   }
 
@@ -1521,13 +1551,17 @@ function handlePrivacyContinue() {
           <label>QP<br /><input value={qpText} onChange={(e) => setQpText(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
           <div style={{ marginBottom: 8 }}>
             <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 14 }}>
-              HMA (chips) <span style={{ color: "#6b7280", fontWeight: 400 }}>(Selecionados: {hmaSelected.length})</span>
+              HMA (chips){" "}
+              <span style={{ color: "#6b7280", fontWeight: 400 }}>
+                (Presente: {hmaPresentCount} · Nega: {hmaNegCount})
+              </span>
             </div>
             {hmaItems.length ? (
               <>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {hmaItems.map((opt) => {
-                    const active = hmaSelected.includes(opt.id);
+                    const status = hmaStates[opt.id] ?? "unknown";
+                    const statusLabel = ALARM_STATUS_LABELS[status];
                     return (
                       <button
                         key={opt.id}
@@ -1536,13 +1570,18 @@ function handlePrivacyContinue() {
                         style={{
                           borderRadius: 999,
                           padding: "8px 12px",
-                          border: `1px solid ${active ? "#2563eb" : "#d1d5db"}`,
-                          background: active ? "#e0ebff" : "#fff",
+                          border: `1px solid ${ALARM_STATUS_STYLES[status].border}`,
+                          background: ALARM_STATUS_STYLES[status].background,
                           cursor: "pointer",
-                          color: "#111827"
+                          color: ALARM_STATUS_STYLES[status].color,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          boxShadow: "none"
                         }}
                       >
-                        {opt.label}
+                        <span style={{ color: "#111827" }}>{opt.label}</span>
+                        <span style={{ fontSize: 11, opacity: 0.85 }}>{statusLabel}</span>
                       </button>
                     );
                   })}
@@ -1551,7 +1590,11 @@ function handlePrivacyContinue() {
                   <button
                     type="button"
                     onClick={() => {
-                      setHmaSelected([]);
+                      const reset: HmaStateMap = {};
+                      hmaItems.forEach((it) => {
+                        reset[it.id] = "unknown";
+                      });
+                      setHmaStates(reset);
                       setHmaFreeText("");
                       setHmaFreeOpen(false);
                     }}
@@ -1563,7 +1606,7 @@ function handlePrivacyContinue() {
                     disabled={!currentTemplate}
                     onClick={() => {
                       if (!currentTemplate) return;
-                      setHmaSelected(getTemplateHmaDefaults(currentTemplate));
+                      setHmaStates(getTemplateHmaDefaultStates(currentTemplate));
                       setHmaFreeText("");
                       setHmaFreeOpen(false);
                     }}
