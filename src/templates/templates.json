@@ -110,6 +110,205 @@
         ]
       }
     },
+    
+  {
+    "id": "ped_oma",
+    "label": "Otite média aguda (ped)",
+    "defaults": {
+      "qpDefault": "Dor em orelha",
+      "alarme": "",
+      "comorb": "",
+      "meds": "",
+      "hipotese": "Otite média aguda",
+      "condutaAlarmes": "",
+      "exame": [
+        "BEG, corado, hidratado, ativo, afebril no momento",
+        "Otoscopia: membrana timpânica direita hiperemiada e abaulada, sem perfuração; esquerda íntegra e normocorada",
+        "Oroscopia: mucosa orofaríngea levemente hiperemiada, sem exsudatos",
+        "Ausculta pulmonar: MV presente, sem ruídos adventícios, sem esforço",
+        "Abdome: flácido, indolor, sem visceromegalias, sem sinais de peritonite",
+        "Neurológico: alerta, responsivo, sem sinais de meningismo"
+      ],
+      "alarmItems": [
+        { "id": "letargia", "label": "Letargia", "absentLabel": "Sem letargia", "presentText": "Letargia/hiporresponsivo" },
+        { "id": "vomitos-incoerciveis", "label": "Vômitos incoercíveis", "absentLabel": "Sem vômitos incoercíveis", "presentText": "Vômitos incoercíveis" },
+        { "id": "otorreia-purulenta", "label": "Otorreia purulenta", "absentLabel": "Sem otorreia purulenta", "presentText": "Otorreia purulenta" },
+        { "id": "rigidez-nuca", "label": "Rigidez nuca", "absentLabel": "Sem rigidez de nuca", "presentText": "Rigidez de nuca/sinais meníngeos" },
+        { "id": "desid-importante", "label": "Desidratação", "absentLabel": "Sem desidratação", "presentText": "Sinais de desidratação" }
+      ],
+      "hmaItems": [
+        { "id": "febre", "label": "Febre", "text": "Febre associada ao quadro" },
+        { "id": "otalgia", "label": "Otalgia", "text": "Otalgia, pior ao toque na orelha afetada" },
+        { "id": "irritabilidade", "label": "Irritabilidade", "text": "Irritabilidade durante o quadro" },
+        { "id": "orelha-direita", "label": "Orelha direita", "text": "Sintomas predominam em orelha direita" },
+        { "id": "apetite-preservado", "label": "Apetite preserv.", "text": "Mantém apetite e boa aceitação de líquidos" },
+        { "id": "tosse-coriza", "label": "Tosse/coriza", "text": "Tosse ou sintomas de vias aéreas altas" },
+        { "id": "vomitos-diarreia", "label": "Vômitos/diarreia", "text": "Queixa de vômitos ou diarreia associados" },
+        { "id": "toxemia", "label": "Toxemia", "text": "Alteração de estado geral ou toxemia" }
+      ],
+      "hmaDefaults": ["febre", "otalgia", "irritabilidade", "orelha-direita", "apetite-preservado"],
+      "rxGroups": [],
+      "rxDefaults": []
+    }
+  },
+  {
+    "id": "ped_faringoamigdalite_viral",
+    "label": "Faringoamigdalite viral (ped)",
+    "defaults": {
+      "qpDefault": "Dor de garganta",
+      "alarme": "",
+      "comorb": "",
+      "meds": "",
+      "hipotese": "Faringoamigdalite viral",
+      "condutaAlarmes": "",
+      "exame": [
+        "BEG, corado, hidratado, ativo, afebril no momento",
+        "Oroscopia: hiperemia difusa de orofaringe, amígdalas aumentadas, sem exsudato",
+        "Otoscopia: membranas timpânicas íntegras e normocoradas",
+        "Ausculta pulmonar: MV presente, sem ruídos adventícios",
+        "Abdome: flácido, indolor, sem visceromegalias, sem sinais de peritonite",
+        "Neurológico: alerta, responsivo, sem sinais de meningismo"
+      ],
+      "alarmItems": [
+        { "id": "dispneia", "label": "Dispneia/esforço", "absentLabel": "Sem dispneia", "presentText": "Dispneia ou esforço respiratório" },
+        { "id": "sialorreia-degluticao", "label": "Sialorreia/VO", "absentLabel": "Sem sialorreia", "presentText": "Sialorreia ou incapacidade de deglutir saliva" },
+        { "id": "trismo-voz-abafada", "label": "Trismo/voz abaf", "absentLabel": "Sem trismo/voz abafada", "presentText": "Trismo ou voz abafada" },
+        { "id": "desvio-uvula", "label": "Desvio de úvula", "absentLabel": "Sem desvio de úvula", "presentText": "Desvio de úvula/abaulamento peritonsilar" },
+        { "id": "desid-vo", "label": "Desidratação/VO", "absentLabel": "Sem desidratação", "presentText": "Recusa via oral ou sinais de desidratação" },
+        { "id": "febre-persistente", "label": "Febre persistente", "absentLabel": "Sem febre persistente", "presentText": "Febre alta persistente ou toxemia" }
+      ],
+      "hmaItems": [
+        { "id": "febre", "label": "Febre", "text": "Febre associada ao quadro" },
+        { "id": "odinofagia", "label": "Odinofagia", "text": "Dor de garganta e odinofagia" },
+        { "id": "disfagia", "label": "Disfagia", "text": "Dificuldade para deglutir" },
+        { "id": "tosse", "label": "Tosse", "text": "Refere tosse (geralmente leve)" },
+        { "id": "coriza", "label": "Coriza", "text": "Coriza e sintomas nasais associados" },
+        { "id": "estado-geral", "label": "Bom estado geral", "text": "Mantém bom estado geral, sem prostração" },
+        { "id": "ingesta-liquidos", "label": "Ingesta líquidos", "text": "Aceita líquidos adequadamente" }
+      ],
+      "hmaDefaults": ["febre", "odinofagia", "disfagia", "estado-geral"],
+      "rxGroups": [],
+      "rxDefaults": []
+    }
+  },
+  {
+    "id": "ped_gastroenterite_viral",
+    "label": "Gastroenterite viral (ped)",
+    "defaults": {
+      "qpDefault": "Diarreia e vômitos",
+      "alarme": "",
+      "comorb": "",
+      "meds": "",
+      "hipotese": "Gastroenterite viral",
+      "condutaAlarmes": "",
+      "exame": [
+        "BEG, corado, hidratado, ativo, afebril no momento",
+        "Otoscopia: sem alterações",
+        "Oroscopia: mucosa oral hidratada, sem lesões",
+        "Ausculta pulmonar: MV presente, sem ruídos adventícios",
+        "Abdome: plano, ruídos presentes, indolor, sem visceromegalias, sem sinais de defesa",
+        "Neurológico: alerta, responsivo, sem sinais de meningismo"
+      ],
+      "alarmItems": [
+        { "id": "desid-importante", "label": "Desidratação", "absentLabel": "Sem desidratação", "presentText": "Sinais de desidratação importante" },
+        { "id": "sangue-fezes", "label": "Sangue nas fezes", "absentLabel": "Sem sangue nas fezes", "presentText": "Sangue ou muco nas fezes" },
+        { "id": "vomitos-incoerciveis", "label": "Vômitos incoercíveis", "absentLabel": "Sem vômitos incoercíveis", "presentText": "Vômitos incoercíveis ou biliosos" },
+        { "id": "dor-abdominal-intensa", "label": "Dor abdominal", "absentLabel": "Sem dor abdominal intensa", "presentText": "Dor abdominal intensa ou sinais de peritonite" },
+        { "id": "febre-alta", "label": "Febre alta/piora", "absentLabel": "Sem febre alta persistente", "presentText": "Febre alta persistente ou piora clínica" }
+      ],
+      "hmaItems": [
+        { "id": "vomitos", "label": "Vômitos", "text": "Vômitos associados ao quadro" },
+        { "id": "diarreia", "label": "Diarreia", "text": "Diarreia em curso" },
+        { "id": "febre-baixa", "label": "Febre baixa", "text": "Febre baixa ou subfebril" },
+        { "id": "ingesta-liquidos", "label": "Aceita líquidos", "text": "Aceita líquidos, diurese preservada" },
+        { "id": "apetite-reduzido", "label": "Apetite reduzido", "text": "Apetite reduzido, sem sinais de desidratação" },
+        { "id": "sangue-fezes", "label": "Sangue nas fezes", "text": "Presença de sangue ou muco nas fezes" },
+        { "id": "dor-abdominal", "label": "Dor abdominal", "text": "Dor abdominal associada" }
+      ],
+      "hmaDefaults": ["vomitos", "diarreia", "ingesta-liquidos", "apetite-reduzido"],
+      "rxGroups": [],
+      "rxDefaults": []
+    }
+  },
+  {
+    "id": "ped_resfriado",
+    "label": "Resfriado comum (ped)",
+    "defaults": {
+      "qpDefault": "Sintomas de IVAS",
+      "alarme": "",
+      "comorb": "",
+      "meds": "",
+      "hipotese": "IVAS viral",
+      "condutaAlarmes": "",
+      "exame": [
+        "BEG, corado, hidratado, ativo, afebril no momento",
+        "Otoscopia: membranas timpânicas normais",
+        "Oroscopia: mucosa orofaríngea levemente hiperemiada, sem exsudatos",
+        "Nariz: coriza abundante, clara",
+        "Ausculta pulmonar: MV presente, sem ruídos adventícios",
+        "Abdome: flácido, indolor, sem visceromegalias, sem sinais de peritonite",
+        "Neurológico: alerta, responsivo, sem sinais de meningismo"
+      ],
+      "alarmItems": [
+        { "id": "dispneia", "label": "Dispneia/esforço", "absentLabel": "Sem dispneia", "presentText": "Dispneia ou esforço respiratório" },
+        { "id": "sat-baixa", "label": "Sat baixa/cianose", "absentLabel": "Sem dessaturação", "presentText": "Dessaturação ou cianose" },
+        { "id": "febre-persistente", "label": "Febre persistente", "absentLabel": "Sem febre persistente", "presentText": "Febre alta persistente ou piora clínica" },
+        { "id": "otite-sinusite", "label": "Otite/sinusite", "absentLabel": "Sem otite/sinusite", "presentText": "Otalgia intensa, otorreia ou dor facial intensa" },
+        { "id": "desid", "label": "Desidratação", "absentLabel": "Sem desidratação", "presentText": "Ingesta ou diurese reduzidas, sinais de desidratação" }
+      ],
+      "hmaItems": [
+        { "id": "febre", "label": "Febre", "text": "Febre associada ao quadro" },
+        { "id": "coriza", "label": "Coriza", "text": "Coriza abundante, clara" },
+        { "id": "tosse", "label": "Tosse", "text": "Tosse seca" },
+        { "id": "obstrucao-nasal", "label": "Obstrução nasal", "text": "Obstrução/congestão nasal" },
+        { "id": "estado-geral", "label": "Estado geral ok", "text": "Bom estado geral, sem prostração" },
+        { "id": "apetite-ok", "label": "Apetite ok", "text": "Boa aceitação alimentar" }
+      ],
+      "hmaDefaults": ["febre", "coriza", "tosse", "obstrucao-nasal", "estado-geral"],
+      "rxGroups": [],
+      "rxDefaults": []
+    }
+  },
+  {
+    "id": "ped_faringoamigdalite_bacteriana",
+    "label": "Faringoamigdalite bacteriana (ped)",
+    "defaults": {
+      "qpDefault": "Dor intensa de garganta",
+      "alarme": "",
+      "comorb": "",
+      "meds": "",
+      "hipotese": "Faringoamigdalite bacteriana",
+      "condutaAlarmes": "",
+      "exame": [
+        "BEG, corado, hidratado, afebril no momento",
+        "Oroscopia: hiperemia de faringe e amígdalas com exsudato e edema moderados, sem sinais de abscesso",
+        "Palpação cervical: linfonodos aumentados em cadeia cervical anterior",
+        "Otoscopia: membranas timpânicas íntegras e normocoradas",
+        "Ausculta pulmonar: sons respiratórios normais, sem esforço",
+        "Abdome: flácido, indolor, sem visceromegalias, sem sinais de peritonite",
+        "Neurológico: alerta, responsivo, sem sinais de irritação meníngea"
+      ],
+      "alarmItems": [
+        { "id": "hidratacao-baixa", "label": "Hidratação↓", "absentLabel": "Hidratação ok", "presentText": "Ingesta/diurese reduzidas ou sinais de desidratação" },
+        { "id": "trismo-abscesso", "label": "Trismo/abscesso", "absentLabel": "Sem trismo/abscesso", "presentText": "Trismo, abaulamento peritonsilar ou abscesso" },
+        { "id": "voz-abafada", "label": "Voz abafada", "absentLabel": "Sem voz abafada", "presentText": "Voz abafada ou sialorreia" },
+        { "id": "dispneia", "label": "Dispneia", "absentLabel": "Sem dispneia", "presentText": "Dispneia ou dificuldade respiratória" },
+        { "id": "encefalopatia", "label": "Encefalopatia", "absentLabel": "Sem encefalopatia", "presentText": "Sonolência, confusão ou convulsão" }
+      ],
+      "hmaItems": [
+        { "id": "febre-alta", "label": "Febre alta", "text": "Febre alta associada ao quadro" },
+        { "id": "odinofagia-intensa", "label": "Odinofagia intensa", "text": "Odinofagia intensa com disfagia" },
+        { "id": "recusa-alimentar", "label": "Recusa alimentar", "text": "Recusa alimentar por dor" },
+        { "id": "cefaleia", "label": "Cefaleia", "text": "Cefaleia associada" },
+        { "id": "tosse", "label": "Tosse", "text": "Tosse (quando presente)" },
+        { "id": "linfonodos", "label": "Linfonodos", "text": "Linfonodomegalias cervicais dolorosas" },
+        { "id": "sintomas-gi", "label": "Sintomas GI", "text": "Náuseas ou sintomas gastrintestinais associados" }
+      ],
+      "hmaDefaults": ["febre-alta", "odinofagia-intensa", "recusa-alimentar", "linfonodos"],
+      "rxGroups": [],
+      "rxDefaults": []
+    }
+  },
     {
       "id": "urticaria",
       "label": "Urticária aguda",
