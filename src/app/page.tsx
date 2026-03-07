@@ -285,6 +285,8 @@ function getRxDirections(
 
   const peds = item.peds;
   const extra: string[] = [];
+  const hasAgeBands = Array.isArray(peds.ageBands) && peds.ageBands.length > 0;
+  const hasMgKg = Boolean(peds.mgKg);
 
   if (typeof peds.minAgeMonths === "number" && ageMonths !== null && ageMonths < peds.minAgeMonths) {
     extra.push(`Atenção: uso recomendado apenas a partir de ${peds.minAgeMonths} meses.`);
@@ -299,9 +301,13 @@ function getRxDirections(
 
   const ageBand = getAgeBandDose(peds.ageBands, ageMonths);
 
-  if (peds.ageBands?.length && ageMonths === null) {
+  if (!hasAgeBands && !hasMgKg) {
+    return [...base.filter(Boolean), ...extra];
+  }
+
+  if (hasAgeBands && ageMonths === null) {
     extra.push("Preencher idade para cálculo automático por faixa etária.");
-  } else if (!peds.ageBands?.length && (!weightKg || !peds.mgKg)) {
+  } else if (!hasAgeBands && (!weightKg || !peds.mgKg)) {
     extra.push("Tomar conforme peso (preencher peso para cálculo da dose).");
   } else if (ageBand) {
     const doseMgRawMin = ageBand.doseMg;

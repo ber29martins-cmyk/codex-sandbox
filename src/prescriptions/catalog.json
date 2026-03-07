@@ -985,6 +985,456 @@
       }
     },
     {
+      "id": "amox_clav_ped_susp_400_57_5",
+      "label": "Amoxicilina + clavulanato (susp. 400+57mg/5mL)",
+      "route": "ORAL",
+      "title": "Amoxicilina + clavulanato",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas, por 7 a 14 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 2,
+        "mgKg": { "min": 12.5, "max": 12.5 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 1000,
+        "maxPerDayMgKg": 90,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 400+57mg/5mL", "mgPer5ml": 400 }
+        ],
+        "notes": [
+          "dose padrao: 25-45mg/kg/dia de amoxicilina, em 2 tomadas",
+          "dose alta: 80-90mg/kg/dia de amoxicilina, em 2 tomadas",
+          "dose maxima: 1000mg por dose e 2000mg/dia de amoxicilina"
+        ]
+      }
+    },
+    {
+      "id": "amox_clav_ped_susp_250_62_5_5",
+      "label": "Amoxicilina + clavulanato (susp. 250+62,5mg/5mL)",
+      "route": "ORAL",
+      "title": "Amoxicilina + clavulanato",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas, por 7 a 14 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 2,
+        "mgKg": { "min": 12.5, "max": 12.5 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 1000,
+        "maxPerDayMgKg": 90,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 250+62,5mg/5mL", "mgPer5ml": 250 }
+        ],
+        "notes": [
+          "dose padrao: 25-45mg/kg/dia de amoxicilina, em 2 tomadas",
+          "dose alta: 80-90mg/kg/dia de amoxicilina, em 2 tomadas",
+          "dose maxima: 1000mg por dose e 2000mg/dia de amoxicilina"
+        ]
+      }
+    },
+    {
+      "id": "amox_clav_ped_susp_125_31_25_5",
+      "label": "Amoxicilina + clavulanato (susp. 125+31,25mg/5mL)",
+      "route": "ORAL",
+      "title": "Amoxicilina + clavulanato",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas, por 7 a 14 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 2,
+        "mgKg": { "min": 12.5, "max": 12.5 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 1000,
+        "maxPerDayMgKg": 90,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 125+31,25mg/5mL", "mgPer5ml": 125 }
+        ],
+        "notes": [
+          "dose padrao: 25-45mg/kg/dia de amoxicilina, em 2 tomadas",
+          "dose alta: 80-90mg/kg/dia de amoxicilina, em 2 tomadas",
+          "dose maxima: 1000mg por dose e 2000mg/dia de amoxicilina"
+        ]
+      }
+    },
+    {
+      "id": "amox_clav_ped_comp_500_125",
+      "label": "Amoxicilina + clavulanato (comp. 500+125mg)",
+      "route": "ORAL",
+      "title": "Amoxicilina + clavulanato",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido via oral de 12 em 12 horas, por 7 a 14 dias"
+      ],
+      "peds": {
+        "minWeightKg": 40,
+        "ageBands": [
+          { "minAgeMonths": 0, "doseMg": 500, "intervalHours": 12 }
+        ],
+        "maxPerDoseMg": 500,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "comprimido 500+125mg" }
+        ],
+        "notes": [
+          "indicado para pacientes com peso >= 40kg",
+          "dose por tomada: 500mg de amoxicilina"
+        ]
+      }
+    },
+    {
+      "id": "amox_clav_ped_comp_875_125",
+      "label": "Amoxicilina + clavulanato (comp. 875+125mg)",
+      "route": "ORAL",
+      "title": "Amoxicilina + clavulanato",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido via oral de 12 em 12 horas, por 7 a 14 dias"
+      ],
+      "peds": {
+        "minWeightKg": 50,
+        "ageBands": [
+          { "minAgeMonths": 0, "doseMg": 875, "intervalHours": 12 }
+        ],
+        "maxPerDoseMg": 875,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "comprimido 875+125mg" }
+        ],
+        "notes": [
+          "indicado para pacientes com peso >= 50kg",
+          "dose por tomada: 875mg de amoxicilina"
+        ]
+      }
+    },
+    {
+      "id": "azitromicina_ped_susp_200_5",
+      "label": "Azitromicina pediátrica (susp. 200mg/5mL)",
+      "route": "ORAL",
+      "title": "Azitromicina",
+      "qty": "1 frasco",
+      "directions": [
+        "Dia 1: 10mg/kg via oral 1x/dia; Dias 2 a 5: 5mg/kg via oral 1x/dia"
+      ],
+      "peds": {
+        "mgKg": { "min": 5, "max": 10 },
+        "intervalHours": { "min": 24, "max": 24 },
+        "maxPerDoseMg": 500,
+        "maxDosesPerDay": 1,
+        "formulations": [
+          { "label": "suspensao 200mg/5mL", "mgPer5ml": 200 }
+        ],
+        "notes": [
+          "dia 1: 10mg/kg; dias 2 a 5: 5mg/kg",
+          "maximo diario: 500mg"
+        ]
+      }
+    },
+    {
+      "id": "azitromicina_ped_comp_500",
+      "label": "Azitromicina pediátrica (comp. 500mg)",
+      "route": "ORAL",
+      "title": "Azitromicina",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido via oral 1x ao dia por 3 a 5 dias"
+      ],
+      "peds": {
+        "minWeightKg": 45,
+        "ageBands": [
+          { "minAgeMonths": 0, "doseMg": 500, "intervalHours": 24 }
+        ],
+        "maxPerDoseMg": 500,
+        "maxDosesPerDay": 1,
+        "formulations": [
+          { "label": "comprimido 500mg" }
+        ],
+        "notes": [
+          "indicado para pacientes >= 45kg"
+        ]
+      }
+    },
+    {
+      "id": "cefaclor_ped_susp_250_5",
+      "label": "Cefaclor pediátrico (susp. 250mg/5mL)",
+      "route": "ORAL",
+      "title": "Cefaclor",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 8 em 8 horas por 10 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 6.67, "max": 6.67 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 500,
+        "maxPerDayMgKg": 20,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "suspensao 250mg/5mL", "mgPer5ml": 250 }
+        ],
+        "notes": [
+          "dose alvo: 20mg/kg/dia",
+          "dose maxima por tomada: 10mL ou 500mg"
+        ]
+      }
+    },
+    {
+      "id": "cefaclor_ped_susp_375_5",
+      "label": "Cefaclor pediátrico (susp. 375mg/5mL)",
+      "route": "ORAL",
+      "title": "Cefaclor",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 12 em 12 horas por 10 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 10, "max": 10 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 500,
+        "maxPerDayMgKg": 20,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 375mg/5mL", "mgPer5ml": 375 }
+        ],
+        "notes": [
+          "dose alvo: 20mg/kg/dia",
+          "dose maxima por tomada: 6,6mL"
+        ]
+      }
+    },
+    {
+      "id": "cefalexina_ped_susp_250_5",
+      "label": "Cefalexina pediátrica (susp. 250mg/5mL)",
+      "route": "ORAL",
+      "title": "Cefalexina",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 6 em 6 horas por 7 a 14 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 6.25, "max": 12.5 },
+        "intervalHours": { "min": 6, "max": 6 },
+        "maxPerDoseMg": 500,
+        "maxPerDayMgKg": 50,
+        "maxDosesPerDay": 4,
+        "formulations": [
+          { "label": "suspensao 250mg/5mL", "mgPer5ml": 250 }
+        ],
+        "notes": [
+          "dose alvo: 25 a 50mg/kg/dia dividida em 4 tomadas",
+          "dose maxima: 500mg por dose ou 2g/dia",
+          "refrigerar apos reconstituicao e usar em ate 14 dias"
+        ]
+      }
+    },
+    {
+      "id": "cefalexina_ped_susp_500_5",
+      "label": "Cefalexina pediátrica (susp. 500mg/5mL)",
+      "route": "ORAL",
+      "title": "Cefalexina",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 6 em 6 horas por 7 a 14 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 6.25, "max": 12.5 },
+        "intervalHours": { "min": 6, "max": 6 },
+        "maxPerDoseMg": 500,
+        "maxPerDayMgKg": 50,
+        "maxDosesPerDay": 4,
+        "formulations": [
+          { "label": "suspensao 500mg/5mL", "mgPer5ml": 500 }
+        ],
+        "notes": [
+          "dose alvo: 25 a 50mg/kg/dia dividida em 4 tomadas",
+          "dose maxima: 500mg por dose ou 2g/dia",
+          "refrigerar apos reconstituicao e usar em ate 14 dias"
+        ]
+      }
+    },
+    {
+      "id": "claritromicina_ped_susp_50_ml",
+      "label": "Claritromicina pediátrica (susp. 50mg/mL)",
+      "route": "ORAL",
+      "title": "Claritromicina",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas por 10 a 14 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 7.5, "max": 7.5 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 500,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 50mg/mL", "mgPerMl": 50 }
+        ],
+        "notes": [
+          "dose maxima por tomada: 10mL"
+        ]
+      }
+    },
+    {
+      "id": "penicilina_benzatina_ped_inj_300k_ml",
+      "label": "Penicilina benzatina pediátrica (inj. 300.000UI/mL)",
+      "route": "PARENTERAL",
+      "title": "Penicilina benzatina",
+      "qty": "1 ampola",
+      "directions": [
+        "Aplicar via intramuscular em dose unica",
+        "Ate 26kg: 600.000UI (2mL da solucao 300.000UI/mL)",
+        "A partir de 27kg: 1.200.000UI (4mL da solucao 300.000UI/mL)"
+      ],
+      "peds": {
+        "minAgeMonths": 1,
+        "formulations": [
+          { "label": "solucao injetavel 300000UI/mL" }
+        ],
+        "notes": [
+          "para profilaxia de febre reumatica: repetir a cada 3 a 4 semanas",
+          "disponivel em frasco-ampola de 600.000UI e 1.200.000UI"
+        ]
+      }
+    },
+    {
+      "id": "smx_tmp_ped_susp_40_8_ml",
+      "label": "SMX+TMP pediátrico (susp. 40mg/mL + 8mg/mL)",
+      "route": "ORAL",
+      "title": "Sulfametoxazol + trimetoprima",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas por 7 a 14 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 2,
+        "mgKg": { "min": 4, "max": 4 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 160,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao TMP 8mg/mL", "mgPerMl": 8 }
+        ],
+        "notes": [
+          "dose alvo: 8mg TMP/kg/dia (4mg/kg/dose)",
+          "dose maxima: 160mg TMP por dose (20mL)"
+        ]
+      }
+    },
+    {
+      "id": "smx_tmp_ped_susp_forte_80_16_ml",
+      "label": "SMX+TMP pediátrico (susp. forte 80mg/mL + 16mg/mL)",
+      "route": "ORAL",
+      "title": "Sulfametoxazol + trimetoprima",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas por 7 a 14 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 2,
+        "mgKg": { "min": 4, "max": 4 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 160,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao TMP 16mg/mL", "mgPerMl": 16 }
+        ],
+        "notes": [
+          "dose alvo: 8mg TMP/kg/dia (4mg/kg/dose)",
+          "dose maxima: 160mg TMP por dose (10mL)"
+        ]
+      }
+    },
+    {
+      "id": "smx_tmp_ped_comp_400_80",
+      "label": "SMX+TMP pediátrico (comp. 400+80mg)",
+      "route": "ORAL",
+      "title": "Sulfametoxazol + trimetoprima",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 2 comprimidos via oral de 12 em 12 horas por 7 a 14 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 144,
+        "ageBands": [
+          { "minAgeMonths": 144, "doseMg": 160, "intervalHours": 12 }
+        ],
+        "maxPerDoseMg": 160,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "comprimido TMP 80mg" }
+        ],
+        "notes": [
+          "indicado a partir de 12 anos"
+        ]
+      }
+    },
+    {
+      "id": "smx_tmp_ped_comp_forte_800_160",
+      "label": "SMX+TMP pediátrico (comp. forte 800+160mg)",
+      "route": "ORAL",
+      "title": "Sulfametoxazol + trimetoprima",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido via oral de 12 em 12 horas por 7 a 14 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 144,
+        "ageBands": [
+          { "minAgeMonths": 144, "doseMg": 160, "intervalHours": 12 }
+        ],
+        "maxPerDoseMg": 160,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "comprimido TMP 160mg" }
+        ],
+        "notes": [
+          "indicado a partir de 12 anos"
+        ]
+      }
+    },
+    {
+      "id": "tobramicina_oft_ped_colirio_0_3",
+      "label": "Tobramicina oftálmica (colírio 0,3%)",
+      "route": "OFTALMICO",
+      "title": "Tobramicina oftálmica",
+      "qty": "1 frasco",
+      "directions": [
+        "Instilar 1 a 2 gotas no(s) olho(s) afetado(s) de 4 em 4 horas por no minimo 7 dias",
+        "Ocluir ducto nasolacrimal por 1-2 minutos apos instilar"
+      ],
+      "peds": {
+        "formulations": [
+          { "label": "colirio 0,3% (3mg/mL)" }
+        ],
+        "notes": [
+          "cada gota corresponde a aproximadamente 0,1mg de tobramicina"
+        ]
+      }
+    },
+    {
+      "id": "tobramicina_oft_ped_pomada_0_3",
+      "label": "Tobramicina oftálmica (pomada 0,3%)",
+      "route": "OFTALMICO",
+      "title": "Tobramicina oftálmica",
+      "qty": "1 bisnaga",
+      "directions": [
+        "Aplicar 1cm de pomada no saco conjuntival 2 a 3 vezes ao dia por no minimo 7 dias"
+      ],
+      "peds": {
+        "formulations": [
+          { "label": "pomada oftalmica 0,3% (3mg/g)" }
+        ],
+        "notes": [
+          "pode ser associada ao colirio durante o dia e pomada a noite"
+        ]
+      }
+    },
+    {
       "id": "prednisona_20mg_meticorten",
       "label": "Prednisona 20mg",
       "route": "ORAL",

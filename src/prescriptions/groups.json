@@ -75,7 +75,24 @@
         "amoxicilina_ped_susp_500_5",
         "amoxicilina_ped_susp_250_5",
         "amoxicilina_ped_susp_400_5",
-        "amoxicilina_ped_caps_500"
+        "amoxicilina_ped_caps_500",
+        "amox_clav_ped_susp_400_57_5",
+        "amox_clav_ped_susp_250_62_5_5",
+        "amox_clav_ped_susp_125_31_25_5",
+        "amox_clav_ped_comp_500_125",
+        "amox_clav_ped_comp_875_125",
+        "azitromicina_ped_susp_200_5",
+        "azitromicina_ped_comp_500",
+        "cefaclor_ped_susp_250_5",
+        "cefaclor_ped_susp_375_5",
+        "cefalexina_ped_susp_250_5",
+        "cefalexina_ped_susp_500_5",
+        "claritromicina_ped_susp_50_ml",
+        "penicilina_benzatina_ped_inj_300k_ml",
+        "smx_tmp_ped_susp_40_8_ml",
+        "smx_tmp_ped_susp_forte_80_16_ml",
+        "smx_tmp_ped_comp_400_80",
+        "smx_tmp_ped_comp_forte_800_160"
       ]
     },
     {
@@ -389,6 +406,14 @@
         "carmelose_5mg_ml_lacrifilm",
         "dextrana_1mg_ml_hipromelose_3mg_ml_lacrima_plus",
         "cetotifeno_0_25mg_ml_octifen"
+      ]
+    },
+    {
+      "id": "oftalmicos_antibioticos_ped",
+      "label": "Oftálmicos antibióticos (PED)",
+      "itemIds": [
+        "tobramicina_oft_ped_colirio_0_3",
+        "tobramicina_oft_ped_pomada_0_3"
       ]
     },
     {
