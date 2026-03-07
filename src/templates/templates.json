@@ -147,8 +147,8 @@
         { "id": "toxemia", "label": "Toxemia", "text": "Alteração de estado geral ou toxemia" }
       ],
       "hmaDefaults": ["febre", "otalgia", "irritabilidade", "orelha-direita", "apetite-preservado"],
-      "rxGroups": [],
-      "rxDefaults": []
+      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
+      "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
   {
@@ -187,8 +187,8 @@
         { "id": "ingesta-liquidos", "label": "Ingesta líquidos", "text": "Aceita líquidos adequadamente" }
       ],
       "hmaDefaults": ["febre", "odinofagia", "disfagia", "estado-geral"],
-      "rxGroups": [],
-      "rxDefaults": []
+      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
+      "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
   {
@@ -226,8 +226,8 @@
         { "id": "dor-abdominal", "label": "Dor abdominal", "text": "Dor abdominal associada" }
       ],
       "hmaDefaults": ["vomitos", "diarreia", "ingesta-liquidos", "apetite-reduzido"],
-      "rxGroups": [],
-      "rxDefaults": []
+      "rxGroups": ["sro", "antitermicos_ped"],
+      "rxDefaults": ["sro_sais_reidratacao_oral", "paracetamol_ped"]
     }
   },
   {
@@ -265,8 +265,8 @@
         { "id": "apetite-ok", "label": "Apetite ok", "text": "Boa aceitação alimentar" }
       ],
       "hmaDefaults": ["febre", "coriza", "tosse", "obstrucao-nasal", "estado-geral"],
-      "rxGroups": [],
-      "rxDefaults": []
+      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
+      "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
   {
@@ -305,8 +305,8 @@
         { "id": "sintomas-gi", "label": "Sintomas GI", "text": "Náuseas ou sintomas gastrintestinais associados" }
       ],
       "hmaDefaults": ["febre-alta", "odinofagia-intensa", "recusa-alimentar", "linfonodos"],
-      "rxGroups": [],
-      "rxDefaults": []
+      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
+      "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
     {

@@ -214,6 +214,90 @@ function parseAgeMonths(ageRaw: string): { months: number | null; display: strin
   return { months, display };
 }
 
+function parseWeightKg(weightRaw: string): number | null {
+  const raw = weightRaw.trim();
+  if (!raw) return null;
+  const match = raw.match(/[0-9]+([.,][0-9]+)?/);
+  if (!match) return null;
+  const value = Number(match[0].replace(",", "."));
+  return Number.isFinite(value) ? value : null;
+}
+
+function formatDoseValue(value: number) {
+  if (!Number.isFinite(value)) return "";
+  if (value < 10) return value.toFixed(1).replace(/\.0$/, "");
+  return Math.round(value).toString();
+}
+
+function formatDoseRange(min: number, max: number, unit: string) {
+  const minTxt = formatDoseValue(min);
+  const maxTxt = formatDoseValue(max);
+  if (!minTxt || !maxTxt) return "";
+  if (Math.abs(min - max) < 0.01) return `${minTxt} ${unit}`;
+  return `${minTxt} a ${maxTxt} ${unit}`;
+}
+
+function getRxDirections(
+  item: RxItem,
+  profile: "adulto" | "pediatria",
+  weightKg: number | null,
+  ageMonths: number | null
+) {
+  const base = [...(item.directions ?? [])];
+  if (profile !== "pediatria" || !item.peds) return base;
+
+  const peds = item.peds;
+  const extra: string[] = [];
+
+  if (typeof peds.minAgeMonths === "number" && ageMonths !== null && ageMonths < peds.minAgeMonths) {
+    extra.push(`Atenção: uso recomendado apenas a partir de ${peds.minAgeMonths} meses.`);
+  }
+
+  if (!weightKg || !peds.mgKg) {
+    extra.push("Preencha o peso para cálculo pediátrico.");
+  } else {
+    const mgMinRaw = weightKg * peds.mgKg.min;
+    const mgMaxRaw = weightKg * peds.mgKg.max;
+    const mgMin = typeof peds.maxPerDoseMg === "number" ? Math.min(mgMinRaw, peds.maxPerDoseMg) : mgMinRaw;
+    const mgMax = typeof peds.maxPerDoseMg === "number" ? Math.min(mgMaxRaw, peds.maxPerDoseMg) : mgMaxRaw;
+    const doseTxt = formatDoseRange(mgMin, mgMax, "mg");
+    if (doseTxt) {
+      extra.push(`Dose sugerida por dose: ${doseTxt}.`);
+    }
+    if (peds.intervalHours) {
+      extra.push(`Intervalo: a cada ${peds.intervalHours.min} a ${peds.intervalHours.max} horas.`);
+    }
+    if (Array.isArray(peds.formulations)) {
+      peds.formulations.forEach((form) => {
+        const mgPerMl =
+          typeof form.mgPerMl === "number" ? form.mgPerMl : typeof form.mgPer5ml === "number" ? form.mgPer5ml / 5 : null;
+        if (!mgPerMl || mgPerMl <= 0) return;
+        const mlMin = mgMin / mgPerMl;
+        const mlMax = mgMax / mgPerMl;
+        const mlTxt = formatDoseRange(mlMin, mlMax, "mL");
+        if (mlTxt) {
+          extra.push(`${form.label}: ${mlTxt} por dose.`);
+        }
+      });
+    }
+    if (typeof peds.maxPerDayMgKg === "number") {
+      extra.push(`Máximo diário: ${peds.maxPerDayMgKg} mg/kg/dia.`);
+    }
+    if (typeof peds.maxDosesPerDay === "number") {
+      extra.push(`Máximo de ${peds.maxDosesPerDay} doses por dia.`);
+    }
+  }
+
+  if (Array.isArray(peds.notes)) {
+    peds.notes.forEach((note) => {
+      const clean = String(note || "").trim();
+      if (clean) extra.push(`Obs: ${clean}.`);
+    });
+  }
+
+  return [...base.filter(Boolean), ...extra];
+}
+
 function alarmLabelForPrint(input: string) {
   const cleaned = cleanAlarmLabel(input).trim();
   const expanded = ALARM_PRINT_MAP[cleaned] ?? ALARM_PRINT_MAP[cleaned.toLowerCase()] ?? cleaned;
@@ -488,6 +572,12 @@ export default function Page() {
     [profile]
   );
   const catalogMap = useMemo(() => Object.fromEntries(catalogForProfile.map((item) => [item.id, item])), [catalogForProfile]);
+  const ageInfo = useMemo(() => parseAgeMonths(patientAge), [patientAge]);
+  const weightKg = useMemo(() => parseWeightKg(patientWeight), [patientWeight]);
+  const getItemDirectionsForDisplay = useMemo(
+    () => (item: RxItem) => getRxDirections(item, profile, weightKg, ageInfo.months),
+    [profile, weightKg, ageInfo.months]
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -931,7 +1021,7 @@ export default function Page() {
           const dotsWidth = Math.max(2, 80 - base.length - item.qty.length - 2);
           const dotted = `${base} ${".".repeat(dotsWidth)} ${item.qty}`;
           lines.push(dotted);
-          item.directions.forEach((dir) => {
+          getItemDirectionsForDisplay(item).forEach((dir) => {
             if (dir.trim()) lines.push(dir.trim());
           });
           if (index < items.length - 1) {
@@ -942,14 +1032,14 @@ export default function Page() {
       });
 
     return routeBlocks.join("\n\n").trim();
-  }, [orderedSelectedRxIds, catalogMap]);
+  }, [orderedSelectedRxIds, catalogMap, getItemDirectionsForDisplay]);
   
   const hmaParagraphs = useMemo(() => {
     if (!currentTemplate) return [];
     const items = getTemplateHmaItems(currentTemplate);
-    const presentTexts = items
+    const presentLabels = items
       .filter((it) => hmaStates[it.id] === "presente")
-      .map((it) => it.text || it.label)
+      .map((it) => (it.label || "").trim().toLowerCase())
       .filter(Boolean);
     const negLabels = items
       .filter((it) => hmaStates[it.id] === "nega")
@@ -966,7 +1056,7 @@ export default function Page() {
       : "";
 
     const paragraphs = [];
-    if (presentTexts.length) paragraphs.push(formatParagraph(presentTexts));
+    if (presentLabels.length) paragraphs.push(formatParagraph([`Refere ${formatList(presentLabels)}`]));
     if (negLabels.length) paragraphs.push(formatParagraph([`Nega ${formatList(negLabels)}`]));
     if (freeParagraph) paragraphs.push(freeParagraph);
     return paragraphs;
@@ -976,8 +1066,7 @@ export default function Page() {
   const pediatricIntro = useMemo(() => {
     if (profile !== "pediatria") return "";
     if (!currentTemplate) return "";
-    const ageParsed = parseAgeMonths(patientAge);
-    const months = ageParsed.months;
+    const months = ageInfo.months;
     let faixa = "paciente";
     if (months !== null) {
       if (months < 1) faixa = "recém-nascido";
@@ -985,7 +1074,7 @@ export default function Page() {
       else if (months < 144) faixa = "escolar";
       else faixa = "adolescente";
     }
-    const agePart = ageParsed.display ? `${ageParsed.display}` : "";
+    const agePart = ageInfo.display ? `${ageInfo.display}` : "";
     const weightClean = patientWeight.trim();
     const weightPart = weightClean ? (/\bkg\b/i.test(weightClean) ? weightClean : `${weightClean} kg`) : "";
     const qpDisplay = qpText.trim() || currentTemplate.label || "queixa principal";
@@ -993,8 +1082,8 @@ export default function Page() {
     if (agePart) pieces.push(agePart);
     if (weightPart) pieces.push(weightPart);
     const prefix = pieces.join(", ");
-    return `${prefix}, trazido por mãe/pai/familiar, que relata ${qpDisplay}`;
-  }, [profile, patientAge, patientWeight, qpText, currentTemplate]);
+    return `${prefix}, trazido por mãe/pai/familiar, que relata ${qpDisplay}.`;
+  }, [profile, ageInfo, patientWeight, qpText, currentTemplate]);
 
   const blocks = useMemo(() => {
     if (!currentTemplate) {
@@ -1070,6 +1159,7 @@ export default function Page() {
     comorb,
     comorbSelected,
     meds,
+    pediatricIntro,
     alergiaNega,
     triagem,
     pa,
@@ -1939,7 +2029,7 @@ function handlePrivacyContinue() {
                               <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
                             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingLeft: 16, fontFamily: "ui-monospace, SFMono-Regular", fontSize: 14 }}>
-              {item.directions.map((dir, dirIdx) => (
+              {getItemDirectionsForDisplay(item).map((dir, dirIdx) => (
                 <span key={dirIdx}>{dir}</span>
               ))}
             </div>
@@ -1986,7 +2076,7 @@ function handlePrivacyContinue() {
                           <span style={{ minWidth: 120, textAlign: "right", fontWeight: 500 }}>{item.qty}</span>
                         </div>
                         <div style={{ display: "flex", flexDirection: "column", gap: 3, paddingLeft: 16 }}>
-                          {item.directions.map((dir, dirIdx) => (
+                          {getItemDirectionsForDisplay(item).map((dir, dirIdx) => (
                             <span key={dirIdx}>{dir}</span>
                           ))}
                         </div>

@@ -25,6 +25,14 @@
       ]
     },
     {
+      "id": "antitermicos_ped",
+      "label": "Antitérmicos (PED)",
+      "itemIds": [
+        "paracetamol_ped",
+        "ibuprofeno_ped"
+      ]
+    },
+    {
       "id": "aines",
       "label": "AINES",
       "itemIds": [
