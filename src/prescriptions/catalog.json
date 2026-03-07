@@ -901,6 +901,10 @@
         "Administrar via oral de 12 em 12 horas, por 7 a 10 dias"
       ],
       "peds": {
+        "regimens": [
+          { "id": "amoxi_padrao", "label": "Dose padrão (50mg/kg/dia)", "mgKg": { "min": 25, "max": 25 }, "intervalHours": { "min": 12, "max": 12 } },
+          { "id": "amoxi_alta", "label": "Dose alta (80-90mg/kg/dia)", "mgKg": { "min": 40, "max": 45 }, "intervalHours": { "min": 12, "max": 12 }, "notes": ["dose alta sugerida em OMA/PNM conforme indicação clínica"] }
+        ],
         "mgKg": { "min": 25, "max": 25 },
         "intervalHours": { "min": 12, "max": 12 },
         "maxPerDoseMg": 1000,
@@ -924,6 +928,10 @@
         "Administrar via oral de 12 em 12 horas, por 7 a 10 dias"
       ],
       "peds": {
+        "regimens": [
+          { "id": "amoxi_padrao", "label": "Dose padrão (50mg/kg/dia)", "mgKg": { "min": 25, "max": 25 }, "intervalHours": { "min": 12, "max": 12 } },
+          { "id": "amoxi_alta", "label": "Dose alta (80-90mg/kg/dia)", "mgKg": { "min": 40, "max": 45 }, "intervalHours": { "min": 12, "max": 12 }, "notes": ["dose alta sugerida em OMA/PNM conforme indicação clínica"] }
+        ],
         "mgKg": { "min": 25, "max": 25 },
         "intervalHours": { "min": 12, "max": 12 },
         "maxPerDoseMg": 1000,
@@ -947,6 +955,10 @@
         "Administrar via oral de 12 em 12 horas, por 7 a 10 dias"
       ],
       "peds": {
+        "regimens": [
+          { "id": "amoxi_padrao", "label": "Dose padrão (50mg/kg/dia)", "mgKg": { "min": 25, "max": 25 }, "intervalHours": { "min": 12, "max": 12 } },
+          { "id": "amoxi_alta", "label": "Dose alta (80-90mg/kg/dia)", "mgKg": { "min": 40, "max": 45 }, "intervalHours": { "min": 12, "max": 12 }, "notes": ["dose alta sugerida em OMA/PNM conforme indicação clínica"] }
+        ],
         "mgKg": { "min": 25, "max": 25 },
         "intervalHours": { "min": 12, "max": 12 },
         "maxPerDoseMg": 1000,
@@ -995,6 +1007,10 @@
       ],
       "peds": {
         "minAgeMonths": 2,
+        "regimens": [
+          { "id": "amoxclav_padrao", "label": "Dose padrão (25-45mg/kg/dia)", "mgKg": { "min": 12.5, "max": 22.5 }, "intervalHours": { "min": 12, "max": 12 } },
+          { "id": "amoxclav_alta", "label": "Dose alta (80-90mg/kg/dia)", "mgKg": { "min": 40, "max": 45 }, "intervalHours": { "min": 12, "max": 12 }, "notes": ["dose alta para OMA/PNM conforme indicação clínica"] }
+        ],
         "mgKg": { "min": 12.5, "max": 12.5 },
         "intervalHours": { "min": 12, "max": 12 },
         "maxPerDoseMg": 1000,
@@ -1021,6 +1037,10 @@
       ],
       "peds": {
         "minAgeMonths": 2,
+        "regimens": [
+          { "id": "amoxclav_padrao", "label": "Dose padrão (25-45mg/kg/dia)", "mgKg": { "min": 12.5, "max": 22.5 }, "intervalHours": { "min": 12, "max": 12 } },
+          { "id": "amoxclav_alta", "label": "Dose alta (80-90mg/kg/dia)", "mgKg": { "min": 40, "max": 45 }, "intervalHours": { "min": 12, "max": 12 }, "notes": ["dose alta para OMA/PNM conforme indicação clínica"] }
+        ],
         "mgKg": { "min": 12.5, "max": 12.5 },
         "intervalHours": { "min": 12, "max": 12 },
         "maxPerDoseMg": 1000,
@@ -1047,6 +1067,10 @@
       ],
       "peds": {
         "minAgeMonths": 2,
+        "regimens": [
+          { "id": "amoxclav_padrao", "label": "Dose padrão (25-45mg/kg/dia)", "mgKg": { "min": 12.5, "max": 22.5 }, "intervalHours": { "min": 12, "max": 12 } },
+          { "id": "amoxclav_alta", "label": "Dose alta (80-90mg/kg/dia)", "mgKg": { "min": 40, "max": 45 }, "intervalHours": { "min": 12, "max": 12 }, "notes": ["dose alta para OMA/PNM conforme indicação clínica"] }
+        ],
         "mgKg": { "min": 12.5, "max": 12.5 },
         "intervalHours": { "min": 12, "max": 12 },
         "maxPerDoseMg": 1000,
@@ -1122,6 +1146,20 @@
         "Dia 1: 10mg/kg via oral 1x/dia; Dias 2 a 5: 5mg/kg via oral 1x/dia"
       ],
       "peds": {
+        "regimens": [
+          {
+            "id": "azitro_5dias",
+            "label": "Esquema D1 10mg/kg, D2-5 5mg/kg",
+            "azithroStep": { "day1MgKg": 10, "day2to5MgKg": 5, "maxPerDayMg": 500 }
+          },
+          {
+            "id": "azitro_du_30",
+            "label": "Dose única 30mg/kg (OMA recorrente)",
+            "singleDoseMgKg": 30,
+            "maxPerDoseMg": 500,
+            "notes": ["uso em dose unica para OMA recorrente conforme indicação clínica"]
+          }
+        ],
         "mgKg": { "min": 5, "max": 10 },
         "intervalHours": { "min": 24, "max": 24 },
         "maxPerDoseMg": 500,

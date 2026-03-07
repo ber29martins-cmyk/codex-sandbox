@@ -38,6 +38,7 @@ type TemplateState = {
   alarmStates: AlarmStateMap;
   rxSelected: string[];
   rxFormulationByItem?: Record<string, string>;
+  rxRegimenByItem?: Record<string, string>;
   triagem: boolean;
   pa: string;
   fc: string;
@@ -72,6 +73,22 @@ type RxItem = {
       note?: string;
     }>;
     intervalHours?: { min: number; max: number };
+    regimens?: Array<{
+      id: string;
+      label: string;
+      mgKg?: { min: number; max: number };
+      intervalHours?: { min: number; max: number };
+      maxPerDoseMg?: number;
+      maxPerDayMgKg?: number;
+      maxDosesPerDay?: number;
+      notes?: string[];
+      azithroStep?: {
+        day1MgKg: number;
+        day2to5MgKg: number;
+        maxPerDayMg?: number;
+      };
+      singleDoseMgKg?: number;
+    }>;
     maxPerDoseMg?: number;
     maxPerDayMgKg?: number;
     maxDosesPerDay?: number;
@@ -278,15 +295,22 @@ function getRxDirections(
   profile: "adulto" | "pediatria",
   weightKg: number | null,
   ageMonths: number | null,
-  selectedFormulationLabel?: string
+  selectedFormulationLabel?: string,
+  selectedRegimenId?: string
 ) {
   const base = [...(item.directions ?? [])];
   if (profile !== "pediatria" || !item.peds) return base;
 
   const peds = item.peds;
+  const selectedRegimen = peds.regimens?.find((r) => r.id === selectedRegimenId) ?? peds.regimens?.[0];
+  const effectiveMgKg = selectedRegimen?.mgKg ?? peds.mgKg;
+  const effectiveInterval = selectedRegimen?.intervalHours ?? peds.intervalHours;
+  const effectiveMaxPerDose = selectedRegimen?.maxPerDoseMg ?? peds.maxPerDoseMg;
+  const effectiveMaxPerDayMgKg = selectedRegimen?.maxPerDayMgKg ?? peds.maxPerDayMgKg;
+  const effectiveMaxDosesPerDay = selectedRegimen?.maxDosesPerDay ?? peds.maxDosesPerDay;
   const extra: string[] = [];
   const hasAgeBands = Array.isArray(peds.ageBands) && peds.ageBands.length > 0;
-  const hasMgKg = Boolean(peds.mgKg);
+  const hasMgKg = Boolean(effectiveMgKg);
 
   if (typeof peds.minAgeMonths === "number" && ageMonths !== null && ageMonths < peds.minAgeMonths) {
     extra.push(`Atenção: uso recomendado apenas a partir de ${peds.minAgeMonths} meses.`);
@@ -297,6 +321,66 @@ function getRxDirections(
     } else if (weightKg < peds.minWeightKg) {
       extra.push(`Atenção: indicado para peso >= ${peds.minWeightKg}kg.`);
     }
+  }
+
+  if (selectedRegimen?.singleDoseMgKg) {
+    if (!weightKg) {
+      extra.push("Tomar conforme peso (preencher peso para cálculo da dose).");
+    } else {
+      const mgDoseRaw = weightKg * selectedRegimen.singleDoseMgKg;
+      const mgDose = typeof effectiveMaxPerDose === "number" ? Math.min(mgDoseRaw, effectiveMaxPerDose) : mgDoseRaw;
+      const forms = selectedFormulationLabel
+        ? (peds.formulations ?? []).filter((f) => f.label.toLowerCase() === selectedFormulationLabel.toLowerCase())
+        : (peds.formulations ?? []).slice(0, 1);
+      forms.forEach((form) => {
+        const mgPerMl =
+          typeof form.mgPerMl === "number" ? form.mgPerMl : typeof form.mgPer5ml === "number" ? form.mgPer5ml / 5 : null;
+        if (mgPerMl && mgPerMl > 0) {
+          const ml = mgDose / mgPerMl;
+          if (form.label.toLowerCase().includes("gota")) {
+            extra.push(`Dose única: ${formatDoseValue(ml * 20)} gotas (${formatDoseValue(mgDose)}mg; ${selectedRegimen.singleDoseMgKg}mg/kg).`);
+          } else {
+            extra.push(`Dose única: ${formatDoseValue(ml)}mL (${formatDoseValue(mgDose)}mg; ${selectedRegimen.singleDoseMgKg}mg/kg).`);
+          }
+        } else {
+          extra.push(`Dose única: ${formatDoseValue(mgDose)}mg (${selectedRegimen.singleDoseMgKg}mg/kg).`);
+        }
+      });
+    }
+    if (selectedRegimen.notes?.length) {
+      selectedRegimen.notes.forEach((n) => n && extra.push(`Obs: ${n}.`));
+    }
+    return [...base.filter(Boolean), ...extra];
+  }
+
+  if (selectedRegimen?.azithroStep) {
+    const step = selectedRegimen.azithroStep;
+    if (!weightKg) {
+      extra.push("Preencher peso para cálculo do esquema dia 1 e dias 2-5.");
+    } else {
+      const d1mgRaw = weightKg * step.day1MgKg;
+      const d2mgRaw = weightKg * step.day2to5MgKg;
+      const maxDay = step.maxPerDayMg ?? effectiveMaxPerDose;
+      const d1mg = typeof maxDay === "number" ? Math.min(d1mgRaw, maxDay) : d1mgRaw;
+      const d2mg = typeof maxDay === "number" ? Math.min(d2mgRaw, maxDay) : d2mgRaw;
+      const forms = selectedFormulationLabel
+        ? (peds.formulations ?? []).filter((f) => f.label.toLowerCase() === selectedFormulationLabel.toLowerCase())
+        : (peds.formulations ?? []).slice(0, 1);
+      forms.forEach((form) => {
+        const mgPerMl =
+          typeof form.mgPerMl === "number" ? form.mgPerMl : typeof form.mgPer5ml === "number" ? form.mgPer5ml / 5 : null;
+        if (mgPerMl && mgPerMl > 0) {
+          extra.push(`Dia 1: ${formatDoseValue(d1mg / mgPerMl)}mL (${formatDoseValue(d1mg)}mg; ${step.day1MgKg}mg/kg).`);
+          extra.push(`Dias 2-5: ${formatDoseValue(d2mg / mgPerMl)}mL 1x/dia (${formatDoseValue(d2mg)}mg; ${step.day2to5MgKg}mg/kg).`);
+        } else {
+          extra.push(`Dia 1: ${formatDoseValue(d1mg)}mg; Dias 2-5: ${formatDoseValue(d2mg)}mg 1x/dia.`);
+        }
+      });
+    }
+    if (selectedRegimen.notes?.length) {
+      selectedRegimen.notes.forEach((n) => n && extra.push(`Obs: ${n}.`));
+    }
+    return [...base.filter(Boolean), ...extra];
   }
 
   const ageBand = getAgeBandDose(peds.ageBands, ageMonths);
@@ -312,10 +396,10 @@ function getRxDirections(
   } else if (ageBand) {
     const doseMgRawMin = ageBand.doseMg;
     const doseMgRawMax = typeof ageBand.doseMgMax === "number" ? ageBand.doseMgMax : ageBand.doseMg;
-    const doseMgMin = typeof peds.maxPerDoseMg === "number" ? Math.min(doseMgRawMin, peds.maxPerDoseMg) : doseMgRawMin;
-    const doseMgMax = typeof peds.maxPerDoseMg === "number" ? Math.min(doseMgRawMax, peds.maxPerDoseMg) : doseMgRawMax;
+    const doseMgMin = typeof effectiveMaxPerDose === "number" ? Math.min(doseMgRawMin, effectiveMaxPerDose) : doseMgRawMin;
+    const doseMgMax = typeof effectiveMaxPerDose === "number" ? Math.min(doseMgRawMax, effectiveMaxPerDose) : doseMgRawMax;
     const intervalH =
-      ageBand.intervalHours ?? peds.intervalHours?.min ?? peds.intervalHours?.max ?? (ageBand.dosesPerDay ? Math.floor(24 / ageBand.dosesPerDay) : null);
+      ageBand.intervalHours ?? effectiveInterval?.min ?? effectiveInterval?.max ?? (ageBand.dosesPerDay ? Math.floor(24 / ageBand.dosesPerDay) : null);
     if (Array.isArray(peds.formulations)) {
       const selected = selectedFormulationLabel?.trim().toLowerCase();
       const forms = selected
@@ -358,17 +442,17 @@ function getRxDirections(
       extra.push(`Obs: ${ageBand.note}.`);
     }
   } else {
-    if (!weightKg || !peds.mgKg) {
+    if (!weightKg || !effectiveMgKg) {
       extra.push("Sem faixa etária compatível para idade informada.");
       return extra.length ? extra : base.filter(Boolean);
     }
-    const mgMinRaw = weightKg * peds.mgKg.min;
-    const mgMaxRaw = weightKg * peds.mgKg.max;
-    const mgMin = typeof peds.maxPerDoseMg === "number" ? Math.min(mgMinRaw, peds.maxPerDoseMg) : mgMinRaw;
-    const mgMax = typeof peds.maxPerDoseMg === "number" ? Math.min(mgMaxRaw, peds.maxPerDoseMg) : mgMaxRaw;
-    const mgKgTxt = `${peds.mgKg.min}-${peds.mgKg.max} mg/kg/dose`;
-    const intervalText = peds.intervalHours
-      ? `, a cada ${peds.intervalHours.min}-${peds.intervalHours.max} horas`
+    const mgMinRaw = weightKg * effectiveMgKg.min;
+    const mgMaxRaw = weightKg * effectiveMgKg.max;
+    const mgMin = typeof effectiveMaxPerDose === "number" ? Math.min(mgMinRaw, effectiveMaxPerDose) : mgMinRaw;
+    const mgMax = typeof effectiveMaxPerDose === "number" ? Math.min(mgMaxRaw, effectiveMaxPerDose) : mgMaxRaw;
+    const mgKgTxt = `${effectiveMgKg.min}-${effectiveMgKg.max} mg/kg/dose`;
+    const intervalText = effectiveInterval
+      ? `, a cada ${effectiveInterval.min}-${effectiveInterval.max} horas`
       : "";
     if (Array.isArray(peds.formulations)) {
       const selected = selectedFormulationLabel?.trim().toLowerCase();
@@ -396,16 +480,22 @@ function getRxDirections(
         }
       });
     }
-    if (typeof peds.maxPerDayMgKg === "number") {
-      extra.push(`Máximo diário: ${peds.maxPerDayMgKg} mg/kg/dia.`);
+    if (typeof effectiveMaxPerDayMgKg === "number") {
+      extra.push(`Máximo diário: ${effectiveMaxPerDayMgKg} mg/kg/dia.`);
     }
-    if (typeof peds.maxDosesPerDay === "number") {
-      extra.push(`Máximo de ${peds.maxDosesPerDay} doses por dia.`);
+    if (typeof effectiveMaxDosesPerDay === "number") {
+      extra.push(`Máximo de ${effectiveMaxDosesPerDay} doses por dia.`);
     }
   }
 
   if (Array.isArray(peds.notes)) {
     peds.notes.forEach((note) => {
+      const clean = String(note || "").trim();
+      if (clean) extra.push(`Obs: ${clean}.`);
+    });
+  }
+  if (selectedRegimen?.notes?.length) {
+    selectedRegimen.notes.forEach((note) => {
       const clean = String(note || "").trim();
       if (clean) extra.push(`Obs: ${clean}.`);
     });
@@ -504,6 +594,7 @@ function buildTemplateDefaults(template: Template): TemplateState {
     alarmStates: buildDefaultAlarmStates(template),
     rxSelected: template.defaults.rxDefaults ?? [],
     rxFormulationByItem: {},
+    rxRegimenByItem: {},
     triagem: true,
     pa: "",
     fc: "",
@@ -665,6 +756,7 @@ export default function Page() {
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
   const [rxSelected, setRxSelected] = useState<string[]>([]);
   const [rxFormulationByItem, setRxFormulationByItem] = useState<Record<string, string>>({});
+  const [rxRegimenByItem, setRxRegimenByItem] = useState<Record<string, string>>({});
   const [hmaStates, setHmaStates] = useState<HmaStateMap>({});
   const [hmaFreeText, setHmaFreeText] = useState("");
   const [hmaFreeOpen, setHmaFreeOpen] = useState(false);
@@ -724,8 +816,10 @@ export default function Page() {
   const ageInfo = useMemo(() => parseAgeMonths(patientAge), [patientAge]);
   const weightKg = useMemo(() => parseWeightKg(patientWeight), [patientWeight]);
   const getItemDirectionsForDisplay = useMemo(
-    () => (item: RxItem) => getRxDirections(item, profile, weightKg, ageInfo.months, rxFormulationByItem[item.id]),
-    [profile, weightKg, ageInfo.months, rxFormulationByItem]
+    () =>
+      (item: RxItem) =>
+        getRxDirections(item, profile, weightKg, ageInfo.months, rxFormulationByItem[item.id], rxRegimenByItem[item.id]),
+    [profile, weightKg, ageInfo.months, rxFormulationByItem, rxRegimenByItem]
   );
   const getSelectedFormulationLabel = useMemo(
     () => (item: RxItem) => {
@@ -976,6 +1070,7 @@ export default function Page() {
     const kit = rxKitsRef.current[templateId];
     setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
     setRxFormulationByItem(templateState.rxFormulationByItem ?? {});
+    setRxRegimenByItem(templateState.rxRegimenByItem ?? {});
     isApplyingTemplate.current = false;
   }, [templateId, currentTemplate]);
 
@@ -1002,6 +1097,7 @@ export default function Page() {
       alarmStates,
       rxSelected,
       rxFormulationByItem,
+      rxRegimenByItem,
       triagem,
       pa,
       fc,
@@ -1039,6 +1135,7 @@ export default function Page() {
     alarmStates,
     rxSelected,
     rxFormulationByItem,
+    rxRegimenByItem,
     triagem,
     pa,
     fc,
@@ -1566,6 +1663,7 @@ function handlePrivacyContinue() {
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
     setRxFormulationByItem(defaults.rxFormulationByItem ?? {});
+    setRxRegimenByItem(defaults.rxRegimenByItem ?? {});
     setTriagem(defaults.triagem);
     setPa(defaults.pa);
     setFc(defaults.fc);
@@ -1634,6 +1732,7 @@ function handlePrivacyContinue() {
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
     setRxFormulationByItem(defaults.rxFormulationByItem ?? {});
+    setRxRegimenByItem(defaults.rxRegimenByItem ?? {});
     setTriagem(defaults.triagem);
     setPa(defaults.pa);
     setFc(defaults.fc);
@@ -1678,6 +1777,11 @@ function handlePrivacyContinue() {
           delete next[id];
           return next;
         });
+        setRxRegimenByItem((map) => {
+          const next = { ...map };
+          delete next[id];
+          return next;
+        });
         return prev.filter((rx) => rx !== id);
       }
       return [...prev, id];
@@ -1712,6 +1816,7 @@ function handlePrivacyContinue() {
   function handleClearRxSelection() {
     setRxSelected([]);
     setRxFormulationByItem({});
+    setRxRegimenByItem({});
   }
 
   function handleToggleHmaChip(opt: string) {
@@ -2140,6 +2245,7 @@ function handlePrivacyContinue() {
                     const route = item?.route ? `(${item.route})` : "";
                     const checked = rxSelected.includes(itemId);
                     const formulations = item.peds?.formulations ?? [];
+                    const regimens = item.peds?.regimens ?? [];
                     return (
                       <div key={itemId} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                         <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -2165,6 +2271,27 @@ function handlePrivacyContinue() {
                               {formulations.map((form) => (
                                 <option key={form.label} value={form.label}>
                                   {getFormulationCategory(form.label)} - {form.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+                        {checked && regimens.length > 0 && (
+                          <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 24 }}>
+                            <span style={{ fontSize: 12, color: "#475569" }}>Regime:</span>
+                            <select
+                              value={rxRegimenByItem[itemId] ?? regimens[0].id}
+                              onChange={(e) =>
+                                setRxRegimenByItem((prev) => ({
+                                  ...prev,
+                                  [itemId]: e.target.value
+                                }))
+                              }
+                              style={{ border: "1px solid #d1d5db", borderRadius: 6, padding: "4px 8px", fontSize: 12 }}
+                            >
+                              {regimens.map((reg) => (
+                                <option key={reg.id} value={reg.id}>
+                                  {reg.label}
                                 </option>
                               ))}
                             </select>
