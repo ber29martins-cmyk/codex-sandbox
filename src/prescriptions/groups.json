@@ -69,6 +69,16 @@
       ]
     },
     {
+      "id": "antibioticos_ped",
+      "label": "Antibióticos (PED)",
+      "itemIds": [
+        "amoxicilina_ped_susp_500_5",
+        "amoxicilina_ped_susp_250_5",
+        "amoxicilina_ped_susp_400_5",
+        "amoxicilina_ped_caps_500"
+      ]
+    },
+    {
       "id": "antihistaminicos",
       "label": "Anti-histamínicos",
       "itemIds": [

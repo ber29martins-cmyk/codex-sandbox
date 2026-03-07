@@ -265,8 +265,8 @@
         { "id": "apetite-ok", "label": "Apetite ok", "text": "Boa aceitação alimentar" }
       ],
       "hmaDefaults": ["febre", "coriza", "tosse", "obstrucao-nasal"],
-      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
-      "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
+      "rxGroups": ["antitermicos_ped", "antibioticos_ped", "lavagem_nasal"],
+      "rxDefaults": ["paracetamol_ped", "amoxicilina_ped_susp_400_5", "soro_0_9_sorimax"]
     }
   },
   {
@@ -305,8 +305,8 @@
         { "id": "sintomas-gi", "label": "Sintomas GI", "text": "Náuseas ou sintomas gastrintestinais associados" }
       ],
       "hmaDefaults": ["febre-alta", "odinofagia-intensa", "recusa-alimentar", "linfonodos"],
-      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
-      "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
+      "rxGroups": ["antitermicos_ped", "antibioticos_ped", "lavagem_nasal"],
+      "rxDefaults": ["paracetamol_ped", "amoxicilina_ped_susp_400_5", "soro_0_9_sorimax"]
     }
   },
     {

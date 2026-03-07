@@ -60,6 +60,7 @@ type RxItem = {
   directions: string[];
   peds?: {
     minAgeMonths?: number;
+    minWeightKg?: number;
     mgKg?: { min: number; max: number };
     ageBands?: Array<{
       minAgeMonths: number;
@@ -287,6 +288,13 @@ function getRxDirections(
 
   if (typeof peds.minAgeMonths === "number" && ageMonths !== null && ageMonths < peds.minAgeMonths) {
     extra.push(`Atenção: uso recomendado apenas a partir de ${peds.minAgeMonths} meses.`);
+  }
+  if (typeof peds.minWeightKg === "number") {
+    if (weightKg === null) {
+      extra.push(`Preencher peso para validar uso (minimo ${peds.minWeightKg}kg).`);
+    } else if (weightKg < peds.minWeightKg) {
+      extra.push(`Atenção: indicado para peso >= ${peds.minWeightKg}kg.`);
+    }
   }
 
   const ageBand = getAgeBandDose(peds.ageBands, ageMonths);

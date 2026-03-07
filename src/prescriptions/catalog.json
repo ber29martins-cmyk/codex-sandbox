@@ -892,6 +892,99 @@
       }
     },
     {
+      "id": "amoxicilina_ped_susp_500_5",
+      "label": "Amoxicilina pediátrica (susp. 500mg/5mL)",
+      "route": "ORAL",
+      "title": "Amoxicilina",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas, por 7 a 10 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 25, "max": 25 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 1000,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 500mg/5mL", "mgPer5ml": 500 }
+        ],
+        "notes": [
+          "dose alvo: 25mg/kg/dose",
+          "dose maxima por dose: 1000mg (10mL)"
+        ]
+      }
+    },
+    {
+      "id": "amoxicilina_ped_susp_250_5",
+      "label": "Amoxicilina pediátrica (susp. 250mg/5mL)",
+      "route": "ORAL",
+      "title": "Amoxicilina",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas, por 7 a 10 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 25, "max": 25 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 1000,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 250mg/5mL", "mgPer5ml": 250 }
+        ],
+        "notes": [
+          "dose alvo: 25mg/kg/dose",
+          "dose maxima por dose: 1000mg (20mL)"
+        ]
+      }
+    },
+    {
+      "id": "amoxicilina_ped_susp_400_5",
+      "label": "Amoxicilina pediátrica (susp. 400mg/5mL)",
+      "route": "ORAL",
+      "title": "Amoxicilina",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas, por 7 a 10 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 25, "max": 25 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 1000,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 400mg/5mL", "mgPer5ml": 400 }
+        ],
+        "notes": [
+          "dose alvo: 25mg/kg/dose",
+          "dose maxima por dose: 1000mg (12,5mL)"
+        ]
+      }
+    },
+    {
+      "id": "amoxicilina_ped_caps_500",
+      "label": "Amoxicilina pediátrica (cápsula 500mg)",
+      "route": "ORAL",
+      "title": "Amoxicilina",
+      "qty": "1 caixa",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas, por 7 a 10 dias"
+      ],
+      "peds": {
+        "minWeightKg": 40,
+        "mgKg": { "min": 25, "max": 25 },
+        "intervalHours": { "min": 12, "max": 12 },
+        "maxPerDoseMg": 500,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "comprimido 500mg" }
+        ],
+        "notes": [
+          "indicado para pacientes com peso >= 40kg",
+          "dose fixa: 500mg por dose"
+        ]
+      }
+    },
+    {
       "id": "prednisona_20mg_meticorten",
       "label": "Prednisona 20mg",
       "route": "ORAL",
