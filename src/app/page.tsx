@@ -61,6 +61,14 @@ type RxItem = {
   peds?: {
     minAgeMonths?: number;
     mgKg?: { min: number; max: number };
+    ageBands?: Array<{
+      minAgeMonths: number;
+      maxAgeMonths?: number;
+      doseMg: number;
+      intervalHours?: number;
+      dosesPerDay?: number;
+      note?: string;
+    }>;
     intervalHours?: { min: number; max: number };
     maxPerDoseMg?: number;
     maxPerDayMgKg?: number;
@@ -238,6 +246,31 @@ function formatDoseRange(min: number, max: number, unit: string) {
   return `${minTxt} a ${maxTxt} ${unit}`;
 }
 
+function parseMgPerUnitFromLabel(label: string): number | null {
+  const lower = String(label || "").toLowerCase();
+  const match = lower.match(/([0-9]+([.,][0-9]+)?)\s*mg/);
+  if (!match) return null;
+  const value = Number(match[1].replace(",", "."));
+  return Number.isFinite(value) ? value : null;
+}
+
+function getAgeBandDose(
+  ageBands: NonNullable<RxItem["peds"]>["ageBands"],
+  ageMonths: number | null
+) {
+  if (!ageBands?.length) return null;
+  if (ageMonths === null) return null;
+  return (
+    ageBands.find((band) => {
+      const min = band.minAgeMonths ?? 0;
+      const max = band.maxAgeMonths;
+      if (ageMonths < min) return false;
+      if (typeof max === "number" && ageMonths >= max) return false;
+      return true;
+    }) ?? null
+  );
+}
+
 function getRxDirections(
   item: RxItem,
   profile: "adulto" | "pediatria",
@@ -255,9 +288,64 @@ function getRxDirections(
     extra.push(`Atenção: uso recomendado apenas a partir de ${peds.minAgeMonths} meses.`);
   }
 
-  if (!weightKg || !peds.mgKg) {
+  const ageBand = getAgeBandDose(peds.ageBands, ageMonths);
+
+  if (peds.ageBands?.length && ageMonths === null) {
+    extra.push("Preencher idade para cálculo automático por faixa etária.");
+  } else if (!peds.ageBands?.length && (!weightKg || !peds.mgKg)) {
     extra.push("Tomar conforme peso (preencher peso para cálculo da dose).");
+  } else if (ageBand) {
+    const doseMgRaw = ageBand.doseMg;
+    const doseMg = typeof peds.maxPerDoseMg === "number" ? Math.min(doseMgRaw, peds.maxPerDoseMg) : doseMgRaw;
+    const intervalH =
+      ageBand.intervalHours ?? peds.intervalHours?.min ?? peds.intervalHours?.max ?? (ageBand.dosesPerDay ? Math.floor(24 / ageBand.dosesPerDay) : null);
+    if (Array.isArray(peds.formulations)) {
+      const selected = selectedFormulationLabel?.trim().toLowerCase();
+      const forms = selected
+        ? peds.formulations.filter((form) => form.label.trim().toLowerCase() === selected)
+        : peds.formulations.slice(0, 1);
+      forms.forEach((form) => {
+        const lower = form.label.toLowerCase();
+        const mgPerMl =
+          typeof form.mgPerMl === "number" ? form.mgPerMl : typeof form.mgPer5ml === "number" ? form.mgPer5ml / 5 : null;
+        if (mgPerMl && mgPerMl > 0) {
+          const ml = doseMg / mgPerMl;
+          if (lower.includes("gota")) {
+            const gotas = ml * 20;
+            const gotasTxt = formatDoseValue(gotas);
+            extra.push(
+              `Tomar ${gotasTxt} gotas por dose (${formatDoseValue(doseMg)}mg/dose)${intervalH ? `, a cada ${intervalH} horas` : ""}.`
+            );
+          } else {
+            const mlTxt = formatDoseValue(ml);
+            extra.push(
+              `Tomar ${mlTxt}mL por dose (${formatDoseValue(doseMg)}mg/dose)${intervalH ? `, a cada ${intervalH} horas` : ""}.`
+            );
+          }
+          return;
+        }
+        if (lower.includes("comprimido")) {
+          const mgPerComp = parseMgPerUnitFromLabel(form.label);
+          if (mgPerComp && mgPerComp > 0) {
+            const comp = doseMg / mgPerComp;
+            const compTxt = formatDoseValue(comp);
+            extra.push(
+              `Tomar ${compTxt} comprimido(s) por dose (${formatDoseValue(doseMg)}mg/dose)${intervalH ? `, a cada ${intervalH} horas` : ""}.`
+            );
+            return;
+          }
+        }
+        extra.push(`Tomar ${formatDoseValue(doseMg)}mg por dose${intervalH ? `, a cada ${intervalH} horas` : ""}.`);
+      });
+    }
+    if (ageBand.note) {
+      extra.push(`Obs: ${ageBand.note}.`);
+    }
   } else {
+    if (!weightKg || !peds.mgKg) {
+      extra.push("Sem faixa etária compatível para idade informada.");
+      return extra.length ? extra : base.filter(Boolean);
+    }
     const mgMinRaw = weightKg * peds.mgKg.min;
     const mgMaxRaw = weightKg * peds.mgKg.max;
     const mgMin = typeof peds.maxPerDoseMg === "number" ? Math.min(mgMinRaw, peds.maxPerDoseMg) : mgMinRaw;

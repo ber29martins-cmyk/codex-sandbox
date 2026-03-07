@@ -500,6 +500,11 @@
       ],
       "peds": {
         "minAgeMonths": 6,
+        "ageBands": [
+          { "minAgeMonths": 6, "maxAgeMonths": 60, "doseMg": 1.25, "dosesPerDay": 1 },
+          { "minAgeMonths": 60, "maxAgeMonths": 144, "doseMg": 2.5, "dosesPerDay": 1 },
+          { "minAgeMonths": 144, "doseMg": 5, "dosesPerDay": 1 }
+        ],
         "maxPerDoseMg": 5,
         "maxDosesPerDay": 1,
         "formulations": [
@@ -524,6 +529,11 @@
       ],
       "peds": {
         "minAgeMonths": 6,
+        "ageBands": [
+          { "minAgeMonths": 6, "maxAgeMonths": 60, "doseMg": 1.25, "dosesPerDay": 1 },
+          { "minAgeMonths": 60, "maxAgeMonths": 144, "doseMg": 2.5, "dosesPerDay": 1 },
+          { "minAgeMonths": 144, "doseMg": 5, "dosesPerDay": 1 }
+        ],
         "maxPerDoseMg": 5,
         "maxDosesPerDay": 1,
         "formulations": [
@@ -594,6 +604,11 @@
       ],
       "peds": {
         "minAgeMonths": 6,
+        "ageBands": [
+          { "minAgeMonths": 6, "maxAgeMonths": 24, "doseMg": 15, "intervalHours": 12 },
+          { "minAgeMonths": 24, "maxAgeMonths": 144, "doseMg": 30, "intervalHours": 12 },
+          { "minAgeMonths": 144, "doseMg": 60, "intervalHours": 12, "note": "alternativa: 180mg 1x/dia" }
+        ],
         "maxDosesPerDay": 2,
         "formulations": [
           { "label": "suspensao 6mg/mL", "mgPerMl": 6 }
@@ -639,6 +654,10 @@
       ],
       "peds": {
         "minAgeMonths": 24,
+        "ageBands": [
+          { "minAgeMonths": 24, "maxAgeMonths": 72, "doseMg": 5, "dosesPerDay": 1 },
+          { "minAgeMonths": 72, "doseMg": 10, "dosesPerDay": 1 }
+        ],
         "maxPerDoseMg": 10,
         "maxDosesPerDay": 1,
         "formulations": [
@@ -662,6 +681,9 @@
       ],
       "peds": {
         "minAgeMonths": 72,
+        "ageBands": [
+          { "minAgeMonths": 72, "doseMg": 10, "dosesPerDay": 1 }
+        ],
         "maxPerDoseMg": 10,
         "maxDosesPerDay": 1,
         "formulations": [
