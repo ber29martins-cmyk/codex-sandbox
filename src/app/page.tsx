@@ -254,19 +254,16 @@ function getRxDirections(
   }
 
   if (!weightKg || !peds.mgKg) {
-    extra.push("Preencha o peso para cálculo pediátrico.");
+    extra.push("Tomar conforme peso (preencher peso para cálculo da dose).");
   } else {
     const mgMinRaw = weightKg * peds.mgKg.min;
     const mgMaxRaw = weightKg * peds.mgKg.max;
     const mgMin = typeof peds.maxPerDoseMg === "number" ? Math.min(mgMinRaw, peds.maxPerDoseMg) : mgMinRaw;
     const mgMax = typeof peds.maxPerDoseMg === "number" ? Math.min(mgMaxRaw, peds.maxPerDoseMg) : mgMaxRaw;
-    const doseTxt = formatDoseRange(mgMin, mgMax, "mg");
-    if (doseTxt) {
-      extra.push(`Dose sugerida por dose: ${doseTxt}.`);
-    }
-    if (peds.intervalHours) {
-      extra.push(`Intervalo: a cada ${peds.intervalHours.min} a ${peds.intervalHours.max} horas.`);
-    }
+    const mgKgTxt = `${peds.mgKg.min}-${peds.mgKg.max} mg/kg/dose`;
+    const intervalText = peds.intervalHours
+      ? `, a cada ${peds.intervalHours.min}-${peds.intervalHours.max} horas`
+      : "";
     if (Array.isArray(peds.formulations)) {
       peds.formulations.forEach((form) => {
         const mgPerMl =
@@ -274,9 +271,18 @@ function getRxDirections(
         if (!mgPerMl || mgPerMl <= 0) return;
         const mlMin = mgMin / mgPerMl;
         const mlMax = mgMax / mgPerMl;
-        const mlTxt = formatDoseRange(mlMin, mlMax, "mL");
-        if (mlTxt) {
-          extra.push(`${form.label}: ${mlTxt} por dose.`);
+        if (form.label.toLowerCase().includes("gota")) {
+          const gotasMin = mlMin * 20;
+          const gotasMax = mlMax * 20;
+          const gotasTxt = formatDoseRange(gotasMin, gotasMax, "gotas");
+          if (gotasTxt) {
+            extra.push(`Tomar ${gotasTxt} por dose (${mgKgTxt})${intervalText}.`);
+          }
+        } else {
+          const mlTxt = formatDoseRange(mlMin, mlMax, "mL");
+          if (mlTxt) {
+            extra.push(`Tomar ${mlTxt} por dose (${mgKgTxt})${intervalText}.`);
+          }
         }
       });
     }
@@ -295,7 +301,7 @@ function getRxDirections(
     });
   }
 
-  return [...base.filter(Boolean), ...extra];
+  return extra.length ? extra : base.filter(Boolean);
 }
 
 function alarmLabelForPrint(input: string) {
@@ -1077,12 +1083,13 @@ export default function Page() {
     const agePart = ageInfo.display ? `${ageInfo.display}` : "";
     const weightClean = patientWeight.trim();
     const weightPart = weightClean ? (/\bkg\b/i.test(weightClean) ? weightClean : `${weightClean} kg`) : "";
-    const qpDisplay = qpText.trim() || currentTemplate.label || "queixa principal";
+    const qpRaw = (qpText.trim() || getTemplateQP(currentTemplate) || currentTemplate.label || "queixa principal").replace(/\.$/, "");
+    const qpDisplay = qpRaw.charAt(0).toLowerCase() + qpRaw.slice(1);
     const pieces = [`Paciente ${faixa}`];
     if (agePart) pieces.push(agePart);
     if (weightPart) pieces.push(weightPart);
     const prefix = pieces.join(", ");
-    return `${prefix}, trazido por mãe/pai/familiar, que relata ${qpDisplay}.`;
+    return `${prefix}, trazido por familiar, com queixa de ${qpDisplay}.`;
   }, [profile, ageInfo, patientWeight, qpText, currentTemplate]);
 
   const blocks = useMemo(() => {
@@ -1092,7 +1099,7 @@ export default function Page() {
     const templateLabel = currentTemplate.label ?? (currentTemplate as any).title ?? "";
     const anamnese = [
       pediatricIntro ? pediatricIntro : qpText ? `QP: ${qpText}` : templateLabel ? `QP: ${templateLabel}` : "QP: __",
-      hmaParagraphs.length ? `HMA: ${hmaParagraphs[0]}` : "",
+      hmaParagraphs.length ? hmaParagraphs[0] : "",
       ...(hmaParagraphs.slice(1).length ? ["", ...hmaParagraphs.slice(1)] : []),
       ...alarmLines,
       (() => {

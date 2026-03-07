@@ -113,7 +113,7 @@
     
   {
     "id": "ped_oma",
-    "label": "Otite média aguda (ped)",
+    "label": "Otite média aguda",
     "defaults": {
       "qpDefault": "Dor em orelha",
       "alarme": "",
@@ -141,19 +141,19 @@
         { "id": "otalgia", "label": "Otalgia", "text": "Otalgia, pior ao toque na orelha afetada" },
         { "id": "irritabilidade", "label": "Irritabilidade", "text": "Irritabilidade durante o quadro" },
         { "id": "orelha-direita", "label": "Orelha direita", "text": "Sintomas predominam em orelha direita" },
-        { "id": "apetite-preservado", "label": "Apetite preserv.", "text": "Mantém apetite e boa aceitação de líquidos" },
+        { "id": "reducao-apetite", "label": "Redução apetite", "text": "Redução do apetite durante o quadro" },
         { "id": "tosse-coriza", "label": "Tosse/coriza", "text": "Tosse ou sintomas de vias aéreas altas" },
         { "id": "vomitos-diarreia", "label": "Vômitos/diarreia", "text": "Queixa de vômitos ou diarreia associados" },
         { "id": "toxemia", "label": "Toxemia", "text": "Alteração de estado geral ou toxemia" }
       ],
-      "hmaDefaults": ["febre", "otalgia", "irritabilidade", "orelha-direita", "apetite-preservado"],
+      "hmaDefaults": ["febre", "otalgia", "irritabilidade", "orelha-direita"],
       "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
       "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
   {
     "id": "ped_faringoamigdalite_viral",
-    "label": "Faringoamigdalite viral (ped)",
+    "label": "Faringoamigdalite viral",
     "defaults": {
       "qpDefault": "Dor de garganta",
       "alarme": "",
@@ -183,17 +183,17 @@
         { "id": "disfagia", "label": "Disfagia", "text": "Dificuldade para deglutir" },
         { "id": "tosse", "label": "Tosse", "text": "Refere tosse (geralmente leve)" },
         { "id": "coriza", "label": "Coriza", "text": "Coriza e sintomas nasais associados" },
-        { "id": "estado-geral", "label": "Bom estado geral", "text": "Mantém bom estado geral, sem prostração" },
-        { "id": "ingesta-liquidos", "label": "Ingesta líquidos", "text": "Aceita líquidos adequadamente" }
+        { "id": "prostracao", "label": "Prostração", "text": "Prostração ou hipoatividade" },
+        { "id": "recusa-liquidos", "label": "Recusa líquidos", "text": "Recusa de líquidos" }
       ],
-      "hmaDefaults": ["febre", "odinofagia", "disfagia", "estado-geral"],
+      "hmaDefaults": ["febre", "odinofagia", "disfagia"],
       "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
       "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
   {
     "id": "ped_gastroenterite_viral",
-    "label": "Gastroenterite viral (ped)",
+    "label": "Gastroenterite viral",
     "defaults": {
       "qpDefault": "Diarreia e vômitos",
       "alarme": "",
@@ -232,7 +232,7 @@
   },
   {
     "id": "ped_resfriado",
-    "label": "Resfriado comum (ped)",
+    "label": "Resfriado comum (IVAS viral)",
     "defaults": {
       "qpDefault": "Sintomas de IVAS",
       "alarme": "",
@@ -261,17 +261,17 @@
         { "id": "coriza", "label": "Coriza", "text": "Coriza abundante, clara" },
         { "id": "tosse", "label": "Tosse", "text": "Tosse seca" },
         { "id": "obstrucao-nasal", "label": "Obstrução nasal", "text": "Obstrução/congestão nasal" },
-        { "id": "estado-geral", "label": "Estado geral ok", "text": "Bom estado geral, sem prostração" },
+        { "id": "prostracao", "label": "Prostração", "text": "Prostração ou hipoatividade" },
         { "id": "apetite-ok", "label": "Apetite ok", "text": "Boa aceitação alimentar" }
       ],
-      "hmaDefaults": ["febre", "coriza", "tosse", "obstrucao-nasal", "estado-geral"],
+      "hmaDefaults": ["febre", "coriza", "tosse", "obstrucao-nasal"],
       "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
       "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
   {
     "id": "ped_faringoamigdalite_bacteriana",
-    "label": "Faringoamigdalite bacteriana (ped)",
+    "label": "Faringoamigdalite bacteriana",
     "defaults": {
       "qpDefault": "Dor intensa de garganta",
       "alarme": "",
