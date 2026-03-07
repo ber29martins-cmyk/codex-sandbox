@@ -29,7 +29,8 @@
       "label": "Antitérmicos (PED)",
       "itemIds": [
         "paracetamol_ped",
-        "ibuprofeno_ped"
+        "ibuprofeno_ped",
+        "dipirona_ped"
       ]
     },
     {

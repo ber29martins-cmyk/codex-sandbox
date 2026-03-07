@@ -466,6 +466,30 @@
       }
     },
     {
+      "id": "dipirona_ped",
+      "label": "Dipirona pediátrica",
+      "route": "ORAL",
+      "title": "Dipirona",
+      "qty": "1 frasco",
+      "directions": [
+        "tomar conforme peso (calculado no sistema)"
+      ],
+      "peds": {
+        "minAgeMonths": 3,
+        "mgKg": { "min": 15, "max": 25 },
+        "intervalHours": { "min": 6, "max": 6 },
+        "maxDosesPerDay": 4,
+        "formulations": [
+          { "label": "gota 500mg/mL", "mgPerMl": 500 },
+          { "label": "xarope 50mg/mL", "mgPerMl": 50 }
+        ],
+        "notes": [
+          "evitar uso prolongado sem reavaliação clínica",
+          "orientar retorno se febre persistente ou piora"
+        ]
+      }
+    },
+    {
       "id": "prednisona_20mg_meticorten",
       "label": "Prednisona 20mg",
       "route": "ORAL",

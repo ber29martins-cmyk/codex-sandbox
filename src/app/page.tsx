@@ -349,6 +349,23 @@ function getFormulationCategory(label: string) {
   return "Comprimido";
 }
 
+function formatFormulationLabel(label: string) {
+  const raw = String(label || "").trim();
+  if (!raw) return "";
+  const lower = raw.toLowerCase();
+  const normalizedCategory = getFormulationCategory(raw).toLowerCase();
+  if (lower.startsWith("gota ")) {
+    return `${raw.slice(5).trim()} (${normalizedCategory})`;
+  }
+  if (lower.startsWith("susp ")) {
+    return `${raw.slice(5).trim()} (${normalizedCategory})`;
+  }
+  if (lower.startsWith("xarope ")) {
+    return `${raw.slice(7).trim()} (${normalizedCategory})`;
+  }
+  return `${raw} (${normalizedCategory})`;
+}
+
 function getTemplateHmaItems(template: Template) {
   if (!Array.isArray(template.defaults.hmaItems)) return [];
   return template.defaults.hmaItems.map((item, idx) => {
@@ -605,6 +622,25 @@ export default function Page() {
   const getItemDirectionsForDisplay = useMemo(
     () => (item: RxItem) => getRxDirections(item, profile, weightKg, ageInfo.months, rxFormulationByItem[item.id]),
     [profile, weightKg, ageInfo.months, rxFormulationByItem]
+  );
+  const getSelectedFormulationLabel = useMemo(
+    () => (item: RxItem) => {
+      const options = item.peds?.formulations ?? [];
+      if (!options.length) return "";
+      const selected = rxFormulationByItem[item.id];
+      if (selected && options.some((opt) => opt.label === selected)) return selected;
+      return options[0].label;
+    },
+    [rxFormulationByItem]
+  );
+  const getMedicationDisplayTitle = useMemo(
+    () => (item: RxItem) => {
+      const base = item.title;
+      const formulation = formatFormulationLabel(getSelectedFormulationLabel(item));
+      const withFormulation = formulation ? `${base} ${formulation}` : base;
+      return item.brand ? `${withFormulation} (${item.brand})` : withFormulation;
+    },
+    [getSelectedFormulationLabel]
   );
 
   useEffect(() => {
@@ -1047,7 +1083,7 @@ export default function Page() {
       .map(([route, items]) => {
         const lines: string[] = [`USO ${route}:`];
         items.forEach((item, index) => {
-          const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+          const titleBrand = getMedicationDisplayTitle(item);
           const base = `${index + 1}. ${titleBrand}`;
           const dotsWidth = Math.max(2, 80 - base.length - item.qty.length - 2);
           const dotted = `${base} ${".".repeat(dotsWidth)} ${item.qty}`;
@@ -1063,7 +1099,7 @@ export default function Page() {
       });
 
     return routeBlocks.join("\n\n").trim();
-  }, [orderedSelectedRxIds, catalogMap, getItemDirectionsForDisplay]);
+  }, [orderedSelectedRxIds, catalogMap, getItemDirectionsForDisplay, getMedicationDisplayTitle]);
   
   const hmaParagraphs = useMemo(() => {
     if (!currentTemplate) return [];
@@ -2085,7 +2121,7 @@ function handlePrivacyContinue() {
                     <div style={{ fontWeight: 700, marginBottom: 6 }}>USO {group.route}:</div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                       {group.items.map((item, idx) => {
-                        const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+                        const titleBrand = getMedicationDisplayTitle(item);
                         return (
                           <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                             <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
@@ -2132,7 +2168,7 @@ function handlePrivacyContinue() {
                 <div style={{ fontWeight: 700, marginBottom: 6 }}>USO {group.route}:</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 14, lineHeight: 1.6 }}>
                   {group.items.map((item, idx) => {
-                    const titleBrand = item.brand ? `${item.title} (${item.brand})` : item.title;
+                    const titleBrand = getMedicationDisplayTitle(item);
                     return (
                       <div key={item.id} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                         <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
