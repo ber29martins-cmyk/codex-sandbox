@@ -83,6 +83,20 @@
       ]
     },
     {
+      "id": "antihistaminicos_ped",
+      "label": "Anti-histamínicos (PED)",
+      "itemIds": [
+        "desloratadina_ped_xarope",
+        "desloratadina_ped_gotas",
+        "dexclorfeniramina_ped_gotas",
+        "dexclorfeniramina_ped_xarope",
+        "fexofenadina_ped_susp",
+        "hidroxizina_ped_xarope",
+        "loratadina_ped_xarope",
+        "loratadina_ped_comp"
+      ]
+    },
+    {
       "id": "corticoides",
       "label": "Corticoides",
       "itemIds": [

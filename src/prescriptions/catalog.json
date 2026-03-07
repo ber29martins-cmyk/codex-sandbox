@@ -490,6 +490,189 @@
       }
     },
     {
+      "id": "desloratadina_ped_xarope",
+      "label": "Desloratadina pediátrica (xarope)",
+      "route": "ORAL",
+      "title": "Desloratadina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 24 em 24 horas por até 5 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 6,
+        "maxPerDoseMg": 5,
+        "maxDosesPerDay": 1,
+        "formulations": [
+          { "label": "xarope 0,5mg/mL", "mgPerMl": 0.5 }
+        ],
+        "notes": [
+          "6 meses a <5 anos: 1,25mg/dose",
+          "5 a <12 anos: 2,5mg/dose",
+          "a partir de 12 anos: 5mg/dose",
+          "dose maxima por vez: 10mL"
+        ]
+      }
+    },
+    {
+      "id": "desloratadina_ped_gotas",
+      "label": "Desloratadina pediátrica (gotas)",
+      "route": "ORAL",
+      "title": "Desloratadina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 24 em 24 horas por até 5 dias"
+      ],
+      "peds": {
+        "minAgeMonths": 6,
+        "maxPerDoseMg": 5,
+        "maxDosesPerDay": 1,
+        "formulations": [
+          { "label": "gotas 1,25mg/mL", "mgPerMl": 1.25 }
+        ],
+        "notes": [
+          "6 meses a <5 anos: 1,25mg/dose",
+          "5 a <12 anos: 2,5mg/dose",
+          "a partir de 12 anos: 5mg/dose",
+          "dose maxima por vez: 10mL"
+        ]
+      }
+    },
+    {
+      "id": "dexclorfeniramina_ped_gotas",
+      "label": "Dexclorfeniramina pediátrica (gotas)",
+      "route": "ORAL",
+      "title": "Dexclorfeniramina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 8 em 8 horas"
+      ],
+      "peds": {
+        "mgKg": { "min": 0.1667, "max": 0.1667 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 56,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "gotas 2,8mg/mL", "mgPerMl": 2.8 }
+        ],
+        "notes": [
+          "dose alvo: 0,5mg/kg/dia dividida em 3 tomadas",
+          "dose maxima por vez: 20mL"
+        ]
+      }
+    },
+    {
+      "id": "dexclorfeniramina_ped_xarope",
+      "label": "Dexclorfeniramina pediátrica (xarope)",
+      "route": "ORAL",
+      "title": "Dexclorfeniramina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 8 em 8 horas"
+      ],
+      "peds": {
+        "mgKg": { "min": 0.1, "max": 0.1 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 2,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "xarope 2mg/5mL", "mgPer5ml": 2 }
+        ],
+        "notes": [
+          "dose alvo: 0,3mg/kg/dia dividida em 3 tomadas",
+          "dose maxima por vez: 5mL"
+        ]
+      }
+    },
+    {
+      "id": "fexofenadina_ped_susp",
+      "label": "Fexofenadina pediátrica (suspensão)",
+      "route": "ORAL",
+      "title": "Fexofenadina",
+      "qty": "1 frasco",
+      "directions": [
+        "Administrar via oral de 12 em 12 horas"
+      ],
+      "peds": {
+        "minAgeMonths": 6,
+        "maxDosesPerDay": 2,
+        "formulations": [
+          { "label": "suspensao 6mg/mL", "mgPerMl": 6 }
+        ],
+        "notes": [
+          "6 meses a <2 anos: 15mg/dose",
+          "2 a 11 anos: 30mg/dose",
+          "a partir de 12 anos: 60mg de 12/12h ou 180mg 1x/dia",
+          "contraindicado abaixo de 6 meses"
+        ]
+      }
+    },
+    {
+      "id": "hidroxizina_ped_xarope",
+      "label": "Hidroxizina pediátrica (xarope)",
+      "route": "ORAL",
+      "title": "Hidroxizina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 8 em 8 horas por ate 10 dias"
+      ],
+      "peds": {
+        "mgKg": { "min": 0.7, "max": 0.7 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 25,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "xarope 2mg/mL", "mgPerMl": 2 }
+        ],
+        "notes": [
+          "dose maxima por vez: 12,5mL"
+        ]
+      }
+    },
+    {
+      "id": "loratadina_ped_xarope",
+      "label": "Loratadina pediátrica (xarope)",
+      "route": "ORAL",
+      "title": "Loratadina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral uma vez ao dia"
+      ],
+      "peds": {
+        "minAgeMonths": 24,
+        "maxPerDoseMg": 10,
+        "maxDosesPerDay": 1,
+        "formulations": [
+          { "label": "xarope 1mg/mL", "mgPerMl": 1 }
+        ],
+        "notes": [
+          "2 a 6 anos: 5mg/dia",
+          "a partir de 6 anos: 10mg/dia",
+          "dose maxima por vez: 10mL"
+        ]
+      }
+    },
+    {
+      "id": "loratadina_ped_comp",
+      "label": "Loratadina pediátrica (comprimido)",
+      "route": "ORAL",
+      "title": "Loratadina",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar 1 comprimido via oral 1 vez ao dia"
+      ],
+      "peds": {
+        "minAgeMonths": 72,
+        "maxPerDoseMg": 10,
+        "maxDosesPerDay": 1,
+        "formulations": [
+          { "label": "comprimido 10mg" }
+        ],
+        "notes": [
+          "indicado a partir de 6 anos"
+        ]
+      }
+    },
+    {
       "id": "prednisona_20mg_meticorten",
       "label": "Prednisona 20mg",
       "route": "ORAL",

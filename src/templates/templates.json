@@ -147,7 +147,7 @@
         { "id": "toxemia", "label": "Toxemia", "text": "Alteração de estado geral ou toxemia" }
       ],
       "hmaDefaults": ["febre", "otalgia", "irritabilidade", "orelha-direita"],
-      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
+      "rxGroups": ["antitermicos_ped", "antihistaminicos_ped", "lavagem_nasal"],
       "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
@@ -187,7 +187,7 @@
         { "id": "recusa-liquidos", "label": "Recusa líquidos", "text": "Recusa de líquidos" }
       ],
       "hmaDefaults": ["febre", "odinofagia", "disfagia"],
-      "rxGroups": ["antitermicos_ped", "lavagem_nasal"],
+      "rxGroups": ["antitermicos_ped", "antihistaminicos_ped", "lavagem_nasal"],
       "rxDefaults": ["paracetamol_ped", "soro_0_9_sorimax"]
     }
   },
