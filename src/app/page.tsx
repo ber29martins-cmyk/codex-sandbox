@@ -65,6 +65,7 @@ type RxItem = {
       minAgeMonths: number;
       maxAgeMonths?: number;
       doseMg: number;
+      doseMgMax?: number;
       intervalHours?: number;
       dosesPerDay?: number;
       note?: string;
@@ -295,8 +296,10 @@ function getRxDirections(
   } else if (!peds.ageBands?.length && (!weightKg || !peds.mgKg)) {
     extra.push("Tomar conforme peso (preencher peso para cálculo da dose).");
   } else if (ageBand) {
-    const doseMgRaw = ageBand.doseMg;
-    const doseMg = typeof peds.maxPerDoseMg === "number" ? Math.min(doseMgRaw, peds.maxPerDoseMg) : doseMgRaw;
+    const doseMgRawMin = ageBand.doseMg;
+    const doseMgRawMax = typeof ageBand.doseMgMax === "number" ? ageBand.doseMgMax : ageBand.doseMg;
+    const doseMgMin = typeof peds.maxPerDoseMg === "number" ? Math.min(doseMgRawMin, peds.maxPerDoseMg) : doseMgRawMin;
+    const doseMgMax = typeof peds.maxPerDoseMg === "number" ? Math.min(doseMgRawMax, peds.maxPerDoseMg) : doseMgRawMax;
     const intervalH =
       ageBand.intervalHours ?? peds.intervalHours?.min ?? peds.intervalHours?.max ?? (ageBand.dosesPerDay ? Math.floor(24 / ageBand.dosesPerDay) : null);
     if (Array.isArray(peds.formulations)) {
@@ -309,17 +312,17 @@ function getRxDirections(
         const mgPerMl =
           typeof form.mgPerMl === "number" ? form.mgPerMl : typeof form.mgPer5ml === "number" ? form.mgPer5ml / 5 : null;
         if (mgPerMl && mgPerMl > 0) {
-          const ml = doseMg / mgPerMl;
+          const mlMin = doseMgMin / mgPerMl;
+          const mlMax = doseMgMax / mgPerMl;
           if (lower.includes("gota")) {
-            const gotas = ml * 20;
-            const gotasTxt = formatDoseValue(gotas);
+            const gotasTxt = formatDoseRange(mlMin * 20, mlMax * 20, "gotas");
             extra.push(
-              `Tomar ${gotasTxt} gotas por dose (${formatDoseValue(doseMg)}mg/dose)${intervalH ? `, a cada ${intervalH} horas` : ""}.`
+              `Tomar ${gotasTxt} por dose (${formatDoseRange(doseMgMin, doseMgMax, "mg/dose")})${intervalH ? `, a cada ${intervalH} horas` : ""}.`
             );
           } else {
-            const mlTxt = formatDoseValue(ml);
+            const mlTxt = formatDoseRange(mlMin, mlMax, "mL");
             extra.push(
-              `Tomar ${mlTxt}mL por dose (${formatDoseValue(doseMg)}mg/dose)${intervalH ? `, a cada ${intervalH} horas` : ""}.`
+              `Tomar ${mlTxt} por dose (${formatDoseRange(doseMgMin, doseMgMax, "mg/dose")})${intervalH ? `, a cada ${intervalH} horas` : ""}.`
             );
           }
           return;
@@ -327,15 +330,14 @@ function getRxDirections(
         if (lower.includes("comprimido")) {
           const mgPerComp = parseMgPerUnitFromLabel(form.label);
           if (mgPerComp && mgPerComp > 0) {
-            const comp = doseMg / mgPerComp;
-            const compTxt = formatDoseValue(comp);
+            const compTxt = formatDoseRange(doseMgMin / mgPerComp, doseMgMax / mgPerComp, "comprimido(s)");
             extra.push(
-              `Tomar ${compTxt} comprimido(s) por dose (${formatDoseValue(doseMg)}mg/dose)${intervalH ? `, a cada ${intervalH} horas` : ""}.`
+              `Tomar ${compTxt} por dose (${formatDoseRange(doseMgMin, doseMgMax, "mg/dose")})${intervalH ? `, a cada ${intervalH} horas` : ""}.`
             );
             return;
           }
         }
-        extra.push(`Tomar ${formatDoseValue(doseMg)}mg por dose${intervalH ? `, a cada ${intervalH} horas` : ""}.`);
+        extra.push(`Tomar ${formatDoseRange(doseMgMin, doseMgMax, "mg")} por dose${intervalH ? `, a cada ${intervalH} horas` : ""}.`);
       });
     }
     if (ageBand.note) {

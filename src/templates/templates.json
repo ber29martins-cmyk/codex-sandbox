@@ -226,7 +226,7 @@
         { "id": "dor-abdominal", "label": "Dor abdominal", "text": "Dor abdominal associada" }
       ],
       "hmaDefaults": ["vomitos", "diarreia", "ingesta-liquidos", "apetite-reduzido"],
-      "rxGroups": ["sro", "antitermicos_ped"],
+      "rxGroups": ["sro", "antitermicos_ped", "antiemeticos_ped"],
       "rxDefaults": ["sro_sais_reidratacao_oral", "paracetamol_ped"]
     }
   },

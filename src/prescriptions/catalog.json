@@ -695,6 +695,203 @@
       }
     },
     {
+      "id": "bromoprida_ped_solucao",
+      "label": "Bromoprida pediátrica (solução oral)",
+      "route": "ORAL",
+      "title": "Bromoprida",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 8 em 8 horas"
+      ],
+      "peds": {
+        "mgKg": { "min": 0.1667, "max": 0.3333 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 10,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "solucao 1mg/mL", "mgPerMl": 1 }
+        ],
+        "notes": [
+          "dose alvo: 0,5 a 1mg/kg/dia dividida em 3 tomadas",
+          "dose maxima por vez: 10mL"
+        ]
+      }
+    },
+    {
+      "id": "bromoprida_ped_gotas",
+      "label": "Bromoprida pediátrica (gotas)",
+      "route": "ORAL",
+      "title": "Bromoprida",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 8 em 8 horas"
+      ],
+      "peds": {
+        "mgKg": { "min": 0.5, "max": 1 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 11.6,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "gotas 4mg/mL", "mgPerMl": 4 }
+        ],
+        "notes": [
+          "dose alvo: 0,5 a 1mg/kg/dose",
+          "dose maxima por vez: 58 gotas"
+        ]
+      }
+    },
+    {
+      "id": "escopolamina_ped_gotas",
+      "label": "Escopolamina pediátrica (gotas)",
+      "route": "ORAL",
+      "title": "Escopolamina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral, repetir 3 vezes ao dia"
+      ],
+      "peds": {
+        "ageBands": [
+          { "minAgeMonths": 0, "maxAgeMonths": 3, "doseMg": 1.5, "intervalHours": 8 },
+          { "minAgeMonths": 3, "maxAgeMonths": 12, "doseMg": 0.7, "intervalHours": 8 },
+          { "minAgeMonths": 12, "maxAgeMonths": 72, "doseMg": 0.4, "intervalHours": 8 },
+          { "minAgeMonths": 72, "doseMg": 10, "doseMgMax": 20, "intervalHours": 8 }
+        ],
+        "maxPerDoseMg": 20,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "gotas 10mg/mL", "mgPerMl": 10 }
+        ],
+        "notes": [
+          "ate 3 meses: 1,5mg/kg/dose",
+          "3 a 11 meses: 0,7mg/kg/dose",
+          "1 a 6 anos: 0,4mg/kg/dose",
+          "acima de 6 anos: 10 a 20mg/dose",
+          "dose maxima por vez: 2mL"
+        ]
+      }
+    },
+    {
+      "id": "escopolamina_ped_comp",
+      "label": "Escopolamina pediátrica (drágea)",
+      "route": "ORAL",
+      "title": "Escopolamina",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar via oral, repetir 3 vezes ao dia"
+      ],
+      "peds": {
+        "minAgeMonths": 72,
+        "ageBands": [
+          { "minAgeMonths": 72, "doseMg": 10, "doseMgMax": 20, "intervalHours": 8 }
+        ],
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "comprimido 10mg" }
+        ],
+        "notes": [
+          "indicado apenas para maiores de 6 anos",
+          "dose 10 a 20mg por dose",
+          "sem dose maxima estabelecida pelo fabricante"
+        ]
+      }
+    },
+    {
+      "id": "dimenidrinato_ped_gotas",
+      "label": "Dimenidrinato + piridoxina pediátrico (gotas)",
+      "route": "ORAL",
+      "title": "Dimenidrinato + piridoxina",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 6 em 6 horas"
+      ],
+      "peds": {
+        "mgKg": { "min": 1.25, "max": 1.25 },
+        "intervalHours": { "min": 6, "max": 6 },
+        "maxPerDoseMg": 75,
+        "maxDosesPerDay": 4,
+        "formulations": [
+          { "label": "gotas 25mg/mL + 5mg/mL", "mgPerMl": 25 }
+        ],
+        "notes": [
+          "dose alvo: 1 gota/kg/dose",
+          "dose maxima por vez: 60 gotas"
+        ]
+      }
+    },
+    {
+      "id": "metoclopramida_ped_gotas",
+      "label": "Metoclopramida pediátrica (gotas)",
+      "route": "ORAL",
+      "title": "Metoclopramida",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 6 em 6 horas ou de 8 em 8 horas"
+      ],
+      "peds": {
+        "mgKg": { "min": 0.1, "max": 0.2 },
+        "intervalHours": { "min": 6, "max": 8 },
+        "maxPerDoseMg": 10.4,
+        "maxDosesPerDay": 4,
+        "formulations": [
+          { "label": "gotas 4mg/mL", "mgPerMl": 4 }
+        ],
+        "notes": [
+          "dose alvo: 0,5 a 1 gota/kg/dose",
+          "dose maxima por vez: 52 gotas"
+        ]
+      }
+    },
+    {
+      "id": "ondansetrona_ped_solucao",
+      "label": "Ondansetrona pediátrica (solução oral)",
+      "route": "ORAL",
+      "title": "Ondansetrona",
+      "qty": "1 frasco",
+      "directions": [
+        "Tomar via oral de 8 em 8 horas"
+      ],
+      "peds": {
+        "minAgeMonths": 24,
+        "mgKg": { "min": 0.2, "max": 0.2 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 8,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "solucao 4mg/5mL", "mgPer5ml": 4 }
+        ],
+        "notes": [
+          "dose alvo: 0,2mg/kg/dose",
+          "dose maxima por dose: 8mg",
+          "nao recomendado para menores de 2 anos"
+        ]
+      }
+    },
+    {
+      "id": "ondansetrona_ped_orodisp",
+      "label": "Ondansetrona pediátrica (orodispersível)",
+      "route": "ORAL",
+      "title": "Ondansetrona",
+      "qty": "1 caixa",
+      "directions": [
+        "Tomar via oral/sublingual de 8 em 8 horas"
+      ],
+      "peds": {
+        "minAgeMonths": 24,
+        "mgKg": { "min": 0.2, "max": 0.2 },
+        "intervalHours": { "min": 8, "max": 8 },
+        "maxPerDoseMg": 8,
+        "maxDosesPerDay": 3,
+        "formulations": [
+          { "label": "comprimido 4mg orodispersivel" }
+        ],
+        "notes": [
+          "dose alvo: 0,2mg/kg/dose",
+          "dose maxima por dose: 2 comprimidos",
+          "nao recomendado para menores de 2 anos"
+        ]
+      }
+    },
+    {
       "id": "prednisona_20mg_meticorten",
       "label": "Prednisona 20mg",
       "route": "ORAL",
