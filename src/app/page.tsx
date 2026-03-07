@@ -329,6 +329,13 @@ function formatList(items: string[]) {
   return `${items.slice(0, -1).join(", ")} e ${last}`;
 }
 
+function buildPresentNarrative(labels: string[]) {
+  if (!labels.length) return "";
+  if (labels.length === 1) return `Refere ${labels[0]}.`;
+  const [first, ...rest] = labels;
+  return `Refere ${first}, associado a ${formatList(rest)}.`;
+}
+
 function getTemplateHmaItems(template: Template) {
   if (!Array.isArray(template.defaults.hmaItems)) return [];
   return template.defaults.hmaItems.map((item, idx) => {
@@ -1062,7 +1069,8 @@ export default function Page() {
       : "";
 
     const paragraphs = [];
-    if (presentLabels.length) paragraphs.push(formatParagraph([`Refere ${formatList(presentLabels)}`]));
+    const presentNarrative = buildPresentNarrative(presentLabels);
+    if (presentNarrative) paragraphs.push(presentNarrative);
     if (negLabels.length) paragraphs.push(formatParagraph([`Nega ${formatList(negLabels)}`]));
     if (freeParagraph) paragraphs.push(freeParagraph);
     return paragraphs;
