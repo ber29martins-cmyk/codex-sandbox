@@ -97,6 +97,12 @@ type RxItem = {
   };
 };
 type RxGroup = { id: string; label: string; itemIds: string[] };
+type RxSelectionOption = {
+  key: string;
+  title: string;
+  route: string;
+  itemIds: string[];
+};
 
 const ALARM_STATUS_ORDER: AlarmStatus[] = ["unknown", "nega", "presente"];
 const ALARM_STATUS_LABELS: Record<AlarmStatus, string> = {
@@ -558,6 +564,16 @@ function formatFormulationLabel(label: string) {
     return `${raw.slice(7).trim()} (${normalizedCategory})`;
   }
   return `${raw} (${normalizedCategory})`;
+}
+
+function getItemPresentationLabel(item: RxItem) {
+  const primaryFormulation = item.peds?.formulations?.[0]?.label;
+  if (primaryFormulation) {
+    return formatFormulationLabel(primaryFormulation);
+  }
+  const match = item.label.match(/\(([^)]+)\)/);
+  if (match?.[1]) return match[1];
+  return item.label;
 }
 
 function getTemplateHmaItems(template: Template) {
@@ -1189,6 +1205,32 @@ export default function Page() {
     if (!currentTemplate) return [];
     return (currentTemplate.defaults.rxGroups ?? []).map((id) => RX_GROUP_MAP[id] ?? { id, label: id, itemIds: [] });
   }, [currentTemplate]);
+  const rxSelectionOptionsByGroup = useMemo(() => {
+    const grouped: Record<string, RxSelectionOption[]> = {};
+    for (const group of templateRxGroups) {
+      const opts: RxSelectionOption[] = [];
+      const familyIndex = new Map<string, number>();
+      for (const itemId of group.itemIds ?? []) {
+        const item = catalogMap[itemId];
+        if (!item) continue;
+        const familyKey = profile === "pediatria" ? `${item.title}|${item.route}` : item.id;
+        const existingIdx = familyIndex.get(familyKey);
+        if (existingIdx === undefined) {
+          familyIndex.set(familyKey, opts.length);
+          opts.push({
+            key: familyKey,
+            title: item.title,
+            route: item.route,
+            itemIds: [itemId]
+          });
+        } else {
+          opts[existingIdx].itemIds.push(itemId);
+        }
+      }
+      grouped[group.id] = opts;
+    }
+    return grouped;
+  }, [templateRxGroups, catalogMap, profile]);
   const prescribedClasses = useMemo(() => {
     if (!rxSelected.length) return [];
     const sel = new Set(rxSelected);
@@ -1769,22 +1811,50 @@ function handlePrivacyContinue() {
     }, 120);
   }
 
-  function handleToggleRx(id: string) {
+  function getSelectedIdInFamily(itemIds: string[]) {
+    return itemIds.find((id) => rxSelected.includes(id));
+  }
+
+  function handleToggleRxFamily(itemIds: string[]) {
+    if (!itemIds.length) return;
+    const selectedInFamily = getSelectedIdInFamily(itemIds);
+    if (selectedInFamily) {
+      setRxSelected((prev) => prev.filter((id) => !itemIds.includes(id)));
+      setRxFormulationByItem((map) => {
+        const next = { ...map };
+        itemIds.forEach((id) => delete next[id]);
+        return next;
+      });
+      setRxRegimenByItem((map) => {
+        const next = { ...map };
+        itemIds.forEach((id) => delete next[id]);
+        return next;
+      });
+      return;
+    }
+    const defaultId = itemIds[0];
+    setRxSelected((prev) => [...prev.filter((id) => !itemIds.includes(id)), defaultId]);
+  }
+
+  function handleSelectRxPresentation(itemIds: string[], selectedId: string) {
+    if (!itemIds.includes(selectedId)) return;
     setRxSelected((prev) => {
-      if (prev.includes(id)) {
-        setRxFormulationByItem((map) => {
-          const next = { ...map };
-          delete next[id];
-          return next;
-        });
-        setRxRegimenByItem((map) => {
-          const next = { ...map };
-          delete next[id];
-          return next;
-        });
-        return prev.filter((rx) => rx !== id);
-      }
-      return [...prev, id];
+      const next = prev.filter((id) => !itemIds.includes(id));
+      return [...next, selectedId];
+    });
+    setRxFormulationByItem((map) => {
+      const next = { ...map };
+      itemIds.forEach((id) => {
+        if (id !== selectedId) delete next[id];
+      });
+      return next;
+    });
+    setRxRegimenByItem((map) => {
+      const next = { ...map };
+      itemIds.forEach((id) => {
+        if (id !== selectedId) delete next[id];
+      });
+      return next;
     });
   }
 
@@ -2238,32 +2308,55 @@ function handlePrivacyContinue() {
               <div key={group.id} style={{ marginBottom: 12 }}>
                 <div style={{ fontWeight: 500, marginBottom: 6 }}>{group.label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  {group.itemIds.map((itemId) => {
-                    const item = catalogMap[itemId];
+                  {(rxSelectionOptionsByGroup[group.id] ?? []).map((option) => {
+                    const selectedId = getSelectedIdInFamily(option.itemIds);
+                    const checked = Boolean(selectedId);
+                    const activeItemId = selectedId ?? option.itemIds[0];
+                    const item = catalogMap[activeItemId];
                     if (!item) return null;
-                    const label = item?.label ?? itemId;
-                    const route = item?.route ? `(${item.route})` : "";
-                    const checked = rxSelected.includes(itemId);
+                    const label = option.title;
+                    const route = option.route ? `(${option.route})` : "";
                     const formulations = item.peds?.formulations ?? [];
                     const regimens = item.peds?.regimens ?? [];
+                    const hasMultiplePresentations = option.itemIds.length > 1;
                     return (
-                      <div key={itemId} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      <div key={option.key} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                         <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                          <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
+                          <input type="checkbox" checked={checked} onChange={() => handleToggleRxFamily(option.itemIds)} />
                           <span>
                             {label}{" "}
                             {route ? <span style={{ color: "#666", fontSize: 12 }}>{route}</span> : null}
                           </span>
                         </label>
-                        {checked && formulations.length > 0 && (
+                        {checked && hasMultiplePresentations && (
                           <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 24 }}>
                             <span style={{ fontSize: 12, color: "#475569" }}>Apresentação:</span>
                             <select
-                              value={rxFormulationByItem[itemId] ?? formulations[0].label}
+                              value={activeItemId}
+                              onChange={(e) => handleSelectRxPresentation(option.itemIds, e.target.value)}
+                              style={{ border: "1px solid #d1d5db", borderRadius: 6, padding: "4px 8px", fontSize: 12 }}
+                            >
+                              {option.itemIds.map((familyId) => {
+                                const familyItem = catalogMap[familyId];
+                                if (!familyItem) return null;
+                                return (
+                                  <option key={familyId} value={familyId}>
+                                    {getItemPresentationLabel(familyItem)}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+                        )}
+                        {checked && !hasMultiplePresentations && formulations.length > 0 && (
+                          <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 24 }}>
+                            <span style={{ fontSize: 12, color: "#475569" }}>Apresentação:</span>
+                            <select
+                              value={rxFormulationByItem[activeItemId] ?? formulations[0].label}
                               onChange={(e) =>
                                 setRxFormulationByItem((prev) => ({
                                   ...prev,
-                                  [itemId]: e.target.value
+                                  [activeItemId]: e.target.value
                                 }))
                               }
                               style={{ border: "1px solid #d1d5db", borderRadius: 6, padding: "4px 8px", fontSize: 12 }}
@@ -2280,11 +2373,11 @@ function handlePrivacyContinue() {
                           <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 24 }}>
                             <span style={{ fontSize: 12, color: "#475569" }}>Regime:</span>
                             <select
-                              value={rxRegimenByItem[itemId] ?? regimens[0].id}
+                              value={rxRegimenByItem[activeItemId] ?? regimens[0].id}
                               onChange={(e) =>
                                 setRxRegimenByItem((prev) => ({
                                   ...prev,
-                                  [itemId]: e.target.value
+                                  [activeItemId]: e.target.value
                                 }))
                               }
                               style={{ border: "1px solid #d1d5db", borderRadius: 6, padding: "4px 8px", fontSize: 12 }}
