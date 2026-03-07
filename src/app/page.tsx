@@ -37,6 +37,7 @@ type TemplateState = {
   condutaAlarmes: string;
   alarmStates: AlarmStateMap;
   rxSelected: string[];
+  rxFormulationByItem?: Record<string, string>;
   triagem: boolean;
   pa: string;
   fc: string;
@@ -241,7 +242,8 @@ function getRxDirections(
   item: RxItem,
   profile: "adulto" | "pediatria",
   weightKg: number | null,
-  ageMonths: number | null
+  ageMonths: number | null,
+  selectedFormulationLabel?: string
 ) {
   const base = [...(item.directions ?? [])];
   if (profile !== "pediatria" || !item.peds) return base;
@@ -265,7 +267,11 @@ function getRxDirections(
       ? `, a cada ${peds.intervalHours.min}-${peds.intervalHours.max} horas`
       : "";
     if (Array.isArray(peds.formulations)) {
-      peds.formulations.forEach((form) => {
+      const selected = selectedFormulationLabel?.trim().toLowerCase();
+      const forms = selected
+        ? peds.formulations.filter((form) => form.label.trim().toLowerCase() === selected)
+        : peds.formulations.slice(0, 1);
+      forms.forEach((form) => {
         const mgPerMl =
           typeof form.mgPerMl === "number" ? form.mgPerMl : typeof form.mgPer5ml === "number" ? form.mgPer5ml / 5 : null;
         if (!mgPerMl || mgPerMl <= 0) return;
@@ -336,6 +342,13 @@ function buildPresentNarrative(labels: string[]) {
   return `Refere ${first}, associado a ${formatList(rest)}.`;
 }
 
+function getFormulationCategory(label: string) {
+  const lower = String(label || "").toLowerCase();
+  if (lower.includes("gota")) return "Gotas";
+  if (lower.includes("susp") || lower.includes("xarope")) return "Xarope";
+  return "Comprimido";
+}
+
 function getTemplateHmaItems(template: Template) {
   if (!Array.isArray(template.defaults.hmaItems)) return [];
   return template.defaults.hmaItems.map((item, idx) => {
@@ -369,6 +382,7 @@ function buildTemplateDefaults(template: Template): TemplateState {
     condutaAlarmes: template.defaults.condutaAlarmes ?? "Retorno imediato se sinais de alarme ou piora do quadro",
     alarmStates: buildDefaultAlarmStates(template),
     rxSelected: template.defaults.rxDefaults ?? [],
+    rxFormulationByItem: {},
     triagem: true,
     pa: "",
     fc: "",
@@ -529,6 +543,7 @@ export default function Page() {
   const [alergiaTexto, setAlergiaTexto] = useState("");
   const [alarmStates, setAlarmStates] = useState<AlarmStateMap>({});
   const [rxSelected, setRxSelected] = useState<string[]>([]);
+  const [rxFormulationByItem, setRxFormulationByItem] = useState<Record<string, string>>({});
   const [hmaStates, setHmaStates] = useState<HmaStateMap>({});
   const [hmaFreeText, setHmaFreeText] = useState("");
   const [hmaFreeOpen, setHmaFreeOpen] = useState(false);
@@ -588,8 +603,8 @@ export default function Page() {
   const ageInfo = useMemo(() => parseAgeMonths(patientAge), [patientAge]);
   const weightKg = useMemo(() => parseWeightKg(patientWeight), [patientWeight]);
   const getItemDirectionsForDisplay = useMemo(
-    () => (item: RxItem) => getRxDirections(item, profile, weightKg, ageInfo.months),
-    [profile, weightKg, ageInfo.months]
+    () => (item: RxItem) => getRxDirections(item, profile, weightKg, ageInfo.months, rxFormulationByItem[item.id]),
+    [profile, weightKg, ageInfo.months, rxFormulationByItem]
   );
 
   useEffect(() => {
@@ -820,6 +835,7 @@ export default function Page() {
     setAlergiaTexto(templateState.alergiaTexto ?? "");
     const kit = rxKitsRef.current[templateId];
     setRxSelected(kit ?? currentTemplate.defaults.rxDefaults ?? []);
+    setRxFormulationByItem(templateState.rxFormulationByItem ?? {});
     isApplyingTemplate.current = false;
   }, [templateId, currentTemplate]);
 
@@ -845,6 +861,7 @@ export default function Page() {
       condutaAlarmes,
       alarmStates,
       rxSelected,
+      rxFormulationByItem,
       triagem,
       pa,
       fc,
@@ -881,6 +898,7 @@ export default function Page() {
     condutaAlarmes,
     alarmStates,
     rxSelected,
+    rxFormulationByItem,
     triagem,
     pa,
     fc,
@@ -1407,6 +1425,7 @@ function handlePrivacyContinue() {
     setExameLivre(defaults.exameLivre ?? "");
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
+    setRxFormulationByItem(defaults.rxFormulationByItem ?? {});
     setTriagem(defaults.triagem);
     setPa(defaults.pa);
     setFc(defaults.fc);
@@ -1474,6 +1493,7 @@ function handlePrivacyContinue() {
     setExameLivre(defaults.exameLivre ?? "");
     setAlarmStates(defaults.alarmStates);
     setRxSelected(defaults.rxSelected);
+    setRxFormulationByItem(defaults.rxFormulationByItem ?? {});
     setTriagem(defaults.triagem);
     setPa(defaults.pa);
     setFc(defaults.fc);
@@ -1513,6 +1533,11 @@ function handlePrivacyContinue() {
   function handleToggleRx(id: string) {
     setRxSelected((prev) => {
       if (prev.includes(id)) {
+        setRxFormulationByItem((map) => {
+          const next = { ...map };
+          delete next[id];
+          return next;
+        });
         return prev.filter((rx) => rx !== id);
       }
       return [...prev, id];
@@ -1546,6 +1571,7 @@ function handlePrivacyContinue() {
 
   function handleClearRxSelection() {
     setRxSelected([]);
+    setRxFormulationByItem({});
   }
 
   function handleToggleHmaChip(opt: string) {
@@ -1973,14 +1999,38 @@ function handlePrivacyContinue() {
                     const label = item?.label ?? itemId;
                     const route = item?.route ? `(${item.route})` : "";
                     const checked = rxSelected.includes(itemId);
+                    const formulations = item.peds?.formulations ?? [];
                     return (
-                      <label key={itemId} style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                        <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
-                        <span>
-                          {label}{" "}
-                          {route ? <span style={{ color: "#666", fontSize: 12 }}>{route}</span> : null}
-                        </span>
-                      </label>
+                      <div key={itemId} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                        <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                          <input type="checkbox" checked={checked} onChange={() => handleToggleRx(itemId)} />
+                          <span>
+                            {label}{" "}
+                            {route ? <span style={{ color: "#666", fontSize: 12 }}>{route}</span> : null}
+                          </span>
+                        </label>
+                        {checked && formulations.length > 0 && (
+                          <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 24 }}>
+                            <span style={{ fontSize: 12, color: "#475569" }}>Apresentação:</span>
+                            <select
+                              value={rxFormulationByItem[itemId] ?? formulations[0].label}
+                              onChange={(e) =>
+                                setRxFormulationByItem((prev) => ({
+                                  ...prev,
+                                  [itemId]: e.target.value
+                                }))
+                              }
+                              style={{ border: "1px solid #d1d5db", borderRadius: 6, padding: "4px 8px", fontSize: 12 }}
+                            >
+                              {formulations.map((form) => (
+                                <option key={form.label} value={form.label}>
+                                  {getFormulationCategory(form.label)} - {form.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+                      </div>
                     );
                   })}
                 </div>

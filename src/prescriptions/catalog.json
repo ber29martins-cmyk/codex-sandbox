@@ -419,9 +419,9 @@
     },
     {
       "id": "paracetamol_ped",
-      "label": "paracetamol (ped)",
+      "label": "Paracetamol pediátrico",
       "route": "ORAL",
-      "title": "ANTITÉRMICO (PED)",
+      "title": "Paracetamol",
       "qty": "1 frasco",
       "directions": [
         "tomar conforme peso (calculado no sistema)"
@@ -442,9 +442,9 @@
     },
     {
       "id": "ibuprofeno_ped",
-      "label": "ibuprofeno (ped)",
+      "label": "Ibuprofeno pediátrico",
       "route": "ORAL",
-      "title": "ANTITÉRMICO (PED)",
+      "title": "Ibuprofeno",
       "qty": "1 frasco",
       "directions": [
         "tomar conforme peso (calculado no sistema)"
