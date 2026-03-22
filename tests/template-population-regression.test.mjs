@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import templatesData from '../src/templates/templates.json' with { type: 'json' };
+import { getProfileContextLabel, getProfileDisplayName, getProfileSwitchFeedback } from '../src/lib/profileUi.ts';
 
 const templates = templatesData.templates ?? [];
 
@@ -14,9 +15,6 @@ const byPopulation = (profile) => templates.filter((template) => isTemplateIdCom
 const reconcileTemplateIdOnPopulationChange = (currentTemplateId, nextProfile) => {
   return isTemplateIdCompatibleWithProfile(currentTemplateId, nextProfile) ? currentTemplateId : '';
 };
-const getProfileDisplayName = (profile) => (profile === 'pediatria' ? 'Pediatria' : 'Adulto');
-const getProfileContextLabel = (profile) => (profile === 'pediatria' ? 'Contexto ativo: Pediatria' : 'Contexto ativo: Adulto');
-const getProfileSwitchFeedback = (profile) => `Perfil alterado para ${getProfileDisplayName(profile)}`;
 const normalize = (value) =>
   String(value ?? '')
     .normalize('NFD')

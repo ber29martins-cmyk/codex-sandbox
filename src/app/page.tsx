@@ -152,18 +152,6 @@ function isTemplateIdCompatibleWithProfile(id: string, profile: "adulto" | "pedi
   return profile === "pediatria" ? isPediatricTemplate : !isPediatricTemplate;
 }
 
-function getProfileDisplayName(profile: "adulto" | "pediatria") {
-  return profile === "pediatria" ? "Pediatria" : "Adulto";
-}
-
-function getProfileContextLabel(profile: "adulto" | "pediatria") {
-  return `Contexto ativo: ${getProfileDisplayName(profile)}`;
-}
-
-function getProfileSwitchFeedback(profile: "adulto" | "pediatria") {
-  return `Perfil alterado para ${getProfileDisplayName(profile)}`;
-}
-
 function shortenLabel(text: string, maxLen = 42) {
   const clean = text.replace(/^Refere\s+/i, "").replace(/^Nega\s+/i, "").trim();
   if (clean.length <= maxLen) return clean;
@@ -648,6 +636,13 @@ import templatesData from "../templates/templates.json";
 import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
 import { getBetaAccessValidationError } from "../lib/betaAccessForm";
+import {
+  getProfileContextLabel,
+  getProfileDisplayName,
+  getProfileSegmentStyle,
+  getProfileSwitchFeedback,
+  PROFILE_UI_TOKENS
+} from "../lib/profileUi";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
 const INITIAL_DEFAULTS = INITIAL_TEMPLATE ? buildTemplateDefaults(INITIAL_TEMPLATE) : null;
@@ -1594,6 +1589,7 @@ function handlePrivacyContinue() {
             <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               Código de acesso
               <input
+                className="ux-focus-control"
                 value={betaInput}
                 onChange={(e) => setBetaInput(e.target.value)}
                 placeholder="PLANTAO-XXXX-YYYY"
@@ -1604,6 +1600,7 @@ function handlePrivacyContinue() {
             <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               E-mail profissional
               <input
+                className="ux-focus-control"
                 value={betaEmail}
                 onChange={(e) => setBetaEmail(e.target.value)}
                 placeholder="email@exemplo.com"
@@ -1615,6 +1612,7 @@ function handlePrivacyContinue() {
             <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               Nome para identificação (opcional)
               <input
+                className="ux-focus-control"
                 value={betaNameInput}
                 onChange={(e) => setBetaNameInput(e.target.value)}
                 placeholder="Seu nome"
@@ -1624,6 +1622,7 @@ function handlePrivacyContinue() {
             </label>
             <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#1f2937" }}>
               <input
+                className="ux-focus-control"
                 type="checkbox"
                 checked={rememberDevice}
                 onChange={(e) => setRememberDevice(e.target.checked)}
@@ -1635,6 +1634,7 @@ function handlePrivacyContinue() {
           </div>
           <button
             type="button"
+            className="ux-focus-control"
             onClick={validateBeta}
             disabled={betaBusy}
             style={{
@@ -1976,53 +1976,42 @@ function handlePrivacyContinue() {
           </div>
           <div style={{ fontSize: 14, color: "#475569" }}>Escolha a queixa, marque os chips e gere a evolução em segundos</div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginTop: 10 }}>
-            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <label
-                style={{
-                  display: "flex",
-                  gap: 6,
-                  alignItems: "center",
-                  fontSize: 14,
-                  color: "#0f172a",
-                  borderRadius: 999,
-                  border: profile === "adulto" ? "1px solid #1d4ed8" : "1px solid #d1d5db",
-                  background: profile === "adulto" ? "#eff6ff" : "#ffffff",
-                  padding: "6px 10px",
-                  fontWeight: profile === "adulto" ? 700 : 500
-                }}
-              >
-                <input
-                  type="radio"
-                  name="profile"
-                  value="adulto"
-                  checked={profile === "adulto"}
-                  onChange={() => handleProfileChange("adulto")}
-                />
-                Adulto
-              </label>
-              <label
-                style={{
-                  display: "flex",
-                  gap: 6,
-                  alignItems: "center",
-                  fontSize: 14,
-                  color: "#0f172a",
-                  borderRadius: 999,
-                  border: profile === "pediatria" ? "1px solid #1d4ed8" : "1px solid #d1d5db",
-                  background: profile === "pediatria" ? "#eff6ff" : "#ffffff",
-                  padding: "6px 10px",
-                  fontWeight: profile === "pediatria" ? 700 : 500
-                }}
-              >
-                <input
-                  type="radio"
-                  name="profile"
-                  value="pediatria"
-                  checked={profile === "pediatria"}
-                  onChange={() => handleProfileChange("pediatria")}
-                />
-                Pediatria
-              </label>
+            <div
+              role="group"
+              aria-label="Perfil do paciente"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                borderRadius: 10,
+                border: `1px solid ${PROFILE_UI_TOKENS.inactiveBorder}`,
+                overflow: "hidden",
+                background: "#ffffff"
+              }}
+            >
+              {(["adulto", "pediatria"] as const).map((option) => {
+                const segmentStyle = getProfileSegmentStyle(profile, option);
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    className="ux-focus-control"
+                    onClick={() => handleProfileChange(option)}
+                    aria-pressed={profile === option}
+                    style={{
+                      padding: "6px 12px",
+                      border: "1px solid",
+                      borderColor: segmentStyle.borderColor,
+                      background: segmentStyle.background,
+                      color: segmentStyle.color,
+                      fontSize: 14,
+                      fontWeight: segmentStyle.fontWeight,
+                      cursor: "pointer"
+                    }}
+                  >
+                    {getProfileDisplayName(option)}
+                  </button>
+                );
+              })}
             </div>
             <div role="status" aria-live="polite" style={{ fontSize: 12, color: "#1e293b", fontWeight: 600 }}>
               {getProfileContextLabel(profile)}
@@ -2032,6 +2021,7 @@ function handlePrivacyContinue() {
                 <label style={{ fontSize: 13, color: "#0f172a" }}>
                   Idade
                   <input
+                    className="ux-focus-control"
                     value={patientAge}
                     onChange={(e) => setPatientAge(e.target.value)}
                     placeholder="anos"
@@ -2041,6 +2031,7 @@ function handlePrivacyContinue() {
                 <label style={{ fontSize: 13, color: "#0f172a" }}>
                   Peso
                   <input
+                    className="ux-focus-control"
                     value={patientWeight}
                     onChange={(e) => setPatientWeight(e.target.value)}
                     placeholder="kg"
@@ -2084,6 +2075,7 @@ function handlePrivacyContinue() {
                   if (d) setAtestadoCid(d);
                 }}
                 style={{ width: "100%" }}
+                className="ux-focus-control"
               >
                 {availableTemplates.map((t) => (
                   <option key={t.id} value={t.id}>
