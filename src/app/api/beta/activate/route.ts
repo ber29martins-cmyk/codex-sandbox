@@ -1,27 +1,41 @@
 import { kv } from "@vercel/kv";
 import { NextResponse } from "next/server";
 import { isCodeValid } from "../../../../beta/access";
-import { betaBindingKey, BetaBinding, hashEmail, isEmailValid, isKvConfigured, normalizeEmail } from "../../../../lib/betaBinding";
+import {
+  betaBindingKey,
+  BetaBinding,
+  hashEmail,
+  isEmailValid,
+  isKvConfigured,
+  normalizeEmail,
+  shouldBypassBetaAuthWhenKvUnavailable
+} from "../../../../lib/betaBinding";
 import { rateLimit } from "../../../../lib/rateLimit";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  if (!isKvConfigured()) {
+  const kvConfigured = isKvConfigured();
+  if (!kvConfigured && !shouldBypassBetaAuthWhenKvUnavailable()) {
     return NextResponse.json({ ok: false, reason: "kv_not_configured" }, { status: 500 });
   }
 
   try {
     const body = await request.json();
+    const code = typeof body?.code === "string" ? body.code.trim() : "";
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    const rawEmail = typeof body?.email === "string" ? body.email : "";
+    const email = normalizeEmail(rawEmail);
+
+    if (!kvConfigured && shouldBypassBetaAuthWhenKvUnavailable()) {
+      return NextResponse.json({ ok: true, label: "dev_bypass", emailHash: hashEmail(email || "dev-bypass@local") }, { status: 200 });
+    }
+
     const rl = await rateLimit(`rl:activate:${ip}`, 10, 60);
     if (!rl.allowed) {
       return NextResponse.json({ ok: false, reason: "rate_limited" }, { status: 429 });
     }
 
-    const code = typeof body?.code === "string" ? body.code.trim() : "";
-    const rawEmail = typeof body?.email === "string" ? body.email : "";
-    const email = normalizeEmail(rawEmail);
     const validation = await isCodeValid(code);
     if (!validation.ok) return NextResponse.json(validation, { status: 400 });
     if (!isEmailValid(email)) return NextResponse.json({ ok: false, reason: "invalid_email" }, { status: 400 });

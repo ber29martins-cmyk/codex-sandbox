@@ -1,14 +1,18 @@
 import { kv } from "@vercel/kv";
 import { NextResponse } from "next/server";
 import { isCodeValid } from "../../../../beta/access";
-import { betaBindingKey, BetaBinding, isKvConfigured } from "../../../../lib/betaBinding";
+import { betaBindingKey, BetaBinding, isKvConfigured, shouldBypassBetaAuthWhenKvUnavailable } from "../../../../lib/betaBinding";
 import { rateLimit } from "../../../../lib/rateLimit";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  if (!isKvConfigured()) {
+  const kvConfigured = isKvConfigured();
+  if (!kvConfigured && !shouldBypassBetaAuthWhenKvUnavailable()) {
     return NextResponse.json({ ok: false, reason: "kv_not_configured" }, { status: 500 });
+  }
+  if (!kvConfigured && shouldBypassBetaAuthWhenKvUnavailable()) {
+    return NextResponse.json({ ok: true, label: "dev_bypass" }, { status: 200 });
   }
 
   try {

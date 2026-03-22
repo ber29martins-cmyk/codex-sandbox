@@ -10,6 +10,29 @@ export function isKvConfigured() {
   return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
 }
 
+export function isDevAuthBypassEnabled() {
+  const rawFlag = (process.env.BETA_AUTH_DEV_BYPASS ?? "").trim().toLowerCase();
+  const bypassRequested = rawFlag === "1" || rawFlag === "true";
+  if (!bypassRequested) return false;
+
+  const nodeEnv = (process.env.NODE_ENV ?? "").trim().toLowerCase();
+  const vercelEnv = (process.env.VERCEL_ENV ?? "").trim().toLowerCase();
+  const appEnv = (process.env.APP_ENV ?? process.env.ENVIRONMENT ?? "").trim().toLowerCase();
+  const isProdOrStaging =
+    nodeEnv === "production" ||
+    vercelEnv === "production" ||
+    vercelEnv === "preview" ||
+    appEnv === "production" ||
+    appEnv === "staging" ||
+    appEnv === "preview";
+
+  return !isProdOrStaging;
+}
+
+export function shouldBypassBetaAuthWhenKvUnavailable() {
+  return !isKvConfigured() && isDevAuthBypassEnabled();
+}
+
 export function normalizeEmail(input: string) {
   return (input || "").trim().toLowerCase();
 }
