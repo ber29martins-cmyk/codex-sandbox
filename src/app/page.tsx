@@ -2140,9 +2140,10 @@ function handlePrivacyContinue() {
                       <button
                         key={opt.id}
                         type="button"
+                        className="ui-chip"
                         onClick={() => handleToggleHmaChip(opt.id)}
                         style={{
-                          borderRadius: 999,
+                          borderRadius: 8,
                           padding: "8px 12px",
                           border: `1px solid ${ALARM_STATUS_STYLES[status].border}`,
                           background: ALARM_STATUS_STYLES[status].background,
@@ -2230,6 +2231,7 @@ function handlePrivacyContinue() {
                     <button
                       key={item.id}
                       type="button"
+                      className="ui-chip"
                       onClick={() =>
                         setAlarmStates((prev) => {
                           const current = prev[item.id] ?? "unknown";
@@ -2238,7 +2240,7 @@ function handlePrivacyContinue() {
                         })
                       }
                       style={{
-                        borderRadius: 999,
+                        borderRadius: 8,
                         padding: "10px 14px",
                         border: `1px solid ${ALARM_STATUS_STYLES[status].border}`,
                         background: ALARM_STATUS_STYLES[status].background,
@@ -2274,13 +2276,14 @@ function handlePrivacyContinue() {
                   <button
                     key={opt.id}
                     type="button"
+                    className="ui-chip"
                     onClick={() =>
                       setComorbSelected((prev) =>
                         prev.includes(opt.id) ? prev.filter((id) => id !== opt.id) : [...prev, opt.id]
                       )
                     }
                     style={{
-                      borderRadius: 999,
+                      borderRadius: 8,
                       padding: "8px 12px",
                       border: `1px solid ${active ? "#2563eb" : "#d1d5db"}`,
                       background: active ? "#e0ebff" : "#fff",
@@ -2361,11 +2364,12 @@ function handlePrivacyContinue() {
           {workspaceContextBadges.map((badge) => (
             <span
               key={badge}
+              className="ui-chip"
               style={{
                 fontSize: 12,
                 color: "#334155",
                 border: "1px solid #cbd5e1",
-                borderRadius: 999,
+                borderRadius: 8,
                 padding: "4px 10px",
                 background: "#f8fafc"
               }}

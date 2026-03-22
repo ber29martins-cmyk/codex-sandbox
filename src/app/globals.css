@@ -17,6 +17,9 @@
   --ui-focus-border: #2563eb;
   --ui-shadow-soft: 0 8px 30px rgba(15, 23, 42, 0.08);
   --ui-shadow-strong: 0 18px 48px rgba(15, 23, 42, 0.14);
+  --ui-radius-container: 12px;
+  --ui-radius-control: 10px;
+  --ui-radius-chip: 8px;
   --ui-success: #15803d;
   --ui-danger: #b91c1c;
 }
@@ -52,12 +55,14 @@ body {
   border: 1px solid #dbe6f5 !important;
   box-shadow: var(--ui-shadow-soft) !important;
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%) !important;
+  border-radius: var(--ui-radius-container) !important;
 }
 
 .workspace-panel {
   border: 1px solid #dbe6f5 !important;
   background: #ffffff !important;
   box-shadow: var(--ui-shadow-soft);
+  border-radius: var(--ui-radius-container) !important;
 }
 
 .workspace-panel h2 {
@@ -80,7 +85,7 @@ body {
   background: var(--ui-surface);
   color: var(--ui-text-primary);
   border: 1px solid var(--ui-border);
-  border-radius: 8px;
+  border-radius: var(--ui-radius-control);
 }
 
 .ui-control:hover {
@@ -95,7 +100,7 @@ body {
 
 .workspace-main .no-print button {
   border: 1px solid var(--ui-border);
-  border-radius: 10px;
+  border-radius: var(--ui-radius-control) !important;
   background: #ffffff;
   color: var(--ui-text-primary);
   font-weight: 600;
@@ -122,7 +127,7 @@ body {
   background: var(--ui-surface);
   color: var(--ui-text-primary);
   border: 1px solid var(--ui-border);
-  border-radius: 10px;
+  border-radius: var(--ui-radius-control) !important;
 }
 
 .workspace-main .no-print textarea {
@@ -138,6 +143,10 @@ body {
 
 .workspace-output-sticky textarea {
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.ui-chip {
+  border-radius: var(--ui-radius-chip) !important;
 }
 
 @media (max-width: 1024px) {
