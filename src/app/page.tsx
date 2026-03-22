@@ -1574,49 +1574,59 @@ function handlePrivacyContinue() {
             flexDirection: "column",
             gap: 14
           }}
+          aria-busy={betaBusy}
         >
           <div>
-            <h1 style={{ fontSize: 24, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>Acesso profissional</h1>
-            <div style={{ fontSize: 14, color: "#475569", marginBottom: 6 }}>
-              Valide seu acesso para continuar no assistente clínico
-            </div>
-            <div style={{ fontSize: 13, color: "#6b7280" }}>Informe seu código e e-mail para autenticação</div>
+            <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.4, color: "#2563eb", marginBottom: 6 }}>Acesso seguro</div>
+            <h1 style={{ fontSize: 26, lineHeight: 1.2, fontWeight: 700, color: "#0f172a", marginBottom: 6 }}>Identificação profissional</h1>
+            <div style={{ fontSize: 14, color: "#475569", marginBottom: 6 }}>Valide seu código para liberar o workspace clínico.</div>
+            <div style={{ fontSize: 13, color: "#6b7280" }}>Use seu código institucional e e-mail profissional para autenticação.</div>
             <div style={{ fontSize: 12, color: "#6b7280", marginTop: 6 }}>
-              Segurança: use apenas e-mail profissional e não compartilhe seu código de acesso.
+              Confiança: seus dados de acesso não são incluídos na evolução nem no receituário.
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
+            <label htmlFor="beta-code-input" style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               Código de acesso
               <input
+                id="beta-code-input"
                 className="ux-focus-control ui-control"
                 value={betaInput}
                 onChange={(e) => setBetaInput(e.target.value)}
                 placeholder="PLANTAO-XXXX-YYYY"
                 disabled={betaBusy}
+                autoComplete="one-time-code"
+                spellCheck={false}
+                aria-describedby="beta-access-trust"
                 style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", width: "100%" }}
               />
             </label>
-            <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
+            <label htmlFor="beta-email-input" style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               E-mail profissional
               <input
+                id="beta-email-input"
                 className="ux-focus-control ui-control"
                 value={betaEmail}
                 onChange={(e) => setBetaEmail(e.target.value)}
                 placeholder="email@exemplo.com"
                 disabled={betaBusy}
                 ref={emailInputRef}
+                autoComplete="email"
+                inputMode="email"
+                aria-describedby="beta-access-trust"
                 style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", width: "100%" }}
               />
             </label>
-            <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
+            <label htmlFor="beta-name-input" style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               Nome para identificação (opcional)
               <input
+                id="beta-name-input"
                 className="ux-focus-control ui-control"
                 value={betaNameInput}
                 onChange={(e) => setBetaNameInput(e.target.value)}
                 placeholder="Seu nome"
                 disabled={betaBusy}
+                autoComplete="name"
                 style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", width: "100%" }}
               />
             </label>
@@ -1630,7 +1640,7 @@ function handlePrivacyContinue() {
               />
               lembrar neste dispositivo (24h)
             </label>
-            <div style={{ fontSize: 12, color: "#6b7280" }}>use esta opção apenas em dispositivo pessoal</div>
+            <div id="beta-access-trust" style={{ fontSize: 12, color: "#6b7280" }}>Use esta opção apenas em dispositivo pessoal.</div>
           </div>
           <button
             type="button"
@@ -1648,7 +1658,7 @@ function handlePrivacyContinue() {
               cursor: betaBusy ? "not-allowed" : "pointer"
             }}
           >
-            {betaBusy ? "Validando acesso..." : "Acessar plataforma"}
+            {betaBusy ? "Validando acesso..." : "Validar e entrar"}
           </button>
           {(isAdminMode || (betaLabel && betaLabel.toLowerCase() === "owner")) && (
             <button
@@ -1673,7 +1683,7 @@ function handlePrivacyContinue() {
             <div style={{ color: "#4b5563", fontSize: 13 }}>Validando acesso salvo...</div>
           )}
           {betaToast && (
-            <div style={{ color: "#15803d", fontSize: 13 }}>
+            <div role="status" aria-live="polite" style={{ color: "#15803d", fontSize: 13 }}>
               {betaToast}
             </div>
           )}
@@ -1702,7 +1712,7 @@ function handlePrivacyContinue() {
             </button>
           )}
           {betaError && (
-            <div style={{ color: "#b91c1c", fontSize: 13 }}>
+            <div role="alert" aria-live="assertive" style={{ color: "#b91c1c", fontSize: 13 }}>
               {betaError === "expired"
                 ? "Código expirado."
                 : betaError === "revoked"
