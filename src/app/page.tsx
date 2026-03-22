@@ -647,6 +647,7 @@ function buildTemplateDefaults(template: Template): TemplateState {
 import templatesData from "../templates/templates.json";
 import rxCatalogData from "../prescriptions/catalog.json";
 import rxGroupsData from "../prescriptions/groups.json";
+import { getBetaAccessValidationError } from "../lib/betaAccessForm";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
 const INITIAL_DEFAULTS = INITIAL_TEMPLATE ? buildTemplateDefaults(INITIAL_TEMPLATE) : null;
@@ -735,12 +736,9 @@ export default function Page() {
   const validateBeta = async () => {
     const code = betaInput.trim();
     const email = betaEmail.trim().toLowerCase();
-    if (!code) {
-      setBetaError("invalid");
-      return;
-    }
-    if (!email) {
-      setBetaError("invalid_email");
+    const validationError = getBetaAccessValidationError(code, email);
+    if (validationError) {
+      setBetaError(validationError);
       return;
     }
 
@@ -1583,35 +1581,47 @@ function handlePrivacyContinue() {
           }}
         >
           <div>
-            <h1 style={{ fontSize: 24, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>Acesso ao beta</h1>
+            <h1 style={{ fontSize: 24, fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>Acesso profissional</h1>
             <div style={{ fontSize: 14, color: "#475569", marginBottom: 6 }}>
-              Gere evolução + prescrição em segundos
+              Valide seu acesso para continuar no assistente clínico
             </div>
-            <div style={{ fontSize: 13, color: "#6b7280" }}>Insira seu código e e-mail para liberar o acesso</div>
+            <div style={{ fontSize: 13, color: "#6b7280" }}>Informe seu código e e-mail para autenticação</div>
+            <div style={{ fontSize: 12, color: "#6b7280", marginTop: 6 }}>
+              Segurança: use apenas e-mail profissional e não compartilhe seu código de acesso.
+            </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <input
-              value={betaInput}
-              onChange={(e) => setBetaInput(e.target.value)}
-              placeholder="PLANTAO-XXXX-YYYY"
-              disabled={betaBusy}
-              style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
-            />
-            <input
-              value={betaEmail}
-              onChange={(e) => setBetaEmail(e.target.value)}
-              placeholder="email@exemplo.com"
-              disabled={betaBusy}
-              ref={emailInputRef}
-              style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
-            />
-            <input
-              value={betaNameInput}
-              onChange={(e) => setBetaNameInput(e.target.value)}
-              placeholder="Seu nome (opcional)"
-              disabled={betaBusy}
-              style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", minWidth: 240 }}
-            />
+            <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
+              Código de acesso
+              <input
+                value={betaInput}
+                onChange={(e) => setBetaInput(e.target.value)}
+                placeholder="PLANTAO-XXXX-YYYY"
+                disabled={betaBusy}
+                style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", width: "100%" }}
+              />
+            </label>
+            <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
+              E-mail profissional
+              <input
+                value={betaEmail}
+                onChange={(e) => setBetaEmail(e.target.value)}
+                placeholder="email@exemplo.com"
+                disabled={betaBusy}
+                ref={emailInputRef}
+                style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", width: "100%" }}
+              />
+            </label>
+            <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
+              Nome para identificação (opcional)
+              <input
+                value={betaNameInput}
+                onChange={(e) => setBetaNameInput(e.target.value)}
+                placeholder="Seu nome"
+                disabled={betaBusy}
+                style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #d1d5db", width: "100%" }}
+              />
+            </label>
             <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "#1f2937" }}>
               <input
                 type="checkbox"
@@ -1638,7 +1648,7 @@ function handlePrivacyContinue() {
               cursor: betaBusy ? "not-allowed" : "pointer"
             }}
           >
-            {betaBusy ? "Validando..." : "Entrar no beta"}
+            {betaBusy ? "Validando acesso..." : "Acessar plataforma"}
           </button>
           {(isAdminMode || (betaLabel && betaLabel.toLowerCase() === "owner")) && (
             <button
