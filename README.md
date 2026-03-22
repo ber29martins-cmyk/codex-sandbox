@@ -20,6 +20,14 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Regra de população dos templates
+
+A filtragem atual por população depende **obrigatoriamente** da convenção de IDs. Não existe, no modelo de dados atual, um campo explícito de população para templates.
+
+- Templates de `pediatria` **devem** usar ID com prefixo `ped_`.
+- Templates de `adulto` **não devem** usar prefixo `ped_`.
+- Quebrar essa convenção pode reintroduzir silenciosamente o bug de vazamento entre populações (templates pediátricos aparecendo em adulto e/ou templates adultos aparecendo em pediatria).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

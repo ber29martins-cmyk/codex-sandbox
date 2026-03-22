@@ -805,13 +805,10 @@ export default function Page() {
   const [patientAge, setPatientAge] = useState<string>("");
   const [patientWeight, setPatientWeight] = useState<string>("");
   const availableTemplates = useMemo(() => {
-    if (profile === "pediatria") {
-      return TEMPLATES.filter((t) => {
-        const label = (t as any)?.title ?? t.label ?? "";
-        return (t.id ?? "").toLowerCase().startsWith("ped_") || label.toLowerCase().includes("pedi");
-      });
-    }
-    return TEMPLATES;
+    return TEMPLATES.filter((t) => {
+      const isPediatric = (t.id ?? "").toLowerCase().startsWith("ped_");
+      return profile === "pediatria" ? isPediatric : !isPediatric;
+    });
   }, [profile]);
   const currentTemplate = useMemo(() => {
     const match = availableTemplates.find((t) => t.id === templateId);
