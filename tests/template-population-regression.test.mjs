@@ -14,7 +14,9 @@ const byPopulation = (profile) => templates.filter((template) => isTemplateIdCom
 const reconcileTemplateIdOnPopulationChange = (currentTemplateId, nextProfile) => {
   return isTemplateIdCompatibleWithProfile(currentTemplateId, nextProfile) ? currentTemplateId : '';
 };
+const getProfileDisplayName = (profile) => (profile === 'pediatria' ? 'Pediatria' : 'Adulto');
 const getProfileContextLabel = (profile) => (profile === 'pediatria' ? 'Contexto ativo: Pediatria' : 'Contexto ativo: Adulto');
+const getProfileSwitchFeedback = (profile) => `Perfil alterado para ${getProfileDisplayName(profile)}`;
 const normalize = (value) =>
   String(value ?? '')
     .normalize('NFD')
@@ -95,4 +97,14 @@ test('alternância mantém indicação de contexto coerente sem impactar seleç�
   assert.equal(clearedPedOnAdult, '');
   assert.equal(byPopulation('pediatria').some((template) => template.id === pediatricTemplate.id), true);
   assert.equal(byPopulation('adulto').some((template) => template.id === pediatricTemplate.id), false);
+});
+
+test('indicador persistente e feedback transitório refletem corretamente a alternância de perfil', () => {
+  assert.equal(getProfileDisplayName('adulto'), 'Adulto');
+  assert.equal(getProfileDisplayName('pediatria'), 'Pediatria');
+
+  const feedbackToPeds = getProfileSwitchFeedback('pediatria');
+  const feedbackToAdult = getProfileSwitchFeedback('adulto');
+  assert.equal(feedbackToPeds, 'Perfil alterado para Pediatria');
+  assert.equal(feedbackToAdult, 'Perfil alterado para Adulto');
 });

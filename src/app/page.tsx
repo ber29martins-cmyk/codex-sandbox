@@ -152,8 +152,16 @@ function isTemplateIdCompatibleWithProfile(id: string, profile: "adulto" | "pedi
   return profile === "pediatria" ? isPediatricTemplate : !isPediatricTemplate;
 }
 
+function getProfileDisplayName(profile: "adulto" | "pediatria") {
+  return profile === "pediatria" ? "Pediatria" : "Adulto";
+}
+
 function getProfileContextLabel(profile: "adulto" | "pediatria") {
-  return profile === "pediatria" ? "Contexto ativo: Pediatria" : "Contexto ativo: Adulto";
+  return `Contexto ativo: ${getProfileDisplayName(profile)}`;
+}
+
+function getProfileSwitchFeedback(profile: "adulto" | "pediatria") {
+  return `Perfil alterado para ${getProfileDisplayName(profile)}`;
 }
 
 function shortenLabel(text: string, maxLen = 42) {
@@ -814,6 +822,7 @@ export default function Page() {
   const [profile, setProfile] = useState<"adulto" | "pediatria">("adulto");
   const [patientAge, setPatientAge] = useState<string>("");
   const [patientWeight, setPatientWeight] = useState<string>("");
+  const [profileSwitchFeedback, setProfileSwitchFeedback] = useState("");
   const availableTemplates = useMemo(() => {
     return TEMPLATES.filter((t) => isTemplateIdCompatibleWithProfile(t.id, profile));
   }, [profile]);
@@ -1016,6 +1025,7 @@ export default function Page() {
   useEffect(() => {
     return () => {
       clearBetaToast();
+      clearProfileSwitchFeedback();
     };
   }, []);
 
@@ -1508,8 +1518,25 @@ export default function Page() {
       betaToastTimeout.current = undefined;
     }
   };
+  const clearProfileSwitchFeedback = () => {
+    if (profileSwitchFeedbackTimeout.current) {
+      clearTimeout(profileSwitchFeedbackTimeout.current);
+      profileSwitchFeedbackTimeout.current = undefined;
+    }
+  };
 
   const betaToastTimeout = useRef<number | undefined>(undefined);
+  const profileSwitchFeedbackTimeout = useRef<number | undefined>(undefined);
+
+  function handleProfileChange(nextProfile: "adulto" | "pediatria") {
+    setTemplateId((prev) => (isTemplateIdCompatibleWithProfile(prev, nextProfile) ? prev : ""));
+    if (profile !== nextProfile) {
+      setProfileSwitchFeedback(getProfileSwitchFeedback(nextProfile));
+      clearProfileSwitchFeedback();
+      profileSwitchFeedbackTimeout.current = window.setTimeout(() => setProfileSwitchFeedback(""), 1600);
+    }
+    setProfile(nextProfile);
+  }
 
   async function handleCopyInviteLink() {
     const cleanCode = betaInput.trim();
@@ -1959,10 +1986,7 @@ function handlePrivacyContinue() {
                   name="profile"
                   value="adulto"
                   checked={profile === "adulto"}
-                  onChange={() => {
-                    setTemplateId((prev) => (isTemplateIdCompatibleWithProfile(prev, "adulto") ? prev : ""));
-                    setProfile("adulto");
-                  }}
+                  onChange={() => handleProfileChange("adulto")}
                 />
                 Adulto
               </label>
@@ -1985,10 +2009,7 @@ function handlePrivacyContinue() {
                   name="profile"
                   value="pediatria"
                   checked={profile === "pediatria"}
-                  onChange={() => {
-                    setTemplateId((prev) => (isTemplateIdCompatibleWithProfile(prev, "pediatria") ? prev : ""));
-                    setProfile("pediatria");
-                  }}
+                  onChange={() => handleProfileChange("pediatria")}
                 />
                 Pediatria
               </label>
@@ -2023,6 +2044,12 @@ function handlePrivacyContinue() {
         <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>Assistente de evolução</h1>
       <div style={{ fontSize: 12, color: "#4b5563", marginBottom: 12 }}>
         Templates carregados: {availableTemplates.length || 0} {profile === "pediatria" && !availableTemplates.length ? "(pediátrico em construção)" : ""}
+        {" · "}Perfil ativo: {getProfileDisplayName(profile)}
+        {profileSwitchFeedback ? (
+          <span role="status" aria-live="polite" style={{ marginLeft: 8, color: "#1d4ed8", fontWeight: 600 }}>
+            {profileSwitchFeedback}
+          </span>
+        ) : null}
       </div>
       {feedbackUrl && (
         <div className="no-print" style={{ marginBottom: 12 }}>
