@@ -1561,8 +1561,9 @@ function handlePrivacyContinue() {
   if (!betaOk) {
     const betaBusy = betaLoading || betaHydrating;
     return (
-      <main style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 16px", fontFamily: "ui-sans-serif, system-ui" }}>
+      <main className="workspace-main" style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 16px", fontFamily: "ui-sans-serif, system-ui" }}>
         <div
+          className="workspace-panel"
           style={{
             width: "100%",
             maxWidth: 420,
@@ -1979,8 +1980,9 @@ function handlePrivacyContinue() {
       >
         não insira dados identificáveis do paciente. revise e confirme as informações (responsabilidade médica).
       </div>
-      <main style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
+      <main className="workspace-main" style={{ padding: 24, fontFamily: "ui-sans-serif, system-ui" }}>
         <div
+          className="workspace-hero-card"
           style={{
             maxWidth: 1100,
             margin: "0 auto 16px",
@@ -2083,7 +2085,7 @@ function handlePrivacyContinue() {
         className="no-print workspace-shell"
         style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.45fr) minmax(340px, 1fr)", gap: 16, marginBottom: 16, alignItems: "start" }}
       >
-        <section className="workspace-entry-panel" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
+        <section className="workspace-entry-panel workspace-panel" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Entrada rápida</h2>
           <label>
             Queixa
@@ -2353,7 +2355,7 @@ function handlePrivacyContinue() {
 
         </section>
 
-      <section className="workspace-output-sticky" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, background: "#fff" }}>
+      <section className="workspace-output-sticky workspace-panel" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, background: "#fff" }}>
         <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Saída (copiar/colar)</h2>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 10 }}>
           {workspaceContextBadges.map((badge) => (
@@ -2398,7 +2400,7 @@ function handlePrivacyContinue() {
       </div>
 
       <section
-        className="no-print"
+        className="no-print workspace-panel"
         style={{
           border: "1px solid #cbd5e1",
           borderRadius: 12,
