@@ -152,6 +152,10 @@ function isTemplateIdCompatibleWithProfile(id: string, profile: "adulto" | "pedi
   return profile === "pediatria" ? isPediatricTemplate : !isPediatricTemplate;
 }
 
+function getProfileContextLabel(profile: "adulto" | "pediatria") {
+  return profile === "pediatria" ? "Contexto ativo: Pediatria" : "Contexto ativo: Adulto";
+}
+
 function shortenLabel(text: string, maxLen = 42) {
   const clean = text.replace(/^Refere\s+/i, "").replace(/^Nega\s+/i, "").trim();
   if (clean.length <= maxLen) return clean;
@@ -1936,7 +1940,20 @@ function handlePrivacyContinue() {
           <div style={{ fontSize: 14, color: "#475569" }}>Escolha a queixa, marque os chips e gere a evolução em segundos</div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginTop: 10 }}>
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 14, color: "#0f172a" }}>
+              <label
+                style={{
+                  display: "flex",
+                  gap: 6,
+                  alignItems: "center",
+                  fontSize: 14,
+                  color: "#0f172a",
+                  borderRadius: 999,
+                  border: profile === "adulto" ? "1px solid #1d4ed8" : "1px solid #d1d5db",
+                  background: profile === "adulto" ? "#eff6ff" : "#ffffff",
+                  padding: "6px 10px",
+                  fontWeight: profile === "adulto" ? 700 : 500
+                }}
+              >
                 <input
                   type="radio"
                   name="profile"
@@ -1949,7 +1966,20 @@ function handlePrivacyContinue() {
                 />
                 Adulto
               </label>
-              <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 14, color: "#0f172a" }}>
+              <label
+                style={{
+                  display: "flex",
+                  gap: 6,
+                  alignItems: "center",
+                  fontSize: 14,
+                  color: "#0f172a",
+                  borderRadius: 999,
+                  border: profile === "pediatria" ? "1px solid #1d4ed8" : "1px solid #d1d5db",
+                  background: profile === "pediatria" ? "#eff6ff" : "#ffffff",
+                  padding: "6px 10px",
+                  fontWeight: profile === "pediatria" ? 700 : 500
+                }}
+              >
                 <input
                   type="radio"
                   name="profile"
@@ -1962,6 +1992,9 @@ function handlePrivacyContinue() {
                 />
                 Pediatria
               </label>
+            </div>
+            <div role="status" aria-live="polite" style={{ fontSize: 12, color: "#1e293b", fontWeight: 600 }}>
+              {getProfileContextLabel(profile)}
             </div>
             {profile === "pediatria" && (
               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>

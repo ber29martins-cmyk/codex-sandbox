@@ -14,6 +14,7 @@ const byPopulation = (profile) => templates.filter((template) => isTemplateIdCom
 const reconcileTemplateIdOnPopulationChange = (currentTemplateId, nextProfile) => {
   return isTemplateIdCompatibleWithProfile(currentTemplateId, nextProfile) ? currentTemplateId : '';
 };
+const getProfileContextLabel = (profile) => (profile === 'pediatria' ? 'Contexto ativo: Pediatria' : 'Contexto ativo: Adulto');
 const normalize = (value) =>
   String(value ?? '')
     .normalize('NFD')
@@ -70,4 +71,28 @@ test('paridade: regra de exibição e regra de limpeza usam a mesma compatibilid
       );
     }
   }
+});
+
+test('alternância mantém indicação de contexto coerente sem impactar seleção/listagem', () => {
+  const adultTemplate = templates.find((template) => !String(template.id).toLowerCase().startsWith('ped_'));
+  const pediatricTemplate = templates.find((template) => String(template.id).toLowerCase().startsWith('ped_'));
+  assert.ok(adultTemplate, 'template adulto não encontrado');
+  assert.ok(pediatricTemplate, 'template pediátrico não encontrado');
+
+  assert.equal(getProfileContextLabel('adulto'), 'Contexto ativo: Adulto');
+  assert.equal(getProfileContextLabel('pediatria'), 'Contexto ativo: Pediatria');
+
+  const keptAdultId = reconcileTemplateIdOnPopulationChange(adultTemplate.id, 'adulto');
+  const clearedAdultOnPed = reconcileTemplateIdOnPopulationChange(adultTemplate.id, 'pediatria');
+  assert.equal(keptAdultId, adultTemplate.id);
+  assert.equal(clearedAdultOnPed, '');
+  assert.equal(byPopulation('adulto').some((template) => template.id === adultTemplate.id), true);
+  assert.equal(byPopulation('pediatria').some((template) => template.id === adultTemplate.id), false);
+
+  const keptPedId = reconcileTemplateIdOnPopulationChange(pediatricTemplate.id, 'pediatria');
+  const clearedPedOnAdult = reconcileTemplateIdOnPopulationChange(pediatricTemplate.id, 'adulto');
+  assert.equal(keptPedId, pediatricTemplate.id);
+  assert.equal(clearedPedOnAdult, '');
+  assert.equal(byPopulation('pediatria').some((template) => template.id === pediatricTemplate.id), true);
+  assert.equal(byPopulation('adulto').some((template) => template.id === pediatricTemplate.id), false);
 });
