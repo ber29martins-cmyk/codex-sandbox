@@ -30,7 +30,7 @@ Desativação (reversível):
 unset BETA_AUTH_DEV_BYPASS
 ```
 
-Fail-safe: o bypass nunca é ativado em `production`/`staging` (inclui `VERCEL_ENV=production|preview`).
+Fail-safe: o bypass só pode ativar com `NODE_ENV=development` e nunca em `production`/`staging` (inclui `VERCEL_ENV=production|preview`).
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

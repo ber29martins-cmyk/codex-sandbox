@@ -16,10 +16,11 @@ export function isDevAuthBypassEnabled() {
   if (!bypassRequested) return false;
 
   const nodeEnv = (process.env.NODE_ENV ?? "").trim().toLowerCase();
+  if (nodeEnv !== "development") return false;
+
   const vercelEnv = (process.env.VERCEL_ENV ?? "").trim().toLowerCase();
   const appEnv = (process.env.APP_ENV ?? process.env.ENVIRONMENT ?? "").trim().toLowerCase();
   const isProdOrStaging =
-    nodeEnv === "production" ||
     vercelEnv === "production" ||
     vercelEnv === "preview" ||
     appEnv === "production" ||

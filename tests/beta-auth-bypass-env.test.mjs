@@ -78,3 +78,37 @@ test('produção com flag nunca ativa bypass (fail-safe)', () => {
     }
   );
 });
+
+test('staging com flag nunca ativa bypass (fail-safe)', () => {
+  withEnv(
+    {
+      NODE_ENV: 'development',
+      VERCEL_ENV: undefined,
+      APP_ENV: 'staging',
+      ENVIRONMENT: undefined,
+      BETA_AUTH_DEV_BYPASS: 'true',
+      KV_REST_API_URL: undefined,
+      KV_REST_API_TOKEN: undefined
+    },
+    () => {
+      assert.equal(shouldBypassBetaAuthWhenKvUnavailable(), false);
+    }
+  );
+});
+
+test('não interfere no fluxo real quando KV está configurado (mesmo com flag)', () => {
+  withEnv(
+    {
+      NODE_ENV: 'development',
+      VERCEL_ENV: undefined,
+      APP_ENV: undefined,
+      ENVIRONMENT: undefined,
+      BETA_AUTH_DEV_BYPASS: '1',
+      KV_REST_API_URL: 'https://kv.local',
+      KV_REST_API_TOKEN: 'token'
+    },
+    () => {
+      assert.equal(shouldBypassBetaAuthWhenKvUnavailable(), false);
+    }
+  );
+});
