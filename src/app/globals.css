@@ -58,3 +58,20 @@ body {
   outline-offset: 2px;
   border-color: var(--ui-focus-border);
 }
+
+.workspace-output-sticky {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+}
+
+@media (max-width: 1024px) {
+  .workspace-shell {
+    grid-template-columns: 1fr !important;
+  }
+
+  .workspace-output-sticky {
+    position: static;
+    top: auto;
+  }
+}

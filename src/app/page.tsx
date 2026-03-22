@@ -643,6 +643,7 @@ import {
   getProfileSwitchFeedback,
   PROFILE_UI_TOKENS
 } from "../lib/profileUi";
+import { buildWorkspaceContextBadges } from "../lib/workspaceUi";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
 const INITIAL_DEFAULTS = INITIAL_TEMPLATE ? buildTemplateDefaults(INITIAL_TEMPLATE) : null;
@@ -1950,6 +1951,15 @@ function handlePrivacyContinue() {
 
   const hmaItems = currentTemplate ? getTemplateHmaItems(currentTemplate) : [];
   const alarmItems = currentTemplate?.defaults.alarmItems ?? [];
+  const workspaceContextBadges = buildWorkspaceContextBadges({
+    profile,
+    templateLabel: currentTemplate?.label,
+    hmaItemsCount: hmaItems.length,
+    hmaPresentCount,
+    hmaNegCount,
+    alarmCount,
+    rxSelectedCount: rxSelected.length
+  });
   const baseText = `${formatBlock("anamnese")}\n\n${formatBlock("exame")}\n\n${formatBlock("hipotese")}\n\n${formatBlock("conduta")}`;
   const allText = includeRx && rxText ? `${baseText}\n\nReceituário:\n${rxText}` : baseText;
 
@@ -2069,8 +2079,11 @@ function handlePrivacyContinue() {
           </a>
         </div>
       )}
-      <div className="no-print" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-        <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
+      <div
+        className="no-print workspace-shell"
+        style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.45fr) minmax(340px, 1fr)", gap: 16, marginBottom: 16, alignItems: "start" }}
+      >
+        <section className="workspace-entry-panel" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Entrada rápida</h2>
           <label>
             Queixa
@@ -2340,8 +2353,25 @@ function handlePrivacyContinue() {
 
         </section>
 
-      <section style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16 }}>
+      <section className="workspace-output-sticky" style={{ border: "1px solid #ddd", borderRadius: 12, padding: 16, background: "#fff" }}>
         <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>Saída (copiar/colar)</h2>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 10 }}>
+          {workspaceContextBadges.map((badge) => (
+            <span
+              key={badge}
+              style={{
+                fontSize: 12,
+                color: "#334155",
+                border: "1px solid #cbd5e1",
+                borderRadius: 999,
+                padding: "4px 10px",
+                background: "#f8fafc"
+              }}
+            >
+              {badge}
+            </span>
+          ))}
+        </div>
         <div className="no-print" style={{ fontSize: 12, color: "#4b5563", marginBottom: 8 }}>
           observação: documento gerado sem dados identificáveis do paciente.
         </div>
@@ -2359,7 +2389,11 @@ function handlePrivacyContinue() {
             Incluir receituário na impressão/cópia do prontuário
           </label>
 
-          <textarea readOnly value={allText} style={{ width: "100%", height: 420, fontFamily: "ui-monospace, SFMono-Regular", whiteSpace: "pre", padding: 12 }} />
+          <textarea
+            readOnly
+            value={allText}
+            style={{ width: "100%", height: "min(56vh, 420px)", fontFamily: "ui-monospace, SFMono-Regular", whiteSpace: "pre", padding: 12 }}
+          />
         </section>
       </div>
 
