@@ -146,6 +146,12 @@ function getTemplateQP(template: Template) {
   return qpCandidates[0] ?? "";
 }
 
+function isTemplateIdCompatibleWithProfile(id: string, profile: "adulto" | "pediatria") {
+  if (!id) return false;
+  const isPediatricTemplate = id.toLowerCase().startsWith("ped_");
+  return profile === "pediatria" ? isPediatricTemplate : !isPediatricTemplate;
+}
+
 function shortenLabel(text: string, maxLen = 42) {
   const clean = text.replace(/^Refere\s+/i, "").replace(/^Nega\s+/i, "").trim();
   if (clean.length <= maxLen) return clean;
@@ -805,10 +811,7 @@ export default function Page() {
   const [patientAge, setPatientAge] = useState<string>("");
   const [patientWeight, setPatientWeight] = useState<string>("");
   const availableTemplates = useMemo(() => {
-    return TEMPLATES.filter((t) => {
-      const isPediatric = (t.id ?? "").toLowerCase().startsWith("ped_");
-      return profile === "pediatria" ? isPediatric : !isPediatric;
-    });
+    return TEMPLATES.filter((t) => isTemplateIdCompatibleWithProfile(t.id, profile));
   }, [profile]);
   const currentTemplate = useMemo(() => {
     const match = availableTemplates.find((t) => t.id === templateId);
@@ -1939,7 +1942,10 @@ function handlePrivacyContinue() {
                   name="profile"
                   value="adulto"
                   checked={profile === "adulto"}
-                  onChange={() => setProfile("adulto")}
+                  onChange={() => {
+                    setTemplateId((prev) => (isTemplateIdCompatibleWithProfile(prev, "adulto") ? prev : ""));
+                    setProfile("adulto");
+                  }}
                 />
                 Adulto
               </label>
@@ -1949,7 +1955,10 @@ function handlePrivacyContinue() {
                   name="profile"
                   value="pediatria"
                   checked={profile === "pediatria"}
-                  onChange={() => setProfile("pediatria")}
+                  onChange={() => {
+                    setTemplateId((prev) => (isTemplateIdCompatibleWithProfile(prev, "pediatria") ? prev : ""));
+                    setProfile("pediatria");
+                  }}
                 />
                 Pediatria
               </label>
