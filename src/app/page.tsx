@@ -1589,7 +1589,7 @@ function handlePrivacyContinue() {
             <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               Código de acesso
               <input
-                className="ux-focus-control"
+                className="ux-focus-control ui-control"
                 value={betaInput}
                 onChange={(e) => setBetaInput(e.target.value)}
                 placeholder="PLANTAO-XXXX-YYYY"
@@ -1600,7 +1600,7 @@ function handlePrivacyContinue() {
             <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               E-mail profissional
               <input
-                className="ux-focus-control"
+                className="ux-focus-control ui-control"
                 value={betaEmail}
                 onChange={(e) => setBetaEmail(e.target.value)}
                 placeholder="email@exemplo.com"
@@ -1612,7 +1612,7 @@ function handlePrivacyContinue() {
             <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 13, color: "#1f2937" }}>
               Nome para identificação (opcional)
               <input
-                className="ux-focus-control"
+                className="ux-focus-control ui-control"
                 value={betaNameInput}
                 onChange={(e) => setBetaNameInput(e.target.value)}
                 placeholder="Seu nome"
@@ -2021,7 +2021,7 @@ function handlePrivacyContinue() {
                 <label style={{ fontSize: 13, color: "#0f172a" }}>
                   Idade
                   <input
-                    className="ux-focus-control"
+                    className="ux-focus-control ui-control"
                     value={patientAge}
                     onChange={(e) => setPatientAge(e.target.value)}
                     placeholder="anos"
@@ -2031,7 +2031,7 @@ function handlePrivacyContinue() {
                 <label style={{ fontSize: 13, color: "#0f172a" }}>
                   Peso
                   <input
-                    className="ux-focus-control"
+                    className="ux-focus-control ui-control"
                     value={patientWeight}
                     onChange={(e) => setPatientWeight(e.target.value)}
                     placeholder="kg"
@@ -2075,7 +2075,7 @@ function handlePrivacyContinue() {
                   if (d) setAtestadoCid(d);
                 }}
                 style={{ width: "100%" }}
-                className="ux-focus-control"
+                className="ux-focus-control ui-control"
               >
                 {availableTemplates.map((t) => (
                   <option key={t.id} value={t.id}>

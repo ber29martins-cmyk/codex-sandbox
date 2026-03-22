@@ -3,6 +3,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --ui-surface: #ffffff;
+  --ui-surface-muted: #f8fafc;
+  --ui-text-primary: #0f172a;
+  --ui-text-secondary: #475569;
+  --ui-border: #cbd5e1;
+  --ui-border-strong: #93c5fd;
+  --ui-accent: #2563eb;
+  --ui-focus-ring: #60a5fa;
+  --ui-focus-border: #2563eb;
+  --ui-success: #15803d;
+  --ui-danger: #b91c1c;
 }
 
 @theme inline {
@@ -26,7 +37,24 @@ body {
 }
 
 .ux-focus-control:focus-visible {
-  outline: 2px solid #60a5fa;
+  outline: 2px solid var(--ui-focus-ring);
   outline-offset: 2px;
-  border-color: #2563eb !important;
+  border-color: var(--ui-focus-border) !important;
+}
+
+.ui-control {
+  background: var(--ui-surface);
+  color: var(--ui-text-primary);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+}
+
+.ui-control:hover {
+  border-color: var(--ui-border-strong);
+}
+
+.ui-control:focus-visible {
+  outline: 2px solid var(--ui-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--ui-focus-border);
 }
