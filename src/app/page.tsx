@@ -2129,7 +2129,7 @@ function handlePrivacyContinue() {
             </div>
             {hmaItems.length ? (
               <>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                <div className="ui-chip-grid">
                   {hmaItems.map((opt) => {
                     const status = hmaStates[opt.id] ?? "unknown";
                     const statusLabel = ALARM_STATUS_LABELS[status];
@@ -2222,7 +2222,7 @@ function handlePrivacyContinue() {
               <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>
                 Sinais de alarme <span style={{ color: "#6b7280", fontWeight: 400 }}>(Alarmes: {alarmCount})</span>
               </div>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <div className="ui-chip-grid">
               {alarmItems?.map((item) => {
                   const status = alarmStates[item.id] ?? "unknown";
                   const statusLabel = ALARM_STATUS_LABELS[status];
@@ -2269,7 +2269,7 @@ function handlePrivacyContinue() {
 
           <div style={{ marginBottom: 8 }}>
             <div style={{ marginBottom: 6, fontWeight: 600, fontSize: 14 }}>Comorbidades (clique para marcar)</div>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <div className="ui-chip-grid">
               {COMORB_OPTIONS.map((opt) => {
                 const active = comorbSelected.includes(opt.id);
                 return (

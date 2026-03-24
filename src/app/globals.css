@@ -232,6 +232,20 @@ body {
   letter-spacing: 0.004em;
 }
 
+.ui-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.ui-chip-grid > .ui-chip {
+  flex: 1 1 180px;
+  min-width: 160px;
+  max-width: 100%;
+}
+
 @media (max-width: 1024px) {
   .workspace-shell {
     grid-template-columns: 1fr !important;
@@ -240,5 +254,10 @@ body {
   .workspace-output-sticky {
     position: static;
     top: auto;
+  }
+
+  .ui-chip-grid > .ui-chip {
+    flex-basis: 140px;
+    min-width: 132px;
   }
 }
