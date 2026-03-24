@@ -2518,39 +2518,39 @@ function handlePrivacyContinue() {
             <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap", alignItems: "center" }}>
               <button
                 type="button"
+                className="ux-focus-control ui-btn-secondary"
                 onClick={() => copy(rxText || "Sem itens selecionados")}
                 disabled={!rxText}
-                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
               >
                 Copiar receita
               </button>
               <button
                 type="button"
+                className="ux-focus-control ui-btn-secondary"
                 onClick={handlePrintRx}
                 disabled={!rxText}
-                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
               >
                 Imprimir receita
               </button>
               <button
                 type="button"
+                className="ux-focus-control ui-btn-secondary"
                 onClick={handleSaveRxKit}
                 disabled={!rxSelected.length}
-                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
               >
                 Salvar como meu padrão
               </button>
               <button
                 type="button"
+                className="ux-focus-control ui-btn-secondary"
                 onClick={handleRestoreRxDefaults}
-                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
               >
                 Restaurar padrão do template
               </button>
               <button
                 type="button"
+                className="ux-focus-control ui-btn-secondary"
                 onClick={handleClearRxSelection}
-                style={{ border: "1px solid #d1d5db", padding: "8px 12px", borderRadius: 8, background: "#fff", cursor: "pointer" }}
               >
                 Limpar seleção
               </button>
