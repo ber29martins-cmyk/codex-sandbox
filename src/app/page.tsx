@@ -2515,7 +2515,7 @@ function handlePrivacyContinue() {
               </div>
             ))}
 
-            <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap", alignItems: "center" }}>
+            <div className="rx-utility-actions" style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap", alignItems: "center" }}>
               <button
                 type="button"
                 className="ux-focus-control ui-btn-secondary"
