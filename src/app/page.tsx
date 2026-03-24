@@ -643,6 +643,7 @@ import {
   getProfileSwitchFeedback,
   PROFILE_UI_TOKENS
 } from "../lib/profileUi";
+import { applyClinicalNarrativeCohesionToBlocks } from "../lib/clinicalNarrative";
 import { buildWorkspaceContextBadges } from "../lib/workspaceUi";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
@@ -1470,7 +1471,12 @@ export default function Page() {
       conduta.push(`Emitido atestado médico (${dias} ${plural}) (CID: ${cidText})`);
     }
 
-    return { anamnese, exame, hipotese: avaliacao, conduta };
+    return applyClinicalNarrativeCohesionToBlocks({
+      anamnese,
+      exame,
+      hipotese: avaliacao,
+      conduta
+    });
   }, [
     qpText,
     hmaParagraphs,
