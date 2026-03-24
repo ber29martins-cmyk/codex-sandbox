@@ -244,7 +244,9 @@ body {
   width: 100%;
   min-height: 44px;
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
   text-align: left;
 }
 
