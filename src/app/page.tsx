@@ -2116,10 +2116,10 @@ function handlePrivacyContinue() {
           <br />
 
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
-            <button type="button" onClick={handleRestoreTemplateDefaults} disabled={!currentTemplate}>
+            <button type="button" className="ux-focus-control ui-btn-utility" onClick={handleRestoreTemplateDefaults} disabled={!currentTemplate}>
               Restaurar padrão do template
             </button>
-            <button type="button" onClick={handleResetApp}>Resetar app (limpar dados locais)</button>
+            <button type="button" className="ux-focus-control ui-btn-utility" onClick={handleResetApp}>Resetar app (limpar dados locais)</button>
           </div>
 
           <label>QP<br /><input value={qpText} onChange={(e) => setQpText(e.target.value)} style={{ width: "100%" }} /></label><br /><br />
@@ -2164,6 +2164,7 @@ function handlePrivacyContinue() {
                 <div style={{ display: "flex", gap: 8, marginTop: 6 }}>
                   <button
                     type="button"
+                    className="ux-focus-control ui-btn-utility"
                     onClick={() => {
                       const reset: HmaStateMap = {};
                       hmaItems.forEach((it) => {
@@ -2178,6 +2179,7 @@ function handlePrivacyContinue() {
                   </button>
                   <button
                     type="button"
+                    className="ux-focus-control ui-btn-utility"
                     disabled={!currentTemplate}
                     onClick={() => {
                       if (!currentTemplate) return;
@@ -2190,6 +2192,7 @@ function handlePrivacyContinue() {
                   </button>
                   <button
                     type="button"
+                    className="ux-focus-control ui-btn-utility"
                     onClick={() => setHmaFreeOpen((v) => !v)}
                     style={{ padding: "6px 10px", borderRadius: 8 }}
                   >
@@ -2383,12 +2386,12 @@ function handlePrivacyContinue() {
         </div>
 
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
-          <button onClick={() => copy(formatBlock("anamnese"))}>Copiar anamnese</button>
-          <button onClick={() => copy(formatBlock("exame"))}>Copiar exame</button>
-          <button onClick={() => copy(formatBlock("hipotese"))}>Copiar hipótese</button>
-            <button onClick={() => copy(formatBlock("conduta"))}>Copiar conduta</button>
-            <button onClick={() => copy(allText)}>Copiar tudo</button>
-            <button type="button" onClick={handlePrint}>Imprimir</button>
+          <button className="ux-focus-control ui-btn-utility" onClick={() => copy(formatBlock("anamnese"))}>Copiar anamnese</button>
+          <button className="ux-focus-control ui-btn-utility" onClick={() => copy(formatBlock("exame"))}>Copiar exame</button>
+          <button className="ux-focus-control ui-btn-utility" onClick={() => copy(formatBlock("hipotese"))}>Copiar hipótese</button>
+            <button className="ux-focus-control ui-btn-utility" onClick={() => copy(formatBlock("conduta"))}>Copiar conduta</button>
+            <button className="ux-focus-control ui-btn-utility" onClick={() => copy(allText)}>Copiar tudo</button>
+            <button type="button" className="ux-focus-control ui-btn-utility" onClick={handlePrint}>Imprimir</button>
           </div>
           <label style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
             <input type="checkbox" checked={includeRx} onChange={(e) => setIncludeRx(e.target.checked)} />
