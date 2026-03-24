@@ -233,17 +233,19 @@ body {
 }
 
 .ui-chip-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 180px));
   gap: 8px;
-  align-items: stretch;
-  justify-content: flex-start;
+  align-content: start;
+  justify-content: start;
 }
 
 .ui-chip-grid > .ui-chip {
-  flex: 1 1 180px;
-  min-width: 160px;
-  max-width: 100%;
+  width: 100%;
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: left;
 }
 
 @media (max-width: 1024px) {
@@ -256,8 +258,13 @@ body {
     top: auto;
   }
 
-  .ui-chip-grid > .ui-chip {
-    flex-basis: 140px;
-    min-width: 132px;
+  .ui-chip-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+  }
+}
+
+@media (max-width: 640px) {
+  .ui-chip-grid {
+    grid-template-columns: repeat(auto-fill, minmax(132px, 132px));
   }
 }

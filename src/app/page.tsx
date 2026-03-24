@@ -2250,7 +2250,6 @@ function handlePrivacyContinue() {
                         alignItems: "center",
                         gap: 8,
                         boxShadow: "none",
-                        minWidth: 160,
                         justifyContent: "space-between"
                       }}
                     >
