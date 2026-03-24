@@ -27,6 +27,14 @@ export default function BetaPage() {
         const legacy = localStorage.getItem(LEGACY_BETA_STORAGE_KEY);
         if (legacy) localStorage.removeItem(LEGACY_BETA_STORAGE_KEY);
 
+        const sessionRes = await fetch("/api/beta/validate", { method: "POST" });
+        const sessionJson = (await sessionRes.json()) as BetaResponse;
+        if (cancelled) return;
+        if (sessionRes.ok && sessionJson.ok) {
+          router.replace("/");
+          return;
+        }
+
         const stored = localStorage.getItem(BETA_STORAGE_KEY);
         if (stored) {
           const parsed = JSON.parse(stored) as { code?: string; emailHash?: string };
@@ -39,6 +47,7 @@ export default function BetaPage() {
             const json = (await res.json()) as BetaResponse;
             if (cancelled) return;
             if (res.ok && json.ok) {
+              localStorage.removeItem(BETA_STORAGE_KEY);
               router.replace("/");
               return;
             }
@@ -85,7 +94,7 @@ export default function BetaPage() {
       });
       const json = (await res.json()) as BetaResponse & { emailHash?: string };
       if (res.ok && json.ok) {
-        localStorage.setItem(BETA_STORAGE_KEY, JSON.stringify({ code: cleanCode, emailHash: json.emailHash, ts: Date.now() }));
+        localStorage.removeItem(BETA_STORAGE_KEY);
         router.replace("/");
       } else {
         localStorage.removeItem(BETA_STORAGE_KEY);

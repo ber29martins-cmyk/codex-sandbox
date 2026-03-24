@@ -744,24 +744,19 @@ export default function Page() {
       const res = await fetch("/api/beta/activate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, email })
+        body: JSON.stringify({ code, email, rememberDevice })
       });
       const json = await res.json();
       if (res.ok && json.ok) {
         setBetaOk(true);
         setBetaLabel(json.label);
-        localStorage.setItem(BETA_STORAGE_KEY, JSON.stringify({ code, emailHash: json.emailHash, ts: Date.now() }));
+        if (json.code) {
+          setBetaInput(json.code);
+        }
         const cleanName = betaNameInput.trim();
         if (cleanName) {
           localStorage.setItem("beta_display_name", cleanName);
           setBetaDisplayName(cleanName);
-        }
-        if (rememberDevice) {
-          localStorage.setItem("beta_remember_ok", "1");
-          localStorage.setItem("beta_remember_until", String(Date.now() + 24 * 60 * 60 * 1000));
-        } else {
-          localStorage.removeItem("beta_remember_ok");
-          localStorage.removeItem("beta_remember_until");
         }
       } else {
         localStorage.removeItem(BETA_STORAGE_KEY);
@@ -898,49 +893,53 @@ export default function Page() {
           localStorage.removeItem(LEGACY_BETA_STORAGE_KEY);
         }
 
-        const storedBeta = localStorage.getItem(BETA_STORAGE_KEY);
-        if (storedBeta) {
-          try {
-            const parsed = JSON.parse(storedBeta) as { code?: string; emailHash?: string };
-            if (parsed?.code && parsed?.emailHash) {
-              const res = await fetch("/api/beta/validate", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ code: parsed.code, emailHash: parsed.emailHash })
-              });
-              const json = await res.json();
-              if (cancelled) return;
-              if (res.ok && json.ok) {
-                setBetaOk(true);
-                setBetaLabel(json.label);
+        const cookieSessionRes = await fetch("/api/beta/validate", { method: "POST" });
+        const cookieSessionJson = await cookieSessionRes.json();
+        if (cancelled) return;
+
+        if (cookieSessionRes.ok && cookieSessionJson.ok) {
+          setBetaOk(true);
+          setBetaLabel(cookieSessionJson.label ?? "");
+          if (cookieSessionJson.code) {
+            setBetaInput(cookieSessionJson.code);
+          }
+        } else {
+          const storedBeta = localStorage.getItem(BETA_STORAGE_KEY);
+          if (storedBeta) {
+            try {
+              const parsed = JSON.parse(storedBeta) as { code?: string; emailHash?: string };
+              if (parsed?.code && parsed?.emailHash) {
+                const res = await fetch("/api/beta/validate", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ code: parsed.code, emailHash: parsed.emailHash })
+                });
+                const json = await res.json();
+                if (cancelled) return;
+                if (res.ok && json.ok) {
+                  setBetaOk(true);
+                  setBetaLabel(json.label);
+                  if (json.code) {
+                    setBetaInput(json.code);
+                  }
+                  localStorage.removeItem(BETA_STORAGE_KEY);
+                } else {
+                  localStorage.removeItem(BETA_STORAGE_KEY);
+                  setBetaOk(false);
+                  setBetaError(json.reason || "invalid");
+                }
               } else {
                 localStorage.removeItem(BETA_STORAGE_KEY);
-                setBetaOk(false);
-                setBetaError(json.reason || "invalid");
               }
-            } else {
-              localStorage.removeItem(BETA_STORAGE_KEY);
+            } catch (err) {
+              if (!cancelled) {
+                localStorage.removeItem(BETA_STORAGE_KEY);
+                setBetaError("invalid");
+              }
             }
-          } catch (err) {
-            if (!cancelled) {
-              localStorage.removeItem(BETA_STORAGE_KEY);
-              setBetaError("invalid");
-            }
+          } else if (cookieSessionJson?.reason) {
+            setBetaError(cookieSessionJson.reason);
           }
-        }
-
-        try {
-          const rememberOk = localStorage.getItem("beta_remember_ok") === "1";
-          const rememberUntilRaw = localStorage.getItem("beta_remember_until");
-          const rememberUntil = rememberUntilRaw ? Number(rememberUntilRaw) : 0;
-          if (rememberOk && rememberUntil > Date.now()) {
-            setBetaOk(true);
-          } else if (rememberUntilRaw) {
-            localStorage.removeItem("beta_remember_ok");
-            localStorage.removeItem("beta_remember_until");
-          }
-        } catch (err) {
-          console.error("Falha ao ler remember device", err);
         }
 
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -1693,11 +1692,10 @@ function handlePrivacyContinue() {
             <button
               type="button"
               onClick={() => {
+                fetch("/api/beta/logout", { method: "POST" }).catch(() => undefined);
                 setBetaOk(false);
                 setBetaLabel("");
                 localStorage.removeItem(BETA_STORAGE_KEY);
-                localStorage.removeItem("beta_remember_ok");
-                localStorage.removeItem("beta_remember_until");
               }}
               style={{
                 padding: "8px 10px",
@@ -1779,7 +1777,7 @@ function handlePrivacyContinue() {
     }
   }
 
-  function handleResetApp() {
+  async function handleResetApp() {
     const firstTemplate = TEMPLATES[0];
     if (!firstTemplate) return;
 
@@ -1790,6 +1788,7 @@ function handlePrivacyContinue() {
 
     if (typeof window !== "undefined") {
       try {
+        await fetch("/api/beta/logout", { method: "POST" });
         const keys = Object.keys(localStorage);
         for (const key of keys) {
           if (key.startsWith("mvp:") || key === STORAGE_KEY || key === RX_KIT_KEY || key === "invite_code") {
@@ -1797,8 +1796,6 @@ function handlePrivacyContinue() {
           }
         }
         localStorage.removeItem(BETA_STORAGE_KEY);
-        localStorage.removeItem("beta_remember_ok");
-        localStorage.removeItem("beta_remember_until");
       } catch (err) {
         console.error("Erro limpando storage", err);
       }

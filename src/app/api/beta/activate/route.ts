@@ -10,6 +10,7 @@ import {
   normalizeEmail,
   shouldBypassBetaAuthWhenKvUnavailable
 } from "../../../../lib/betaBinding";
+import { setBetaSessionCookie } from "../../../../lib/betaSession";
 import { rateLimit } from "../../../../lib/rateLimit";
 
 export const runtime = "nodejs";
@@ -23,12 +24,16 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const code = typeof body?.code === "string" ? body.code.trim() : "";
+    const rememberDevice = Boolean(body?.rememberDevice);
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
     const rawEmail = typeof body?.email === "string" ? body.email : "";
     const email = normalizeEmail(rawEmail);
 
     if (!kvConfigured && shouldBypassBetaAuthWhenKvUnavailable()) {
-      return NextResponse.json({ ok: true, label: "dev_bypass", emailHash: hashEmail(email || "dev-bypass@local") }, { status: 200 });
+      const emailHash = hashEmail(email || "dev-bypass@local");
+      const response = NextResponse.json({ ok: true, label: "dev_bypass", emailHash, code: code || "dev_bypass" }, { status: 200 });
+      setBetaSessionCookie(response, { code: code || "dev_bypass", emailHash, label: "dev_bypass", remember: rememberDevice });
+      return response;
     }
 
     const rl = await rateLimit(`rl:activate:${ip}`, 10, 60);
@@ -46,14 +51,19 @@ export async function POST(request: Request) {
     if (!existing) {
       const payload: BetaBinding = { hash: emailHash, activatedAt: new Date().toISOString(), label: validation.label };
       await kv.set(key, payload);
-      return NextResponse.json({ ok: true, label: validation.label, emailHash }, { status: 200 });
+      const response = NextResponse.json({ ok: true, label: validation.label, emailHash, code }, { status: 200 });
+      setBetaSessionCookie(response, { code, emailHash, label: validation.label, remember: rememberDevice });
+      return response;
     }
 
     if (existing.hash !== emailHash) {
       return NextResponse.json({ ok: false, reason: "bound_to_other_email" }, { status: 403 });
     }
 
-    return NextResponse.json({ ok: true, label: existing.label ?? validation.label, emailHash }, { status: 200 });
+    const label = existing.label ?? validation.label;
+    const response = NextResponse.json({ ok: true, label, emailHash, code }, { status: 200 });
+    setBetaSessionCookie(response, { code, emailHash, label, remember: rememberDevice });
+    return response;
   } catch (err) {
     console.error("Failed to activate beta access", err);
     const status = err instanceof SyntaxError ? 400 : 500;

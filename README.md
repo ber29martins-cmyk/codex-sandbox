@@ -32,6 +32,13 @@ unset BETA_AUTH_DEV_BYPASS
 
 Fail-safe: o bypass só pode ativar com `NODE_ENV=development` e nunca em `production`/`staging` (inclui `VERCEL_ENV=production|preview`).
 
+### Fluxo padrão de acesso (preview/branch estável)
+
+- Use sempre a URL estável do preview da branch (não links efêmeros de execução anterior).
+- Após validar código + e-mail uma vez, a sessão é persistida em cookie `HttpOnly` (`SameSite=Lax`) com expiração controlada.
+- Em novo deploy da mesma branch/URL, a sessão é reaproveitada automaticamente sem exigir novo link/nova key.
+- O botão de sair limpa a sessão no servidor e força nova autenticação.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
