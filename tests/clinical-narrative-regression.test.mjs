@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import templatesData from "../src/templates/templates.json" with { type: "json" };
 import {
   applyClinicalNarrativeCohesion,
-  applyClinicalNarrativeCohesionToBlocks
+  applyClinicalNarrativeCohesionToBlocks,
+  collectStateNarrativeComplements
 } from "../src/lib/clinicalNarrative.ts";
 
 const templates = templatesData.templates ?? [];
@@ -17,6 +18,14 @@ function shouldRequireTerminalPunctuation(line) {
   if (line.includes(":")) return false;
   if (line.includes("|")) return false;
   return true;
+}
+
+function formatList(items) {
+  if (items.length === 0) return "";
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} e ${items[1]}`;
+  const last = items[items.length - 1];
+  return `${items.slice(0, -1).join(", ")} e ${last}`;
 }
 
 test("camada de coesão normaliza espaçamento, pontuação e deduplicação", () => {
@@ -102,4 +111,24 @@ test("regressão todos os templates: cenário de seleção máxima mantém narra
     assert.ok(baseText.includes("\n\n"), `quebra de seções inválida no template ${template.id}`);
     assert.equal(baseText.includes("undefined"), false, `texto inválido no template ${template.id}`);
   }
+});
+
+test("negações de HMA usam fraseologia clínica por item (sem colar label literal)", () => {
+  const target = templates.find((template) => template.id === "abscesso_furunculo");
+  assert.ok(target, "template abscesso_furunculo não encontrado");
+
+  const hmaItems = target.defaults.hmaItems ?? [];
+  const states = {};
+  states.recorrente = "nega";
+  states.local = "nega";
+
+  const neg = collectStateNarrativeComplements(hmaItems, states, "nega");
+  const sentence = `Nega ${formatList(neg)}.`;
+
+  assert.equal(
+    sentence,
+    "Nega episódios prévios semelhantes (furunculose) e localização em face, mão, períneo ou outra região crítica."
+  );
+  assert.equal(sentence.includes("Nega recorrente"), false);
+  assert.equal(sentence.includes("Nega local crítico"), false);
 });

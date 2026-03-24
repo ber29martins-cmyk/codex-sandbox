@@ -13,7 +13,7 @@ type Template = {
   defaults: {
     qp?: string;
     qpDefault?: string;
-    hmaItems?: { id: string; label: string; text: string }[];
+    hmaItems?: { id: string; label: string; text: string; presentText?: string; absentText?: string; absentLabel?: string }[];
     hmaDefaults?: string[];
     alarme: string;
     comorb: string;
@@ -161,85 +161,6 @@ function shortenLabel(text: string, maxLen = 42) {
 function normalizeHmaLabel(label: string) {
   return label.replace(/^(nega|sem|não|ausência de)\s+/i, "").trim();
 }
-
-function cleanAlarmLabel(s: string) {
-  return s.replace(/^(sem|nega)\s+/i, "").replace(/^não\s+apresenta\s+/i, "").trim();
-}
-
-const ALARM_PRINT_MAP: Record<string, string> = {
-  "Dispneia/esforço": "dispneia ou esforço respiratório",
-  "Sat baixa": "saturação baixa",
-  "Dor torácica": "dor torácica",
-  "Dor torácica imp": "dor torácica importante",
-  "Hemoptise": "hemoptise",
-  "Febre >72h": "febre persistente (>72h)",
-  "Febre alta >72h": "febre alta ou persistente (>72h)",
-  "Febre >72h/piora": "febre persistente (>72h) ou piora após melhora",
-  "Piora progressiva": "piora progressiva",
-  "Piora após melhora": "piora após melhora",
-  "Incapaz VO/desid": "incapaz de via oral ou sinais de desidratação importante",
-  "Desid importante": "sinais de desidratação importante",
-  "Desid/baixa VO": "desidratação importante ou baixa aceitação via oral",
-  "Vômitos incoerc": "vômitos incoercíveis",
-  "Confusão/rebaix": "confusão mental ou rebaixamento",
-  "Confusão/sonol": "confusão mental ou sonolência importante",
-  "confusão": "confusão mental ou alteração do nível de consciência",
-  "Febre/calafrios": "febre e calafrios",
-  "Dor flanco/lomb": "dor em flanco ou lombalgia",
-  "N/V importantes": "náuseas ou vômitos importantes",
-  "Sepse hipot/conf": "sinais de sepse com hipotensão ou confusão",
-  "Falha terapêut": "piora progressiva ou falha terapêutica",
-  "Hematêmese": "hematêmese",
-  "Melena/sangram": "melena ou sangramento digestivo",
-  "Perda ponderal": "perda ponderal ou anorexia importante",
-  "Disfagia prog": "disfagia ou odinofagia progressiva",
-  "Vômitos persist": "vômitos persistentes",
-  "Síncope/hipot": "síncope ou hipotensão",
-  "Equiv anginoso": "dor torácica em aperto ou dispneia (equivalente anginoso)",
-  "Anemia suspeita": "anemia conhecida ou suspeita",
-  "Sangue nas fezes": "sangue nas fezes ou melena",
-  "Dor abd intensa": "dor abdominal intensa ou localizada",
-  "Choque": "sinais de choque",
-  "Suspeita colite": "uso recente de antibiótico com suspeita de colite",
-  "Dor retroauric": "dor retroauricular",
-  "Edema retroauric": "edema retroauricular",
-  "Pavilhão protru": "pavilhão auricular protruído",
-  "Paralisia facial": "paralisia facial",
-  "Cefaleia intensa": "cefaleia intensa",
-  "Meningismo": "rigidez de nuca ou sinais meníngeos",
-  "Toxemia": "toxemia ou mau estado geral",
-  "Dispneia/estridor": "dispneia ou estridor",
-  "Sialorreia/VO": "sialorreia ou incapacidade de deglutir saliva",
-  "Trismo/voz abaf": "trismo ou voz abafada",
-  "Desvio de úvula": "desvio de úvula (suspeita de abscesso peritonsilar)",
-  "Desid/recusa VO": "desidratação importante ou recusa via oral",
-  "Febre alta/tox": "febre alta persistente ou toxemia",
-  "Déficit sensitivo": "parestesia ou hipoestesia",
-  "Perda de força": "perda de força",
-  "Alteração esfinc": "alteração esfincteriana",
-  "Anestesia em sela": "anestesia em sela",
-  "Fala entrecort": "fala entrecortada ou incapacidade de falar frases",
-  "Tórax silenc": "tórax silencioso ou redução importante do murmúrio vesicular",
-  "Exaustão": "exaustão respiratória iminente",
-  "Cianose": "cianose",
-  "Rebaixamento": "rebaixamento do nível de consciência",
-  "dor despropor": "dor desproporcional",
-  "dor desproporc": "dor desproporcional",
-  "rápida progress": "progressão rápida",
-  "falha 48-72h": "falha terapêutica em 48–72 horas",
-  "pior cefaleia": "pior cefaleia da vida ou mudança abrupta do padrão",
-  "início súbito": "início súbito tipo trovoada",
-  "déficit neuro": "déficit neurológico focal",
-  "febre/mening": "febre ou sinais meníngeos",
-  "trauma": "trauma craniano associado",
-  "papiledema": "papiledema ou sinais de hipertensão intracraniana",
-  "gravidez": "gravidez ou puerpério",
-  "hipotensão": "hipotensão ou sinais de choque",
-  "taquicardia": "taquicardia ou instabilidade hemodinâmica",
-  "incapaz deglut": "incapacidade de deglutir ou recusa via oral",
-  "dispneia/estridor": "dispneia / estridor",
-  "sinais infecção": "sinais de infecção secundária"
-};
 
 function parseAgeMonths(ageRaw: string): { months: number | null; display: string } {
   const raw = ageRaw.trim();
@@ -516,12 +437,6 @@ function getRxDirections(
   return extra.length ? extra : base.filter(Boolean);
 }
 
-function alarmLabelForPrint(input: string) {
-  const cleaned = cleanAlarmLabel(input).trim();
-  const expanded = ALARM_PRINT_MAP[cleaned] ?? ALARM_PRINT_MAP[cleaned.toLowerCase()] ?? cleaned;
-  return expanded.toLocaleLowerCase("pt-BR");
-}
-
 function formatParagraph(lines: string[]) {
   const parts: string[] = [];
   for (const raw of lines) {
@@ -539,13 +454,6 @@ function formatList(items: string[]) {
   if (items.length === 2) return `${items[0]} e ${items[1]}`;
   const last = items[items.length - 1];
   return `${items.slice(0, -1).join(", ")} e ${last}`;
-}
-
-function buildPresentNarrative(labels: string[]) {
-  if (!labels.length) return "";
-  if (labels.length === 1) return `Refere ${labels[0]}.`;
-  const [first, ...rest] = labels;
-  return `Refere ${first}, associado a ${formatList(rest)}.`;
 }
 
 function getFormulationCategory(label: string) {
@@ -643,7 +551,7 @@ import {
   getProfileSwitchFeedback,
   PROFILE_UI_TOKENS
 } from "../lib/profileUi";
-import { applyClinicalNarrativeCohesionToBlocks } from "../lib/clinicalNarrative";
+import { applyClinicalNarrativeCohesionToBlocks, collectStateNarrativeComplements } from "../lib/clinicalNarrative";
 import { buildWorkspaceContextBadges } from "../lib/workspaceUi";
 const TEMPLATES = ((templatesData as { templates: Template[] }).templates ?? []).slice().sort((a, b) => a.label.localeCompare(b.label, "pt", { sensitivity: "base" }));
 const INITIAL_TEMPLATE = TEMPLATES[0];
@@ -1190,23 +1098,12 @@ export default function Page() {
     const items = currentTemplate.defaults.alarmItems ?? [];
     if (!items.length) return [];
 
-    const ausentes: string[] = [];
-    const presentes: string[] = [];
-    for (const item of items) {
-      const status = alarmStates[item.id] ?? "unknown";
-      if (status === "nega") {
-        const lbl = alarmLabelForPrint(item.absentLabel ?? item.label ?? "");
-        if (lbl) ausentes.push(lbl);
-      }
-      if (status === "presente") {
-        const lbl = alarmLabelForPrint(item.presentText || item.label || "");
-        if (lbl) presentes.push(lbl);
-      }
-    }
+    const ausentes = collectStateNarrativeComplements(items, alarmStates, "nega");
+    const presentes = collectStateNarrativeComplements(items, alarmStates, "presente");
 
     const lines: string[] = [];
-    if (ausentes.length) lines.push(`Ausência de: ${ausentes.join(", ")}`);
-    if (presentes.length) lines.push(`Sinais de alarme presentes: ${presentes.join(", ")}`);
+    if (ausentes.length) lines.push(`Nega ${formatList(ausentes)}.`);
+    if (presentes.length) lines.push(`Refere ${formatList(presentes)}.`);
     return lines;
   }, [alarme, alarmStates, currentTemplate]);
   const templateRxGroups = useMemo(() => {
@@ -1355,14 +1252,8 @@ export default function Page() {
   const hmaParagraphs = useMemo(() => {
     if (!currentTemplate) return [];
     const items = getTemplateHmaItems(currentTemplate);
-    const presentLabels = items
-      .filter((it) => hmaStates[it.id] === "presente")
-      .map((it) => (it.label || "").trim().toLowerCase())
-      .filter(Boolean);
-    const negLabels = items
-      .filter((it) => hmaStates[it.id] === "nega")
-      .map((it) => (it.label || "").trim().toLowerCase())
-      .filter(Boolean);
+    const presentLabels = collectStateNarrativeComplements(items, hmaStates, "presente");
+    const negLabels = collectStateNarrativeComplements(items, hmaStates, "nega");
 
     const freeParagraph = hmaFreeText
       ? formatParagraph(
@@ -1374,9 +1265,9 @@ export default function Page() {
       : "";
 
     const paragraphs = [];
-    const presentNarrative = buildPresentNarrative(presentLabels);
+    const presentNarrative = presentLabels.length ? `Refere ${formatList(presentLabels)}.` : "";
     if (presentNarrative) paragraphs.push(presentNarrative);
-    if (negLabels.length) paragraphs.push(formatParagraph([`Nega ${formatList(negLabels)}`]));
+    if (negLabels.length) paragraphs.push(`Nega ${formatList(negLabels)}.`);
     if (freeParagraph) paragraphs.push(freeParagraph);
     return paragraphs;
   }, [hmaStates, hmaFreeText, currentTemplate]);
