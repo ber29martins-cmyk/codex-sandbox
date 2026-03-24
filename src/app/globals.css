@@ -194,6 +194,44 @@ body {
   border-color: #b9c7d7 !important;
 }
 
+.ui-btn-utility {
+  border: 1px solid #c8d3df !important;
+  border-radius: 4px !important;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  padding: 6px 10px !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.005em;
+  line-height: 1.25;
+}
+
+.ui-btn-utility:hover:not(:disabled) {
+  background: #f8fafc !important;
+  border-color: #b9c7d7 !important;
+}
+
+.workspace-main .no-print button.ui-btn-utility {
+  border-radius: 4px !important;
+}
+
+.ui-chip-status {
+  border-radius: 6px !important;
+}
+
+.workspace-main .no-print button.ui-chip-status {
+  border-radius: 6px !important;
+}
+
+.ui-badge-meta {
+  border-radius: 4px !important;
+  border-color: #d3dce7 !important;
+  background: #f8fafc !important;
+  color: #334155 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.004em;
+}
+
 @media (max-width: 1024px) {
   .workspace-shell {
     grid-template-columns: 1fr !important;

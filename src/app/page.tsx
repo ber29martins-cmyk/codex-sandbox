@@ -2140,7 +2140,7 @@ function handlePrivacyContinue() {
                       <button
                         key={opt.id}
                         type="button"
-                        className="ui-chip"
+                        className="ui-chip ui-chip-status"
                         onClick={() => handleToggleHmaChip(opt.id)}
                         style={{
                           borderRadius: 8,
@@ -2231,7 +2231,7 @@ function handlePrivacyContinue() {
                     <button
                       key={item.id}
                       type="button"
-                      className="ui-chip"
+                      className="ui-chip ui-chip-status"
                       onClick={() =>
                         setAlarmStates((prev) => {
                           const current = prev[item.id] ?? "unknown";
@@ -2276,7 +2276,7 @@ function handlePrivacyContinue() {
                   <button
                     key={opt.id}
                     type="button"
-                    className="ui-chip"
+                    className="ui-chip ui-chip-status"
                     onClick={() =>
                       setComorbSelected((prev) =>
                         prev.includes(opt.id) ? prev.filter((id) => id !== opt.id) : [...prev, opt.id]
@@ -2364,7 +2364,7 @@ function handlePrivacyContinue() {
           {workspaceContextBadges.map((badge) => (
             <span
               key={badge}
-              className="ui-chip"
+              className="ui-chip ui-badge-meta"
               style={{
                 fontSize: 12,
                 color: "#334155",
@@ -2518,7 +2518,7 @@ function handlePrivacyContinue() {
             <div className="rx-utility-actions" style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap", alignItems: "center" }}>
               <button
                 type="button"
-                className="ux-focus-control ui-btn-secondary"
+                className="ux-focus-control ui-btn-utility"
                 onClick={() => copy(rxText || "Sem itens selecionados")}
                 disabled={!rxText}
               >
@@ -2526,7 +2526,7 @@ function handlePrivacyContinue() {
               </button>
               <button
                 type="button"
-                className="ux-focus-control ui-btn-secondary"
+                className="ux-focus-control ui-btn-utility"
                 onClick={handlePrintRx}
                 disabled={!rxText}
               >
@@ -2534,7 +2534,7 @@ function handlePrivacyContinue() {
               </button>
               <button
                 type="button"
-                className="ux-focus-control ui-btn-secondary"
+                className="ux-focus-control ui-btn-utility"
                 onClick={handleSaveRxKit}
                 disabled={!rxSelected.length}
               >
@@ -2542,14 +2542,14 @@ function handlePrivacyContinue() {
               </button>
               <button
                 type="button"
-                className="ux-focus-control ui-btn-secondary"
+                className="ux-focus-control ui-btn-utility"
                 onClick={handleRestoreRxDefaults}
               >
                 Restaurar padrão do template
               </button>
               <button
                 type="button"
-                className="ux-focus-control ui-btn-secondary"
+                className="ux-focus-control ui-btn-utility"
                 onClick={handleClearRxSelection}
               >
                 Limpar seleção
